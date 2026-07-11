@@ -4,7 +4,8 @@ import AdminBookingsTable from '@/components/admin/AdminBookingsTable'
 import AdminApplicantsTable from '@/components/admin/AdminApplicantsTable'
 import AdminInquiriesTable from '@/components/admin/AdminInquiriesTable'
 import AdminUpdatesTable from '@/components/admin/AdminUpdatesTable'
-import { ShieldCheck, Users, Briefcase, Mail, Megaphone } from 'lucide-react'
+import AdminTestimonialsTable from '@/components/admin/AdminTestimonialsTable'
+import { ShieldCheck, Users, Briefcase, Mail, Megaphone, Star } from 'lucide-react'
 import Link from 'next/link'
 
 export default async function AdminDashboardPage({
@@ -35,7 +36,7 @@ export default async function AdminDashboardPage({
   // 3. Extract search params for filtering & view toggling
   const resolvedParams = await searchParams
   const statusFilter = resolvedParams.status
-  const currentView = ['bookings', 'applicants', 'inquiries', 'updates'].includes(resolvedParams.view || '') 
+  const currentView = ['bookings', 'applicants', 'inquiries', 'updates', 'testimonials'].includes(resolvedParams.view || '') 
     ? resolvedParams.view 
     : 'bookings'
 
@@ -44,6 +45,7 @@ export default async function AdminDashboardPage({
   let applicants: any[] = []
   let inquiries: any[] = []
   let updates: any[] = []
+  let testimonials: any[] = []
   let fetchError = null
 
   if (currentView === 'bookings') {
@@ -63,6 +65,10 @@ export default async function AdminDashboardPage({
     if (statusFilter && statusFilter !== 'all') query = query.eq('status', statusFilter)
     const { data, error } = await query
     updates = data || []
+    fetchError = error
+  } else if (currentView === 'testimonials') {
+    const { data, error } = await supabase.from('testimonials').select('*').order('created_at', { ascending: false })
+    testimonials = data || []
     fetchError = error
   } else {
     let query = supabase.from('inquiries').select('*').order('created_at', { ascending: false })
@@ -135,6 +141,17 @@ export default async function AdminDashboardPage({
             <Megaphone className="w-4 h-4" />
             News & Updates
           </Link>
+          <Link
+            href="/admin?view=testimonials"
+            className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+              currentView === 'testimonials'
+                ? 'border-indigo-600 text-indigo-600'
+                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+            }`}
+          >
+            <Star className="w-4 h-4" />
+            Testimonials
+          </Link>
         </div>
 
         {fetchError ? (
@@ -154,6 +171,9 @@ export default async function AdminDashboardPage({
             )}
             {currentView === 'updates' && (
               <AdminUpdatesTable updates={updates} />
+            )}
+            {currentView === 'testimonials' && (
+              <AdminTestimonialsTable testimonials={testimonials} />
             )}
           </>
         )}

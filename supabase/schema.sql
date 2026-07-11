@@ -326,3 +326,28 @@ USING (
   bucket_id = 'updates_media' AND 
   (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin'
 );
+
+-- ----------------------------------------
+-- 10. Testimonials table
+-- ----------------------------------------
+CREATE TABLE public.testimonials (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  client_name TEXT NOT NULL,
+  company TEXT,
+  role TEXT,
+  quote TEXT NOT NULL,
+  is_featured BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- RLS Policies
+ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public can view testimonials"
+ON public.testimonials FOR SELECT
+USING (true);
+
+CREATE POLICY "Admins have full access to testimonials"
+ON public.testimonials FOR ALL
+USING ( (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin' );
