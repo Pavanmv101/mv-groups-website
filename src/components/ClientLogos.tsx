@@ -25,6 +25,12 @@ const LOGOS = [
     location: 'Delhi',
     src: '/images/logo-print-media.jpg',
   },
+  {
+    id: 5,
+    name: 'Wewaah Weddings & Experiences',
+    location: 'Bangalore',
+    src: '/images/logo-wewaah.jpg',
+  },
 ]
 
 export default function ClientLogos() {
