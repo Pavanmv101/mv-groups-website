@@ -40,8 +40,8 @@ export default function FAQSection() {
         
         <SectionHeading 
           title="Frequently Asked Questions" 
-          subtitle="Everything you need to know about partnering with MV Groups for your staffing and event needs."
-          centered
+          description="Everything you need to know about partnering with MV Groups for your staffing and event needs."
+          align="center"
         />
 
         <div className="mt-12 space-y-4">
