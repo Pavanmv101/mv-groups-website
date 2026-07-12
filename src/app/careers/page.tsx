@@ -63,17 +63,41 @@ export default function CareersPage() {
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Submit Your Application</h2>
             
             {state.success ? (
-              <div className="bg-emerald-50 text-emerald-800 p-6 rounded-2xl border border-emerald-100 text-center">
-                <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto mb-4" />
-                <h3 className="text-lg font-bold mb-2">Application Submitted!</h3>
-                <p className="text-emerald-700">
+              <div className="text-center py-8">
+                {/* Animated tick mark */}
+                <div className="mx-auto mb-6 w-24 h-24 relative">
+                  <svg className="w-24 h-24" viewBox="0 0 100 100">
+                    <circle
+                      cx="50" cy="50" r="45"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="3"
+                      strokeDasharray="283"
+                      strokeDashoffset="283"
+                      className="animate-[drawCircle_0.6s_ease-out_forwards]"
+                    />
+                    <path
+                      d="M30 52 L44 66 L70 38"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeDasharray="60"
+                      strokeDashoffset="60"
+                      className="animate-[drawCheck_0.4s_ease-out_0.5s_forwards]"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Application Submitted!</h3>
+                <p className="text-slate-600 max-w-md mx-auto">
                   Thank you for your interest in joining MV Groups. Our recruitment team will review your application and get back to you shortly.
                 </p>
                 <button 
                   onClick={() => window.location.reload()}
-                  className="mt-6 px-6 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-lg font-medium transition-colors"
+                  className="mt-8 px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold transition-colors shadow-lg shadow-emerald-500/20"
                 >
-                  Submit Another
+                  Submit Another Application
                 </button>
               </div>
             ) : (

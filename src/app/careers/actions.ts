@@ -72,7 +72,7 @@ export async function submitApplication(prevState: any, formData: FormData) {
 
     if (insertError) {
       console.error('Application insert error:', insertError)
-      return { success: false, error: 'An error occurred while submitting your application.' }
+      return { success: false, error: `Submission failed: ${insertError.message} (code: ${insertError.code})` }
     }
 
     revalidatePath('/admin') // refresh admin cache
