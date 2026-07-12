@@ -13,7 +13,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'MV Groups — Manpower Staffing & Tech Event Solutions | Tumakuru',
+    default: 'MV Groups (Bangalore Best) — Manpower Staffing & Tech Event Solutions',
     template: '%s | MV Groups',
   },
   description:
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'MV Groups' }],
   openGraph: {
-    title: 'MV Groups — Manpower Staffing & Tech Event Solutions',
+    title: 'MV Groups (Bangalore Best) — Manpower Staffing & Tech Event Solutions',
     description:
       'Premier manpower supply and software/tech events company delivering reliable staffing solutions and world-class event management across Karnataka.',
     type: 'website',
