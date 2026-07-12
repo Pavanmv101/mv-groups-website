@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useRef, Suspense } from 'react'
-import { login, signup, verifyOtp, resendOtp } from './actions'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Loader2, ArrowRight, Eye, EyeOff, ShieldCheck, Mail, RotateCcw } from 'lucide-react'
+import { createClient } from '@/utils/supabase/client'
 
 function OtpInput({ value, onChange }: { value: string; onChange: (val: string) => void }) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
@@ -73,6 +73,8 @@ function LoginForm() {
   const [otpVerified, setOtpVerified] = useState(false)
   const [resending, setResending] = useState(false)
 
+  const supabase = createClient()
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -86,9 +88,10 @@ function LoginForm() {
     setError(null)
     
     const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
     
     if (!isLogin) {
-      const password = formData.get('password') as string
       if (password.length < 8) {
         setError('Password must be at least 8 characters long.')
         setLoading(false)
@@ -103,8 +106,9 @@ function LoginForm() {
 
     try {
       if (isLogin) {
-        const res = await login(formData)
-        if (res?.error) {
+        const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+        
+        if (signInError) {
           const newAttempts = failedAttempts + 1
           setFailedAttempts(newAttempts)
           
@@ -117,13 +121,19 @@ function LoginForm() {
               setFailedAttempts(0)
             }, 30000)
           } else {
-            setError(res.error)
+            setError(signInError.message)
           }
-        } else if (res?.success) {
+        } else if (data.user) {
+          const { data: userData } = await supabase
+            .from('users')
+            .select('role')
+            .eq('id', data.user.id)
+            .single()
+
           setFailedAttempts(0)
           setLoginSuccess(true)
           setTimeout(() => {
-            if (res.role === 'admin') {
+            if (userData?.role === 'admin') {
               router.push('/admin')
             } else {
               router.push('/dashboard')
@@ -132,11 +142,19 @@ function LoginForm() {
           }, 1500)
         }
       } else {
-        const res = await signup(formData)
-        if (res?.error) {
-          setError(res.error)
-        } else if (res?.success) {
-          setOtpEmail(res.email!)
+        const full_name = formData.get('full_name') as string
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name }
+          }
+        })
+        
+        if (signUpError) {
+          setError(signUpError.message)
+        } else {
+          setOtpEmail(email)
           setOtpStep(true)
           setError(null)
         }
@@ -157,10 +175,15 @@ function LoginForm() {
     setError(null)
 
     try {
-      const res = await verifyOtp(otpEmail, otpCode)
-      if (res?.error) {
-        setError(res.error)
-      } else if (res?.success) {
+      const { error: verifyError } = await supabase.auth.verifyOtp({
+        email: otpEmail,
+        token: otpCode,
+        type: 'signup',
+      })
+      
+      if (verifyError) {
+        setError(verifyError.message)
+      } else {
         setOtpVerified(true)
         setTimeout(() => {
           router.push('/dashboard')
@@ -178,9 +201,12 @@ function LoginForm() {
     setResending(true)
     setError(null)
     try {
-      const res = await resendOtp(otpEmail)
-      if (res?.error) {
-        setError(res.error)
+      const { error: resendError } = await supabase.auth.resend({
+        type: 'signup',
+        email: otpEmail,
+      })
+      if (resendError) {
+        setError(resendError.message)
       }
     } catch (err: any) {
       setError('Failed to resend code.')

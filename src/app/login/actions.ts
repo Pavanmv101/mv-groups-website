@@ -25,6 +25,7 @@ export async function login(formData: FormData) {
     .eq('id', authData.user.id)
     .single()
 
+  revalidatePath('/', 'layout')
   // Return role for client-side redirect
   return { success: true, role: userData?.role || 'client' }
 }
@@ -66,6 +67,7 @@ export async function verifyOtp(email: string, token: string) {
     return { error: error.message }
   }
 
+  revalidatePath('/', 'layout')
   return { success: true }
 }
 
