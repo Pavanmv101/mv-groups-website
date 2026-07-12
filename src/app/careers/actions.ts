@@ -64,7 +64,7 @@ export async function submitApplication(prevState: any, formData: FormData) {
         email,
         phone,
         city,
-        interest,
+        area_of_interest: interest,
         availability,
         resume_url
       }
