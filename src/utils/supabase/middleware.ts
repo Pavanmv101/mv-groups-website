@@ -35,13 +35,19 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith('/dashboard')
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  const isProtectedPath = 
+    request.nextUrl.pathname.startsWith('/dashboard') || 
+    request.nextUrl.pathname.startsWith('/booking') ||
+    request.nextUrl.pathname.startsWith('/admin')
+
+  if (!user && isProtectedPath) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
+    
+    if (request.nextUrl.pathname.startsWith('/booking')) {
+      url.searchParams.set('message', 'Please log in or sign up to request a quote.')
+    }
+    
     return NextResponse.redirect(url)
   }
 
