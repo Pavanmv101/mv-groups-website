@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight, Instagram } from 'lucide-react';
 import { COMPANY, NAV_LINKS, SERVICES } from '@/lib/constants';
 
 function LinkedinIcon({ className }: { className?: string }) {
@@ -36,6 +36,15 @@ export default function Footer() {
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-5 h-5" />
+              </a>
+              <a
+                href={COMPANY.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-pink-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}

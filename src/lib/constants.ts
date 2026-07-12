@@ -26,6 +26,7 @@ export const COMPANY = {
   email: 'mvgroups2026@gmail.com',
   phone: '+91 93805 58344',
   linkedin: 'https://linkedin.com/company/mvgroups',
+  instagram: 'https://instagram.com/mvgroup.ss',
   website: 'https://mvgroups.in',
 } as const;
 
