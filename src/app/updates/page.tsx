@@ -16,7 +16,7 @@ export default async function UpdatesPage() {
   return (
     <>
       {/* Hero Section matching Services page */}
-      <section className="relative gradient-navy hero-pattern pt-36 pb-24 lg:pt-44 lg:pb-32 overflow-hidden">
+      <section className="relative gradient-navy hero-pattern pt-32 pb-16 lg:pt-40 lg:pb-20 overflow-hidden">
         <div className="absolute top-10 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-10 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl" />
 
@@ -35,7 +35,7 @@ export default async function UpdatesPage() {
       </section>
 
       {/* Posts Grid */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {(!posts || posts.length === 0) ? (
