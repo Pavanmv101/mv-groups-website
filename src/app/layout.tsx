@@ -50,7 +50,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <Navbar />
-        <main className="flex-grow pt-16">{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer />
         <WhatsAppButton />
       </body>

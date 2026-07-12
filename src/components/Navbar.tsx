@@ -15,7 +15,7 @@ export default function Navbar() {
   const [role, setRole] = useState<'client' | 'admin' | null>(null);
   const pathname = usePathname();
 
-  const isDarkHeroPage = pathname === '/' || pathname === '/services';
+  const isDarkHeroPage = pathname === '/' || pathname === '/services' || pathname === '/updates';
   const scrolled = isScrolled || !isDarkHeroPage;
 
   useEffect(() => {
