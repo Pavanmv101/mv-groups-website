@@ -1,10 +1,58 @@
 'use client'
 
-import { useState, Suspense } from 'react'
-import { login, signup } from './actions'
+import { useState, useRef, Suspense } from 'react'
+import { login, signup, verifyOtp, resendOtp } from './actions'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Loader2, ArrowRight, Eye, EyeOff, ShieldCheck } from 'lucide-react'
+import { Loader2, ArrowRight, Eye, EyeOff, ShieldCheck, Mail, RotateCcw } from 'lucide-react'
+
+function OtpInput({ value, onChange }: { value: string; onChange: (val: string) => void }) {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+  const digits = value.padEnd(6, '').split('')
+
+  function handleChange(index: number, char: string) {
+    if (!/^\d?$/.test(char)) return
+    const newDigits = [...digits]
+    newDigits[index] = char
+    onChange(newDigits.join('').trim())
+    if (char && index < 5) {
+      inputRefs.current[index + 1]?.focus()
+    }
+  }
+
+  function handleKeyDown(index: number, e: React.KeyboardEvent) {
+    if (e.key === 'Backspace' && !digits[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus()
+    }
+  }
+
+  function handlePaste(e: React.ClipboardEvent) {
+    e.preventDefault()
+    const pasted = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6)
+    onChange(pasted)
+    const focusIndex = Math.min(pasted.length, 5)
+    inputRefs.current[focusIndex]?.focus()
+  }
+
+  return (
+    <div className="flex gap-3 justify-center">
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <input
+          key={i}
+          ref={(el) => { inputRefs.current[i] = el }}
+          type="text"
+          inputMode="numeric"
+          maxLength={1}
+          value={digits[i] || ''}
+          onChange={(e) => handleChange(i, e.target.value)}
+          onKeyDown={(e) => handleKeyDown(i, e)}
+          onPaste={i === 0 ? handlePaste : undefined}
+          className="w-12 h-14 text-center text-xl font-bold border-2 border-slate-200 rounded-xl bg-slate-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all outline-none"
+        />
+      ))}
+    </div>
+  )
+}
 
 function LoginForm() {
   const searchParams = useSearchParams()
@@ -18,10 +66,16 @@ function LoginForm() {
   const [failedAttempts, setFailedAttempts] = useState(0)
   const [lockedUntil, setLockedUntil] = useState<number | null>(null)
 
+  // OTP verification state
+  const [otpStep, setOtpStep] = useState(false)
+  const [otpEmail, setOtpEmail] = useState('')
+  const [otpCode, setOtpCode] = useState('')
+  const [otpVerified, setOtpVerified] = useState(false)
+  const [resending, setResending] = useState(false)
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Client-side lockout check
     if (lockedUntil && Date.now() < lockedUntil) {
       const secondsLeft = Math.ceil((lockedUntil - Date.now()) / 1000)
       setError(`Too many failed attempts. Please try again in ${secondsLeft} seconds.`)
@@ -33,7 +87,6 @@ function LoginForm() {
     
     const formData = new FormData(e.currentTarget)
     
-    // Password strength check for signup
     if (!isLogin) {
       const password = formData.get('password') as string
       if (password.length < 8) {
@@ -56,7 +109,7 @@ function LoginForm() {
           setFailedAttempts(newAttempts)
           
           if (newAttempts >= 5) {
-            const lockTime = Date.now() + 30000 // 30 second lockout
+            const lockTime = Date.now() + 30000
             setLockedUntil(lockTime)
             setError('Too many failed attempts. Account locked for 30 seconds.')
             setTimeout(() => {
@@ -69,7 +122,6 @@ function LoginForm() {
         } else if (res?.success) {
           setFailedAttempts(0)
           setLoginSuccess(true)
-          // Show tick animation for 1.5s, then redirect
           setTimeout(() => {
             if (res.role === 'admin') {
               router.push('/admin')
@@ -84,7 +136,9 @@ function LoginForm() {
         if (res?.error) {
           setError(res.error)
         } else if (res?.success) {
-          router.push('/login?message=Check email to continue sign in process')
+          setOtpEmail(res.email!)
+          setOtpStep(true)
+          setError(null)
         }
       }
     } catch (err: any) {
@@ -94,36 +148,144 @@ function LoginForm() {
     }
   }
 
-  // Show animated tick on login success
+  const handleVerifyOtp = async () => {
+    if (otpCode.length !== 6) {
+      setError('Please enter the full 6-digit code.')
+      return
+    }
+    setLoading(true)
+    setError(null)
+
+    try {
+      const res = await verifyOtp(otpEmail, otpCode)
+      if (res?.error) {
+        setError(res.error)
+      } else if (res?.success) {
+        setOtpVerified(true)
+        setTimeout(() => {
+          router.push('/dashboard')
+          router.refresh()
+        }, 1500)
+      }
+    } catch (err: any) {
+      setError(err.message || 'Verification failed')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleResendOtp = async () => {
+    setResending(true)
+    setError(null)
+    try {
+      const res = await resendOtp(otpEmail)
+      if (res?.error) {
+        setError(res.error)
+      }
+    } catch (err: any) {
+      setError('Failed to resend code.')
+    } finally {
+      setResending(false)
+    }
+  }
+
+  // Animated tick component
+  const AnimatedTick = ({ title, subtitle }: { title: string; subtitle: string }) => (
+    <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
+      <div className="mx-auto mb-6 w-24 h-24 relative">
+        <svg className="w-24 h-24" viewBox="0 0 100 100">
+          <circle
+            cx="50" cy="50" r="45"
+            fill="none"
+            stroke="#10b981"
+            strokeWidth="3"
+            strokeDasharray="283"
+            strokeDashoffset="283"
+            className="animate-[drawCircle_0.6s_ease-out_forwards]"
+          />
+          <path
+            d="M30 52 L44 66 L70 38"
+            fill="none"
+            stroke="#10b981"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="60"
+            strokeDashoffset="60"
+            className="animate-[drawCheck_0.4s_ease-out_0.5s_forwards]"
+          />
+        </svg>
+      </div>
+      <h3 className="text-xl font-bold text-slate-900 mb-2">{title}</h3>
+      <p className="text-slate-500">{subtitle}</p>
+    </div>
+  )
+
+  // Login success screen
   if (loginSuccess) {
+    return <AnimatedTick title="Login Successful!" subtitle="Redirecting you to your dashboard..." />
+  }
+
+  // OTP verified success screen
+  if (otpVerified) {
+    return <AnimatedTick title="Email Verified!" subtitle="Your account is ready. Redirecting..." />
+  }
+
+  // OTP verification step
+  if (otpStep) {
     return (
-      <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
-        <div className="mx-auto mb-6 w-24 h-24 relative">
-          <svg className="w-24 h-24" viewBox="0 0 100 100">
-            <circle
-              cx="50" cy="50" r="45"
-              fill="none"
-              stroke="#10b981"
-              strokeWidth="3"
-              strokeDasharray="283"
-              strokeDashoffset="283"
-              className="animate-[drawCircle_0.6s_ease-out_forwards]"
-            />
-            <path
-              d="M30 52 L44 66 L70 38"
-              fill="none"
-              stroke="#10b981"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="60"
-              strokeDashoffset="60"
-              className="animate-[drawCheck_0.4s_ease-out_0.5s_forwards]"
-            />
-          </svg>
+      <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl animate-fade-in-up">
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Mail className="w-8 h-8 text-blue-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Verify Your Email</h2>
+          <p className="text-slate-600">
+            We sent a 6-digit code to<br />
+            <span className="font-semibold text-slate-800">{otpEmail}</span>
+          </p>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2">Login Successful!</h3>
-        <p className="text-slate-500">Redirecting you to your dashboard...</p>
+
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100">
+            {error}
+          </div>
+        )}
+
+        <div className="mb-6">
+          <OtpInput value={otpCode} onChange={setOtpCode} />
+        </div>
+
+        <button
+          onClick={handleVerifyOtp}
+          disabled={loading || otpCode.length !== 6}
+          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold flex items-center justify-center gap-2 hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 disabled:opacity-70"
+        >
+          {loading ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <>
+              Verify Email
+              <ArrowRight className="w-4 h-4" />
+            </>
+          )}
+        </button>
+
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleResendOtp}
+            disabled={resending}
+            className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1.5 mx-auto transition-colors"
+          >
+            <RotateCcw className={`w-3.5 h-3.5 ${resending ? 'animate-spin' : ''}`} />
+            {resending ? 'Sending...' : "Didn't get the code? Resend"}
+          </button>
+        </div>
+
+        <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-slate-400">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>Check your spam folder if you don&apos;t see the email</span>
+        </div>
       </div>
     )
   }
@@ -228,7 +390,6 @@ function LoginForm() {
         </button>
       </form>
 
-      {/* Security badge */}
       <div className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-400">
         <ShieldCheck className="w-3.5 h-3.5" />
         <span>Secured with end-to-end encryption</span>
