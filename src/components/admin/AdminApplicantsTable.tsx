@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { sendApplicantStatusEmail } from '@/app/actions/email'
 import { Calendar, Phone, Mail, MapPin, Briefcase, FileText, CheckCircle2, AlertCircle, Clock } from 'lucide-react'
 
 type Applicant = {
@@ -50,9 +51,14 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
     router.push(`/admin?${params.toString()}`)
   }
 
-  const handleStatusChange = async (id: string, newStatus: string) => {
-    const { error } = await supabase.from('applicants').update({ status: newStatus }).eq('id', id)
+  const handleStatusChange = async (app: Applicant, newStatus: string) => {
+    // 1. Update the database
+    const { error } = await supabase.from('applicants').update({ status: newStatus }).eq('id', app.id)
     if (!error) {
+      // 2. Send the automated email
+      if (newStatus === 'shortlisted' || newStatus === 'rejected') {
+        await sendApplicantStatusEmail(app.name, app.email, newStatus)
+      }
       router.refresh()
     } else {
       alert('Failed to update status.')
@@ -141,7 +147,7 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
                   <td className="px-6 py-4 align-top text-right">
                     <select
                       value={app.status}
-                      onChange={(e) => handleStatusChange(app.id, e.target.value)}
+                      onChange={(e) => handleStatusChange(app, e.target.value)}
                       className="text-sm border border-slate-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-white text-slate-700 outline-none transition-all cursor-pointer hover:border-slate-400"
                     >
                       <option value="new">New</option>
