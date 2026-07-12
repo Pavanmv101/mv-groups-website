@@ -76,6 +76,7 @@ function LoginForm() {
             } else {
               router.push('/dashboard')
             }
+            router.refresh()
           }, 1500)
         }
       } else {

@@ -25,7 +25,7 @@ export async function login(formData: FormData) {
     .eq('id', authData.user.id)
     .single()
 
-  revalidatePath('/', 'layout')
+  // Return role for client-side redirect
   return { success: true, role: userData?.role || 'client' }
 }
 
