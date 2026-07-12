@@ -57,7 +57,7 @@ function AnimatedCounter({ end, suffix, duration = 2000 }: { end: number; suffix
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center items-center gradient-navy hero-pattern overflow-hidden pt-32 lg:pt-40 pb-20">
+    <section className="relative -mt-16 min-h-[90vh] flex flex-col justify-center items-center gradient-navy hero-pattern overflow-hidden pt-32 lg:pt-40 pb-20">
       {/* Decorative background glows */}
       <div className="absolute top-20 right-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
