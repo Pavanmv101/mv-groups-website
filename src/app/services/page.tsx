@@ -63,7 +63,6 @@ const INDUSTRIES = [
   { icon: Landmark, label: 'Government Events' },
   { icon: Heart, label: 'NGOs' },
   { icon: Trophy, label: 'Sports Events' },
-  { icon: Music, label: 'Concert Organizers' },
 ];
 
 /* ------------------------------------------------------------------ */
