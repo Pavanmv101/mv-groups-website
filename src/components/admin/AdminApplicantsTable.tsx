@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client'
 import { Calendar, Phone, Mail, MapPin, Briefcase, FileText, CheckCircle2, AlertCircle, Clock } from 'lucide-react'
 
 type Applicant = {
@@ -34,6 +35,7 @@ const getStatusBadge = (status: string) => {
 export default function AdminApplicantsTable({ applicants }: { applicants: Applicant[] }) {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const supabase = createClient()
   const currentStatus = searchParams.get('status') || 'all'
 
   const statuses = ['all', 'new', 'reviewed', 'shortlisted', 'rejected']
@@ -46,6 +48,15 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
       params.set('status', status)
     }
     router.push(`/admin?${params.toString()}`)
+  }
+
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    const { error } = await supabase.from('applicants').update({ status: newStatus }).eq('id', id)
+    if (!error) {
+      router.refresh()
+    } else {
+      alert('Failed to update status.')
+    }
   }
 
   return (
@@ -128,9 +139,16 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
                     </p>
                   </td>
                   <td className="px-6 py-4 align-top text-right">
-                    <button className="text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline">
-                      Manage
-                    </button>
+                    <select
+                      value={app.status}
+                      onChange={(e) => handleStatusChange(app.id, e.target.value)}
+                      className="text-sm border border-slate-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-white text-slate-700 outline-none transition-all cursor-pointer hover:border-slate-400"
+                    >
+                      <option value="new">New</option>
+                      <option value="reviewed">Reviewed</option>
+                      <option value="shortlisted">Shortlisted</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
                   </td>
                 </tr>
               ))
