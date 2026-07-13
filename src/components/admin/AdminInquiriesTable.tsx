@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client'
 import { Mail, Phone, Calendar, Clock, CheckCircle2, Archive } from 'lucide-react'
 
 type Inquiry = {
@@ -30,6 +31,7 @@ const getStatusBadge = (status: string) => {
 export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[] }) {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const supabase = createClient()
   const currentStatus = searchParams.get('status') || 'all'
 
   const statuses = ['all', 'unread', 'read', 'archived']
@@ -42,6 +44,15 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
       params.set('status', status)
     }
     router.push(`/admin?${params.toString()}`)
+  }
+
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    const { error } = await supabase.from('inquiries').update({ status: newStatus }).eq('id', id)
+    if (!error) {
+      router.refresh()
+    } else {
+      alert('Failed to update status.')
+    }
   }
 
   return (
@@ -111,10 +122,23 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
                       {new Date(inquiry.created_at).toLocaleDateString()}
                     </p>
                   </td>
-                  <td className="px-6 py-4 align-top text-right">
-                    <button className="text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline">
-                      Respond
-                    </button>
+                  <td className="px-6 py-4 align-top text-right space-y-2">
+                    <select
+                      value={inquiry.status}
+                      onChange={(e) => handleStatusChange(inquiry.id, e.target.value)}
+                      className="w-full text-sm border border-slate-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-white text-slate-700 outline-none transition-all cursor-pointer hover:border-slate-400"
+                    >
+                      <option value="unread">Unread</option>
+                      <option value="read">Read</option>
+                      <option value="archived">Archived</option>
+                    </select>
+                    
+                    <a 
+                      href={`mailto:${inquiry.email}?subject=Re: ${inquiry.subject}`}
+                      className="inline-block w-full text-center px-3 py-1.5 text-xs font-medium bg-indigo-50 text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors border border-indigo-200 mt-2"
+                    >
+                      Reply Email
+                    </a>
                   </td>
                 </tr>
               ))
