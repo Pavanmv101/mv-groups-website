@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Play, MapPin } from 'lucide-react';
 import { COMPANY, STATS } from '@/lib/constants';
 

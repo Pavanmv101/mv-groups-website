@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react'
 import { submitApplication } from './actions'
-import { Briefcase, MapPin, Clock, Upload, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react'
 
 const initialState = {
   success: false,
@@ -29,7 +29,7 @@ export default function CareersPage() {
             Join the <span className="gradient-text">MV Groups</span> Team
           </h1>
           <p className="text-lg text-slate-600 mb-8">
-            We are always looking for passionate, energetic, and reliable individuals to join our growing team. Whether you're looking for flexible event work or a career in manpower staffing, we have opportunities for you!
+            We are always looking for passionate, energetic, and reliable individuals to join our growing team. Whether you&apos;re looking for flexible event work or a career in manpower staffing, we have opportunities for you!
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-10">

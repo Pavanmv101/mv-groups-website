@@ -95,7 +95,7 @@ export default function AboutPage() {
             <p className="text-slate-600 leading-relaxed relative z-10">
               To be the most trusted and preferred staffing partner across South India by 2028. 
               We envision a future where finding the right event crew is seamless, and where every 
-              brand ambassador or logistics coordinator we deploy elevates the client's brand experience.
+              brand ambassador or logistics coordinator we deploy elevates the client&apos;s brand experience.
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function AboutPage() {
           <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-purple-300 hover:shadow-lg transition-all text-center">
             <Award className="w-10 h-10 text-purple-500 mx-auto mb-4" />
             <h3 className="text-lg font-bold text-slate-900 mb-2">Excellence</h3>
-            <p className="text-sm text-slate-600">We don't just meet expectations; we strive to exceed them.</p>
+            <p className="text-sm text-slate-600">We don&apos;t just meet expectations; we strive to exceed them.</p>
           </div>
           <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-lg transition-all text-center">
             <Zap className="w-10 h-10 text-emerald-500 mx-auto mb-4" />

@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { Calendar, Users, IndianRupee, ArrowRight, Clock, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Calendar, Users, ArrowRight, Clock, CheckCircle2, AlertCircle } from 'lucide-react'
 import { SERVICES } from '@/lib/constants'
 
 export default async function DashboardPage() {
@@ -76,14 +76,14 @@ export default async function DashboardPage() {
                 <Calendar className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-medium text-slate-900 mb-2">No bookings yet</h3>
-              <p className="text-slate-500 mb-6">You haven't requested any services yet.</p>
+              <p className="text-slate-500 mb-6">You haven&apos;t requested any services yet.</p>
               <Link href="/services" className="text-blue-600 font-medium hover:underline inline-flex items-center gap-1">
                 Explore our services <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           ) : (
             <div className="divide-y divide-slate-200">
-              {bookings.map((booking: any) => (
+              {bookings.map((booking: { id: string; service_type: string; status: string; created_at: string; amount: number | null; start_date: string; end_date: string; people_needed: number; description: string | null }) => (
                 <div key={booking.id} className="p-6 hover:bg-slate-50 transition-colors">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                     <div>
@@ -120,6 +120,12 @@ export default async function DashboardPage() {
                       <p className="text-xs text-slate-500 font-medium mb-1">Description</p>
                       <p className="text-sm text-slate-700 line-clamp-2">{booking.description || 'No description provided.'}</p>
                     </div>
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-slate-100 text-right">
+                    <Link href={`/dashboard/booking/${booking.id}`} className="inline-block text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
+                      View Details & Chat
+                    </Link>
                   </div>
                 </div>
               ))}

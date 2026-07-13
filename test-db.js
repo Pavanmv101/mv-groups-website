@@ -20,7 +20,7 @@ async function testConnection() {
   try {
     // Attempt to fetch from 'inquiries' which we just told the user to create
     // Even if the table doesn't exist, we will get a PostgREST error, which confirms the DB is reachable.
-    const { data, error } = await supabase.from('inquiries').select('*').limit(1)
+    const { error } = await supabase.from('inquiries').select('*').limit(1)
     
     if (error) {
       if (error.code === '42P01') {

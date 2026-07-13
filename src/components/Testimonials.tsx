@@ -36,7 +36,7 @@ export default async function Testimonials() {
             What Our Clients Say
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            Don't just take our word for it. Hear from the amazing teams and companies we've had the pleasure of working with.
+            Don&apos;t just take our word for it. Hear from the amazing teams and companies we&apos;ve had the pleasure of working with.
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export default async function Testimonials() {
               <Quote className="w-10 h-10 text-indigo-100 absolute top-6 right-6" />
               
               <p className="text-slate-700 italic relative z-10 mb-8 leading-relaxed">
-                "{t.quote}"
+                &quot;{t.quote}&quot;
               </p>
               
               <div className="mt-auto flex items-center gap-4">

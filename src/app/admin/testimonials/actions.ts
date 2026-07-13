@@ -26,8 +26,8 @@ export async function addTestimonial(formData: FormData) {
     revalidatePath('/admin')
     revalidatePath('/')
     return { success: true }
-  } catch (e: any) {
-    return { error: e.message }
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Unknown error' }
   }
 }
 
@@ -46,8 +46,8 @@ export async function updateTestimonial(id: string, formData: FormData) {
     revalidatePath('/admin')
     revalidatePath('/')
     return { success: true }
-  } catch (e: any) {
-    return { error: e.message }
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Unknown error' }
   }
 }
 
@@ -59,8 +59,8 @@ export async function deleteTestimonial(id: string) {
     revalidatePath('/admin')
     revalidatePath('/')
     return { success: true }
-  } catch (e: any) {
-    return { error: e.message }
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Unknown error' }
   }
 }
 
@@ -75,7 +75,7 @@ export async function toggleFeatured(id: string, currentStatus: boolean) {
     revalidatePath('/admin')
     revalidatePath('/')
     return { success: true }
-  } catch (e: any) {
-    return { error: e.message }
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Unknown error' }
   }
 }

@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { sendApplicantStatusEmail } from '@/app/actions/email'
-import { Calendar, Phone, Mail, MapPin, Briefcase, FileText, CheckCircle2, AlertCircle, Clock } from 'lucide-react'
+import { Phone, Mail, MapPin, Briefcase, FileText, CheckCircle2, AlertCircle, Clock } from 'lucide-react'
 
 type Applicant = {
   id: string

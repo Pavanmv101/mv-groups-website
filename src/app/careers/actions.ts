@@ -2,10 +2,19 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { headers } from 'next/headers'
+import { checkRateLimit } from '@/lib/rate-limit'
 
-export async function submitApplication(prevState: any, formData: FormData) {
+export async function submitApplication(prevState: unknown, formData: FormData) {
   try {
     const supabase = await createClient()
+
+    const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
+    const rateLimitResult = await checkRateLimit(`careers_${ip}`)
+
+    if (!rateLimitResult.success) {
+      return { success: false, error: 'Too many requests. Please try again later.' }
+    }
 
     // 1. Extract basic form fields
     const name = formData.get('name') as string
@@ -39,7 +48,7 @@ export async function submitApplication(prevState: any, formData: FormData) {
       const fileExt = allowedMimeTypes[resumeFile.type]
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
       
-      const { data: uploadData, error: uploadError } = await supabase
+      const { error: uploadError } = await supabase
         .storage
         .from('resumes')
         .upload(fileName, resumeFile, {
@@ -79,8 +88,8 @@ export async function submitApplication(prevState: any, formData: FormData) {
     
     return { success: true, error: null }
 
-  } catch (err: any) {
-    console.error('Submit Application Exception:', err)
-    return { success: false, error: 'An unexpected error occurred.' }
+  } catch (error) {
+    console.error('Error submitting application:', error)
+    return { success: false, error: error instanceof Error ? error.message : 'An unexpected error occurred.' }
   }
 }

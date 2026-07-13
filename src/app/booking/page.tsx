@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SERVICES } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/client';
 import { CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { Turnstile } from '@marsidev/react-turnstile';
+import { submitBooking } from './actions';
 
 function BookingForm() {
   const searchParams = useSearchParams();
@@ -15,6 +17,8 @@ function BookingForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [formData, setFormData] = useState({
     contact_name: '',
@@ -28,12 +32,11 @@ function BookingForm() {
     description: '',
   });
 
-  // If the URL changes (e.g. clicking a link again), update the dropdown
-  useEffect(() => {
-    if (preselectedService) {
-      setFormData((prev) => ({ ...prev, service_type: preselectedService }));
-    }
-  }, [preselectedService]);
+  const [prevService, setPrevService] = useState(preselectedService);
+  if (preselectedService !== prevService) {
+    setPrevService(preselectedService);
+    setFormData((prev) => ({ ...prev, service_type: preselectedService }));
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -42,42 +45,42 @@ function BookingForm() {
     }));
   };
 
+  // Pre-fill data if user is logged in
+  useState(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setFormData(prev => ({
+          ...prev,
+          contact_name: user.user_metadata?.full_name || prev.contact_name,
+          contact_email: user.email || prev.contact_email,
+        }));
+      }
+    });
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      setError('Please complete the CAPTCHA verification.');
+      return;
+    }
+    
     setLoading(true);
     setError('');
 
     try {
-      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        throw new Error('Supabase credentials missing. Please set them in .env.local');
+      const formDataObj = new FormData(e.target as HTMLFormElement);
+      const result = await submitBooking(formDataObj, turnstileToken);
+
+      if (!result.success) {
+        throw new Error(result.error);
       }
-
-      const { data: { session } } = await supabase.auth.getSession();
-      const userId = session?.user?.id || null;
-
-      const { error: sbError } = await supabase.from('bookings').insert([
-        {
-          client_id: userId,
-          contact_name: formData.contact_name,
-          contact_email: formData.contact_email,
-          contact_phone: formData.contact_phone,
-          service_type: formData.service_type,
-          start_date: formData.start_date,
-          end_date: formData.end_date,
-          people_needed: formData.people_needed,
-          description: formData.budget_range 
-            ? `[Budget: ${formData.budget_range}]\n\n${formData.description}`.trim()
-            : formData.description,
-        },
-      ]);
-
-      if (sbError) throw sbError;
       
       setSuccess(true);
-      // Optional: scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -113,50 +116,60 @@ function BookingForm() {
         </div>
       )}
 
+      {isLoggedIn ? (
+        <>
+          <input type="hidden" name="contact_name" value={formData.contact_name} />
+          <input type="hidden" name="contact_email" value={formData.contact_email} />
+          <input type="hidden" name="contact_phone" value={formData.contact_phone} />
+        </>
+      ) : (
+        <div className="grid sm:grid-cols-2 gap-6 mb-8">
+          <div className="sm:col-span-2">
+            <h3 className="text-lg font-bold text-slate-900 border-b pb-2 mb-4">Contact Details</h3>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Full Name *</label>
+            <input 
+              type="text" 
+              name="contact_name" 
+              required 
+              value={formData.contact_name}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
+              placeholder="John Doe"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Email Address *</label>
+            <input 
+              type="email" 
+              name="contact_email" 
+              required 
+              value={formData.contact_email}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
+              placeholder="john@company.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number *</label>
+            <input 
+              type="tel" 
+              name="contact_phone" 
+              required 
+              value={formData.contact_phone}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
+              placeholder="+1 (555) 000-0000"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="grid sm:grid-cols-2 gap-6 mb-8">
-        <div className="sm:col-span-2">
-          <h3 className="text-lg font-bold text-slate-900 border-b pb-2 mb-4">Contact Details</h3>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Full Name *</label>
-          <input 
-            type="text" 
-            name="contact_name" 
-            required 
-            value={formData.contact_name}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-            placeholder="John Doe"
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Email Address *</label>
-          <input 
-            type="email" 
-            name="contact_email" 
-            required 
-            value={formData.contact_email}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-            placeholder="john@company.com"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number *</label>
-          <input 
-            type="tel" 
-            name="contact_phone" 
-            required 
-            value={formData.contact_phone}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-            placeholder="+91 98765 43210"
-          />
-        </div>
-
         <div className="sm:col-span-2 mt-4">
           <h3 className="text-lg font-bold text-slate-900 border-b pb-2 mb-4">Event & Staffing Requirements</h3>
         </div>
@@ -242,23 +255,31 @@ function BookingForm() {
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-      >
-        {loading ? (
-          <>
-            <Loader2 className="w-5 h-5 animate-spin" />
-            Submitting Request...
-          </>
-        ) : (
-          <>
-            Request Quote
-            <ArrowRight className="w-5 h-5" />
-          </>
-        )}
-      </button>
+      <div className="mt-8 flex flex-col sm:flex-row items-center gap-6">
+        <div className="w-full sm:w-auto">
+          <Turnstile 
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
+            onSuccess={setTurnstileToken} 
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={loading || !turnstileToken}
+          className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {loading ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            <>
+              Request Quote
+              <ArrowRight className="w-5 h-5" />
+            </>
+          )}
+        </button>
+      </div>
     </form>
   );
 }

@@ -113,7 +113,7 @@ function TestimonialModal({
             <Star className={`w-5 h-5 ${isFeatured ? 'text-amber-500 fill-amber-500' : 'text-slate-400'}`} />
             <div>
               <p className="font-medium text-slate-800 text-sm">Feature on Homepage</p>
-              <p className="text-xs text-slate-500">Featured testimonials appear in the "What Our Clients Say" section.</p>
+              <p className="text-xs text-slate-500">Featured testimonials appear in the &quot;What Our Clients Say&quot; section.</p>
             </div>
             <div className={`ml-auto w-5 h-5 rounded-full border-2 flex items-center justify-center ${
               isFeatured ? 'border-amber-500 bg-amber-500' : 'border-slate-300'
@@ -153,7 +153,7 @@ export default function AdminTestimonialsTable({ testimonials: initial }: { test
   const [testimonials, setTestimonials] = useState(initial)
   const [modalMode, setModalMode] = useState<ModalMode>(null)
   const [editTarget, setEditTarget] = useState<Testimonial | undefined>(undefined)
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
   const [pendingId, setPendingId] = useState<string | null>(null)
 
   function openAdd() {
@@ -245,7 +245,7 @@ export default function AdminTestimonialsTable({ testimonials: initial }: { test
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-600 italic text-sm leading-relaxed line-clamp-3">"{t.quote}"</p>
+                    <p className="text-slate-600 italic text-sm leading-relaxed line-clamp-3">&quot;{t.quote}&quot;</p>
                   </div>
 
                   <div className="flex items-center gap-1 flex-shrink-0">

@@ -2,10 +2,37 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { headers } from 'next/headers'
+import { checkRateLimit } from '@/lib/rate-limit'
 
-export async function submitInquiry(prevState: any, formData: FormData) {
+export async function submitInquiry(prevState: unknown, formData: FormData) {
   try {
     const supabase = await createClient()
+
+    const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
+    const rateLimitResult = await checkRateLimit(`contact_${ip}`)
+
+    if (!rateLimitResult.success) {
+      return { success: false, error: 'Too many requests. Please try again later.' }
+    }
+
+    const turnstileToken = formData.get('cf-turnstile-response') as string
+    if (!turnstileToken) {
+        return { success: false, error: 'CAPTCHA verification is required.' }
+    }
+    const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+    const secretKey = process.env.TURNSTILE_SECRET_KEY || '1x0000000000000000000000000000000AA' 
+    
+    const res = await fetch(verifyEndpoint, {
+        method: 'POST',
+        body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`,
+        headers: { 'content-type': 'application/x-www-form-urlencoded' }
+    })
+    
+    const data = await res.json()
+    if (!data.success && secretKey !== '1x0000000000000000000000000000000AA') {
+        return { success: false, error: 'CAPTCHA verification failed.' }
+    }
 
     const name = formData.get('name') as string
     const email = formData.get('email') as string
@@ -36,8 +63,8 @@ export async function submitInquiry(prevState: any, formData: FormData) {
     
     return { success: true, error: null }
 
-  } catch (err: any) {
+  } catch (err) {
     console.error('Submit Inquiry Exception:', err)
-    return { success: false, error: 'An unexpected error occurred.' }
+    return { success: false, error: err instanceof Error ? err.message : 'An unexpected error occurred.' }
   }
 }

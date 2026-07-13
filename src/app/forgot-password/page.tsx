@@ -25,7 +25,8 @@ export default function ForgotPasswordPage() {
       } else if (res?.success) {
         setMessage("If that email exists, we've sent a password reset link.")
       }
-    } catch (err: any) {
+    } catch (err) {
+      console.error(err)
       setError('An unexpected error occurred.')
     } finally {
       setLoading(false)
@@ -47,7 +48,7 @@ export default function ForgotPasswordPage() {
               Reset Password
             </h2>
             <p className="text-slate-600">
-              Enter your email address and we'll send you a link to reset your password.
+              Enter your email address and we&apos;ll send you a link to reset your password.
             </p>
           </div>
 

@@ -55,8 +55,8 @@ export async function sendApplicantStatusEmail(name: string, email: string, stat
       html: htmlContent,
     })
     return { success: true }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error sending email:', error)
-    return { success: false, error: error.message }
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }

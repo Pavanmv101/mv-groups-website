@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowRight, User } from 'lucide-react';
+import { type User } from '@supabase/supabase-js';
+import { Menu, X, ArrowRight, User as UserIcon } from 'lucide-react';
 import { NAV_LINKS, COMPANY } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/client';
 import { logout } from '@/app/login/actions';
@@ -11,7 +12,7 @@ import { logout } from '@/app/login/actions';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<'client' | 'admin' | null>(null);
   const pathname = usePathname();
 
@@ -117,7 +118,7 @@ export default function Navbar() {
                       : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  <User className="w-4 h-4" />
+                  <UserIcon className="w-4 h-4" />
                   Dashboard
                 </Link>
                 <form action={logout}>
@@ -142,7 +143,7 @@ export default function Navbar() {
                     : 'text-white/80 hover:text-white hover:bg-white/10'
                 }`}
               >
-                <User className="w-4 h-4" />
+                <UserIcon className="w-4 h-4" />
                 Login
               </Link>
             )}

@@ -41,10 +41,15 @@ export default async function AdminDashboardPage({
     : 'bookings'
 
   // 4. Fetch Data based on view
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bookings: any[] = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let applicants: any[] = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let inquiries: any[] = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let updates: any[] = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let testimonials: any[] = []
   let fetchError = null
 

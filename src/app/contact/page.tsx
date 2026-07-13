@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef } from 'react'
 import { submitInquiry } from './actions'
 import { COMPANY } from '@/lib/constants'
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const initialState = {
   success: false,
@@ -30,7 +31,7 @@ export default function ContactPage() {
         </h1>
         <p className="text-lg text-slate-600">
           Have a question about our services or want to discuss a custom staffing solution? 
-          We're here to help. Reach out to our team today!
+          We&apos;re here to help. Reach out to our team today!
         </p>
       </section>
 
@@ -134,20 +135,27 @@ export default function ContactPage() {
                     <textarea required id="message" name="message" rows={5} className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none resize-none" placeholder="Write your message here..."></textarea>
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2 group shadow-lg shadow-blue-600/20"
-                  >
-                    {isPending ? (
-                      'Sending...'
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                      </>
-                    )}
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-center gap-6 pt-2">
+                    <div className="w-full sm:w-auto">
+                      <Turnstile 
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isPending}
+                      className="w-full sm:flex-1 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2 group shadow-lg shadow-blue-600/20"
+                    >
+                      {isPending ? (
+                        'Sending...'
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </form>
               )}
 

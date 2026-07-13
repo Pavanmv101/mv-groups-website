@@ -54,6 +54,38 @@ function OtpInput({ value, onChange }: { value: string; onChange: (val: string) 
   )
 }
 
+// Animated tick component
+const AnimatedTick = ({ title, subtitle }: { title: string; subtitle: string }) => (
+  <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
+    <div className="mx-auto mb-6 w-24 h-24 relative">
+      <svg className="w-24 h-24" viewBox="0 0 100 100">
+        <circle
+          cx="50" cy="50" r="45"
+          fill="none"
+          stroke="#10b981"
+          strokeWidth="3"
+          strokeDasharray="283"
+          strokeDashoffset="283"
+          className="animate-[drawCircle_0.6s_ease-out_forwards]"
+        />
+        <path
+          d="M30 52 L44 66 L70 38"
+          fill="none"
+          stroke="#10b981"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="60"
+          strokeDashoffset="60"
+          className="animate-[drawCheck_0.4s_ease-out_0.5s_forwards]"
+        />
+      </svg>
+    </div>
+    <h3 className="text-xl font-bold text-slate-900 mb-2">{title}</h3>
+    <p className="text-slate-500">{subtitle}</p>
+  </div>
+)
+
 function LoginForm() {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -159,8 +191,9 @@ function LoginForm() {
           setError(null)
         }
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred')
+    } catch (err) {
+      console.error(err)
+      setError('An error occurred')
     } finally {
       setLoading(false)
     }
@@ -190,8 +223,9 @@ function LoginForm() {
           router.refresh()
         }, 1500)
       }
-    } catch (err: any) {
-      setError(err.message || 'Verification failed')
+    } catch (err) {
+      console.error(err)
+      setError('Verification failed')
     } finally {
       setLoading(false)
     }
@@ -208,44 +242,15 @@ function LoginForm() {
       if (resendError) {
         setError(resendError.message)
       }
-    } catch (err: any) {
+    } catch (err) {
+      console.error(err)
       setError('Failed to resend code.')
     } finally {
       setResending(false)
     }
   }
 
-  // Animated tick component
-  const AnimatedTick = ({ title, subtitle }: { title: string; subtitle: string }) => (
-    <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
-      <div className="mx-auto mb-6 w-24 h-24 relative">
-        <svg className="w-24 h-24" viewBox="0 0 100 100">
-          <circle
-            cx="50" cy="50" r="45"
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="3"
-            strokeDasharray="283"
-            strokeDashoffset="283"
-            className="animate-[drawCircle_0.6s_ease-out_forwards]"
-          />
-          <path
-            d="M30 52 L44 66 L70 38"
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeDasharray="60"
-            strokeDashoffset="60"
-            className="animate-[drawCheck_0.4s_ease-out_0.5s_forwards]"
-          />
-        </svg>
-      </div>
-      <h3 className="text-xl font-bold text-slate-900 mb-2">{title}</h3>
-      <p className="text-slate-500">{subtitle}</p>
-    </div>
-  )
+
 
   // Login success screen
   if (loginSuccess) {
@@ -402,7 +407,7 @@ function LoginForm() {
 
         <button
           type="submit"
-          disabled={loading || (lockedUntil !== null && Date.now() < lockedUntil)}
+          disabled={loading || lockedUntil !== null}
           className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold flex items-center justify-center gap-2 hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 disabled:opacity-70 mt-2"
         >
           {loading ? (

@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowLeft } from 'lucide-react'
-import ReactMarkdown from 'react-markdown'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params
@@ -79,9 +78,10 @@ export default async function UpdatePostPage({ params }: { params: Promise<{ slu
 
       {/* Content Section using Tailwind Typography (prose) */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="prose prose-lg prose-slate prose-blue max-w-none">
-          <ReactMarkdown>{post.content}</ReactMarkdown>
-        </div>
+        <div 
+          className="prose prose-slate max-w-none hover:prose-a:text-blue-600 prose-img:rounded-xl"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </div>
       
     </article>

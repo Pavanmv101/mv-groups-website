@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { createClient } from '@/utils/supabase/client'
 import { Megaphone, Plus, Edit, Trash2, Calendar, CheckCircle2, Clock, Image as ImageIcon, Loader2 } from 'lucide-react'
+import RichTextEditor from '@/components/RichTextEditor'
 
 type UpdatePost = {
   id: string
@@ -157,6 +159,7 @@ function UpdatePostModal({
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true)
   }, [])
 
@@ -198,7 +201,7 @@ function UpdatePostModal({
         const fileExt = allowedTypes[thumbnailFile.type]
         const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
         
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from('updates_media')
           .upload(fileName, thumbnailFile)
 
@@ -287,17 +290,16 @@ function UpdatePostModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Content (Markdown Supported)</label>
-            <textarea
-              required
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={10}
-              className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-mono text-sm"
-              placeholder="# Heading 1&#10;Write your post content here using Markdown..."
-            />
+            <label className="block text-sm font-medium text-slate-700 mb-2">Content</label>
+            <div className="bg-white rounded-lg border border-slate-200 overflow-hidden min-h-[250px]">
+              <RichTextEditor 
+                value={content}
+                onChange={setContent}
+                placeholder="Write your post content here..."
+              />
+            </div>
             <p className="text-xs text-slate-500 mt-2">
-              Tip: Use # for headers, **text** for bold, and - for bulleted lists.
+              Tip: Use the toolbar to format text, add links, and create lists.
             </p>
           </div>
 
@@ -317,7 +319,7 @@ function UpdatePostModal({
                 </label>
                 {editingPost?.thumbnail_url && !thumbnailFile && (
                   <div className="w-10 h-10 rounded overflow-hidden shrink-0 border border-slate-200">
-                    <img src={editingPost.thumbnail_url} className="w-full h-full object-cover" alt="Current thumbnail" />
+                    <Image src={editingPost.thumbnail_url} width={40} height={40} className="w-full h-full object-cover" alt="Current thumbnail" />
                   </div>
                 )}
               </div>

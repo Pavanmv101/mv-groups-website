@@ -20,11 +20,9 @@ import {
   Landmark,
   Heart,
   Trophy,
-  Music,
 } from 'lucide-react';
 import { SERVICES, STATS } from '@/lib/constants';
 import SectionHeading from '@/components/ui/SectionHeading';
-import FAQSection from '@/components/FAQSection';
 
 /* ------------------------------------------------------------------ */
 /*  Animated entrance hook                                             */
