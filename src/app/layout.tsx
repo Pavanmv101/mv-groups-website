@@ -13,11 +13,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'MV Groups (Bangalore Best) — Manpower Staffing & Tech Event Solutions',
+    default: 'Pavan MV | Founder of MV Groups',
     template: '%s | MV Groups',
   },
   description:
-    'MV Groups is a premier manpower supply and software/tech events company based in Bengaluru, Karnataka. We provide reliable staffing solutions and world-class event management across Karnataka.',
+    'Pavan MV is the founder of MV Groups (mvgroups.online), a premier manpower supply and corporate event staffing agency based in Karnataka.',
   keywords: [
     'manpower staffing',
     'tech events',
@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     'hackathon management',
     'workforce solutions',
   ],
-  authors: [{ name: 'MV Groups' }],
+  authors: [{ name: 'Pavan MV' }],
   openGraph: {
-    title: 'MV Groups (Bangalore Best) — Manpower Staffing & Tech Event Solutions',
+    title: 'Pavan MV | Founder of MV Groups',
     description:
-      'Premier manpower supply and software/tech events company delivering reliable staffing solutions and world-class event management across Karnataka.',
+      'Pavan MV is the founder of MV Groups (mvgroups.online), a premier manpower supply and corporate event staffing agency based in Karnataka.',
     type: 'website',
     locale: 'en_IN',
     siteName: 'MV Groups',
