@@ -19,7 +19,7 @@ export async function resetPassword(formData: FormData) {
   const origin = `${protocol}://${host}`
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/reset-callback`,
+    redirectTo: `${origin}/auth/callback?next=/reset-password`,
   })
 
   // We return success regardless of whether the email exists
