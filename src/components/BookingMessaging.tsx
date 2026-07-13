@@ -22,6 +22,20 @@ export default function BookingMessaging({ bookingId, currentRole, currentUserId
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from('booking_messages')
+        .select('*')
+        .eq('booking_id', bookingId)
+        .order('created_at', { ascending: true })
+
+      if (!error && data) {
+        setMessages(data)
+        setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100)
+      }
+      setLoading(false)
+    }
+
     fetchMessages()
     
     // Subscribe to realtime messages
@@ -34,32 +48,14 @@ export default function BookingMessaging({ bookingId, currentRole, currentUserId
         filter: `booking_id=eq.${bookingId}`
       }, (payload) => {
         setMessages((prev) => [...prev, payload.new as Message])
-        scrollToBottom()
+        setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 100)
       })
       .subscribe()
 
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [bookingId])
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const fetchMessages = async () => {
-    const { data, error } = await supabase
-      .from('booking_messages')
-      .select('*')
-      .eq('booking_id', bookingId)
-      .order('created_at', { ascending: true })
-
-    if (!error && data) {
-      setMessages(data)
-      setTimeout(scrollToBottom, 100)
-    }
-    setLoading(false)
-  }
+  }, [bookingId, supabase])
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault()

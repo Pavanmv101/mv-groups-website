@@ -1,7 +1,6 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { forwardRef } from 'react'
 import 'react-quill/dist/quill.snow.css'
 
 // Dynamically import ReactQuill with SSR disabled
