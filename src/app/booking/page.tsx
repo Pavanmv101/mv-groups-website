@@ -65,8 +65,9 @@ function BookingForm() {
           start_date: formData.start_date,
           end_date: formData.end_date,
           people_needed: formData.people_needed,
-          budget_range: formData.budget_range,
-          description: formData.description,
+          description: formData.budget_range 
+            ? `[Budget: ${formData.budget_range}]\n\n${formData.description}`.trim()
+            : formData.description,
         },
       ]);
 
