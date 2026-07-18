@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { SERVICES } from '@/lib/constants';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Users, Zap, ShieldCheck } from 'lucide-react';
 
 export async function generateStaticParams() {
   return SERVICES.map((service) => ({
@@ -81,6 +81,62 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                   <span className="text-lg font-medium text-slate-800">{feature}</span>
                 </div>
               ))}
+            </div>
+          </div>
+          
+          {/* How It Works Section */}
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">How It Works in Bangalore</h2>
+            <p className="text-lg text-slate-600 mb-10 max-w-2xl">
+              We&apos;ve refined our staffing process to tackle Bangalore&apos;s unique event landscape, ensuring zero delays and perfectly matched talent.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="relative">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">1</div>
+                <h4 className="text-xl font-bold text-slate-900 mb-2">Scope & Briefing</h4>
+                <p className="text-slate-600">You share your exact headcount, roles, and dress code requirements with our team.</p>
+                <div className="hidden md:block absolute top-6 left-16 right-0 h-[2px] bg-slate-100 -z-10"></div>
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">2</div>
+                <h4 className="text-xl font-bold text-slate-900 mb-2">Local Sourcing</h4>
+                <p className="text-slate-600">We source pre-vetted staff locally (e.g., near Whitefield or BIEC) to avoid traffic delays.</p>
+                <div className="hidden md:block absolute top-6 left-16 right-0 h-[2px] bg-slate-100 -z-10"></div>
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">3</div>
+                <h4 className="text-xl font-bold text-slate-900 mb-2">On-Site Prep</h4>
+                <p className="text-slate-600">Our team arrives 60-90 minutes early for a full run-of-show briefing and orientation.</p>
+                <div className="hidden md:block absolute top-6 left-16 right-0 h-[2px] bg-slate-100 -z-10"></div>
+              </div>
+              <div className="relative">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">4</div>
+                <h4 className="text-xl font-bold text-slate-900 mb-2">Live Execution</h4>
+                <p className="text-slate-600">A dedicated agency supervisor manages the flow so you can focus on the event.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Why Choose Us */}
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-slate-900 mb-10">Why Choose Us for {service.title}?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <Users className="w-10 h-10 text-blue-600 mb-6" />
+                <h4 className="text-xl font-bold text-slate-900 mb-3">Multilingual & Tech Fluent</h4>
+                <p className="text-slate-600">Staff fluent in English, Hindi, and Kannada, trained on digital check-ins, CRM tools, and QR scanners.</p>
+              </div>
+              <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <Zap className="w-10 h-10 text-blue-600 mb-6" />
+                <h4 className="text-xl font-bold text-slate-900 mb-3">Scalability on Demand</h4>
+                <p className="text-slate-600">Need 5 people or 50? We scale our workforce up or down based on your specific daily requirements.</p>
+              </div>
+              <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+                <ShieldCheck className="w-10 h-10 text-blue-600 mb-6" />
+                <h4 className="text-xl font-bold text-slate-900 mb-3">Guaranteed Reliability</h4>
+                <p className="text-slate-600">We maintain an on-site backup buffer (10-15% extra staff) to instantly replace any last-minute no-shows.</p>
+              </div>
             </div>
           </div>
           
