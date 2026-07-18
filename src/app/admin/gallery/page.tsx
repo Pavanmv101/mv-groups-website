@@ -53,6 +53,15 @@ export default function AdminGalleryPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
     if (selected) {
+      // Validate file size (4MB limit for Vercel Server Actions)
+      if (selected.size > 4 * 1024 * 1024) {
+        setError('File is too large. Please select an image under 4MB.');
+        setFile(null);
+        setPreview(null);
+        return;
+      }
+      
+      setError(null);
       setFile(selected);
       setPreview(URL.createObjectURL(selected));
     }
@@ -158,7 +167,7 @@ export default function AdminGalleryPage() {
                         <input name="file-upload" type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
                       </label>
                     </div>
-                    <p className="text-xs text-slate-500">PNG, JPG, WEBP up to 5MB</p>
+                    <p className="text-xs text-slate-500">PNG, JPG, WEBP up to 4MB</p>
                   </div>
                 </div>
               </div>
