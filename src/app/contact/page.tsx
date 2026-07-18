@@ -120,7 +120,7 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
-                      <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none" placeholder="+91 98765 43210" />
+                      <input type="tel" id="phone" name="phone" pattern="[+0-9\s\-]+" minLength={10} maxLength={20} className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none" placeholder="+91 98765 43210" title="Phone number should contain at least 10 digits" />
                     </div>
                     <div>
                       <label htmlFor="subject" className="block text-sm font-medium text-slate-700 mb-2">Subject *</label>

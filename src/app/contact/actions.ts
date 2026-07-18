@@ -27,6 +27,14 @@ export async function submitInquiry(prevState: unknown, formData: FormData) {
       return { success: false, error: 'Please fill out all required fields.' }
     }
 
+    if (phone) {
+      // Basic validation: strip all non-digits and check length
+      const phoneDigits = phone.replace(/\D/g, '')
+      if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+        return { success: false, error: 'Please enter a valid phone number (10-15 digits).' }
+      }
+    }
+
     const { error: insertError } = await supabase.from('inquiries').insert([
       {
         name,
