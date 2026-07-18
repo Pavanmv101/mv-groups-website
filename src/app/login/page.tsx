@@ -120,9 +120,13 @@ function LoginForm() {
         },
       })
       if (error) throw error
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      setError(err.message || 'Failed to login with Google')
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('Failed to login with Google')
+      }
       setGoogleLoading(false)
     }
   }

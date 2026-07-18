@@ -1,7 +1,6 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
-import { headers } from 'next/headers'
 
 export async function resetPassword(formData: FormData) {
   const email = formData.get('email') as string

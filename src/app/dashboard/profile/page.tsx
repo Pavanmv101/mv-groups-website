@@ -11,7 +11,7 @@ export default function ProfilePage() {
   const router = useRouter()
   const supabase = createClient()
   const [initialLoading, setInitialLoading] = useState(true)
-  const [userMetadata, setUserMetadata] = useState<any>(null)
+  const [userMetadata, setUserMetadata] = useState<Record<string, unknown> | null>(null)
 
   // Profile State
   const [profileLoading, setProfileLoading] = useState(false)
@@ -54,7 +54,7 @@ export default function ProfilePage() {
         setTimeout(() => setProfileSuccess(false), 3000)
         router.refresh()
       }
-    } catch (err) {
+    } catch {
       setProfileError('An unexpected error occurred.')
     } finally {
       setProfileLoading(false)
@@ -86,7 +86,7 @@ export default function ProfilePage() {
         ;(e.target as HTMLFormElement).reset()
         setTimeout(() => setPasswordSuccess(false), 3000)
       }
-    } catch (err) {
+    } catch {
       setPasswordError('An unexpected error occurred.')
     } finally {
       setPasswordLoading(false)
