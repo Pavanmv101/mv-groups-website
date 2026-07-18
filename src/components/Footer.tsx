@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { COMPANY, NAV_LINKS, SERVICES } from '@/lib/constants';
 
@@ -29,8 +30,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl gradient-blue flex items-center justify-center">
-                <span className="text-white font-bold text-lg">MV</span>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white">
+                <Image src="/logo.jpg" alt="MV Groups Logo" width={40} height={40} className="object-cover" />
               </div>
               <span className="text-xl font-bold">{COMPANY.name}</span>
             </Link>

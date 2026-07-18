@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { type User } from '@supabase/supabase-js';
 import { Menu, X, ArrowRight, User as UserIcon } from 'lucide-react';
@@ -68,8 +69,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl gradient-blue flex items-center justify-center shadow-lg shadow-blue-500/25">
-              <span className="text-white font-bold text-lg">MV</span>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/25 overflow-hidden">
+              <Image src="/logo.jpg" alt="MV Groups Logo" width={40} height={40} className="object-cover" />
             </div>
             <span
               className={`text-xl font-bold transition-colors ${

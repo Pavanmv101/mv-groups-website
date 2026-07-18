@@ -50,7 +50,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'MV Groups',
-    image: 'https://mvgroups.vercel.app/logo.png', // Replace with real URL
+    image: 'https://mvgroups.vercel.app/logo.jpg', // Replace with real URL
     description: 'Premier manpower supply and software/tech events company delivering reliable staffing solutions and world-class event management across Karnataka.',
     address: {
       '@type': 'PostalAddress',
