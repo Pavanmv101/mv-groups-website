@@ -145,7 +145,7 @@ export default function ProfilePage() {
                   <input 
                     type="email"
                     disabled
-                    value={userMetadata?.email || 'Your Email'}
+                    value={(userMetadata?.email as string) || 'Your Email'}
                     className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-100 text-slate-500 cursor-not-allowed"
                   />
                   <p className="text-xs text-slate-400 mt-1.5">Email cannot be changed currently.</p>
