@@ -132,9 +132,9 @@ export default function CareersPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="interest" className="block text-sm font-medium text-slate-700 mb-2">Primary Area of Interest *</label>
+                  <label htmlFor="interest" className="block text-sm font-medium text-slate-700 mb-2">What are you interested in doing? *</label>
                   <select required id="interest" name="interest" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none text-slate-700">
-                    <option value="">Select an area of interest...</option>
+                    <option value="">Select what you are interested in doing...</option>
                     <option value="Manpower Staffing (Ushers, Registration, etc.)">Manpower Staffing (Ushers, Registration, etc.)</option>
                     <option value="Promotional Staffing (Brand Promoters)">Promotional Staffing (Brand Promoters)</option>
                     <option value="Event Setup & Logistics (Crew)">Event Setup & Logistics (Crew)</option>
