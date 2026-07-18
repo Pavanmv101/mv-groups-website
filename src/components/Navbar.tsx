@@ -110,17 +110,19 @@ export default function Navbar() {
                     Admin Panel
                   </Link>
                 )}
-                <Link
-                  href="/dashboard"
-                  className={`ml-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                    scrolled
-                      ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <UserIcon className="w-4 h-4" />
-                  Dashboard
-                </Link>
+                {role !== 'admin' && (
+                  <Link
+                    href="/dashboard"
+                    className={`ml-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                      scrolled
+                        ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <UserIcon className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+                )}
                 <form action={logout}>
                   <button
                     type="submit"
@@ -203,17 +205,19 @@ export default function Navbar() {
                       Admin Panel
                     </Link>
                   )}
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                      scrolled
-                        ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    Dashboard
-                  </Link>
+                  {role !== 'admin' && (
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setIsOpen(false)}
+                      className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                        scrolled
+                          ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
+                          : 'text-white/80 hover:text-white hover:bg-white/10'
+                      }`}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
                   <form action={logout}>
                     <button
                       type="submit"
