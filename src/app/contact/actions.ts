@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'
+import nodemailer from 'nodemailer'
 
 export async function submitInquiry(prevState: unknown, formData: FormData) {
   try {
@@ -39,6 +40,36 @@ export async function submitInquiry(prevState: unknown, formData: FormData) {
     if (insertError) {
       console.error('Inquiry insert error:', insertError)
       return { success: false, error: 'An error occurred while submitting your message.' }
+    }
+
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_APP_PASSWORD,
+        },
+      })
+
+      const mailOptions = {
+        from: process.env.GMAIL_USER,
+        to: process.env.GMAIL_USER, 
+        subject: `New Contact Form Submission: ${subject}`,
+        text: `You have received a new inquiry from the MV Groups website.
+        
+Name: ${name}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Subject: ${subject}
+
+Message:
+${message}`
+      }
+
+      await transporter.sendMail(mailOptions)
+    } catch (emailError) {
+      console.error('Failed to send email notification:', emailError)
+      // Even if email fails, we return success because the inquiry is safely in the database
     }
 
     revalidatePath('/admin')
