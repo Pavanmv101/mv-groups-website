@@ -1,12 +1,29 @@
 'use server'
 
 import { createClient } from '@/utils/supabase/server'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
 export async function resetPassword(formData: FormData) {
   const email = formData.get('email') as string
   
   if (!email) {
     return { error: 'Email is required' }
+  }
+
+  // Create an admin client to bypass RLS and verify email existence
+  const supabaseAdmin = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder'
+  )
+
+  const { data: user, error: userError } = await supabaseAdmin
+    .from('users')
+    .select('id')
+    .eq('email', email)
+    .single()
+
+  if (userError || !user) {
+    return { error: 'This email is not registered in our system.' }
   }
 
   const supabase = await createClient()
@@ -21,11 +38,9 @@ export async function resetPassword(formData: FormData) {
     redirectTo: `${origin}/auth/callback?next=/reset-password`,
   })
 
-  // We return success regardless of whether the email exists
-  // to prevent email enumeration. Supabase handles this gracefully.
-  if (error && error.message !== 'Signups not allowed for this instance') {
-    // We only log the error but don't expose it to the client, unless it's a rate limit
+  if (error) {
     console.error('Reset password error:', error)
+    return { error: error.message }
   }
 
   return { success: true }
