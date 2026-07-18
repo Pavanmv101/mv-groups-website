@@ -2,6 +2,15 @@ import { COMPANY } from '@/lib/constants'
 import { Shield, Target, Users, Zap, Award, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About MV Groups | Bangalore Event Staffing Agency',
+  description: 'Learn about MV Groups, a premier event staffing and manpower supply agency founded by Pavan MV. We deliver exceptional event experiences across Karnataka.',
+  alternates: {
+    canonical: 'https://mvgroups.online/about',
+  }
+};
 
 export default function AboutPage() {
   return (
