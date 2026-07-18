@@ -51,12 +51,20 @@ export default async function DashboardPage() {
             <h1 className="text-3xl font-bold text-slate-900">Client Dashboard</h1>
             <p className="text-slate-600 mt-1">Welcome back, {user.user_metadata?.full_name || user.email}</p>
           </div>
-          <Link 
-            href="/services" 
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shrink-0"
-          >
-            New Booking Request
-          </Link>
+          <div className="flex items-center gap-3 shrink-0">
+            <Link 
+              href="/dashboard/profile" 
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition-colors shadow-sm"
+            >
+              Profile Settings
+            </Link>
+            <Link 
+              href="/services" 
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
+            >
+              New Booking Request
+            </Link>
+          </div>
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
