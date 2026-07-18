@@ -51,9 +51,9 @@ export default function PrivacyPolicyPage() {
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Cookies and Web Beacons</h2>
             <p>
-              Like any other website, {COMPANY.name} uses "cookies". These cookies are used to store information including visitors' preferences, 
-              and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing 
-              our web page content based on visitors' browser type and/or other information.
+              Like any other website, {COMPANY.name} uses &quot;cookies&quot;. These cookies are used to store information including visitors&apos; preferences, 
+              and the pages on the website that the visitor accessed or visited. The information is used to optimize the users&apos; experience by customizing 
+              our web page content based on visitors&apos; browser type and/or other information.
             </p>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Data Security</h2>

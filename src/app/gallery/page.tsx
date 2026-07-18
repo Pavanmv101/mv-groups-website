@@ -23,7 +23,7 @@ export default function GalleryPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Our Work in Action</h1>
             <p className="text-xl text-slate-600">
-              A glimpse into the professional teams and successful events we've helped power across the country.
+              A glimpse into the professional teams and successful events we&apos;ve helped power across the country.
             </p>
           </div>
 

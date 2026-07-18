@@ -65,7 +65,7 @@ function BookingForm() {
 
     try {
       const formDataObj = new FormData(e.target as HTMLFormElement);
-      const result = await submitBooking(formDataObj, '');
+      const result = await submitBooking(formDataObj);
 
       if (!result.success) {
         throw new Error(result.error);

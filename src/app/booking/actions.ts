@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'
 
-export async function submitBooking(formData: FormData, turnstileToken: string) {
+export async function submitBooking(formData: FormData) {
   try {
     const supabase = await createClient()
 

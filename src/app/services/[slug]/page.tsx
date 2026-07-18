@@ -72,7 +72,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold text-slate-900 mb-10">What's included in {service.title}?</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-10">What&apos;s included in {service.title}?</h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {service.features.map((feature, index) => (

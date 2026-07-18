@@ -17,7 +17,7 @@ export default function TermsConditionsPage() {
             <p><strong>Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</strong></p>
             
             <p>
-              Welcome to {COMPANY.name}! These terms and conditions outline the rules and regulations for the use of {COMPANY.name}'s Website, 
+              Welcome to {COMPANY.name}! These terms and conditions outline the rules and regulations for the use of {COMPANY.name}&apos;s Website, 
               located at {COMPANY.website}, as well as the provision of our staffing and event management services.
             </p>
             <p>
