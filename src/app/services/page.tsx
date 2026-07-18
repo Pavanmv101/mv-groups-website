@@ -247,7 +247,13 @@ function ServiceDetailSection({
               ))}
             </ul>
 
-            <div className="pt-4">
+            <div className="pt-4 flex flex-wrap gap-4">
+              <Link
+                href={`/services/${service.id}`}
+                className={`inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-white border-2 ${accent.border} ${accent.text} font-semibold text-base hover:bg-slate-50 transition-all`}
+              >
+                Learn More
+              </Link>
               <Link
                 href={`/booking?service=${service.id}`}
                 className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r ${accent.gradient} text-white font-semibold text-base hover:opacity-90 transition-all shadow-lg hover:-translate-y-0.5`}

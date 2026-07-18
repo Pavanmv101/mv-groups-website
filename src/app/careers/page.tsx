@@ -189,6 +189,69 @@ export default function CareersPage() {
           </div>
         </div>
 
+        {/* FAQ Section */}
+        <div className="max-w-3xl mx-auto mt-24">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            
+            <details className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900 font-semibold text-lg">
+                How and when do I get paid?
+                <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                Payments are typically processed within 48 to 72 hours after the successful completion of an event. We transfer payments directly to your provided bank account via NEFT/UPI. For long-term projects (e.g., month-long exhibitions), payments may be made weekly or bi-weekly.
+              </p>
+            </details>
+
+            <details className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900 font-semibold text-lg">
+                What is the standard dress code for events?
+                <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                Dress codes vary depending on the client and the nature of the event. For corporate events, formal attire (black trousers, white shirt, blazer) is usually expected. For promotional events, clients often provide branded t-shirts. We will always inform you of the specific dress code before you confirm a shift.
+              </p>
+            </details>
+
+            <details className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900 font-semibold text-lg">
+                Do I need prior experience to join?
+                <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                While prior experience in event management, hospitality, or promotions is highly valued, it is not strictly mandatory for all roles. We look for individuals with great communication skills, punctuality, and a positive attitude. We often provide basic training/briefings before major events.
+              </p>
+            </details>
+
+            <details className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between gap-1.5 text-slate-900 font-semibold text-lg">
+                How will I be notified about upcoming shifts?
+                <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </span>
+              </summary>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                Once you are shortlisted and verified in our database, our operations team will reach out to you via WhatsApp or phone call whenever there is an event in your city that matches your profile and availability.
+              </p>
+            </details>
+          </div>
+        </div>
+
       </div>
     </div>
   )
