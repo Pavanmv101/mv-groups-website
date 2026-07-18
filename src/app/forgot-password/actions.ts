@@ -12,11 +12,11 @@ export async function resetPassword(formData: FormData) {
 
   const supabase = await createClient()
   
-  // Get the host/origin dynamically to support local and prod environments
-  const headersList = await headers()
-  const host = headersList.get('host')
-  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
-  const origin = `${protocol}://${host}`
+  // Hardcode the production URL to guarantee it matches the Supabase Whitelist,
+  // since Vercel dynamic host headers can sometimes cause redirect mismatch errors.
+  const origin = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:3000' 
+    : 'https://www.mvgroups.online'
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${origin}/auth/callback?next=/reset-password`,
