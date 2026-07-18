@@ -6,7 +6,6 @@ import { SERVICES } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/client';
 import { CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { Turnstile } from '@marsidev/react-turnstile';
 import { submitBooking } from './actions';
 
 function BookingForm() {
@@ -17,7 +16,6 @@ function BookingForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
-  const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -61,17 +59,13 @@ function BookingForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!turnstileToken) {
-      setError('Please complete the CAPTCHA verification.');
-      return;
-    }
     
     setLoading(true);
     setError('');
 
     try {
       const formDataObj = new FormData(e.target as HTMLFormElement);
-      const result = await submitBooking(formDataObj, turnstileToken);
+      const result = await submitBooking(formDataObj, '');
 
       if (!result.success) {
         throw new Error(result.error);
@@ -160,6 +154,10 @@ function BookingForm() {
               type="tel" 
               name="contact_phone" 
               required 
+              pattern="[+0-9\s\-]+"
+              minLength={10}
+              maxLength={20}
+              title="Phone number should contain at least 10 digits"
               value={formData.contact_phone}
               onChange={handleChange}
               className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
@@ -256,15 +254,9 @@ function BookingForm() {
       </div>
 
       <div className="mt-8 flex flex-col sm:flex-row items-center gap-6">
-        <div className="w-full sm:w-auto">
-          <Turnstile 
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
-            onSuccess={setTurnstileToken} 
-          />
-        </div>
         <button
           type="submit"
-          disabled={loading || !turnstileToken}
+          disabled={loading}
           className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {loading ? (

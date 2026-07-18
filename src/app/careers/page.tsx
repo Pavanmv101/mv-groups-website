@@ -116,7 +116,7 @@ export default function CareersPage() {
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">Phone Number *</label>
-                    <input required type="tel" id="phone" name="phone" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none" placeholder="+91 98765 43210" />
+                    <input required type="tel" id="phone" name="phone" pattern="[+0-9\s\-]+" minLength={10} maxLength={20} title="Phone number should contain at least 10 digits" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none" placeholder="+91 98765 43210" />
                   </div>
                 </div>
 

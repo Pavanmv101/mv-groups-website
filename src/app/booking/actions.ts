@@ -15,26 +15,12 @@ export async function submitBooking(formData: FormData, turnstileToken: string) 
       return { success: false, error: 'Too many requests. Please try again later.' }
     }
 
-    // Turnstile Validation
-    if (!turnstileToken) {
-        return { success: false, error: 'CAPTCHA verification is required.' }
-    }
-    const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-    // Use test secret key if not provided
-    const secretKey = process.env.TURNSTILE_SECRET_KEY || '1x0000000000000000000000000000000AA' 
-    
-    const res = await fetch(verifyEndpoint, {
-        method: 'POST',
-        body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`,
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        }
-    })
-    
-    const data = await res.json()
-    // Skip failure check for test token in dev
-    if (!data.success && secretKey !== '1x0000000000000000000000000000000AA') {
-        return { success: false, error: 'CAPTCHA verification failed.' }
+    const contact_phone = formData.get('contact_phone') as string
+    if (contact_phone) {
+      const phoneDigits = contact_phone.replace(/\D/g, '')
+      if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+        return { success: false, error: 'Please enter a valid phone number (10-15 digits).' }
+      }
     }
 
     const { data: { session } } = await supabase.auth.getSession()

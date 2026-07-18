@@ -29,6 +29,12 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
       return { success: false, error: 'Please fill out all required fields.' }
     }
 
+    // Basic phone validation
+    const phoneDigits = phone.replace(/\D/g, '')
+    if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+      return { success: false, error: 'Please enter a valid phone number (10-15 digits).' }
+    }
+
     let resume_url = null
 
     // 2. Upload resume if provided
