@@ -351,3 +351,57 @@ USING (true);
 CREATE POLICY "Admins have full access to testimonials"
 ON public.testimonials FOR ALL
 USING ( (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin' );
+
+-- ----------------------------------------
+-- 11. Gallery Images table
+-- ----------------------------------------
+CREATE TABLE public.gallery_images (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  image_url TEXT NOT NULL,
+  alt_text TEXT NOT NULL,
+  category TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- RLS Policies
+ALTER TABLE public.gallery_images ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public can view gallery images"
+ON public.gallery_images FOR SELECT
+USING (true);
+
+CREATE POLICY "Admins have full access to gallery images"
+ON public.gallery_images FOR ALL
+USING ( (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin' );
+
+-- Create bucket for gallery images
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('gallery', 'gallery', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage Policies for gallery bucket
+CREATE POLICY "Public can view gallery media"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'gallery');
+
+CREATE POLICY "Admins can upload gallery media"
+ON storage.objects FOR INSERT
+WITH CHECK (
+  bucket_id = 'gallery' AND 
+  (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin'
+);
+
+CREATE POLICY "Admins can update gallery media"
+ON storage.objects FOR UPDATE
+USING (
+  bucket_id = 'gallery' AND 
+  (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin'
+);
+
+CREATE POLICY "Admins can delete gallery media"
+ON storage.objects FOR DELETE
+USING (
+  bucket_id = 'gallery' AND 
+  (SELECT role FROM public.users WHERE id = auth.uid()) = 'admin'
+);

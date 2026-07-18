@@ -1,12 +1,14 @@
 import Image from 'next/image';
 
-const images = [
-  { id: 1, src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Corporate Event Registration", category: "Registration" },
-  { id: 2, src: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Exhibition Booth Staffing", category: "Exhibitions" },
-  { id: 3, src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Brand Promotion Team", category: "Promotions" },
-  { id: 4, src: "https://images.unsplash.com/photo-1475721028314-398858db1946?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Event Setup Crew", category: "Logistics" },
-  { id: 5, src: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Conference Ushers", category: "Corporate" },
-  { id: 6, src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "VIP Hosting Team", category: "Hosting" }
+import { createClient } from '@/utils/supabase/server';
+
+const fallbackImages = [
+  { id: "fallback-1", image_url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt_text: "Corporate Event Registration", category: "Registration" },
+  { id: "fallback-2", image_url: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt_text: "Exhibition Booth Staffing", category: "Exhibitions" },
+  { id: "fallback-3", image_url: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt_text: "Brand Promotion Team", category: "Promotions" },
+  { id: "fallback-4", image_url: "https://images.unsplash.com/photo-1475721028314-398858db1946?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt_text: "Event Setup Crew", category: "Logistics" },
+  { id: "fallback-5", image_url: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt_text: "Conference Ushers", category: "Corporate" },
+  { id: "fallback-6", image_url: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt_text: "VIP Hosting Team", category: "Hosting" }
 ];
 
 export const metadata = {
@@ -14,7 +16,17 @@ export const metadata = {
   description: 'Explore the high-quality events and brands powered by MV Groups staffing solutions.',
 };
 
-export default function GalleryPage() {
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function GalleryPage() {
+  const supabase = await createClient();
+  const { data: dbImages } = await supabase
+    .from('gallery_images')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const images = dbImages && dbImages.length > 0 ? dbImages : fallbackImages;
+
   return (
     <div className="min-h-screen bg-white">
       
@@ -32,8 +44,8 @@ export default function GalleryPage() {
               <div key={image.id} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
                 <div className="aspect-w-4 aspect-h-3 relative h-64 w-full">
                   <Image 
-                    src={image.src} 
-                    alt={image.alt}
+                    src={image.image_url} 
+                    alt={image.alt_text}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -43,7 +55,7 @@ export default function GalleryPage() {
                   <span className="inline-block px-3 py-1 bg-blue-600/90 text-white text-xs font-semibold rounded-full mb-2 backdrop-blur-sm">
                     {image.category}
                   </span>
-                  <h3 className="text-lg font-bold text-white">{image.alt}</h3>
+                  <h3 className="text-lg font-bold text-white">{image.alt_text}</h3>
                 </div>
               </div>
             ))}
