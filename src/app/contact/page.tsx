@@ -4,8 +4,6 @@ import { useActionState, useEffect, useRef } from 'react'
 import { submitInquiry } from './actions'
 import { COMPANY } from '@/lib/constants'
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react'
-import { Turnstile } from '@marsidev/react-turnstile'
-
 const initialState = {
   success: false,
   error: null,
@@ -137,9 +135,6 @@ export default function ContactPage() {
 
                   <div className="flex flex-col sm:flex-row items-center gap-6 pt-2">
                     <div className="w-full sm:w-auto">
-                      <Turnstile 
-                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} 
-                      />
                     </div>
                     <button
                       type="submit"

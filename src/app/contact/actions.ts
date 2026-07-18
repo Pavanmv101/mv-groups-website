@@ -16,24 +16,6 @@ export async function submitInquiry(prevState: unknown, formData: FormData) {
       return { success: false, error: 'Too many requests. Please try again later.' }
     }
 
-    const turnstileToken = formData.get('cf-turnstile-response') as string
-    if (!turnstileToken) {
-        return { success: false, error: 'CAPTCHA verification is required.' }
-    }
-    const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-    const secretKey = process.env.TURNSTILE_SECRET_KEY || '1x0000000000000000000000000000000AA' 
-    
-    const res = await fetch(verifyEndpoint, {
-        method: 'POST',
-        body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(turnstileToken)}`,
-        headers: { 'content-type': 'application/x-www-form-urlencoded' }
-    })
-    
-    const data = await res.json()
-    if (!data.success && secretKey !== '1x0000000000000000000000000000000AA') {
-        return { success: false, error: 'CAPTCHA verification failed.' }
-    }
-
     const name = formData.get('name') as string
     const email = formData.get('email') as string
     const phone = formData.get('phone') as string
