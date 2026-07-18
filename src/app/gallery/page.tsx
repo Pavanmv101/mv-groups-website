@@ -1,5 +1,3 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Image from 'next/image';
 
 const images = [
@@ -19,7 +17,6 @@ export const metadata = {
 export default function GalleryPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
       
       <main className="pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,8 +60,6 @@ export default function GalleryPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

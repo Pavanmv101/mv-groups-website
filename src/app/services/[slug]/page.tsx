@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
 import { SERVICES } from '@/lib/constants';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
@@ -37,7 +35,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-slate-50 border-b border-slate-100">
@@ -97,8 +94,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

@@ -1,5 +1,3 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { COMPANY } from '@/lib/constants';
 
 export const metadata = {
@@ -10,7 +8,6 @@ export const metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
       
       <main className="pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,8 +81,6 @@ export default function PrivacyPolicyPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
