@@ -81,7 +81,13 @@ export default function AdminBookingsTable({ initialBookings }: { initialBooking
   const handleBulkApprove = async () => {
     if (!selectedIds.length) return
     const supabase = createClient()
-    await supabase.from('bookings').update({ status: 'approved' }).in('id', selectedIds)
+    const { error } = await supabase.from('bookings').update({ status: 'approved' }).in('id', selectedIds)
+    
+    if (error) {
+      alert("Failed to approve bookings: " + error.message)
+      return
+    }
+
     router.refresh()
     setSelectedIds([])
   }
