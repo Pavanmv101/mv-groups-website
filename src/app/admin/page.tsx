@@ -40,6 +40,17 @@ export default async function AdminDashboardPage({
     ? resolvedParams.view 
     : 'bookings'
 
+  // Fetch notification counts in parallel
+  const [
+    { count: pendingBookings },
+    { count: newApplicants },
+    { count: unreadInquiries }
+  ] = await Promise.all([
+    supabase.from('bookings').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
+    supabase.from('applicants').select('*', { count: 'exact', head: true }).eq('status', 'new'),
+    supabase.from('inquiries').select('*', { count: 'exact', head: true }).eq('status', 'unread')
+  ])
+
   // 4. Fetch Data based on view
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let bookings: any[] = []
@@ -110,7 +121,15 @@ export default async function AdminDashboardPage({
                 : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
             }`}
           >
-            <Users className="w-4 h-4" />
+            <div className="relative">
+              <Users className="w-4 h-4" />
+              {(pendingBookings ?? 0) > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+              )}
+            </div>
             Client Bookings
           </Link>
           <Link
@@ -121,7 +140,15 @@ export default async function AdminDashboardPage({
                 : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
             }`}
           >
-            <Briefcase className="w-4 h-4" />
+            <div className="relative">
+              <Briefcase className="w-4 h-4" />
+              {(newApplicants ?? 0) > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+              )}
+            </div>
             Job Applications
           </Link>
           <Link
@@ -132,7 +159,15 @@ export default async function AdminDashboardPage({
                 : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
             }`}
           >
-            <Mail className="w-4 h-4" />
+            <div className="relative">
+              <Mail className="w-4 h-4" />
+              {(unreadInquiries ?? 0) > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+              )}
+            </div>
             Contact Messages
           </Link>
           <Link
