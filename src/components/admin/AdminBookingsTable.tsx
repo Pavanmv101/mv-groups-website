@@ -93,12 +93,14 @@ export default function AdminBookingsTable({ initialBookings }: { initialBooking
 
     // Send emails in the background
     const selectedBookings = initialBookings.filter(b => selectedIds.includes(b.id))
-    selectedBookings.forEach(booking => {
+    for (const booking of selectedBookings) {
       if (booking.contact_email) {
-        sendBookingApprovedEmail(booking.contact_name, booking.contact_email, getServiceName(booking.service_type))
-          .catch(err => console.error('Failed to send approval email', err))
+        const result = await sendBookingApprovedEmail(booking.contact_name, booking.contact_email, getServiceName(booking.service_type))
+        if (!result.success) {
+          alert("Booking approved, but failed to send email to " + booking.contact_email + ": " + result.error)
+        }
       }
-    })
+    }
 
     router.refresh()
     setSelectedIds([])
