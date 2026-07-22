@@ -6,6 +6,7 @@ import { Calendar, Users, Filter, CheckCircle2, AlertCircle, Clock, ChevronLeft,
 import { createClient } from '@/utils/supabase/client'
 import { SERVICES } from '@/lib/constants'
 import Link from 'next/link'
+import { sendBookingApprovedEmail } from '@/app/actions/email'
 
 type Booking = {
   id: string
@@ -81,12 +82,23 @@ export default function AdminBookingsTable({ initialBookings }: { initialBooking
   const handleBulkApprove = async () => {
     if (!selectedIds.length) return
     const supabase = createClient()
+    
+    // Update the database
     const { error } = await supabase.from('bookings').update({ status: 'approved' }).in('id', selectedIds)
     
     if (error) {
       alert("Failed to approve bookings: " + error.message)
       return
     }
+
+    // Send emails in the background
+    const selectedBookings = initialBookings.filter(b => selectedIds.includes(b.id))
+    selectedBookings.forEach(booking => {
+      if (booking.contact_email) {
+        sendBookingApprovedEmail(booking.contact_name, booking.contact_email, getServiceName(booking.service_type))
+          .catch(err => console.error('Failed to send approval email', err))
+      }
+    })
 
     router.refresh()
     setSelectedIds([])

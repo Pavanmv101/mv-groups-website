@@ -60,3 +60,36 @@ export async function sendApplicantStatusEmail(name: string, email: string, stat
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
+
+export async function sendBookingApprovedEmail(name: string, email: string, serviceName: string) {
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    console.error('Email credentials not configured')
+    return { success: false, error: 'Email credentials not configured' }
+  }
+
+  const subject = `Your booking for ${serviceName} is Approved! - MV Groups`
+  const htmlContent = `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+      <h2 style="color: #4f46e5;">Great news, ${name}!</h2>
+      <p>We are thrilled to inform you that your booking request for <strong>${serviceName}</strong> has been <strong>approved</strong> by our team.</p>
+      <p>We are preparing the final details and will reach out to you shortly with the final quotation and next steps.</p>
+      <p>If you have any immediate questions, feel free to reply to this email or send us a message through your dashboard.</p>
+      <p>We look forward to working with you!</p>
+      <br/>
+      <p>Best regards,<br><strong>The MV Groups Team</strong></p>
+    </div>
+  `
+
+  try {
+    await transporter.sendMail({
+      from: `"MV Groups" <${process.env.GMAIL_USER}>`,
+      to: email,
+      subject,
+      html: htmlContent,
+    })
+    return { success: true }
+  } catch (error) {
+    console.error('Error sending approval email:', error)
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+  }
+}
