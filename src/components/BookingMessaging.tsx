@@ -19,6 +19,7 @@ export default function BookingMessaging({ bookingId, currentRole, currentUserId
   const [loading, setLoading] = useState(true)
   const [newMessage, setNewMessage] = useState('')
   const [sending, setSending] = useState(false)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function BookingMessaging({ bookingId, currentRole, currentUserId
     if (!newMessage.trim()) return
 
     setSending(true)
+    setErrorMsg(null)
     const { error } = await supabase.from('booking_messages').insert({
       booking_id: bookingId,
       sender_id: currentUserId,
@@ -73,6 +75,7 @@ export default function BookingMessaging({ bookingId, currentRole, currentUserId
       setNewMessage('')
     } else {
       console.error("Failed to send message", error)
+      setErrorMsg(error.message || 'Failed to send message. Please try again.')
     }
     setSending(false)
   }
@@ -87,6 +90,12 @@ export default function BookingMessaging({ bookingId, currentRole, currentUserId
         <h3 className="font-bold text-slate-900">Message Thread</h3>
         <p className="text-sm text-slate-500">Chat with {currentRole === 'admin' ? 'the client' : 'our team'}</p>
       </div>
+      
+      {errorMsg && (
+        <div className="bg-red-50 p-2 text-center text-xs text-red-600 font-medium border-b border-red-100">
+          {errorMsg}
+        </div>
+      )}
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 ? (
