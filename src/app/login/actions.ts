@@ -40,22 +40,23 @@ async function verifyTurnstile(token: string) {
 }
 
 export async function login(formData: FormData) {
-  const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
-  
-  // 1. IP-based rate limiting (10 req/min)
-  if (process.env.UPSTASH_REDIS_REST_URL) {
-    const { success } = await loginRateLimit.limit(`login:${ip}`)
-    if (!success) {
-      return { error: 'Too many requests. Please try again later.' }
+  try {
+    const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
+    
+    // 1. IP-based rate limiting (10 req/min)
+    if (process.env.UPSTASH_REDIS_REST_URL) {
+      const { success } = await loginRateLimit.limit(`login:${ip}`)
+      if (!success) {
+        return { error: 'Too many requests. Please try again later.' }
+      }
     }
-  }
 
-  // 2. Validate Input
-  const parsed = loginSchema.safeParse({
-    email: formData.get('email'),
-    password: formData.get('password'),
-    turnstileToken: formData.get('turnstileToken'),
-  })
+    // 2. Validate Input
+    const parsed = loginSchema.safeParse({
+      email: formData.get('email'),
+      password: formData.get('password'),
+      turnstileToken: formData.get('turnstileToken'),
+    })
 
   if (!parsed.success) {
     return { error: 'Incorrect email or password.' }
@@ -123,14 +124,18 @@ export async function login(formData: FormData) {
     await redis.del(attemptsKey)
   }
 
-  const { data: userData } = await supabase
-    .from('users')
-    .select('role')
-    .eq('id', authData.user.id)
-    .single()
+    const { data: userData } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', authData.user.id)
+      .single()
 
-  revalidatePath('/', 'layout')
-  return { success: true, role: userData?.role || 'client' }
+    revalidatePath('/', 'layout')
+    return { success: true, role: userData?.role || 'client' }
+  } catch (err: any) {
+    console.error('Server Action Login Error:', err)
+    return { error: 'Server Error: ' + (err.message || err.toString()) }
+  }
 }
 
 export async function signup(formData: FormData) {
