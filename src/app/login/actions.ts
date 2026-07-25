@@ -96,26 +96,27 @@ export async function login(formData: FormData) {
   const { data: authData, error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
+    let currentAttempts = 0
     // 7. Handle Failure
     if (process.env.UPSTASH_REDIS_REST_URL && redis) {
-      const newAttempts = await redis.incr(attemptsKey)
+      currentAttempts = await redis.incr(attemptsKey)
       // Progressive delay: 500ms * failures
-      await sleep(Math.min(newAttempts * 500, 2000))
+      await sleep(Math.min(currentAttempts * 500, 2000))
 
-      if (newAttempts >= 5) {
+      if (currentAttempts >= 5) {
         // Lock for 15 minutes (900 seconds)
         await redis.setex(lockKey, 900, 'locked')
         await redis.del(attemptsKey) // Reset attempts since it's locked
         return { error: 'Too many failed attempts. Account locked for 15 minutes.' }
       }
       
-      if (newAttempts >= 3) {
+      if (currentAttempts >= 3) {
         return { error: 'Incorrect email or password.', requireCaptcha: true }
       }
     }
     
     // Always return generic error message
-    const debugFlag = redis ? '' : ' [No DB]'
+    const debugFlag = redis ? ` [Att:${currentAttempts}]` : ' [No DB]'
     return { error: 'Incorrect email or password.' + debugFlag }
   }
 
