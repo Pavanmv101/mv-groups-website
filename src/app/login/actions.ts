@@ -8,7 +8,7 @@ import { redis, loginRateLimit } from '@/lib/rate-limit'
 import { headers } from 'next/headers'
 
 const loginSchema = z.object({
-  email: z.string().email(),
+  email: z.string().trim().email(),
   password: z.string().min(1),
   turnstileToken: z.string().optional(),
 })
@@ -58,7 +58,8 @@ export async function login(formData: FormData) {
     })
 
   if (!parsed.success) {
-    return { error: 'Incorrect email or password. [Invalid Format]' }
+    const errorDetails = parsed.error.errors.map(e => e.path[0]).join(',')
+    return { error: `Incorrect email or password. [Invalid Format: ${errorDetails}]` }
   }
 
   const { email, password, turnstileToken } = parsed.data
