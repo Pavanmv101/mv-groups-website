@@ -5,6 +5,8 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Loader2, ArrowRight, Eye, EyeOff, ShieldCheck, Mail, RotateCcw } from 'lucide-react'
 import { createClient } from '@/utils/supabase/client'
+import { login, signup } from '@/app/login/actions'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 function OtpInput({ value, onChange }: { value: string; onChange: (val: string) => void }) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
@@ -97,6 +99,8 @@ function LoginForm() {
   const [loginSuccess, setLoginSuccess] = useState(false)
   const [failedAttempts, setFailedAttempts] = useState(0)
   const [lockedUntil, setLockedUntil] = useState<number | null>(null)
+  const [requireCaptcha, setRequireCaptcha] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   // OTP verification state
   const [otpStep, setOtpStep] = useState(false)
@@ -134,62 +138,29 @@ function LoginForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (lockedUntil && Date.now() < lockedUntil) {
-      const secondsLeft = Math.ceil((lockedUntil - Date.now()) / 1000)
-      setError(`Too many failed attempts. Please try again in ${secondsLeft} seconds.`)
-      return
-    }
-
     setLoading(true)
     setError(null)
     
     const formData = new FormData(e.currentTarget)
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    
-    if (!isLogin) {
-      if (password.length < 8) {
-        setError('Password must be at least 8 characters long.')
-        setLoading(false)
-        return
-      }
-      if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
-        setError('Password must contain at least one uppercase letter, one lowercase letter, and one number.')
-        setLoading(false)
-        return
-      }
+    if (turnstileToken) {
+      formData.append('turnstileToken', turnstileToken)
     }
 
     try {
       if (isLogin) {
-        const { data, error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+        const result = await login(formData)
         
-        if (signInError) {
-          const newAttempts = failedAttempts + 1
-          setFailedAttempts(newAttempts)
-          
-          if (newAttempts >= 5) {
-            const lockTime = Date.now() + 30000
-            setLockedUntil(lockTime)
-            setError('Too many failed attempts. Account locked for 30 seconds.')
-            setTimeout(() => {
-              setLockedUntil(null)
-              setFailedAttempts(0)
-            }, 30000)
-          } else {
-            setError(signInError.message)
+        if (result.error) {
+          setError(result.error)
+          if (result.requireCaptcha) {
+            setRequireCaptcha(true)
           }
-        } else if (data.user) {
-          const { data: userData } = await supabase
-            .from('users')
-            .select('role')
-            .eq('id', data.user.id)
-            .single()
-
-          setFailedAttempts(0)
+        } else if (result.success) {
+          setRequireCaptcha(false)
+          setTurnstileToken(null)
           setLoginSuccess(true)
           setTimeout(() => {
-            if (userData?.role === 'admin') {
+            if (result.role === 'admin') {
               router.push('/admin')
             } else {
               router.push('/dashboard')
@@ -198,26 +169,19 @@ function LoginForm() {
           }, 1500)
         }
       } else {
-        const full_name = formData.get('full_name') as string
-        const { error: signUpError } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: { full_name }
-          }
-        })
+        const result = await signup(formData)
         
-        if (signUpError) {
-          setError(signUpError.message)
-        } else {
-          setOtpEmail(email)
+        if (result.error) {
+          setError(result.error)
+        } else if (result.success) {
+          setOtpEmail(result.email as string)
           setOtpStep(true)
           setError(null)
         }
       }
     } catch (err) {
       console.error(err)
-      setError('An error occurred')
+      setError('An error occurred. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -428,6 +392,15 @@ function LoginForm() {
             <p className="text-xs text-slate-400 mt-1.5">Min 8 characters with uppercase, lowercase, and a number.</p>
           )}
         </div>
+
+        {requireCaptcha && (
+          <div className="mt-4 flex justify-center">
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+              onSuccess={(token) => setTurnstileToken(token)}
+            />
+          </div>
+        )}
 
         <button
           type="submit"
