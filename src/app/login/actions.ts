@@ -115,7 +115,8 @@ export async function login(formData: FormData) {
     }
     
     // Always return generic error message
-    return { error: 'Incorrect email or password.' }
+    const debugFlag = redis ? '' : ' [No DB]'
+    return { error: 'Incorrect email or password.' + debugFlag }
   }
 
   // 8. Handle Success
