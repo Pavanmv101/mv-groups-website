@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { z } from 'zod'
-import sanitizeHtml from 'sanitize-html'
 import { redis, loginRateLimit } from '@/lib/rate-limit'
 import { headers } from 'next/headers'
 
@@ -151,11 +150,8 @@ export async function signup(formData: FormData) {
 
   const { email, password, full_name } = parsed.data
   
-  // Strip HTML from free-text field
-  const sanitizedFullName = sanitizeHtml(full_name, {
-    allowedTags: [],
-    allowedAttributes: {},
-  })
+  // Strip HTML from free-text field using basic string replacement to avoid sanitize-html chunk errors
+  const sanitizedFullName = full_name.replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
   const supabase = await createClient()
   const { error } = await supabase.auth.signUp({

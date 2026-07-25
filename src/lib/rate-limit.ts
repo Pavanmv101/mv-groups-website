@@ -1,25 +1,40 @@
 import { Ratelimit } from '@upstash/ratelimit'
 import { Redis } from '@upstash/redis'
 
-export const redis = process.env.UPSTASH_REDIS_REST_URL 
-  ? new Redis({ url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN || '' })
-  : null
+function initRedis() {
+  try {
+    if (!process.env.UPSTASH_REDIS_REST_URL) return null;
+    return new Redis({ 
+      url: process.env.UPSTASH_REDIS_REST_URL.trim(), 
+      token: (process.env.UPSTASH_REDIS_REST_TOKEN || '').trim() 
+    })
+  } catch (err) {
+    console.error('Failed to initialize Redis:', err)
+    return null
+  }
+}
+export const redis = initRedis()
+
+function initRateLimit(limit: number, windowStr: '1 s' | '1 m' | '1 h' | '1 d', prefix: string) {
+  try {
+    if (!redis) return null;
+    return new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(limit, windowStr),
+      analytics: true,
+      prefix,
+    })
+  } catch (err) {
+    console.error('Failed to initialize Ratelimit:', err)
+    return null
+  }
+}
 
 // Create a new ratelimiter, that allows 5 requests per 1 hour (generic)
-export const rateLimit = redis ? new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(5, '1 h'),
-  analytics: true,
-  prefix: '@upstash/ratelimit',
-}) : null
+export const rateLimit = initRateLimit(5, '1 h', '@upstash/ratelimit')
 
 // Create a strict ratelimiter for login: 10 requests per minute
-export const loginRateLimit = redis ? new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(10, '1 m'),
-  analytics: true,
-  prefix: '@upstash/ratelimit/login',
-}) : null
+export const loginRateLimit = initRateLimit(10, '1 m', '@upstash/ratelimit/login')
 
 // Define a helper to handle graceful failure if Redis env vars are missing
 export async function checkRateLimit(identifier: string) {
