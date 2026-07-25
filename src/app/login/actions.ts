@@ -44,7 +44,7 @@ export async function login(formData: FormData) {
     const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
     
     // 1. IP-based rate limiting (10 req/min)
-    if (process.env.UPSTASH_REDIS_REST_URL) {
+    if (process.env.UPSTASH_REDIS_REST_URL && loginRateLimit) {
       const { success } = await loginRateLimit.limit(`login:${ip}`)
       if (!success) {
         return { error: 'Too many requests. Please try again later.' }
@@ -67,7 +67,7 @@ export async function login(formData: FormData) {
   const attemptsKey = `attempts:${email}`
 
   // 3. Check Account Lockout
-  if (process.env.UPSTASH_REDIS_REST_URL) {
+  if (process.env.UPSTASH_REDIS_REST_URL && redis) {
     const isLocked = await redis.get(lockKey)
     if (isLocked) {
       return { error: 'Account temporarily locked. Please try again in 15 minutes.' }
@@ -76,7 +76,7 @@ export async function login(formData: FormData) {
 
   // 4. Fetch Failed Attempts
   let failedAttempts = 0
-  if (process.env.UPSTASH_REDIS_REST_URL) {
+  if (process.env.UPSTASH_REDIS_REST_URL && redis) {
     failedAttempts = (await redis.get<number>(attemptsKey)) || 0
   }
 
@@ -98,7 +98,7 @@ export async function login(formData: FormData) {
 
   if (error) {
     // 7. Handle Failure
-    if (process.env.UPSTASH_REDIS_REST_URL) {
+    if (process.env.UPSTASH_REDIS_REST_URL && redis) {
       const newAttempts = await redis.incr(attemptsKey)
       // Progressive delay: 500ms * failures
       await sleep(Math.min(newAttempts * 500, 2000))
@@ -120,7 +120,7 @@ export async function login(formData: FormData) {
   }
 
   // 8. Handle Success
-  if (process.env.UPSTASH_REDIS_REST_URL) {
+  if (process.env.UPSTASH_REDIS_REST_URL && redis) {
     await redis.del(attemptsKey)
   }
 
