@@ -58,7 +58,7 @@ export async function login(formData: FormData) {
     })
 
   if (!parsed.success) {
-    return { error: 'Incorrect email or password.' }
+    return { error: 'Incorrect email or password. [Invalid Format]' }
   }
 
   const { email, password, turnstileToken } = parsed.data
