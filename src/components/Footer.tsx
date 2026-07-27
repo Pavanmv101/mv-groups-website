@@ -1,7 +1,15 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
-import { COMPANY, NAV_LINKS, SERVICES } from '@/lib/constants';
+import { COMPANY, NAV_LINKS } from '@/lib/constants';
+
+const POPULAR_SERVICES = [
+  'Event Manpower',
+  'Promotional Staffing',
+  'Exhibition Staffing',
+  'Corporate Event Staffing',
+  'Wedding & Social Staffing',
+  'Event Setup & Logistics',
+];
 
 function LinkedinIcon({ className }: { className?: string }) {
   return (
@@ -14,62 +22,71 @@ function LinkedinIcon({ className }: { className?: string }) {
 function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
   );
 }
 
 export default function Footer() {
   return (
-    <footer className="gradient-navy text-white">
-      {/* Main footer */}
+    <footer style={{ background: '#050505', borderTop: '1px solid #1a1a1a' }}>
+      {/* Main grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
+
+          {/* Col 1 — Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-white">
-                <Image src="/logo.jpg" alt="MV Groups Logo" width={40} height={40} className="object-cover" />
-              </div>
-              <span className="text-xl font-bold">{COMPANY.name}</span>
+            <Link href="/" className="flex items-center gap-0.5 mb-5">
+              <span className="text-2xl font-black" style={{ color: '#c9a84c' }}>MV</span>
+              <span className="text-2xl font-black tracking-[0.18em] text-white">GROUPS</span>
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              {COMPANY.description}
+            <p className="text-sm leading-relaxed mb-6" style={{ color: '#555555' }}>
+              On-demand event staffing for Karnataka. Professional crew, vetted &amp; trained.
             </p>
+            {/* Social icons */}
             <div className="flex gap-3">
               <a
                 href={COMPANY.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-colors"
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+                style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#555555' }}
                 aria-label="LinkedIn"
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#c9a84c'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#555555'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#2a2a2a'; }}
               >
-                <LinkedinIcon className="w-5 h-5" />
+                <LinkedinIcon className="w-4 h-4" />
               </a>
               <a
                 href={COMPANY.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-pink-600 transition-colors"
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+                style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#555555' }}
                 aria-label="Instagram"
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#c9a84c'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#555555'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#2a2a2a'; }}
               >
-                <InstagramIcon className="w-5 h-5" />
+                <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-colors"
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
+                style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#555555' }}
                 aria-label="Email"
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#c9a84c'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#555555'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#2a2a2a'; }}
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Col 2 — Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#555555' }}>
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -77,93 +94,123 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-300 hover:text-white transition-colors text-sm flex items-center gap-1 group"
+                    className="text-sm flex items-center gap-1 group transition-colors duration-200"
+                    style={{ color: '#999999' }}
+                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
+                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
                   >
                     {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#c9a84c' }} />
                   </Link>
                 </li>
               ))}
               <li>
                 <Link
                   href="/booking"
-                  className="text-slate-300 hover:text-white transition-colors text-sm flex items-center gap-1 group"
+                  className="text-sm flex items-center gap-1 group transition-colors duration-200"
+                  style={{ color: '#c9a84c' }}
                 >
                   Request a Quote
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Col 3 — Popular Services */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">
-              Services
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#555555' }}>
+              Popular Services
             </h3>
             <ul className="space-y-3">
-              {SERVICES.map((service) => (
-                <li key={service.id}>
+              {POPULAR_SERVICES.map((s) => (
+                <li key={s}>
                   <Link
                     href="/services"
-                    className="text-slate-300 hover:text-white transition-colors text-sm"
+                    className="text-sm transition-colors duration-200"
+                    style={{ color: '#999999' }}
+                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
+                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
                   >
-                    {service.title}
+                    {s}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Col 4 — Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4">
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#555555' }}>
               Contact
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
-                <span className="text-slate-300 text-sm">{COMPANY.location}</span>
+                <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#c9a84c' }} />
+                <span className="text-sm" style={{ color: '#999999' }}>{COMPANY.location}</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-blue-400 shrink-0" />
+                <Phone className="w-4 h-4 shrink-0" style={{ color: '#c9a84c' }} />
                 <a
                   href={`tel:${COMPANY.phone}`}
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                  className="text-sm transition-colors duration-200"
+                  style={{ color: '#999999' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
+                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
                 >
                   {COMPANY.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-blue-400 shrink-0" />
+                <Mail className="w-4 h-4 shrink-0" style={{ color: '#c9a84c' }} />
                 <a
                   href={`mailto:${COMPANY.email}`}
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                  className="text-sm transition-colors duration-200"
+                  style={{ color: '#999999' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
+                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
                 >
                   {COMPANY.email}
                 </a>
               </li>
+              {/* Response badge */}
+              <li>
+                <span
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
+                  style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)', color: '#22c55e' }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+                  Replies within 2 hours · 7 days
+                </span>
+              </li>
             </ul>
           </div>
+
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
+      <div style={{ borderTop: '1px solid #1a1a1a' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs" style={{ color: '#555555' }}>
+            © {new Date().getFullYear()} MV Groups. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          <div className="flex gap-5">
             <Link
               href="/privacy"
-              className="text-slate-500 hover:text-slate-300 text-sm transition-colors"
+              className="text-xs transition-colors duration-200"
+              style={{ color: '#555555' }}
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#555555'}
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-slate-500 hover:text-slate-300 text-sm transition-colors"
+              className="text-xs transition-colors duration-200"
+              style={{ color: '#555555' }}
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#555555'}
             >
               Terms of Service
             </Link>

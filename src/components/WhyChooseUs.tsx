@@ -1,51 +1,79 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { WHY_CHOOSE_US } from '@/lib/constants';
-import SectionHeading from '@/components/ui/SectionHeading';
+import { Shield, Clock, Award, HeadphonesIcon } from 'lucide-react';
+
+const ITEMS = [
+  {
+    icon: Shield,
+    title: 'Verified & Vetted',
+    description: 'Every professional in our network undergoes thorough background checks and skill verification before deployment.',
+  },
+  {
+    icon: Clock,
+    title: 'Rapid Deployment',
+    description: 'Need staff in 48 hours? Our ready talent pool ensures lightning-fast mobilisation, even for large-scale events.',
+  },
+  {
+    icon: Award,
+    title: 'Quality Assured',
+    description: 'Strict quality standards with regular performance reviews and client feedback loops keep our crew best-in-class.',
+  },
+  {
+    icon: HeadphonesIcon,
+    title: '24/7 Support',
+    description: 'Dedicated WhatsApp support and round-the-clock operations management for every event we staff.',
+  },
+];
 
 export default function WhyChooseUs() {
-  const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
       { threshold: 0.1 }
     );
-
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 bg-slate-50">
+    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#111111' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          label="Why Choose Us"
-          title="Built on Trust, Driven by Excellence"
-          description="We combine industry expertise with operational precision to deliver staffing and event solutions you can rely on."
-        />
+        <div className={`mb-14 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <p className="section-label">● WHY MV GROUPS</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+            Built on Trust,{' '}
+            <em
+              className="not-italic"
+              style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
+            >
+              Driven by Excellence
+            </em>
+          </h2>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {WHY_CHOOSE_US.map((item, index) => {
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {ITEMS.map((item, i) => {
             const Icon = item.icon;
             return (
               <div
                 key={item.title}
-                className={`text-center ${
-                  visible
-                    ? `animate-fade-in-up delay-${(index + 1) * 100}`
-                    : 'opacity-0'
-                }`}
+                className={`rounded-2xl p-7 gold-card ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
+                style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="w-16 h-16 rounded-2xl gradient-navy flex items-center justify-center mx-auto mb-5 shadow-lg shadow-navy-900/20">
-                  <Icon className="w-8 h-8 text-blue-400" />
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)' }}
+                >
+                  <Icon className="w-5 h-5" style={{ color: '#c9a84c' }} />
                 </div>
-                <h3 className="text-lg font-bold text-navy-900 mb-2">{item.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
+                <h3 className="font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#999999' }}>
+                  {item.description}
+                </p>
               </div>
             );
           })}

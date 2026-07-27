@@ -1,17 +1,20 @@
 import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
 import ClientLogos from '@/components/ClientLogos';
-import ServicesOverview from '@/components/ServicesOverview';
-import WhyChooseUs from '@/components/WhyChooseUs';
 import HowItWorks from '@/components/HowItWorks';
+import ServicesOverview from '@/components/ServicesOverview';
+import AnyRoleSection from '@/components/AnyRoleSection';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import JoinCrewSection from '@/components/JoinCrewSection';
 import Testimonials from '@/components/Testimonials';
+import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   alternates: {
     canonical: 'https://mvgroups.online',
-  }
+  },
 };
 
 export default function HomePage() {
@@ -20,10 +23,13 @@ export default function HomePage() {
       <Hero />
       <Marquee />
       <ClientLogos />
-      <ServicesOverview />
-      <WhyChooseUs />
       <HowItWorks />
+      <ServicesOverview />
+      <AnyRoleSection />
+      <WhyChooseUs />
+      <JoinCrewSection />
       <Testimonials />
+      <FAQSection />
       <CTASection />
     </>
   );

@@ -2,71 +2,184 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { SERVICES } from '@/lib/constants';
-import Card from '@/components/ui/Card';
-import SectionHeading from '@/components/ui/SectionHeading';
+import {
+  Heart, Briefcase, Store, Megaphone, Truck,
+  GraduationCap, Zap, UtensilsCrossed, Music,
+} from 'lucide-react';
+
+const SERVICES = [
+  {
+    id: 'weddings',
+    label: 'WEDDINGS',
+    icon: Heart,
+    title: 'Weddings',
+    desc: 'Venue setup, guest management, hospitality & coordination teams',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%)',
+  },
+  {
+    id: 'corporate',
+    label: 'CORPORATE',
+    icon: Briefcase,
+    title: 'Corporate Events',
+    desc: 'Conference support, registration, tech crew & brand ambassadors',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a1a2a 100%)',
+  },
+  {
+    id: 'exhibition',
+    label: 'EXHIBITION',
+    icon: Store,
+    title: 'Exhibition Staffing',
+    desc: 'Booth assistants, lead generation, product presenters',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a2a1a 100%)',
+  },
+  {
+    id: 'brand',
+    label: 'BRAND',
+    icon: Megaphone,
+    title: 'Promotional Staffing',
+    desc: 'Brand promoters, road show activation, sampling staff',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a1a2a 100%)',
+  },
+  {
+    id: 'logistics',
+    label: 'LOGISTICS',
+    icon: Truck,
+    title: 'Event Setup & Logistics',
+    desc: 'Loading crew, stage setup, barricading, transport',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a1a 100%)',
+  },
+  {
+    id: 'college',
+    label: 'COLLEGE FESTS',
+    icon: GraduationCap,
+    title: 'College Fests',
+    desc: 'Volunteer pools, registration desks, floor managers',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a2a2a 100%)',
+  },
+  {
+    id: 'brand-launches',
+    label: 'BRAND LAUNCHES',
+    icon: Zap,
+    title: 'Brand Launches',
+    desc: 'Activation crew, brand ambassadors, launch-day hosts',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%)',
+  },
+  {
+    id: 'hospitality',
+    label: 'HOSPITALITY',
+    icon: UtensilsCrossed,
+    title: 'Hospitality',
+    desc: 'Servers, hosts, bartenders, guest service',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a1a2a 100%)',
+  },
+  {
+    id: 'production',
+    label: 'PRODUCTION',
+    icon: Music,
+    title: 'Production & Backstage',
+    desc: 'Stage hands, runners, comms, quick-change choreography',
+    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a2a1a 100%)',
+  },
+];
 
 export default function ServicesOverview() {
-  const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.1 }
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold: 0.05 }
     );
-
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 bg-white">
+    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#111111' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          label="What We Do"
-          title="Comprehensive Staffing & Event Solutions"
-          description="From deploying skilled workforce to managing world-class tech events, we deliver end-to-end solutions tailored to your business needs."
-        />
+        {/* Header */}
+        <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div>
+            <p className="section-label">● WHAT WE DO</p>
+            <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+              Our{' '}
+              <em className="not-italic" style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+                Services
+              </em>
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm leading-relaxed lg:text-right" style={{ color: '#999999' }}>
+            Professional staffing across all event categories — from intimate weddings to massive corporate events.
+          </p>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICES.map((service, index) => {
-            const Icon = service.icon;
+        {/* 3×3 Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {SERVICES.map((svc, i) => {
+            const Icon = svc.icon;
             return (
-              <Card
-                key={service.id}
-                className={`group relative overflow-hidden ${
-                  visible
-                    ? `animate-fade-in-up delay-${(index + 1) * 100}`
-                    : 'opacity-0'
-                }`}
+              <div
+                key={svc.id}
+                className={`group relative rounded-2xl overflow-hidden cursor-pointer ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
+                style={{
+                  animationDelay: `${i * 60}ms`,
+                  height: '260px',
+                  background: svc.bg,
+                  border: '1px solid #2a2a2a',
+                }}
               >
-                {/* Gradient accent top */}
-                <div className="absolute top-0 left-0 right-0 h-1 gradient-blue opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Hover overlay */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{ background: 'rgba(201,168,76,0.06)' }}
+                />
 
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-5 group-hover:bg-blue-500 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-blue-500 group-hover:text-white transition-colors duration-300" />
+                {/* Bottom gradient */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-2/3 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85), transparent)' }}
+                />
+
+                {/* Category label + icon — top left */}
+                <div className="absolute top-5 left-5 flex items-center gap-2">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)' }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color: '#c9a84c' }} />
+                  </div>
+                  <span
+                    className="text-[10px] font-bold tracking-[0.12em]"
+                    style={{ color: '#c9a84c' }}
+                  >
+                    {svc.label}
+                  </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-navy-900 mb-3">
-                  {service.title}
-                </h3>
+                {/* Content — bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:translate-y-0 translate-y-0 transition-transform">
+                    {svc.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                    {svc.desc}
+                  </p>
+                  <Link
+                    href={`/booking?service=${svc.id}`}
+                    className="inline-flex items-center gap-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    style={{ color: '#c9a84c' }}
+                  >
+                    Request a Quote →
+                  </Link>
+                </div>
 
-                <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                  {service.shortDescription}
-                </p>
-
-                <Link
-                  href={`/booking?service=${service.id}`}
-                  className="mt-6 flex items-center gap-1 text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors"
-                >
-                  Request a Quote
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Card>
+                {/* Scale on hover */}
+                <div
+                  className="absolute inset-0 transition-transform duration-500 group-hover:scale-[1.03]"
+                  style={{ zIndex: -1 }}
+                />
+              </div>
             );
           })}
         </div>

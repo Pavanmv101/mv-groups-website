@@ -1,66 +1,97 @@
-import { createClient } from '@/utils/supabase/server'
-import { Quote } from 'lucide-react'
+import { createClient } from '@/utils/supabase/server';
+
+const STARS = [1, 2, 3, 4, 5];
 
 export default async function Testimonials() {
-  const supabase = await createClient()
-  
-  // Fetch featured testimonials, or fallback to all if none are featured
-  const { data: testimonials } = await supabase
+  const supabase = await createClient();
+
+  const { data: featured } = await supabase
     .from('testimonials')
     .select('*')
     .eq('is_featured', true)
     .order('created_at', { ascending: false })
-    .limit(3)
+    .limit(3);
 
-  // If no featured testimonials exist, just grab the latest 3
-  const displayTestimonials = testimonials && testimonials.length > 0 
-    ? testimonials 
-    : (await supabase
-        .from('testimonials')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(3)
-      ).data || []
+  const displayTestimonials =
+    featured && featured.length > 0
+      ? featured
+      : (
+          await supabase
+            .from('testimonials')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(3)
+        ).data || [];
 
-  if (displayTestimonials.length === 0) return null
+  if (displayTestimonials.length === 0) return null;
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-100/50 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            What Our Clients Say
+    <section className="py-24 lg:py-32" style={{ background: '#111111' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-14">
+          <p className="section-label">● WHAT CLIENTS SAY</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight max-w-2xl">
+            Trusted by Event Organisers{' '}
+            <em
+              className="not-italic"
+              style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
+            >
+              Across Karnataka
+            </em>
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Don&apos;t just take our word for it. Hear from the amazing teams and companies we&apos;ve had the pleasure of working with.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {displayTestimonials.map((t, idx) => (
-            <div 
-              key={t.id} 
-              className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 relative animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both hover:shadow-md transition-shadow"
-              style={{ animationDelay: `${idx * 150}ms` }}
+            <div
+              key={t.id}
+              className="relative rounded-2xl p-8 flex flex-col"
+              style={{
+                background: '#1a1a1a',
+                border: '1px solid #2a2a2a',
+                animationDelay: `${idx * 120}ms`,
+              }}
             >
-              <Quote className="w-10 h-10 text-indigo-100 absolute top-6 right-6" />
-              
-              <p className="text-slate-700 italic relative z-10 mb-8 leading-relaxed">
-                &quot;{t.quote}&quot;
+              {/* Gold quote mark */}
+              <div
+                className="text-7xl font-black leading-none mb-4 select-none"
+                style={{ color: '#c9a84c', opacity: 0.25, fontFamily: 'Georgia, serif', lineHeight: 1 }}
+                aria-hidden="true"
+              >
+                "
+              </div>
+
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
+                {STARS.map((s) => (
+                  <svg key={s} className="w-4 h-4" viewBox="0 0 20 20" fill="#c9a84c">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+
+              {/* Quote */}
+              <p className="text-sm leading-relaxed flex-grow mb-6" style={{ color: '#cccccc' }}>
+                &ldquo;{t.quote}&rdquo;
               </p>
-              
-              <div className="mt-auto flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 font-bold text-lg border border-slate-200">
-                  {t.client_name.charAt(0)}
+
+              {/* Author */}
+              <div className="flex items-center gap-3 pt-5" style={{ borderTop: '1px solid #2a2a2a' }}>
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+                  style={{ background: 'rgba(201,168,76,0.15)', color: '#c9a84c', border: '1px solid rgba(201,168,76,0.3)' }}
+                >
+                  {t.client_name.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900">{t.client_name}</h4>
-                  <p className="text-sm text-slate-500">
-                    {t.role ? `${t.role}, ` : ''}{t.company}
+                  <h4 className="font-bold text-sm" style={{ color: '#c9a84c' }}>
+                    {t.client_name}
+                  </h4>
+                  <p className="text-xs" style={{ color: '#555555' }}>
+                    {t.role ? `${t.role}${t.company ? ', ' : ''}` : ''}
+                    {t.company}
                   </p>
                 </div>
               </div>
@@ -69,5 +100,5 @@ export default async function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }
