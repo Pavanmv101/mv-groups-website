@@ -151,9 +151,9 @@ export default function Hero() {
         <Reveal delay={0}>
           <div className="flex flex-col sm:flex-row items-center gap-3 mb-10">
             <span
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/90"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-medium text-white/90"
               style={{
-                background: 'rgba(18,17,16,0.85)',
+                background: 'rgba(0,0,0,0.7)',
                 border: '1px solid rgba(243,200,146,0.35)',
                 backdropFilter: 'blur(10px)',
               }}
@@ -162,9 +162,9 @@ export default function Hero() {
               Reliable Events. Reliable Staff.
             </span>
             <span
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/80"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-medium text-white/80"
               style={{
-                background: 'rgba(18,17,16,0.85)',
+                background: 'rgba(0,0,0,0.7)',
                 border: '1px solid rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(10px)',
               }}
@@ -181,7 +181,7 @@ export default function Hero() {
           <div
             className="font-black leading-none select-none"
             style={{
-              fontSize: 'clamp(72px, 16vw, 128px)',
+              fontSize: 'clamp(96px, 16vw, 144px)',
               color: '#f3c892',
               textShadow: '0 0 60px rgba(243,200,146,0.3)',
               letterSpacing: '-0.02em',
@@ -190,8 +190,8 @@ export default function Hero() {
             MV
           </div>
           <div
-            className="font-black text-white mt-0 tracking-[0.22em]"
-            style={{ fontSize: 'clamp(18px, 4vw, 28px)', letterSpacing: '0.22em' }}
+            className="font-black text-white mt-0 uppercase"
+            style={{ fontSize: '32px', letterSpacing: '0.3em' }}
           >
             GROUPS
           </div>
@@ -252,12 +252,12 @@ export default function Hero() {
                 <div className="flex flex-col items-center px-6 py-1">
                   <span
                     className="font-black leading-none"
-                    style={{ color: '#f3c892', fontSize: '1.5rem' }}
+                    style={{ color: '#f3c892', fontSize: '48px' }}
                   >
                     {stat.value}
                   </span>
                   <span
-                    className="text-xs font-semibold tracking-widest mt-0.5"
+                    className="text-[13px] font-semibold tracking-widest mt-1"
                     style={{ color: '#a39e98', letterSpacing: '0.1em' }}
                   >
                     {stat.label}

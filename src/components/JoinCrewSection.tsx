@@ -11,7 +11,7 @@ const CRITERIA = [
 
 export default function JoinCrewSection() {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0c0b0a]">
+    <section className="relative py-32 overflow-hidden bg-[#0c0b0a]">
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(243,200,146,0.04)_0%,transparent_70%)]" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,13 +20,13 @@ export default function JoinCrewSection() {
           {/* Decorative Corner */}
           <div className="absolute -top-16 -right-16 w-32 h-32 bg-[#f3c892] opacity-5 blur-[80px] rounded-full" />
 
-          <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
-            <div className="lg:w-1/2 text-left">
-              <p className="text-[#f3c892] text-xs font-bold tracking-[0.2em] uppercase mb-4">The Standard</p>
+          <div className="relative z-10 flex flex-col gap-12">
+            <div className="text-center max-w-2xl mx-auto">
+              <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#c9a84c] mb-4">● The Standard</p>
               <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6 tracking-tighter">
                 Not everyone makes the cut.
               </h2>
-              <p className="text-[#a39e98] leading-relaxed text-lg mb-10 max-w-md">
+              <p className="text-[#a39e98] leading-relaxed text-lg mb-10">
                 We don't do "gig work". We curate an exclusive roster of top-tier talent. If you have the grace for high-end hospitality or the grit for live production, you belong here.
               </p>
               
@@ -36,14 +36,14 @@ export default function JoinCrewSection() {
               </Link>
             </div>
 
-            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
               {CRITERIA.map((c) => {
                 const Icon = c.icon;
                 return (
-                  <div key={c.title} className="p-6 bg-[#1a1918] border border-[#282624] rounded-2xl flex flex-col gap-4 group hover:border-[#f3c892]/50 transition-all">
+                  <div key={c.title} className="p-6 bg-[#1a1918] border border-[#282624] rounded-2xl flex flex-col items-center text-center gap-4 group hover:border-[#f3c892]/50 transition-all">
                     <Icon className="w-8 h-8 text-[#f3c892] group-hover:scale-110 transition-transform duration-300" />
                     <div>
-                      <h3 className="font-bold text-white text-sm mb-1">{c.title}</h3>
+                      <h3 className="font-bold text-white text-sm mb-2">{c.title}</h3>
                       <p className="text-[#66625d] text-xs leading-relaxed">{c.desc}</p>
                     </div>
                   </div>

@@ -30,14 +30,14 @@ export default function AnyRoleSection() {
   }, []);
 
   return (
-    <section className="py-24 bg-[#121110]">
+    <section className="py-32 bg-[#121110]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
           {/* Left Text */}
           <div className="lg:w-1/3">
-            <p className="text-[#f3c892] text-xs font-bold tracking-[0.2em] uppercase mb-4">The Talent</p>
+            <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#c9a84c] mb-4">● The Talent</p>
             <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
               Any role.<br/>
               <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>

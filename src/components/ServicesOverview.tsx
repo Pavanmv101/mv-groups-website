@@ -68,7 +68,7 @@ const SERVICES = [
 
 export default function ServicesOverview() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-[#0c0b0a]">
+    <section className="py-32 relative overflow-hidden bg-[#0c0b0a]">
       {/* ── Background Texture & Glow ── */}
       <div className="absolute inset-0 pointer-events-none bg-premium-grid opacity-20" />
       <div 
@@ -81,7 +81,7 @@ export default function ServicesOverview() {
         <Reveal>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6">
           <div>
-            <p className="section-label">● WHAT WE DO</p>
+            <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#c9a84c] mb-4">● WHAT WE DO</p>
             <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
               Our{' '}
               <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
@@ -95,14 +95,14 @@ export default function ServicesOverview() {
         </div>
         </Reveal>
 
-        {/* Bento Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-4 auto-rows-[320px] md:auto-rows-[280px] gap-4">
+        {/* Services Grid */}
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {SERVICES.map((svc) => {
             const Icon = svc.icon;
             return (
-              <StaggerItem key={svc.id} className={svc.bento}>
+              <StaggerItem key={svc.id}>
                 <div
-                  className="group relative rounded-3xl overflow-hidden cursor-pointer h-full w-full flex flex-col justify-end p-6 md:p-8"
+                  className="group relative rounded-3xl overflow-hidden cursor-pointer w-full flex flex-col justify-end p-6 md:p-8 min-h-[320px]"
                   style={{
                     backgroundImage: svc.bg,
                     backgroundSize: 'cover',
