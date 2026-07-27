@@ -68,8 +68,15 @@ const SERVICES = [
 
 export default function ServicesOverview() {
   return (
-    <section className="py-24 lg:py-32" style={{ background: '#141312' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 lg:py-32 relative overflow-hidden bg-[#0c0b0a]">
+      {/* ── Background Texture & Glow ── */}
+      <div className="absolute inset-0 pointer-events-none bg-premium-grid opacity-20" />
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(243,200,146,0.1) 0%, transparent 70%)' }}
+      />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <Reveal>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6">
