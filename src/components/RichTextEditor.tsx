@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css'
 // Dynamically import ReactQuill with SSR disabled
 const ReactQuill = dynamic(() => import('react-quill'), { 
   ssr: false,
-  loading: () => <div className="h-64 bg-slate-50 border border-slate-200 rounded-lg animate-pulse flex items-center justify-center text-slate-400 text-sm">Loading editor...</div>
+  loading: () => <div className="h-64 bg-[#0a0908] border border-[#282624] rounded-lg animate-pulse flex items-center justify-center text-[#403e3c] text-sm">Loading editor...</div>
 })
 
 interface RichTextEditorProps {

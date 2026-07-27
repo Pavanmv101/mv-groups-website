@@ -22,19 +22,19 @@ export default async function ClientBookingPage({ params }: { params: Promise<{ 
 
   if (error || !booking) {
     return (
-      <div className="min-h-screen bg-slate-50 pt-28 pb-20 px-4">
+      <div className="min-h-screen bg-[#0a0908] pt-28 pb-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-2xl font-bold text-slate-900">Booking not found</h1>
-          <Link href="/dashboard" className="text-blue-600 hover:underline mt-4 inline-block">Return to Dashboard</Link>
+          <h1 className="text-2xl font-bold text-white">Booking not found</h1>
+          <Link href="/dashboard" className="text-[#d4aa73] hover:underline mt-4 inline-block">Return to Dashboard</Link>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20 px-4">
+    <div className="min-h-screen bg-[#0a0908] pt-28 pb-20 px-4">
       <div className="max-w-5xl mx-auto">
-        <Link href="/dashboard" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 mb-8 transition-colors">
+        <Link href="/dashboard" className="inline-flex items-center text-sm font-medium text-[#66625d] hover:text-white mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Dashboard
         </Link>
@@ -43,9 +43,9 @@ export default async function ClientBookingPage({ params }: { params: Promise<{ 
           
           {/* Booking Details */}
           <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-slate-900">Booking Details</h2>
+                <h2 className="text-xl font-bold text-white">Booking Details</h2>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                   booking.status === 'approved' ? 'bg-emerald-100 text-emerald-700' :
                   booking.status === 'pending' ? 'bg-amber-100 text-amber-700' :
@@ -57,18 +57,18 @@ export default async function ClientBookingPage({ params }: { params: Promise<{ 
 
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Briefcase className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Briefcase className="w-5 h-5 text-[#d4aa73] mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500 font-medium">Service</p>
-                    <p className="text-sm font-semibold text-slate-900">{booking.service_type}</p>
+                    <p className="text-xs text-[#66625d] font-medium">Service</p>
+                    <p className="text-sm font-semibold text-white">{booking.service_type}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <Calendar className="w-5 h-5 text-indigo-600 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500 font-medium">Dates</p>
-                    <p className="text-sm font-semibold text-slate-900">
+                    <p className="text-xs text-[#66625d] font-medium">Dates</p>
+                    <p className="text-sm font-semibold text-white">
                       {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
                     </p>
                   </div>
@@ -77,16 +77,16 @@ export default async function ClientBookingPage({ params }: { params: Promise<{ 
                 <div className="flex items-start gap-3">
                   <Users className="w-5 h-5 text-purple-600 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-500 font-medium">People Needed</p>
-                    <p className="text-sm font-semibold text-slate-900">{booking.people_needed}</p>
+                    <p className="text-xs text-[#66625d] font-medium">People Needed</p>
+                    <p className="text-sm font-semibold text-white">{booking.people_needed}</p>
                   </div>
                 </div>
               </div>
 
               {booking.description && (
-                <div className="mt-6 pt-6 border-t border-slate-100">
-                  <p className="text-xs text-slate-500 font-medium mb-2">Description</p>
-                  <p className="text-sm text-slate-700 whitespace-pre-wrap bg-slate-50 p-3 rounded-xl border border-slate-100">{booking.description}</p>
+                <div className="mt-6 pt-6 border-t border-[#1a1918]">
+                  <p className="text-xs text-[#66625d] font-medium mb-2">Description</p>
+                  <p className="text-sm text-[#c8c3be] whitespace-pre-wrap bg-[#0a0908] p-3 rounded-xl border border-[#1a1918]">{booking.description}</p>
                 </div>
               )}
             </div>

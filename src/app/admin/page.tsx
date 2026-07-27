@@ -95,7 +95,7 @@ export default async function AdminDashboardPage({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20">
+    <div className="min-h-screen bg-[#0a0908] pt-28 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
@@ -106,19 +106,19 @@ export default async function AdminDashboardPage({
                 Admin Protected
               </span>
             </div>
-            <h1 className="text-3xl font-bold text-slate-900">Admin Control Panel</h1>
-            <p className="text-slate-600 mt-1">Manage all incoming bookings, team applications, messages, and news updates.</p>
+            <h1 className="text-3xl font-bold text-white">Admin Control Panel</h1>
+            <p className="text-[#a39e98] mt-1">Manage all incoming bookings, team applications, messages, and news updates.</p>
           </div>
         </div>
 
         {/* View Tabs */}
-        <div className="flex space-x-2 mb-8 border-b border-slate-200 overflow-x-auto hide-scrollbar">
+        <div className="flex space-x-2 mb-8 border-b border-[#282624] overflow-x-auto hide-scrollbar">
           <Link
             href="/admin?view=bookings"
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
               currentView === 'bookings'
                 ? 'border-indigo-600 text-indigo-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                : 'border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]'
             }`}
           >
             <div className="relative">
@@ -137,7 +137,7 @@ export default async function AdminDashboardPage({
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
               currentView === 'applicants'
                 ? 'border-indigo-600 text-indigo-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                : 'border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]'
             }`}
           >
             <div className="relative">
@@ -156,7 +156,7 @@ export default async function AdminDashboardPage({
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
               currentView === 'inquiries'
                 ? 'border-indigo-600 text-indigo-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                : 'border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]'
             }`}
           >
             <div className="relative">
@@ -175,7 +175,7 @@ export default async function AdminDashboardPage({
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
               currentView === 'updates'
                 ? 'border-indigo-600 text-indigo-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                : 'border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]'
             }`}
           >
             <Megaphone className="w-4 h-4" />
@@ -186,7 +186,7 @@ export default async function AdminDashboardPage({
             className={`px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
               currentView === 'testimonials'
                 ? 'border-indigo-600 text-indigo-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                : 'border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]'
             }`}
           >
             <Star className="w-4 h-4" />
@@ -194,7 +194,7 @@ export default async function AdminDashboardPage({
           </Link>
           <Link
             href="/admin/gallery"
-            className="px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
+            className="px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]"
           >
             <Image className="w-4 h-4" />
             Gallery

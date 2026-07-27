@@ -38,38 +38,38 @@ export default async function DashboardPage() {
       case 'rejected':
         return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200"><AlertCircle className="w-3 h-3"/> Rejected</span>
       default:
-        return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">{status}</span>
+        return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#141312] text-white border border-[#282624]">{status}</span>
     }
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20">
+    <div className="min-h-screen bg-[#0a0908] pt-28 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Client Dashboard</h1>
-            <p className="text-slate-600 mt-1">Welcome back, {user.user_metadata?.full_name || user.email}</p>
+            <h1 className="text-3xl font-bold text-white">Client Dashboard</h1>
+            <p className="text-[#a39e98] mt-1">Welcome back, {user.user_metadata?.full_name || user.email}</p>
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <Link 
               href="/dashboard/profile" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#141312] border border-[#282624] text-[#c8c3be] rounded-lg font-medium hover:bg-[#0a0908] transition-colors shadow-sm"
             >
               Profile Settings
             </Link>
             <Link 
               href="/services" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f3c892] text-white rounded-lg font-medium hover:bg-[#e5b980] transition-colors shadow-sm"
             >
               New Booking Request
             </Link>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="px-6 py-5 border-b border-slate-200 bg-slate-50/50">
-            <h2 className="text-lg font-semibold text-slate-900">Your Bookings</h2>
+        <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] overflow-hidden">
+          <div className="px-6 py-5 border-b border-[#282624] bg-[#141312]/50">
+            <h2 className="text-lg font-semibold text-white">Your Bookings</h2>
           </div>
           
           {error && (
@@ -80,58 +80,58 @@ export default async function DashboardPage() {
 
           {!bookings || bookings.length === 0 ? (
             <div className="p-12 text-center">
-              <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#141312] text-[#403e3c] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-medium text-slate-900 mb-2">No bookings yet</h3>
-              <p className="text-slate-500 mb-6">You haven&apos;t requested any services yet.</p>
-              <Link href="/services" className="text-blue-600 font-medium hover:underline inline-flex items-center gap-1">
+              <h3 className="text-lg font-medium text-white mb-2">No bookings yet</h3>
+              <p className="text-[#66625d] mb-6">You haven&apos;t requested any services yet.</p>
+              <Link href="/services" className="text-[#d4aa73] font-medium hover:underline inline-flex items-center gap-1">
                 Explore our services <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           ) : (
             <div className="divide-y divide-slate-200">
               {bookings.map((booking: { id: string; service_type: string; status: string; created_at: string; amount: number | null; start_date: string; end_date: string; people_needed: number; description: string | null }) => (
-                <div key={booking.id} className="p-6 hover:bg-slate-50 transition-colors">
+                <div key={booking.id} className="p-6 hover:bg-[#0a0908] transition-colors">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                     <div>
                       <div className="flex items-center gap-3 mb-1">
-                        <h3 className="font-semibold text-slate-900 text-lg">
+                        <h3 className="font-semibold text-white text-lg">
                           {getServiceName(booking.service_type)}
                         </h3>
                         {getStatusBadge(booking.status)}
                       </div>
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-[#66625d]">
                         Requested on {new Date(booking.created_at).toLocaleDateString()}
                       </p>
                     </div>
                     {booking.amount && (
                       <div className="text-right">
-                        <p className="text-sm text-slate-500 font-medium">Quote Amount</p>
-                        <p className="text-xl font-bold text-slate-900">₹{booking.amount.toLocaleString()}</p>
+                        <p className="text-sm text-[#66625d] font-medium">Quote Amount</p>
+                        <p className="text-xl font-bold text-white">₹{booking.amount.toLocaleString()}</p>
                       </div>
                     )}
                   </div>
                   
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-slate-100">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-[#1a1918]">
                     <div>
-                      <p className="text-xs text-slate-500 font-medium mb-1 flex items-center gap-1"><Calendar className="w-3 h-3"/> Dates</p>
-                      <p className="text-sm text-slate-900 font-medium">
+                      <p className="text-xs text-[#66625d] font-medium mb-1 flex items-center gap-1"><Calendar className="w-3 h-3"/> Dates</p>
+                      <p className="text-sm text-white font-medium">
                         {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 font-medium mb-1 flex items-center gap-1"><Users className="w-3 h-3"/> Staff Needed</p>
-                      <p className="text-sm text-slate-900 font-medium">{booking.people_needed} People</p>
+                      <p className="text-xs text-[#66625d] font-medium mb-1 flex items-center gap-1"><Users className="w-3 h-3"/> Staff Needed</p>
+                      <p className="text-sm text-white font-medium">{booking.people_needed} People</p>
                     </div>
                     <div className="col-span-2">
-                      <p className="text-xs text-slate-500 font-medium mb-1">Description</p>
-                      <p className="text-sm text-slate-700 line-clamp-2">{booking.description || 'No description provided.'}</p>
+                      <p className="text-xs text-[#66625d] font-medium mb-1">Description</p>
+                      <p className="text-sm text-[#c8c3be] line-clamp-2">{booking.description || 'No description provided.'}</p>
                     </div>
                   </div>
                   
-                  <div className="mt-4 pt-4 border-t border-slate-100 text-right">
-                    <Link href={`/dashboard/booking/${booking.id}`} className="inline-block text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
+                  <div className="mt-4 pt-4 border-t border-[#1a1918] text-right">
+                    <Link href={`/dashboard/booking/${booking.id}`} className="inline-block text-sm font-medium text-[#d4aa73] hover:text-blue-800 hover:underline">
                       View Details & Chat
                     </Link>
                   </div>

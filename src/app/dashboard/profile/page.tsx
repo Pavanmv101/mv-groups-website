@@ -95,36 +95,36 @@ export default function ProfilePage() {
 
   if (initialLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+      <div className="min-h-screen bg-[#0a0908] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#d4aa73]" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20">
+    <div className="min-h-screen bg-[#0a0908] pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="mb-8">
           <Link 
             href="/dashboard" 
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#66625d] hover:text-white transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Link>
-          <h1 className="text-3xl font-bold text-slate-900">Profile Settings</h1>
-          <p className="text-slate-600 mt-1">Manage your account details and security.</p>
+          <h1 className="text-3xl font-bold text-white">Profile Settings</h1>
+          <p className="text-[#a39e98] mt-1">Manage your account details and security.</p>
         </div>
 
         <div className="space-y-6">
           {/* Personal Information Card */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+          <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] overflow-hidden">
+            <div className="px-6 py-5 border-b border-[#282624] bg-[#141312]/50 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-[#d4aa73]">
                 <User className="w-5 h-5" />
               </div>
-              <h2 className="text-lg font-semibold text-slate-900">Personal Information</h2>
+              <h2 className="text-lg font-semibold text-white">Personal Information</h2>
             </div>
             
             <form onSubmit={handleProfileSubmit} className="p-6">
@@ -141,25 +141,25 @@ export default function ProfilePage() {
               
               <div className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                  <label className="block text-sm font-medium text-[#c8c3be] mb-1">Email Address</label>
                   <input 
                     type="email"
                     disabled
                     value={(userMetadata?.email as string) || 'Your Email'}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-100 text-slate-500 cursor-not-allowed"
+                    className="w-full px-4 py-3 rounded-lg border border-[#282624] bg-[#141312] text-[#66625d] cursor-not-allowed"
                   />
-                  <p className="text-xs text-slate-400 mt-1.5">Email cannot be changed currently.</p>
+                  <p className="text-xs text-[#403e3c] mt-1.5">Email cannot be changed currently.</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                  <label className="block text-sm font-medium text-[#c8c3be] mb-1">Full Name</label>
                   <input 
                     name="full_name"
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
+                    className="w-full px-4 py-3 rounded-lg border border-[#282624] focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] transition-colors bg-[#0a0908] focus:bg-[#141312]"
                   />
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function ProfilePage() {
                 <button
                   type="submit"
                   disabled={profileLoading}
-                  className="px-6 py-2.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors disabled:opacity-70 flex items-center gap-2"
+                  className="px-6 py-2.5 rounded-lg bg-[#f3c892] text-white font-medium hover:bg-[#e5b980] transition-colors disabled:opacity-70 flex items-center gap-2"
                 >
                   {profileLoading && <Loader2 className="w-4 h-4 animate-spin" />}
                   Save Changes
@@ -178,12 +178,12 @@ export default function ProfilePage() {
           </div>
 
           {/* Security Card */}
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600">
+          <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] overflow-hidden">
+            <div className="px-6 py-5 border-b border-[#282624] bg-[#141312]/50 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#141312] flex items-center justify-center text-[#a39e98]">
                 <Lock className="w-5 h-5" />
               </div>
-              <h2 className="text-lg font-semibold text-slate-900">Security</h2>
+              <h2 className="text-lg font-semibold text-white">Security</h2>
             </div>
             
             <form onSubmit={handlePasswordSubmit} className="p-6">
@@ -200,25 +200,25 @@ export default function ProfilePage() {
               
               <div className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">New Password</label>
+                  <label className="block text-sm font-medium text-[#c8c3be] mb-1">New Password</label>
                   <input 
                     name="password"
                     type="password"
                     required
                     minLength={8}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
+                    className="w-full px-4 py-3 rounded-lg border border-[#282624] focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] transition-colors bg-[#0a0908] focus:bg-[#141312]"
                     placeholder="••••••••"
                   />
-                  <p className="text-xs text-slate-400 mt-1.5">Min 8 characters with uppercase, lowercase, and a number.</p>
+                  <p className="text-xs text-[#403e3c] mt-1.5">Min 8 characters with uppercase, lowercase, and a number.</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Confirm New Password</label>
+                  <label className="block text-sm font-medium text-[#c8c3be] mb-1">Confirm New Password</label>
                   <input 
                     name="confirm_password"
                     type="password"
                     required
-                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
+                    className="w-full px-4 py-3 rounded-lg border border-[#282624] focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] transition-colors bg-[#0a0908] focus:bg-[#141312]"
                     placeholder="••••••••"
                   />
                 </div>
@@ -228,7 +228,7 @@ export default function ProfilePage() {
                 <button
                   type="submit"
                   disabled={passwordLoading}
-                  className="px-6 py-2.5 rounded-lg bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors disabled:opacity-70 flex items-center gap-2"
+                  className="px-6 py-2.5 rounded-lg bg-[#0c0b0a] text-white font-medium hover:bg-[#141312] transition-colors disabled:opacity-70 flex items-center gap-2"
                 >
                   {passwordLoading && <Loader2 className="w-4 h-4 animate-spin" />}
                   Update Password

@@ -18,7 +18,7 @@ export default function SectionHeading({
       {label && (
         <span
           className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 ${
-            light ? 'bg-white/10 text-blue-300' : 'bg-blue-50 text-blue-600'
+            light ? 'bg-[#141312]/10 text-blue-300' : 'bg-blue-50 text-[#d4aa73]'
           }`}
         >
           {label}
@@ -34,7 +34,7 @@ export default function SectionHeading({
       {description && (
         <p
           className={`text-lg leading-relaxed ${
-            light ? 'text-slate-300' : 'text-slate-600'
+            light ? 'text-slate-300' : 'text-[#a39e98]'
           }`}
         >
           {description}

@@ -240,7 +240,7 @@ function ServiceDetailSection({
             <div className="pt-6 flex flex-wrap gap-4">
               <Link
                 href={`/services/${service.id}`}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm transition-colors hover:bg-white/5"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm transition-colors hover:bg-[#141312]/5"
                 style={{ border: '1px solid #282624', color: '#ffffff', background: 'transparent' }}
               >
                 Learn More
@@ -360,7 +360,7 @@ function CTABanner() {
           </Link>
           <Link
             href="/contact"
-            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-10 py-4 rounded-full font-bold text-sm transition-colors hover:bg-white/5"
+            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-10 py-4 rounded-full font-bold text-sm transition-colors hover:bg-[#141312]/5"
             style={{ border: '1px solid #282624', color: '#ffffff', background: 'transparent' }}
           >
             Contact Us

@@ -16,9 +16,9 @@ export default function Card({
   const base = 'rounded-2xl p-6';
 
   const variants = {
-    default: 'bg-white shadow-lg shadow-slate-200/50',
+    default: 'bg-[#141312] shadow-lg shadow-slate-200/50',
     glass: 'glass',
-    bordered: 'bg-white border border-slate-200',
+    bordered: 'bg-[#141312] border border-[#282624]',
   };
 
   return (

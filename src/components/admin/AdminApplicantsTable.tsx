@@ -29,7 +29,7 @@ const getStatusBadge = (status: string) => {
     case 'rejected':
       return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200"><AlertCircle className="w-3 h-3"/> Rejected</span>
     default:
-      return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">{status}</span>
+      return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#141312] text-white border border-[#282624]">{status}</span>
   }
 }
 
@@ -66,10 +66,10 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      <div className="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-          <Briefcase className="w-5 h-5 text-slate-500" />
+    <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] overflow-hidden">
+      <div className="px-6 py-5 border-b border-[#282624] bg-[#141312]/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+          <Briefcase className="w-5 h-5 text-[#66625d]" />
           Job Applications
         </h2>
         
@@ -81,7 +81,7 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 currentStatus === status
                   ? 'bg-indigo-100 text-indigo-700 border border-indigo-200'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                  : 'bg-[#141312] text-[#a39e98] border border-[#282624] hover:bg-[#0a0908]'
               }`}
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -93,7 +93,7 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-sm">
+            <tr className="bg-[#0a0908] border-b border-[#282624] text-[#66625d] text-sm">
               <th className="px-6 py-4 font-semibold">Applicant</th>
               <th className="px-6 py-4 font-semibold">Interest & Availability</th>
               <th className="px-6 py-4 font-semibold">Resume</th>
@@ -104,22 +104,22 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
           <tbody className="divide-y divide-slate-100">
             {applicants.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
+                <td colSpan={5} className="px-6 py-12 text-center text-[#66625d]">
                   No applicants found for the selected filter.
                 </td>
               </tr>
             ) : (
               applicants.map((app) => (
-                <tr key={app.id} className="hover:bg-slate-50/50 transition-colors">
+                <tr key={app.id} className="hover:bg-[#141312]/50 transition-colors">
                   <td className="px-6 py-4 align-top">
-                    <p className="font-semibold text-slate-900">{app.name}</p>
-                    <p className="text-sm text-slate-500 flex items-center gap-1 mt-1"><Mail className="w-3 h-3"/> {app.email}</p>
-                    <p className="text-sm text-slate-500 flex items-center gap-1 mt-0.5"><Phone className="w-3 h-3"/> {app.phone}</p>
-                    <p className="text-sm text-slate-500 flex items-center gap-1 mt-0.5"><MapPin className="w-3 h-3"/> {app.city}</p>
+                    <p className="font-semibold text-white">{app.name}</p>
+                    <p className="text-sm text-[#66625d] flex items-center gap-1 mt-1"><Mail className="w-3 h-3"/> {app.email}</p>
+                    <p className="text-sm text-[#66625d] flex items-center gap-1 mt-0.5"><Phone className="w-3 h-3"/> {app.phone}</p>
+                    <p className="text-sm text-[#66625d] flex items-center gap-1 mt-0.5"><MapPin className="w-3 h-3"/> {app.city}</p>
                   </td>
                   <td className="px-6 py-4 align-top">
-                    <p className="font-medium text-slate-900">{app.interest}</p>
-                    <span className="inline-block mt-2 px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-md">
+                    <p className="font-medium text-white">{app.interest}</p>
+                    <span className="inline-block mt-2 px-2 py-1 bg-[#141312] text-[#a39e98] text-xs rounded-md">
                       {app.availability}
                     </span>
                   </td>
@@ -135,12 +135,12 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
                         View Resume
                       </a>
                     ) : (
-                      <span className="text-sm text-slate-400 italic">No resume</span>
+                      <span className="text-sm text-[#403e3c] italic">No resume</span>
                     )}
                   </td>
                   <td className="px-6 py-4 align-top">
                     {getStatusBadge(app.status)}
-                    <p className="text-xs text-slate-400 mt-2">
+                    <p className="text-xs text-[#403e3c] mt-2">
                       {new Date(app.created_at).toLocaleDateString()}
                     </p>
                   </td>
@@ -148,7 +148,7 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
                     <select
                       value={app.status}
                       onChange={(e) => handleStatusChange(app, e.target.value)}
-                      className="text-sm border border-slate-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-white text-slate-700 outline-none transition-all cursor-pointer hover:border-slate-400"
+                      className="text-sm border border-[#403e3c] rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-[#141312] text-[#c8c3be] outline-none transition-all cursor-pointer hover:border-[#66625d]"
                     >
                       <option value="new">New</option>
                       <option value="reviewed">Reviewed</option>

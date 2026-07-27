@@ -47,16 +47,16 @@ export default function AdminUpdatesTable({ updates }: { updates: UpdatePost[] }
 
   return (
     <>
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-        <div className="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-          <Megaphone className="w-5 h-5 text-slate-500" />
+      <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] overflow-hidden">
+        <div className="px-6 py-5 border-b border-[#282624] bg-[#141312]/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+          <Megaphone className="w-5 h-5 text-[#66625d]" />
           News & Updates
         </h2>
         
         <button
           onClick={openNewPost}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-[#f3c892] text-white text-sm font-medium rounded-lg hover:bg-[#e5b980] transition-colors"
         >
           <Plus className="w-4 h-4" />
           New Post
@@ -65,7 +65,7 @@ export default function AdminUpdatesTable({ updates }: { updates: UpdatePost[] }
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left">
-          <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+          <thead className="text-xs text-[#66625d] uppercase bg-[#0a0908] border-b border-[#282624]">
             <tr>
               <th className="px-6 py-4 font-medium">Post Title</th>
               <th className="px-6 py-4 font-medium">Status</th>
@@ -76,16 +76,16 @@ export default function AdminUpdatesTable({ updates }: { updates: UpdatePost[] }
           <tbody className="divide-y divide-slate-100">
             {updates.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
+                <td colSpan={4} className="px-6 py-12 text-center text-[#66625d]">
                   No updates found. Create your first post!
                 </td>
               </tr>
             ) : (
               updates.map((post) => (
-                <tr key={post.id} className="hover:bg-slate-50/50 transition-colors">
+                <tr key={post.id} className="hover:bg-[#141312]/50 transition-colors">
                   <td className="px-6 py-4">
-                    <div className="font-medium text-slate-900">{post.title}</div>
-                    <div className="text-slate-500 text-xs mt-1">/{post.slug}</div>
+                    <div className="font-medium text-white">{post.title}</div>
+                    <div className="text-[#66625d] text-xs mt-1">/{post.slug}</div>
                   </td>
                   <td className="px-6 py-4">
                     {post.status === 'published' ? (
@@ -93,12 +93,12 @@ export default function AdminUpdatesTable({ updates }: { updates: UpdatePost[] }
                         <CheckCircle2 className="w-3 h-3" /> Published
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#141312] text-white">
                         <Clock className="w-3 h-3" /> Draft
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-slate-600 whitespace-nowrap">
+                  <td className="px-6 py-4 text-[#a39e98] whitespace-nowrap">
                     <div className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {post.created_at.split('T')[0]}
@@ -107,7 +107,7 @@ export default function AdminUpdatesTable({ updates }: { updates: UpdatePost[] }
                   <td className="px-6 py-4 text-right">
                     <button 
                       onClick={() => openEditPost(post)}
-                      className="text-blue-600 hover:text-blue-800 p-2 hover:bg-blue-50 rounded-lg transition-colors mr-2"
+                      className="text-[#d4aa73] hover:text-blue-800 p-2 hover:bg-blue-50 rounded-lg transition-colors mr-2"
                       title="Edit Post"
                     >
                       <Edit className="w-4 h-4" />
@@ -246,17 +246,17 @@ function UpdatePostModal({
   if (!isMounted) return null
 
   return createPortal(
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0c0b0a]/50 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-[#141312] rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
         
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-          <h3 className="text-lg font-bold text-slate-900">
+        <div className="px-6 py-4 border-b border-[#1a1918] flex items-center justify-between bg-[#0a0908]">
+          <h3 className="text-lg font-bold text-white">
             {editingPost ? 'Edit Post' : 'Create New Post'}
           </h3>
           <button 
             type="button"
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 p-1"
+            className="text-[#403e3c] hover:text-[#a39e98] p-1"
           >
             ✕
           </button>
@@ -266,48 +266,48 @@ function UpdatePostModal({
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Post Title</label>
+              <label className="block text-sm font-medium text-[#c8c3be] mb-2">Post Title</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={handleTitleChange}
-                className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-2.5 rounded-lg border border-[#282624] focus:outline-none focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] transition-all"
                 placeholder="e.g., MV Groups Expands to New City"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">URL Slug</label>
+              <label className="block text-sm font-medium text-[#c8c3be] mb-2">URL Slug</label>
               <input
                 type="text"
                 required
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-mono text-sm"
+                className="w-full px-4 py-2.5 rounded-lg border border-[#282624] focus:outline-none focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] transition-all font-mono text-sm"
                 placeholder="e.g., expands-to-new-city"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Content</label>
-            <div className="bg-white rounded-lg border border-slate-200 overflow-hidden min-h-[250px]">
+            <label className="block text-sm font-medium text-[#c8c3be] mb-2">Content</label>
+            <div className="bg-[#141312] rounded-lg border border-[#282624] overflow-hidden min-h-[250px]">
               <RichTextEditor 
                 value={content}
                 onChange={setContent}
                 placeholder="Write your post content here..."
               />
             </div>
-            <p className="text-xs text-slate-500 mt-2">
+            <p className="text-xs text-[#66625d] mt-2">
               Tip: Use the toolbar to format text, add links, and create lists.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Featured Image</label>
+              <label className="block text-sm font-medium text-[#c8c3be] mb-2">Featured Image</label>
               <div className="flex items-center gap-4">
-                <label className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-dashed border-slate-300 rounded-lg hover:bg-slate-50 hover:border-slate-400 transition-colors cursor-pointer text-sm text-slate-600 font-medium">
+                <label className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-dashed border-[#403e3c] rounded-lg hover:bg-[#0a0908] hover:border-[#66625d] transition-colors cursor-pointer text-sm text-[#a39e98] font-medium">
                   <ImageIcon className="w-4 h-4" />
                   {thumbnailFile ? thumbnailFile.name : 'Choose Image...'}
                   <input 
@@ -318,7 +318,7 @@ function UpdatePostModal({
                   />
                 </label>
                 {editingPost?.thumbnail_url && !thumbnailFile && (
-                  <div className="w-10 h-10 rounded overflow-hidden shrink-0 border border-slate-200">
+                  <div className="w-10 h-10 rounded overflow-hidden shrink-0 border border-[#282624]">
                     <Image src={editingPost.thumbnail_url} width={40} height={40} className="w-full h-full object-cover" alt="Current thumbnail" />
                   </div>
                 )}
@@ -326,11 +326,11 @@ function UpdatePostModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Publishing Status</label>
+              <label className="block text-sm font-medium text-[#c8c3be] mb-2">Publishing Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-2.5 rounded-lg border border-[#282624] focus:outline-none focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] transition-all"
               >
                 <option value="draft">Draft (Hidden)</option>
                 <option value="published">Published (Public)</option>
@@ -338,18 +338,18 @@ function UpdatePostModal({
             </div>
           </div>
 
-          <div className="pt-4 mt-2 border-t border-slate-100 flex justify-end gap-3">
+          <div className="pt-4 mt-2 border-t border-[#1a1918] flex justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+              className="px-5 py-2.5 text-sm font-medium text-[#a39e98] hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm disabled:opacity-70 flex items-center gap-2"
+              className="px-6 py-2.5 bg-[#f3c892] hover:bg-[#e5b980] text-white text-sm font-medium rounded-lg transition-colors shadow-sm disabled:opacity-70 flex items-center gap-2"
             >
               {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
               {editingPost ? 'Save Changes' : 'Publish Post'}

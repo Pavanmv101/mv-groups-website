@@ -22,9 +22,9 @@ const getStatusBadge = (status: string) => {
     case 'read':
       return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200"><CheckCircle2 className="w-3 h-3"/> Read</span>
     case 'archived':
-      return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"><Archive className="w-3 h-3"/> Archived</span>
+      return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#141312] text-white border border-[#282624]"><Archive className="w-3 h-3"/> Archived</span>
     default:
-      return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200">{status}</span>
+      return <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#141312] text-white border border-[#282624]">{status}</span>
   }
 }
 
@@ -56,10 +56,10 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      <div className="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-          <Mail className="w-5 h-5 text-slate-500" />
+    <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] overflow-hidden">
+      <div className="px-6 py-5 border-b border-[#282624] bg-[#141312]/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+          <Mail className="w-5 h-5 text-[#66625d]" />
           General Inquiries
         </h2>
         
@@ -71,7 +71,7 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 currentStatus === status
                   ? 'bg-indigo-100 text-indigo-700 border border-indigo-200'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                  : 'bg-[#141312] text-[#a39e98] border border-[#282624] hover:bg-[#0a0908]'
               }`}
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -83,7 +83,7 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-sm">
+            <tr className="bg-[#0a0908] border-b border-[#282624] text-[#66625d] text-sm">
               <th className="px-6 py-4 font-semibold">Contact Info</th>
               <th className="px-6 py-4 font-semibold">Message</th>
               <th className="px-6 py-4 font-semibold">Status & Date</th>
@@ -93,31 +93,31 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
           <tbody className="divide-y divide-slate-100">
             {inquiries.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
+                <td colSpan={4} className="px-6 py-12 text-center text-[#66625d]">
                   No inquiries found for the selected filter.
                 </td>
               </tr>
             ) : (
               inquiries.map((inquiry) => (
-                <tr key={inquiry.id} className={`transition-colors ${inquiry.status === 'unread' ? 'bg-amber-50/30' : 'hover:bg-slate-50/50'}`}>
+                <tr key={inquiry.id} className={`transition-colors ${inquiry.status === 'unread' ? 'bg-amber-50/30' : 'hover:bg-[#141312]/50'}`}>
                   <td className="px-6 py-4 align-top w-64">
-                    <p className="font-semibold text-slate-900">{inquiry.name}</p>
-                    <p className="text-sm text-slate-500 flex items-center gap-1 mt-1 break-all">
+                    <p className="font-semibold text-white">{inquiry.name}</p>
+                    <p className="text-sm text-[#66625d] flex items-center gap-1 mt-1 break-all">
                       <Mail className="w-3 h-3 shrink-0"/> {inquiry.email}
                     </p>
                     {inquiry.phone && (
-                      <p className="text-sm text-slate-500 flex items-center gap-1 mt-0.5">
+                      <p className="text-sm text-[#66625d] flex items-center gap-1 mt-0.5">
                         <Phone className="w-3 h-3 shrink-0"/> {inquiry.phone}
                       </p>
                     )}
                   </td>
                   <td className="px-6 py-4 align-top max-w-md">
-                    <p className="font-bold text-slate-900 mb-1">{inquiry.subject}</p>
-                    <p className="text-sm text-slate-700 line-clamp-3 leading-relaxed">{inquiry.message}</p>
+                    <p className="font-bold text-white mb-1">{inquiry.subject}</p>
+                    <p className="text-sm text-[#c8c3be] line-clamp-3 leading-relaxed">{inquiry.message}</p>
                   </td>
                   <td className="px-6 py-4 align-top whitespace-nowrap">
                     {getStatusBadge(inquiry.status)}
-                    <p className="text-xs text-slate-400 mt-2 flex items-center gap-1">
+                    <p className="text-xs text-[#403e3c] mt-2 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {new Date(inquiry.created_at).toLocaleDateString()}
                     </p>
@@ -126,7 +126,7 @@ export default function AdminInquiriesTable({ inquiries }: { inquiries: Inquiry[
                     <select
                       value={inquiry.status}
                       onChange={(e) => handleStatusChange(inquiry.id, e.target.value)}
-                      className="w-full text-sm border border-slate-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-white text-slate-700 outline-none transition-all cursor-pointer hover:border-slate-400"
+                      className="w-full text-sm border border-[#403e3c] rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1.5 pl-3 pr-8 bg-[#141312] text-[#c8c3be] outline-none transition-all cursor-pointer hover:border-[#66625d]"
                     >
                       <option value="unread">Unread</option>
                       <option value="read">Read</option>

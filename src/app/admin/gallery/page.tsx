@@ -127,18 +127,18 @@ export default function AdminGalleryPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="mb-6">
-        <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center gap-1">
+        <Link href="/admin" className="text-[#d4aa73] hover:text-blue-700 font-medium text-sm flex items-center gap-1">
           &larr; Back to Dashboard
         </Link>
       </div>
-      <h1 className="text-3xl font-bold text-slate-900 mb-8">Manage Gallery</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">Manage Gallery</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Upload Form */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-              <Plus className="w-5 h-5 text-blue-600" />
+          <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] p-6">
+            <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <Plus className="w-5 h-5 text-[#d4aa73]" />
               Add New Image
             </h2>
 
@@ -151,33 +151,33 @@ export default function AdminGalleryPage() {
             <form onSubmit={handleUpload} className="space-y-5">
               {/* Image Upload Area */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Image File</label>
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl relative hover:bg-slate-50 transition-colors">
+                <label className="block text-sm font-semibold text-[#c8c3be] mb-2">Image File</label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-[#403e3c] border-dashed rounded-xl relative hover:bg-[#0a0908] transition-colors">
                   <div className="space-y-1 text-center">
                     {preview ? (
                       <div className="relative w-full h-32 mb-4">
                         <Image src={preview} alt="Preview" fill className="object-contain rounded-lg" />
                       </div>
                     ) : (
-                      <ImageIcon className="mx-auto h-12 w-12 text-slate-400" />
+                      <ImageIcon className="mx-auto h-12 w-12 text-[#403e3c]" />
                     )}
-                    <div className="flex text-sm text-slate-600 justify-center">
-                      <label className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                    <div className="flex text-sm text-[#a39e98] justify-center">
+                      <label className="relative cursor-pointer bg-[#141312] rounded-md font-medium text-[#d4aa73] hover:text-[#f3c892] focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
                         <span>Upload a file</span>
                         <input name="file-upload" type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
                       </label>
                     </div>
-                    <p className="text-xs text-slate-500">PNG, JPG, WEBP up to 4MB</p>
+                    <p className="text-xs text-[#66625d]">PNG, JPG, WEBP up to 4MB</p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Category</label>
+                <label className="block text-sm font-semibold text-[#c8c3be] mb-2">Category</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-slate-50 focus:bg-white transition-colors"
+                  className="w-full px-4 py-3 rounded-lg border border-[#282624] focus:outline-none focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] bg-[#0a0908] focus:bg-[#141312] transition-colors"
                 >
                   <option value="">Select a category</option>
                   <option value="Corporate">Corporate</option>
@@ -190,20 +190,20 @@ export default function AdminGalleryPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Description / Alt Text</label>
+                <label className="block text-sm font-semibold text-[#c8c3be] mb-2">Description / Alt Text</label>
                 <input
                   type="text"
                   value={altText}
                   onChange={(e) => setAltText(e.target.value)}
                   placeholder="e.g. VIP Hosting Team at Tech Summit"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-slate-50 focus:bg-white transition-colors"
+                  className="w-full px-4 py-3 rounded-lg border border-[#282624] focus:outline-none focus:ring-2 focus:ring-[#f3c892]/20 focus:border-[#f3c892] bg-[#0a0908] focus:bg-[#141312] transition-colors"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={uploading || !file}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-[#f3c892] hover:bg-[#e5b980] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {uploading ? (
                   <>
@@ -223,23 +223,23 @@ export default function AdminGalleryPage() {
 
         {/* Existing Images Gallery */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 min-h-[500px]">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">Uploaded Images</h2>
+          <div className="bg-[#141312] rounded-2xl shadow-sm border border-[#282624] p-6 min-h-[500px]">
+            <h2 className="text-xl font-bold text-white mb-6">Uploaded Images</h2>
 
             {loading ? (
               <div className="flex items-center justify-center h-64">
-                <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+                <Loader2 className="w-8 h-8 animate-spin text-[#f3c892]" />
               </div>
             ) : images.length === 0 ? (
-              <div className="text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
-                <ImageIcon className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-                <h3 className="text-sm font-medium text-slate-900">No images uploaded</h3>
-                <p className="mt-1 text-sm text-slate-500">Get started by uploading your first gallery image.</p>
+              <div className="text-center py-12 bg-[#0a0908] rounded-xl border-2 border-dashed border-[#282624]">
+                <ImageIcon className="w-12 h-12 text-[#403e3c] mx-auto mb-3" />
+                <h3 className="text-sm font-medium text-white">No images uploaded</h3>
+                <p className="mt-1 text-sm text-[#66625d]">Get started by uploading your first gallery image.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {images.map((image) => (
-                  <div key={image.id} className="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
+                  <div key={image.id} className="relative group rounded-xl overflow-hidden border border-[#282624] bg-[#0a0908]">
                     <div className="aspect-w-16 aspect-h-10 relative h-48">
                       <Image
                         src={image.image_url}
@@ -249,7 +249,7 @@ export default function AdminGalleryPage() {
                       />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4">
                         <div className="flex justify-between items-start">
-                          <span className="px-2 py-1 bg-white/20 backdrop-blur-md rounded-md text-xs font-semibold text-white">
+                          <span className="px-2 py-1 bg-[#141312]/20 backdrop-blur-md rounded-md text-xs font-semibold text-white">
                             {image.category}
                           </span>
                           <button

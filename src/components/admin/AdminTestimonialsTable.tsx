@@ -49,76 +49,76 @@ function TestimonialModal({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl">
-        <div className="flex items-center justify-between p-6 border-b border-slate-100">
-          <h2 className="text-xl font-bold text-slate-900">
+      <div className="bg-[#141312] rounded-2xl w-full max-w-lg shadow-2xl">
+        <div className="flex items-center justify-between p-6 border-b border-[#1a1918]">
+          <h2 className="text-xl font-bold text-white">
             {mode === 'add' ? 'Add New Testimonial' : 'Edit Testimonial'}
           </h2>
-          <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-            <X className="w-5 h-5 text-slate-500" />
+          <button onClick={onClose} className="p-2 hover:bg-[#141312] rounded-lg transition-colors">
+            <X className="w-5 h-5 text-[#66625d]" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Client Name *</label>
+            <label className="block text-sm font-medium text-[#c8c3be] mb-1">Client Name *</label>
             <input
               name="client_name"
               required
               defaultValue={testimonial?.client_name}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-[#282624] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g. Sarah Jenkins"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Role</label>
+              <label className="block text-sm font-medium text-[#c8c3be] mb-1">Role</label>
               <input
                 name="role"
                 defaultValue={testimonial?.role ?? ''}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#282624] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="e.g. Event Director"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Company</label>
+              <label className="block text-sm font-medium text-[#c8c3be] mb-1">Company</label>
               <input
                 name="company"
                 defaultValue={testimonial?.company ?? ''}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#282624] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="e.g. TechFlow Innovations"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Quote *</label>
+            <label className="block text-sm font-medium text-[#c8c3be] mb-1">Quote *</label>
             <textarea
               name="quote"
               required
               rows={4}
               defaultValue={testimonial?.quote}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+              className="w-full px-3 py-2 border border-[#282624] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
               placeholder="What did the client say about MV Groups?"
             />
           </div>
 
           <div
             className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
-              isFeatured ? 'border-amber-300 bg-amber-50' : 'border-slate-200 bg-slate-50'
+              isFeatured ? 'border-amber-300 bg-amber-50' : 'border-[#282624] bg-[#0a0908]'
             }`}
             onClick={() => setIsFeatured(!isFeatured)}
           >
-            <Star className={`w-5 h-5 ${isFeatured ? 'text-amber-500 fill-amber-500' : 'text-slate-400'}`} />
+            <Star className={`w-5 h-5 ${isFeatured ? 'text-amber-500 fill-amber-500' : 'text-[#403e3c]'}`} />
             <div>
-              <p className="font-medium text-slate-800 text-sm">Feature on Homepage</p>
-              <p className="text-xs text-slate-500">Featured testimonials appear in the &quot;What Our Clients Say&quot; section.</p>
+              <p className="font-medium text-white text-sm">Feature on Homepage</p>
+              <p className="text-xs text-[#66625d]">Featured testimonials appear in the &quot;What Our Clients Say&quot; section.</p>
             </div>
             <div className={`ml-auto w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-              isFeatured ? 'border-amber-500 bg-amber-500' : 'border-slate-300'
+              isFeatured ? 'border-amber-500 bg-amber-500' : 'border-[#403e3c]'
             }`}>
-              {isFeatured && <div className="w-2 h-2 rounded-full bg-white" />}
+              {isFeatured && <div className="w-2 h-2 rounded-full bg-[#141312]" />}
             </div>
           </div>
 
@@ -130,7 +130,7 @@ function TestimonialModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2.5 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+              className="flex-1 px-4 py-2.5 text-sm font-medium text-[#c8c3be] bg-[#141312] hover:bg-[#282624] rounded-lg transition-colors"
             >
               Cancel
             </button>
@@ -201,7 +201,7 @@ export default function AdminTestimonialsTable({ testimonials: initial }: { test
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <p className="text-sm text-slate-500">{testimonials.length} testimonial{testimonials.length !== 1 ? 's' : ''} total</p>
+          <p className="text-sm text-[#66625d]">{testimonials.length} testimonial{testimonials.length !== 1 ? 's' : ''} total</p>
           <button
             onClick={openAdd}
             className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
@@ -212,10 +212,10 @@ export default function AdminTestimonialsTable({ testimonials: initial }: { test
         </div>
 
         {testimonials.length === 0 ? (
-          <div className="text-center py-20 border-2 border-dashed border-slate-200 rounded-2xl">
+          <div className="text-center py-20 border-2 border-dashed border-[#282624] rounded-2xl">
             <Star className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-            <h3 className="font-semibold text-slate-700 mb-1">No testimonials yet</h3>
-            <p className="text-slate-500 text-sm mb-4">Add your first client testimonial to display it on the homepage.</p>
+            <h3 className="font-semibold text-[#c8c3be] mb-1">No testimonials yet</h3>
+            <p className="text-[#66625d] text-sm mb-4">Add your first client testimonial to display it on the homepage.</p>
             <button
               onClick={openAdd}
               className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
@@ -228,16 +228,16 @@ export default function AdminTestimonialsTable({ testimonials: initial }: { test
             {testimonials.map(t => (
               <div
                 key={t.id}
-                className={`bg-white border rounded-2xl p-5 transition-all ${
-                  t.is_featured ? 'border-amber-200 shadow-amber-50 shadow-sm' : 'border-slate-200'
+                className={`bg-[#141312] border rounded-2xl p-5 transition-all ${
+                  t.is_featured ? 'border-amber-200 shadow-amber-50 shadow-sm' : 'border-[#282624]'
                 } ${pendingId === t.id ? 'opacity-60 pointer-events-none' : ''}`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="font-semibold text-slate-900">{t.client_name}</span>
+                      <span className="font-semibold text-white">{t.client_name}</span>
                       {t.role && t.company && (
-                        <span className="text-sm text-slate-500">· {t.role}, {t.company}</span>
+                        <span className="text-sm text-[#66625d]">· {t.role}, {t.company}</span>
                       )}
                       {t.is_featured && (
                         <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">
@@ -245,18 +245,18 @@ export default function AdminTestimonialsTable({ testimonials: initial }: { test
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-600 italic text-sm leading-relaxed line-clamp-3">&quot;{t.quote}&quot;</p>
+                    <p className="text-[#a39e98] italic text-sm leading-relaxed line-clamp-3">&quot;{t.quote}&quot;</p>
                   </div>
 
                   <div className="flex items-center gap-1 flex-shrink-0">
                     <button
                       onClick={() => handleToggleFeatured(t)}
                       title={t.is_featured ? 'Remove from featured' : 'Mark as featured'}
-                      className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                      className="p-2 rounded-lg hover:bg-[#141312] transition-colors"
                     >
                       {t.is_featured
                         ? <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                        : <StarOff className="w-4 h-4 text-slate-400" />
+                        : <StarOff className="w-4 h-4 text-[#403e3c]" />
                       }
                     </button>
                     <button
