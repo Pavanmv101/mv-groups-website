@@ -7,10 +7,12 @@ import Reveal from '@/components/animations/Reveal';
 import TextReveal from '@/components/animations/TextReveal';
 import MagneticButton from '@/components/animations/MagneticButton';
 
-// ── Video clip list — using direct royalty-free CDN URLs ──
+// ── Video clip list — local downloaded MP4s ──
 const VIDEO_CLIPS = [
-  'https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/2795750/2795750-uhd_2560_1440_25fps.mp4',
+  '/videos/concert.mp4',
+  '/videos/wedding.mp4',
+  '/videos/corporate.mp4',
+  '/videos/dj.mp4',
 ];
 
 function QuadVideoBackground() {
@@ -39,7 +41,7 @@ function QuadVideoBackground() {
 
   return (
     <div className="absolute inset-0 w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden gap-0 bg-[#0c0b0a]">
-      {/* Top Left */}
+      {/* Top Left - Concert */}
       <div className="relative w-full h-full">
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -51,10 +53,10 @@ function QuadVideoBackground() {
           onError={() => setVideoError(true)}
         />
       </div>
-      {/* Top Right - Mirrored */}
+      {/* Top Right - Wedding */}
       <div className="relative w-full h-full">
         <video
-          className="absolute inset-0 w-full h-full object-cover transform scale-x-[-1]"
+          className="absolute inset-0 w-full h-full object-cover"
           src={VIDEO_CLIPS[1]}
           autoPlay
           muted
@@ -63,11 +65,11 @@ function QuadVideoBackground() {
           onError={() => setVideoError(true)}
         />
       </div>
-      {/* Bottom Left - Mirrored & Slower */}
+      {/* Bottom Left - Corporate */}
       <div className="relative w-full h-full">
         <video
-          className="absolute inset-0 w-full h-full object-cover transform scale-x-[-1] brightness-90"
-          src={VIDEO_CLIPS[1]}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[2]}
           autoPlay
           muted
           loop
@@ -75,11 +77,11 @@ function QuadVideoBackground() {
           onError={() => setVideoError(true)}
         />
       </div>
-      {/* Bottom Right - Flipped Y */}
+      {/* Bottom Right - DJ Night */}
       <div className="relative w-full h-full">
         <video
-          className="absolute inset-0 w-full h-full object-cover transform scale-y-[-1] brightness-75"
-          src={VIDEO_CLIPS[0]}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[3]}
           autoPlay
           muted
           loop
