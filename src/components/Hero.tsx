@@ -53,7 +53,7 @@ function QuadVideoBackground() {
           onError={() => setVideoError(true)}
         />
         <div className="absolute top-8 left-8 md:top-12 md:left-12 z-10 pointer-events-none">
-          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Live Concert</span>
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Corporate Meeting</span>
         </div>
       </div>
       {/* Top Right - Wedding */}
