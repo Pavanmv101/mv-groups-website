@@ -52,6 +52,9 @@ function QuadVideoBackground() {
           playsInline
           onError={() => setVideoError(true)}
         />
+        <div className="absolute top-8 left-8 md:top-12 md:left-12 z-10 pointer-events-none">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Live Concert</span>
+        </div>
       </div>
       {/* Top Right - Wedding */}
       <div className="relative w-full h-full">
@@ -64,6 +67,9 @@ function QuadVideoBackground() {
           playsInline
           onError={() => setVideoError(true)}
         />
+        <div className="absolute top-8 right-8 md:top-12 md:right-12 z-10 pointer-events-none text-right">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Luxury Wedding</span>
+        </div>
       </div>
       {/* Bottom Left - Corporate */}
       <div className="relative w-full h-full">
@@ -76,6 +82,9 @@ function QuadVideoBackground() {
           playsInline
           onError={() => setVideoError(true)}
         />
+        <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-10 pointer-events-none">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Corporate Summit</span>
+        </div>
       </div>
       {/* Bottom Right - DJ Night */}
       <div className="relative w-full h-full">
@@ -88,6 +97,9 @@ function QuadVideoBackground() {
           playsInline
           onError={() => setVideoError(true)}
         />
+        <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 z-10 pointer-events-none text-right">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Exclusive Nightlife</span>
+        </div>
       </div>
       
       {/* Overlay to blend the grid seams slightly */}
