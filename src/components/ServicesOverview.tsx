@@ -11,38 +11,38 @@ import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
 const SERVICES = [
   {
-    id: 'weddings',
-    label: 'WEDDINGS',
-    icon: Heart,
-    title: 'Weddings',
-    desc: 'Venue setup, guest management, hospitality & coordination teams',
+    id: 'vip-hospitality',
+    label: 'HOSPITALITY',
+    icon: UtensilsCrossed,
+    title: 'VIP Hospitality & Guest Services',
+    desc: 'Flawless service for your most important guests. From elite servers to protocol officers and mixologists.',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
     bento: 'md:col-span-2 md:row-span-2'
   },
   {
-    id: 'corporate',
-    label: 'CORPORATE',
-    icon: Briefcase,
-    title: 'Corporate Events',
-    desc: 'Conference support, registration, tech crew & brand ambassadors',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
-    bento: 'md:col-span-1 md:row-span-1'
-  },
-  {
-    id: 'exhibition',
-    label: 'EXHIBITION',
-    icon: Store,
-    title: 'Exhibition Staffing',
-    desc: 'Booth assistants, lead generation, product presenters',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
-    bento: 'md:col-span-1 md:row-span-1'
-  },
-  {
-    id: 'brand',
+    id: 'brand-ambassadors',
     label: 'BRAND',
     icon: Megaphone,
-    title: 'Promotional Staffing',
-    desc: 'Brand promoters, road show activation, sampling staff',
+    title: 'Brand Ambassadors & Activations',
+    desc: 'Charismatic product specialists and lead generators who seamlessly adopt and project your brand’s voice.',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
+    bento: 'md:col-span-2 md:row-span-1'
+  },
+  {
+    id: 'corporate-teams',
+    label: 'CORPORATE',
+    icon: Briefcase,
+    title: 'Corporate & Conference Teams',
+    desc: 'Articulate registration teams, multilingual ushers, and dedicated tech-assistants for high-stakes summits.',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
+    bento: 'md:col-span-2 md:row-span-1'
+  },
+  {
+    id: 'private-events',
+    label: 'PRIVATE',
+    icon: Heart,
+    title: 'Private & Exclusive Gatherings',
+    desc: 'Discreet, highly-vetted staff tailored for ultra-exclusive, high-net-worth social events and bespoke weddings.',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a2a 100%)',
     bento: 'md:col-span-2 md:row-span-1'
   },
@@ -50,45 +50,18 @@ const SERVICES = [
     id: 'logistics',
     label: 'LOGISTICS',
     icon: Truck,
-    title: 'Event Setup & Logistics',
-    desc: 'Loading crew, stage setup, barricading, transport',
+    title: 'Logistics & Ground Control',
+    desc: 'Precision crowd flow management, VIP access control, and rapid deployment setup crews.',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a2a1a 100%)',
-    bento: 'md:col-span-1 md:row-span-2'
-  },
-  {
-    id: 'college',
-    label: 'COLLEGE FESTS',
-    icon: GraduationCap,
-    title: 'College Fests',
-    desc: 'Volunteer pools, registration desks, floor managers',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a2a 100%)',
-    bento: 'md:col-span-1 md:row-span-1'
-  },
-  {
-    id: 'brand-launches',
-    label: 'BRAND LAUNCHES',
-    icon: Zap,
-    title: 'Brand Launches',
-    desc: 'Activation crew, brand ambassadors, launch-day hosts',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
     bento: 'md:col-span-2 md:row-span-1'
-  },
-  {
-    id: 'hospitality',
-    label: 'HOSPITALITY',
-    icon: UtensilsCrossed,
-    title: 'Hospitality',
-    desc: 'Servers, hosts, bartenders, guest service',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
-    bento: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 'production',
     label: 'PRODUCTION',
     icon: Music,
-    title: 'Production & Backstage',
-    desc: 'Stage hands, runners, comms, quick-change choreography',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
+    title: 'Behind-the-Scenes Production',
+    desc: 'The invisible engine of your event. Stage managers, green-room coordinators, and technical runners.',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
     bento: 'md:col-span-4 md:row-span-1'
   },
 ];

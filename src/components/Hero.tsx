@@ -165,7 +165,7 @@ export default function Hero() {
             className="font-bold text-white mb-4"
             style={{ fontSize: 'clamp(15px, 2.5vw, 22px)' }}
           >
-            Event Staffing &amp; Manpower Services across Karnataka
+            The Human Element of Extraordinary Events.
           </p>
         </Reveal>
 
@@ -175,8 +175,7 @@ export default function Hero() {
             className="leading-relaxed mb-10 max-w-xl"
             style={{ color: '#c8c3be', fontSize: '15px' }}
           >
-            MV Groups provides professional event staffing and manpower solutions for corporate events,
-            weddings, exhibitions, college fests, and brand activations across Karnataka.
+            We don't just fill roles; we curate the professional faces that bring your vision to life. Elite hospitality, brand ambassadors, and seamless event talent across Karnataka.
           </p>
         </Reveal>
 
@@ -185,13 +184,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 mb-14 justify-center w-full">
             <MagneticButton>
               <Link href="/booking" className="btn-gold text-sm px-7 py-3.5">
-                Book Event Staff
+                Curate Your Team
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </MagneticButton>
             <MagneticButton>
               <Link href="/contact" className="btn-outline text-sm px-7 py-3.5">
-                Request a Quote
+                Request a Consultation
               </Link>
             </MagneticButton>
           </div>
