@@ -5,14 +5,14 @@ import { CheckCircle2 } from 'lucide-react';
 const REASONS = [
   {
     title: 'Elite Vetting Process',
-    desc: 'Every candidate undergoes a rigorous 4-step interview, background check, and etiquette screening before they ever put on our uniform.'
+    desc: 'Every candidate undergoes a strict 4-step interview, background check, and manners screening before they ever put on our uniform.'
   },
   {
-    title: 'Rapid Deployment',
-    desc: 'Need a team tomorrow? Our proprietary management software allows us to dispatch fully-briefed crews in under 24 hours.'
+    title: 'Fast Setup',
+    desc: 'Need a team tomorrow? Our advanced software allows us to dispatch fully-briefed crews in under 24 hours.'
   },
   {
-    title: 'Immaculate Presentation',
+    title: 'Professional Presentation',
     desc: 'We enforce strict grooming and uniform standards. Our staff arrives looking exactly as premium as the event you are hosting.'
   },
   {

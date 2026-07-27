@@ -214,7 +214,7 @@ export default function Hero() {
             className="leading-relaxed mb-10 max-w-xl"
             style={{ color: '#c8c3be', fontSize: '15px' }}
           >
-            We don't just fill roles; we curate the professional faces that bring your vision to life. Elite hospitality, brand ambassadors, and seamless event talent across Karnataka.
+            We don't just fill roles; we carefully select the professional faces that bring your vision to life. Elite hospitality, brand ambassadors, and seamless event talent across Karnataka.
           </p>
         </Reveal>
 
@@ -223,7 +223,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 mb-14 justify-center w-full">
             <MagneticButton>
               <Link href="/booking" className="btn-gold text-sm px-7 py-3.5">
-                Curate Your Team
+                Book Your Team
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </MagneticButton>

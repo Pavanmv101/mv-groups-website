@@ -7,22 +7,22 @@ import Reveal from '@/components/animations/Reveal';
 const STEPS = [
   {
     id: '01',
-    title: 'Consultation & Scoping',
+    title: 'Consultation & Planning',
     desc: 'We analyze your event requirements, from guest count to specific talent needs, ensuring we perfectly match the profile of your brand.',
     icon: ClipboardCheck,
     cta: '/contact'
   },
   {
     id: '02',
-    title: 'Talent Curation',
-    desc: 'Our team hand-selects the ideal hospitality, promotional, or technical staff from our vetted roster, specifically chosen for your event type.',
+    title: 'Staff Selection',
+    desc: 'Our team hand-selects the ideal hospitality, promotional, or technical staff from our trusted team, specifically chosen for your event type.',
     icon: Users,
     cta: null
   },
   {
     id: '03',
     title: 'Flawless Execution',
-    desc: 'On event day, our dedicated supervisors ensure precise deployment, immaculate grooming, and seamless integration with your core team.',
+    desc: 'On event day, our dedicated supervisors ensure precise setup, perfect presentation, and easy teamwork with your core team.',
     icon: CalendarCheck,
     cta: null
   }
@@ -39,7 +39,7 @@ export default function HowItWorks() {
               ● The Process
             </p>
             <h2 className="text-4xl md:text-5xl font-black text-white">
-              How We <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>Curate</em>
+              Our <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>Process</em>
             </h2>
           </div>
         </Reveal>

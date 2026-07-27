@@ -169,7 +169,7 @@ export default function Navbar() {
                     : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'
                 }`}
               >
-                Curate Your Team
+                Book Your Team
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -266,7 +266,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className="btn-gold w-full justify-center text-base py-4"
             >
-              Curate Your Team
+              Book Your Team
               <ArrowRight className="w-4 h-4" />
             </Link>
             <p className="text-center text-[#66625d] text-xs mt-4">

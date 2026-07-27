@@ -4,9 +4,9 @@ import { ArrowRight, ShieldCheck, Gem, Sparkles, Briefcase } from 'lucide-react'
 import Reveal from '@/components/animations/Reveal';
 
 const CRITERIA = [
-  { icon: ShieldCheck, title: 'Flawless Background', desc: 'Pre-screened and fully vetted' },
-  { icon: Gem, title: 'Impeccable Grooming', desc: 'Strict aesthetic & presentation standards' },
-  { icon: Sparkles, title: 'Hospitality Trained', desc: 'Mastery in etiquette and protocol' },
+  { icon: ShieldCheck, title: 'Clean Background', desc: 'Pre-screened and fully vetted' },
+  { icon: Gem, title: 'Professional Look', desc: 'Strict aesthetic & presentation standards' },
+  { icon: Sparkles, title: 'Hospitality Trained', desc: 'Mastery in manners and protocol' },
   { icon: Briefcase, title: 'High-Stakes Ready', desc: 'Thrives in high-pressure live environments' },
 ];
 

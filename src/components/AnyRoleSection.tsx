@@ -48,7 +48,7 @@ export default function AnyRoleSection() {
               From a single high-profile brand ambassador to a 500-person coordinated ground team, our network scales instantly to meet the demands of your event.
             </p>
             <Link href="/booking" className="inline-flex items-center gap-2 text-sm font-bold text-white bg-[#f3c892]/10 hover:bg-[#f3c892]/20 border border-[#f3c892]/30 px-6 py-3 rounded-full transition-all">
-              Curate Your Team
+              Book Your Team
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

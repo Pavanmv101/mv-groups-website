@@ -15,7 +15,7 @@ const SERVICES = [
     label: 'HOSPITALITY',
     icon: UtensilsCrossed,
     title: 'VIP Hospitality & Guest Services',
-    desc: 'Flawless service for your most important guests. From elite servers to protocol officers and mixologists.',
+    desc: 'Perfect service for your most important guests. From elite servers to protocol officers and mixologists.',
     bg: 'url(https://images.unsplash.com/photo-1559336197-ded8aaa244bc?auto=format&fit=crop&q=80&w=1200)',
   },
   {
@@ -23,7 +23,7 @@ const SERVICES = [
     label: 'BRAND',
     icon: Megaphone,
     title: 'Brand Ambassadors & Activations',
-    desc: 'Charismatic product specialists and lead generators who seamlessly adopt and project your brand’s voice.',
+    desc: 'Engaging product specialists and promoters who perfectly represent your brand.',
     bg: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800)',
   },
   {
@@ -31,7 +31,7 @@ const SERVICES = [
     label: 'CORPORATE',
     icon: Briefcase,
     title: 'Corporate & Conference Teams',
-    desc: 'Articulate registration teams, multilingual ushers, and dedicated tech-assistants for high-stakes summits.',
+    desc: 'Professional registration teams, ushers, and tech assistants for important corporate events.',
     bg: 'url(https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800)',
   },
   {
@@ -39,7 +39,7 @@ const SERVICES = [
     label: 'PRIVATE',
     icon: Heart,
     title: 'Private & Exclusive Gatherings',
-    desc: 'Discreet, highly-vetted staff tailored for ultra-exclusive, high-net-worth social events and bespoke weddings.',
+    desc: 'Trusted and professional staff tailored for exclusive social events and luxury weddings.',
     bg: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=800)',
   },
   {
@@ -47,7 +47,7 @@ const SERVICES = [
     label: 'LOGISTICS',
     icon: Truck,
     title: 'Logistics & Ground Control',
-    desc: 'Precision crowd flow management, VIP access control, and rapid deployment setup crews.',
+    desc: 'Expert crowd management, VIP access control, and fast setup crews.',
     bg: 'url(https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80&w=800)',
   },
   {
