@@ -110,6 +110,11 @@ body {
   75%, 100% { transform: scale(2); opacity: 0; }
 }
 
+@keyframes sway {
+  0%   { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
+}
+
 @keyframes drawCircle {
   to { stroke-dashoffset: 0; }
 }
@@ -136,6 +141,9 @@ body {
 }
 .animate-ping {
   animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.animate-sway {
+  animation: sway 8s ease-in-out infinite alternate;
 }
 
 /* Stagger delays */
@@ -164,6 +172,15 @@ body {
 .gold-card:hover {
   border-color: #f3c892;
   box-shadow: 0 0 20px rgba(243, 200, 146, 0.12);
+}
+
+/* ─── Premium Grid BG ─── */
+.bg-premium-grid {
+  background-image: 
+    linear-gradient(rgba(243, 200, 146, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 200, 146, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center center;
 }
 
 /* ─── Primary button ─── */

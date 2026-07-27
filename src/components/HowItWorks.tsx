@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
+
 import { ArrowRight } from 'lucide-react';
+import Reveal from '@/components/animations/Reveal';
+import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
 const STEPS = [
   {
@@ -31,29 +34,13 @@ const STEPS = [
   },
 ];
 
-function useReveal() {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return { ref, visible };
-}
-
 export default function HowItWorks() {
-  const { ref, visible } = useReveal();
   const [active, setActive] = useState<number | null>(null);
 
   return (
     <section
-      ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ background: '#0c0b0a' }}
+      className="relative py-24 lg:py-32 overflow-hidden bg-premium-grid"
+      style={{ backgroundColor: '#0c0b0a' }}
     >
       {/* Large faded background numbers */}
       <div
@@ -71,37 +58,44 @@ export default function HowItWorks() {
         ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Spotlights */}
+      <div className="absolute top-0 left-0 w-full h-[600px] overflow-hidden pointer-events-none z-0">
+        <div className="absolute left-1/6 top-0 w-1/3 h-full animate-sway" style={{ background: 'linear-gradient(180deg, rgba(243,200,146,0.08) 0%, rgba(243,200,146,0) 80%)', clipPath: 'polygon(45% 0, 55% 0, 100% 100%, 0 100%)', transformOrigin: 'top center', animationDelay: '0s' }} />
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 w-1/3 h-full animate-sway" style={{ background: 'linear-gradient(180deg, rgba(243,200,146,0.08) 0%, rgba(243,200,146,0) 80%)', clipPath: 'polygon(45% 0, 55% 0, 100% 100%, 0 100%)', transformOrigin: 'top center', animationDelay: '1.5s' }} />
+        <div className="absolute right-1/6 top-0 w-1/3 h-full animate-sway" style={{ background: 'linear-gradient(180deg, rgba(243,200,146,0.08) 0%, rgba(243,200,146,0) 80%)', clipPath: 'polygon(45% 0, 55% 0, 100% 100%, 0 100%)', transformOrigin: 'top center', animationDelay: '3s' }} />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
-        <div className={`mb-16 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <p className="section-label">● THE PROCESS</p>
-          <div className="flex flex-col sm:flex-row sm:items-end gap-4">
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
-              How It{' '}
-              <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
-                Works
-              </em>
-            </h2>
-            <p className="text-sm pb-1" style={{ color: '#a39e98' }}>
-              Three simple steps from booking to event execution
+        <Reveal>
+          <div className="mb-16">
+            <p className="section-label">● THE PROCESS</p>
+            <div className="flex flex-col sm:flex-row sm:items-end gap-4">
+              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+                How It{' '}
+                <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+                  Works
+                </em>
+              </h2>
+              <p className="text-sm pb-1" style={{ color: '#a39e98' }}>
+                Three simple steps from booking to event execution
+              </p>
+            </div>
+            <p className="text-xs tracking-[0.2em] uppercase mt-4" style={{ color: '#66625d' }}>
+              Tap each step to walk through
             </p>
           </div>
-          <p className="text-xs tracking-[0.2em] uppercase mt-4" style={{ color: '#66625d' }}>
-            Tap each step to walk through
-          </p>
-        </div>
+        </Reveal>
 
         {/* Step cards */}
-        <div className="grid md:grid-cols-3 gap-5">
+        <StaggerContainer className="grid md:grid-cols-3 gap-5">
           {STEPS.map((step, i) => {
             const isActive = active === i;
             return (
+              <StaggerItem key={step.num}>
               <button
-                key={step.num}
                 onClick={() => setActive(isActive ? null : i)}
-                className={`text-left rounded-2xl p-8 transition-all duration-300 cursor-pointer ${
-                  visible ? `reveal visible reveal-delay-${i + 1}` : 'opacity-0'
-                }`}
+                className="text-left rounded-2xl p-8 transition-all duration-300 cursor-pointer w-full"
                 style={{
                   background: '#1a1918',
                   border: isActive ? '1.5px solid #f3c892' : '1.5px solid #282624',
@@ -154,9 +148,10 @@ export default function HowItWorks() {
                   </div>
                 )}
               </button>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

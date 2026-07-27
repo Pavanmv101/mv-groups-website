@@ -6,6 +6,8 @@ import {
   Heart, Briefcase, Store, Megaphone, Truck,
   GraduationCap, Zap, UtensilsCrossed, Music,
 } from 'lucide-react';
+import Reveal from '@/components/animations/Reveal';
+import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
 const SERVICES = [
   {
@@ -83,23 +85,12 @@ const SERVICES = [
 ];
 
 export default function ServicesOverview() {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.05 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#141312' }}>
+    <section className="py-24 lg:py-32" style={{ background: '#141312' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+        <Reveal>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6">
           <div>
             <p className="section-label">● WHAT WE DO</p>
             <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
@@ -113,22 +104,22 @@ export default function ServicesOverview() {
             Professional staffing across all event categories — from intimate weddings to massive corporate events.
           </p>
         </div>
+        </Reveal>
 
         {/* 3×3 Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {SERVICES.map((svc, i) => {
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {SERVICES.map((svc) => {
             const Icon = svc.icon;
             return (
-              <div
-                key={svc.id}
-                className={`group relative rounded-2xl overflow-hidden cursor-pointer ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
-                style={{
-                  animationDelay: `${i * 60}ms`,
-                  height: '260px',
-                  background: svc.bg,
-                  border: '1px solid #282624',
-                }}
-              >
+              <StaggerItem key={svc.id}>
+                <div
+                  className="group relative rounded-2xl overflow-hidden cursor-pointer"
+                  style={{
+                    height: '260px',
+                    background: svc.bg,
+                    border: '1px solid #282624',
+                  }}
+                >
                 {/* Hover overlay */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -174,15 +165,11 @@ export default function ServicesOverview() {
                   </Link>
                 </div>
 
-                {/* Scale on hover */}
-                <div
-                  className="absolute inset-0 transition-transform duration-500 group-hover:scale-[1.03]"
-                  style={{ zIndex: -1 }}
-                />
-              </div>
+                </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
