@@ -89,7 +89,7 @@ export default function ServicesOverview() {
         </Reveal>
 
         {/* Bento Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-4 auto-rows-[160px] gap-4">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-4 auto-rows-[320px] md:auto-rows-[280px] gap-4">
           {SERVICES.map((svc) => {
             const Icon = svc.icon;
             return (
@@ -137,7 +137,7 @@ export default function ServicesOverview() {
                 </div>
 
                 {/* Content Area */}
-                <div className="relative z-10 w-full transform group-hover:-translate-y-2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+                <div className="relative z-10 w-full transform group-hover:-translate-y-2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] pr-12">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
                     {svc.title}
                   </h3>
