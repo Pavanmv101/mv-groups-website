@@ -163,7 +163,7 @@ export default function Navbar() {
               {/* Book Staff CTA */}
               <Link
                 href="/booking"
-                className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${
+                className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap ${
                   scrolled
                     ? 'bg-[#f3c892] text-[#0c0b0a] hover:bg-[#e5b980] shadow-lg shadow-[rgba(243,200,146,0.25)] hover:shadow-[rgba(243,200,146,0.4)] hover:-translate-y-0.5'
                     : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'
