@@ -45,17 +45,14 @@ export default function Footer() {
             <p className="text-sm leading-relaxed mb-6" style={{ color: '#66625d' }}>
               On-demand event staffing for Karnataka. Professional crew, vetted &amp; trained.
             </p>
-            {/* Social icons */}
+            {/* Social icons — pure CSS hover via .social-icon-btn */}
             <div className="flex gap-3">
               <a
                 href={COMPANY.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
-                style={{ background: '#1a1918', border: '1px solid #282624', color: '#66625d' }}
+                className="social-icon-btn"
                 aria-label="LinkedIn"
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#f3c892'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(243,200,146,0.4)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#282624'; }}
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
@@ -63,21 +60,15 @@ export default function Footer() {
                 href={COMPANY.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
-                style={{ background: '#1a1918', border: '1px solid #282624', color: '#66625d' }}
+                className="social-icon-btn"
                 aria-label="Instagram"
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#f3c892'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(243,200,146,0.4)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#282624'; }}
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
-                style={{ background: '#1a1918', border: '1px solid #282624', color: '#66625d' }}
+                className="social-icon-btn"
                 aria-label="Email"
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#f3c892'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(243,200,146,0.4)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#282624'; }}
               >
                 <Mail className="w-4 h-4" />
               </a>
@@ -94,21 +85,20 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm flex items-center gap-1 group transition-colors duration-200"
-                    style={{ color: '#a39e98' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
+                    className="footer-link text-sm flex items-center gap-1 group"
                   >
                     {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} />
+                    <ArrowUpRight
+                      className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"
+                      style={{ color: '#f3c892' }}
+                    />
                   </Link>
                 </li>
               ))}
               <li>
                 <Link
                   href="/booking"
-                  className="text-sm flex items-center gap-1 group transition-colors duration-200"
-                  style={{ color: '#f3c892' }}
+                  className="footer-link-gold text-sm flex items-center gap-1"
                 >
                   Request a Quote
                   <ArrowUpRight className="w-3 h-3" />
@@ -125,13 +115,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {POPULAR_SERVICES.map((s) => (
                 <li key={s}>
-                  <Link
-                    href="/services"
-                    className="text-sm transition-colors duration-200"
-                    style={{ color: '#a39e98' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
-                  >
+                  <Link href="/services" className="footer-link text-sm">
                     {s}
                   </Link>
                 </li>
@@ -151,25 +135,13 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 shrink-0" style={{ color: '#f3c892' }} />
-                <a
-                  href={`tel:${COMPANY.phone}`}
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: '#a39e98' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
-                >
+                <a href={`tel:${COMPANY.phone}`} className="footer-link text-sm">
                   {COMPANY.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 shrink-0" style={{ color: '#f3c892' }} />
-                <a
-                  href={`mailto:${COMPANY.email}`}
-                  className="text-sm transition-colors duration-200"
-                  style={{ color: '#a39e98' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
-                >
+                <a href={`mailto:${COMPANY.email}`} className="footer-link text-sm">
                   {COMPANY.email}
                 </a>
               </li>
@@ -196,24 +168,8 @@ export default function Footer() {
             © {new Date().getFullYear()} MV Groups. All rights reserved.
           </p>
           <div className="flex gap-5">
-            <Link
-              href="/privacy"
-              className="text-xs transition-colors duration-200"
-              style={{ color: '#66625d' }}
-              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
-              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-xs transition-colors duration-200"
-              style={{ color: '#66625d' }}
-              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
-              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'}
-            >
-              Terms of Service
-            </Link>
+            <Link href="/privacy" className="footer-link-muted text-xs">Privacy Policy</Link>
+            <Link href="/terms" className="footer-link-muted text-xs">Terms of Service</Link>
           </div>
         </div>
       </div>

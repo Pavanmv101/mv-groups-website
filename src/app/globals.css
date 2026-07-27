@@ -224,6 +224,55 @@ body {
   margin-bottom: 1rem;
 }
 
+/* ─── Footer hover links (Server Component safe) ─── */
+.footer-link {
+  color: #a39e98;
+  transition: color 0.2s ease;
+}
+.footer-link:hover { color: #ffffff; }
+
+.footer-link-muted {
+  color: #66625d;
+  transition: color 0.2s ease;
+}
+.footer-link-muted:hover { color: #a39e98; }
+
+.footer-link-gold {
+  color: #f3c892;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+.footer-link-gold:hover { color: #e5b980; }
+
+/* Social icon button */
+.social-icon-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1918;
+  border: 1px solid #282624;
+  color: #66625d;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.social-icon-btn:hover {
+  color: #f3c892;
+  border-color: rgba(243,200,146,0.4);
+}
+
+/* Client logo card (grayscale hover) */
+.logo-card {
+  background: #1a1918;
+  border: 1px solid #282624;
+  filter: grayscale(1) brightness(0.55);
+  transition: filter 0.3s ease, border-color 0.3s ease;
+}
+.logo-card:hover {
+  filter: grayscale(0) brightness(1);
+  border-color: rgba(243,200,146,0.4);
+}
+
 /* ─── Video hero crossfade ─── */
 .hero-video {
   position: absolute;
