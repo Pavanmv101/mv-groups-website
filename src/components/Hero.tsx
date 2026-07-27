@@ -13,24 +13,8 @@ const VIDEO_CLIPS = [
   'https://videos.pexels.com/video-files/2795750/2795750-uhd_2560_1440_25fps.mp4',
 ];
 
-function VideoBackground() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [currentClip, setCurrentClip] = useState(0);
-  const [fade, setFade] = useState(true);
+function QuadVideoBackground() {
   const [videoError, setVideoError] = useState(false);
-
-  // Crossfade between clips every 8 seconds
-  useEffect(() => {
-    if (videoError) return;
-    const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setCurrentClip((prev) => (prev + 1) % VIDEO_CLIPS.length);
-        setFade(true);
-      }, 600);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [videoError]);
 
   if (videoError) {
     // Fallback: dark gradient with subtle noise texture
@@ -42,7 +26,6 @@ function VideoBackground() {
             'linear-gradient(135deg, #0c0b0a 0%, #141312 40%, #0d0d0d 70%, #0c0b0a 100%)',
         }}
       >
-        {/* Subtle radial glow */}
         <div
           className="absolute inset-0"
           style={{
@@ -55,18 +38,61 @@ function VideoBackground() {
   }
 
   return (
-    <video
-      ref={videoRef}
-      key={currentClip}
-      className="hero-video absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-      src={VIDEO_CLIPS[currentClip]}
-      autoPlay
-      muted
-      loop
-      playsInline
-      style={{ opacity: fade ? 1 : 0, transition: 'opacity 0.6s ease-in-out' }}
-      onError={() => setVideoError(true)}
-    />
+    <div className="absolute inset-0 w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden gap-0 bg-[#0c0b0a]">
+      {/* Top Left */}
+      <div className="relative w-full h-full">
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[0]}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={() => setVideoError(true)}
+        />
+      </div>
+      {/* Top Right - Mirrored */}
+      <div className="relative w-full h-full">
+        <video
+          className="absolute inset-0 w-full h-full object-cover transform scale-x-[-1]"
+          src={VIDEO_CLIPS[1]}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={() => setVideoError(true)}
+        />
+      </div>
+      {/* Bottom Left - Mirrored & Slower */}
+      <div className="relative w-full h-full">
+        <video
+          className="absolute inset-0 w-full h-full object-cover transform scale-x-[-1] brightness-90"
+          src={VIDEO_CLIPS[1]}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={() => setVideoError(true)}
+        />
+      </div>
+      {/* Bottom Right - Flipped Y */}
+      <div className="relative w-full h-full">
+        <video
+          className="absolute inset-0 w-full h-full object-cover transform scale-y-[-1] brightness-75"
+          src={VIDEO_CLIPS[0]}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onError={() => setVideoError(true)}
+        />
+      </div>
+      
+      {/* Overlay to blend the grid seams slightly */}
+      <div className="absolute inset-0 bg-[#0c0b0a]/30 pointer-events-none" />
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-white/5 pointer-events-none" />
+      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 pointer-events-none" />
+    </div>
   );
 }
 
@@ -85,8 +111,8 @@ export default function Hero() {
       className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ minHeight: '100svh' }}
     >
-      {/* ── Video background ── */}
-      <VideoBackground />
+      {/* ── 4-Grid Video background ── */}
+      <QuadVideoBackground />
 
       {/* ── Dark overlay ── */}
       <div
