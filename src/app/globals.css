@@ -193,9 +193,9 @@ body {
 /* ─── Premium Grid BG ─── */
 .bg-premium-grid {
   background-image: 
-    linear-gradient(rgba(243, 200, 146, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(243, 200, 146, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(rgba(243, 200, 146, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 200, 146, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
   background-position: center center;
 }
 

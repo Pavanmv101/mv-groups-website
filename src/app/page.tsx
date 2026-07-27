@@ -9,6 +9,7 @@ import JoinCrewSection from '@/components/JoinCrewSection';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
+import SideNav from '@/components/SideNav';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <SideNav />
       <Hero />
       <Marquee />
       <ClientLogos />

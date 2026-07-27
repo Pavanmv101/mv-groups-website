@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight, ClipboardCheck, Users, CalendarCheck } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
+import Constellation from './animations/Constellation';
 
 const STEPS = [
   {
@@ -30,9 +31,10 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-premium-grid" style={{ backgroundColor: '#0a0908' }}>
+    <section id="process" className="py-24 lg:py-32 relative overflow-hidden bg-premium-grid" style={{ backgroundColor: '#0a0908' }}>
       
-      {/* ── Animated Background Blobs ── */}
+      {/* ── Background Effects ── */}
+      <Constellation />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#f3c892] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.07] animate-blob pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#c9a06a] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] animate-blob animation-delay-2000 pointer-events-none" />
 

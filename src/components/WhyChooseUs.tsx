@@ -1,6 +1,8 @@
 'use client';
 
+import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import Watermark from './animations/Watermark';
 
 const REASONS = [
   {
@@ -23,8 +25,9 @@ const REASONS = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ backgroundColor: '#0a0908' }}>
-      {/* ── Animated Background Blobs ── */}
+    <section id="trust" className="py-24 lg:py-32 relative overflow-hidden bg-premium-grid" style={{ backgroundColor: '#0a0908' }}>
+      {/* ── Background Effects ── */}
+      <Watermark text="TRUST" />
       <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-[#e5b980] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.06] animate-blob pointer-events-none transform -translate-y-1/2 -translate-x-1/2" />
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[#f3c892] rounded-full mix-blend-screen filter blur-[120px] opacity-[0.04] animate-blob animation-delay-4000 pointer-events-none transform translate-x-1/4" />
 

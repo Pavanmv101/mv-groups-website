@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, Gem, Sparkles, Briefcase } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
+import Watermark from './animations/Watermark';
+import Constellation from './animations/Constellation';
 
 const CRITERIA = [
   { icon: ShieldCheck, title: 'Clean Background', desc: 'Pre-screened and fully vetted' },
@@ -12,7 +14,13 @@ const CRITERIA = [
 
 export default function JoinCrewSection() {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0908]" style={{ borderTop: '1px solid #1a1918' }}>
+    <section id="crew" className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0908]" style={{ borderTop: '1px solid #1a1918' }}>
+      
+      {/* ── Background Effects ── */}
+      <Watermark text="CREW" />
+      <Constellation />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#f3c892] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] pointer-events-none transform translate-x-1/4" />
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <Reveal>

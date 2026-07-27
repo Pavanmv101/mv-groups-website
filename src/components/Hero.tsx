@@ -121,6 +121,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero"
       ref={heroRef}
       className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ minHeight: '100svh' }}

@@ -62,7 +62,7 @@ const SERVICES = [
 
 export default function ServicesOverview() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-[#0c0b0a]">
+    <section id="services" className="py-24 lg:py-32 relative overflow-hidden bg-[#0c0b0a]">
       {/* ── Background Texture & Glow ── */}
       <div className="absolute inset-0 pointer-events-none bg-premium-grid opacity-20" />
       <div 
