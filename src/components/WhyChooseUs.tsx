@@ -1,82 +1,68 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { Shield, Clock, Award, HeadphonesIcon } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
-const ITEMS = [
+const REASONS = [
   {
-    icon: Shield,
-    title: 'Verified & Vetted',
-    description: 'Every professional in our network undergoes thorough background checks and skill verification before deployment.',
+    title: 'Elite Vetting Process',
+    desc: 'Every candidate undergoes a rigorous 4-step interview, background check, and etiquette screening before they ever put on our uniform.'
   },
   {
-    icon: Clock,
     title: 'Rapid Deployment',
-    description: 'Need staff in 48 hours? Our ready talent pool ensures lightning-fast mobilisation, even for large-scale events.',
+    desc: 'Need a team tomorrow? Our proprietary management software allows us to dispatch fully-briefed crews in under 24 hours.'
   },
   {
-    icon: Award,
-    title: 'Quality Assured',
-    description: 'Strict quality standards with regular performance reviews and client feedback loops keep our crew best-in-class.',
+    title: 'Immaculate Presentation',
+    desc: 'We enforce strict grooming and uniform standards. Our staff arrives looking exactly as premium as the event you are hosting.'
   },
   {
-    icon: HeadphonesIcon,
-    title: '24/7 Support',
-    description: 'Dedicated WhatsApp support and round-the-clock operations management for every event we staff.',
-  },
+    title: 'On-Site Supervision',
+    desc: 'We don’t just drop off staff. A dedicated MV Groups supervisor remains on-site to manage the crew so you can focus on your guests.'
+  }
 ];
 
 export default function WhyChooseUs() {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#141312' }}>
+    <section className="py-24 md:py-32 bg-[#0a0908]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`mb-14 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <p className="section-label">● WHY MV GROUPS</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
-            Built on Trust,{' '}
-            <em
-              className="not-italic"
-              style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
-            >
-              Driven by Excellence
-            </em>
-          </h2>
-        </div>
+        
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+          
+          {/* Left - Sticky Editorial Header */}
+          <div className="lg:w-1/2 relative">
+            <div className="lg:sticky lg:top-32">
+              <p className="text-[#f3c892] text-xs font-bold tracking-[0.2em] uppercase mb-4">The MV Standard</p>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tighter">
+                Why the best brands <br className="hidden lg:block"/>
+                <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+                  trust us.
+                </em>
+              </h2>
+              <p className="text-[#a39e98] leading-relaxed text-lg mb-8 max-w-md">
+                We bridge the gap between temporary manpower and permanent luxury hospitality. We are your partners in perfect execution.
+              </p>
+            </div>
+          </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {ITEMS.map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.title}
-                className={`rounded-2xl p-7 gold-card ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.25)' }}
-                >
-                  <Icon className="w-5 h-5" style={{ color: '#f3c892' }} />
+          {/* Right - Scrolling Value Props */}
+          <div className="lg:w-1/2 flex flex-col gap-16">
+            {REASONS.map((reason, idx) => (
+              <div key={idx} className="flex gap-6 group">
+                <div className="flex-shrink-0 mt-1">
+                  <div className="w-12 h-12 rounded-full bg-[#141312] border border-[#282624] flex items-center justify-center group-hover:border-[#f3c892] group-hover:shadow-[0_0_15px_rgba(243,200,146,0.2)] transition-all duration-300">
+                    <CheckCircle2 className="w-6 h-6 text-[#f3c892]" />
+                  </div>
                 </div>
-                <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>
-                  {item.description}
-                </p>
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#f3c892] transition-colors">{reason.title}</h3>
+                  <p className="text-[#a39e98] leading-relaxed text-lg">
+                    {reason.desc}
+                  </p>
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

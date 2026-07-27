@@ -1,79 +1,93 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const ROW1_PILLS = [
-  'Registration Team', 'Greeting Team', 'Ushers', 'Seat Assigners',
-  'Event Coordinator', 'MC', 'Host', 'Videographer',
+const CAPABILITIES = [
+  'VIP Protocol Officers', 'Multilingual Ushers', 'Brand Ambassadors',
+  'Mixologists', 'Event Producers', 'Technical Runners',
+  'Stage Managers', 'Security Directors', 'Lead Generators',
+  'Registration Techs', 'Valet Coordinators', 'Show Callers'
 ];
-const ROW2_PILLS = [
-  'Brand Ambassadors', 'Security', 'Logistics', 'Floor Manager',
-  'Backstage Runner', 'Hospitality', 'Stage Hand', 'Promoter',
-];
-
-function PillRow({ items, direction }: { items: string[]; direction: 'left' | 'right' }) {
-  const doubled = [...items, ...items];
-  return (
-    <div className="overflow-hidden" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
-      <div
-        className={direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}
-        style={{ display: 'flex', gap: '10px', willChange: 'transform' }}
-      >
-        {doubled.map((pill, i) => (
-          <span
-            key={i}
-            className="flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold text-white whitespace-nowrap"
-            style={{ background: '#282624', border: '1px solid rgba(243,200,146,0.25)' }}
-          >
-            {pill}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function AnyRoleSection() {
-  return (
-    <section className="py-10 lg:py-14" style={{ background: '#0c0b0a' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className="rounded-2xl overflow-hidden"
-          style={{ background: '#141312', border: '1px solid #282624' }}
-        >
-          <div className="grid lg:grid-cols-2 gap-0">
-            {/* Left — text */}
-            <div className="p-10 lg:p-14 flex flex-col justify-center">
-              <p className="section-label">BUILD YOUR OWN CREW</p>
-              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-5">
-                Any role.{' '}
-                <em
-                  className="not-italic"
-                  style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
-                >
-                  Any size.
-                </em>
-              </h2>
-              <p className="text-sm leading-relaxed mb-8" style={{ color: '#a39e98' }}>
-                From a single promoter for a brand stall to 500 crew for a corporate summit — if it
-                happens at an event, MV Groups staffs it.
-              </p>
-              <Link href="/booking" className="btn-gold self-start text-sm">
-                Build My Crew
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-            {/* Right — scrolling pills */}
-            <div
-              className="flex flex-col justify-center gap-4 py-10 lg:py-14 pr-10 pl-0 lg:pl-4"
-              style={{ borderLeft: '1px solid #282624' }}
-            >
-              <PillRow items={ROW1_PILLS} direction="left" />
-              <PillRow items={ROW2_PILLS} direction="right" />
+  // Randomly light up capabilities to create a living "cloud" effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIdx = Math.floor(Math.random() * CAPABILITIES.length);
+      setActiveIndex(randomIdx);
+      
+      setTimeout(() => {
+        setActiveIndex(null);
+      }, 1500);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="py-24 bg-[#121110]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          
+          {/* Left Text */}
+          <div className="lg:w-1/3">
+            <p className="text-[#f3c892] text-xs font-bold tracking-[0.2em] uppercase mb-4">The Talent</p>
+            <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
+              Any role.<br/>
+              <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+                Any scale.
+              </em>
+            </h2>
+            <p className="text-[#a39e98] leading-relaxed mb-8">
+              From a single high-profile brand ambassador to a 500-person coordinated ground team, our network scales instantly to meet the demands of your event.
+            </p>
+            <Link href="/booking" className="inline-flex items-center gap-2 text-sm font-bold text-white bg-[#f3c892]/10 hover:bg-[#f3c892]/20 border border-[#f3c892]/30 px-6 py-3 rounded-full transition-all">
+              Curate Your Team
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Right Capabilities Grid */}
+          <div className="lg:w-2/3">
+            <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+              {CAPABILITIES.map((cap, i) => {
+                const isActive = activeIndex === i;
+                
+                return (
+                  <motion.div
+                    key={cap}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    onMouseEnter={() => setActiveIndex(i)}
+                    onMouseLeave={() => setActiveIndex(null)}
+                    className="cursor-default transition-all duration-500"
+                    style={{
+                      background: isActive ? '#f3c892' : '#1a1918',
+                      border: isActive ? '1px solid #f3c892' : '1px solid #282624',
+                      color: isActive ? '#0a0908' : '#c8c3be',
+                      padding: '0.75rem 1.5rem',
+                      borderRadius: '9999px',
+                      fontSize: '0.875rem',
+                      fontWeight: isActive ? 700 : 500,
+                      boxShadow: isActive ? '0 0 20px rgba(243,200,146,0.3)' : 'none',
+                      transform: isActive ? 'scale(1.05)' : 'scale(1)'
+                    }}
+                  >
+                    {cap}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
+
         </div>
       </div>
     </section>

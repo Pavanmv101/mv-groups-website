@@ -1,157 +1,105 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
-
-import { ArrowRight } from 'lucide-react';
-import Reveal from '@/components/animations/Reveal';
-import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
+import { ArrowRight, ClipboardCheck, Users, CalendarCheck } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const STEPS = [
   {
-    num: '01',
-    title: 'Tell Us',
-    short: 'Share your event type, date, location, and the roles you need.',
-    detail:
-      'Use our simple booking form or drop us a WhatsApp. Tell us what kind of event it is, your expected headcount, the specific roles you need filled, and the date. The more detail, the faster we match.',
-    cta: null,
+    id: '01',
+    title: 'Consultation & Scoping',
+    desc: 'We analyze your event requirements, from guest count to specific talent needs, ensuring we perfectly match the profile of your brand.',
+    icon: ClipboardCheck,
+    cta: '/contact'
   },
   {
-    num: '02',
-    title: 'We Match',
-    short: 'We match roles and send verified staff profiles within hours.',
-    detail:
-      'Our internal team reviews your brief and hand-picks staff from our vetted pool. Within hours you receive a proposal with staff profiles, bios, and a transparent cost breakdown — no hidden fees.',
-    cta: null,
+    id: '02',
+    title: 'Talent Curation',
+    desc: 'Our team hand-selects the ideal hospitality, promotional, or technical staff from our vetted roster, specifically chosen for your event type.',
+    icon: Users,
+    cta: null
   },
   {
-    num: '03',
-    title: 'We Execute',
-    short: 'Confirm team — we dispatch with WhatsApp support & live tracking.',
-    detail:
-      'Once confirmed, our ops team handles dispatch, briefing, and on-ground coordination. You get a dedicated WhatsApp group with your team lead for real-time updates throughout the event.',
-    cta: '/booking',
-  },
+    id: '03',
+    title: 'Flawless Execution',
+    desc: 'On event day, our dedicated supervisors ensure precise deployment, immaculate grooming, and seamless integration with your core team.',
+    icon: CalendarCheck,
+    cta: null
+  }
 ];
 
 export default function HowItWorks() {
-  const [active, setActive] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Create a scroll-linked progress bar for the timeline line
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start center', 'end center']
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section
-      className="relative py-24 lg:py-32 overflow-hidden bg-premium-grid"
-      style={{ backgroundColor: '#0c0b0a' }}
-    >
-      {/* Large faded background numbers */}
-      <div
-        className="absolute inset-0 flex items-center justify-around pointer-events-none select-none"
-        aria-hidden="true"
-      >
-        {['01', '02', '03'].map((n) => (
-          <span
-            key={n}
-            className="font-black leading-none"
-            style={{ fontSize: 'clamp(120px, 18vw, 220px)', color: '#1a1918', letterSpacing: '-0.04em' }}
-          >
-            {n}
-          </span>
-        ))}
-      </div>
+    <section className="py-24 md:py-32 relative overflow-hidden" style={{ background: '#0a0908' }}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+        
+        <div className="text-center mb-24">
+          <p className="text-[#f3c892] text-xs font-bold tracking-[0.2em] uppercase mb-4">The Process</p>
+          <h2 className="text-4xl md:text-5xl font-black text-white">
+            How We <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>Curate</em>
+          </h2>
+        </div>
 
-      {/* Spotlights */}
-      <div className="absolute top-0 left-0 w-full h-[600px] overflow-hidden pointer-events-none z-0">
-        <div className="absolute left-1/6 top-0 w-1/3 h-full animate-sway" style={{ background: 'linear-gradient(180deg, rgba(243,200,146,0.08) 0%, rgba(243,200,146,0) 80%)', clipPath: 'polygon(45% 0, 55% 0, 100% 100%, 0 100%)', transformOrigin: 'top center', animationDelay: '0s' }} />
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 w-1/3 h-full animate-sway" style={{ background: 'linear-gradient(180deg, rgba(243,200,146,0.08) 0%, rgba(243,200,146,0) 80%)', clipPath: 'polygon(45% 0, 55% 0, 100% 100%, 0 100%)', transformOrigin: 'top center', animationDelay: '1.5s' }} />
-        <div className="absolute right-1/6 top-0 w-1/3 h-full animate-sway" style={{ background: 'linear-gradient(180deg, rgba(243,200,146,0.08) 0%, rgba(243,200,146,0) 80%)', clipPath: 'polygon(45% 0, 55% 0, 100% 100%, 0 100%)', transformOrigin: 'top center', animationDelay: '3s' }} />
-      </div>
+        <div ref={containerRef} className="relative">
+          {/* Central Line */}
+          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-[#282624] -translate-x-1/2" />
+          
+          {/* Active Line */}
+          <motion.div 
+            className="absolute left-[28px] md:left-1/2 top-0 w-[2px] bg-[#f3c892] -translate-x-1/2 origin-top rounded-full shadow-[0_0_15px_#f3c892]"
+            style={{ height: lineHeight }}
+          />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        {/* Header */}
-        <Reveal>
-          <div className="mb-16">
-            <p className="section-label">● THE PROCESS</p>
-            <div className="flex flex-col sm:flex-row sm:items-end gap-4">
-              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
-                How It{' '}
-                <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
-                  Works
-                </em>
-              </h2>
-              <p className="text-sm pb-1" style={{ color: '#a39e98' }}>
-                Three simple steps from booking to event execution
-              </p>
-            </div>
-            <p className="text-xs tracking-[0.2em] uppercase mt-4" style={{ color: '#66625d' }}>
-              Tap each step to walk through
-            </p>
-          </div>
-        </Reveal>
-
-        {/* Step cards */}
-        <StaggerContainer className="grid md:grid-cols-3 gap-5">
-          {STEPS.map((step, i) => {
-            const isActive = active === i;
-            return (
-              <StaggerItem key={step.num}>
-              <button
-                onClick={() => setActive(isActive ? null : i)}
-                className="text-left rounded-2xl p-8 transition-all duration-300 cursor-pointer w-full"
-                style={{
-                  background: '#1a1918',
-                  border: isActive ? '1.5px solid #f3c892' : '1.5px solid #282624',
-                  boxShadow: isActive ? '0 0 32px rgba(243,200,146,0.12)' : 'none',
-                }}
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <span
-                    className="text-5xl font-black leading-none"
-                    style={{ color: isActive ? '#f3c892' : '#282624' }}
-                  >
-                    {step.num}
-                  </span>
-                  <span
-                    className="text-2xl transition-transform duration-300"
-                    style={{ transform: isActive ? 'rotate(45deg)' : 'none', color: '#66625d' }}
-                  >
-                    +
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {step.title}
-                  {i < STEPS.length - 1 && (
-                    <span className="ml-2 text-base" style={{ color: '#66625d' }}>→</span>
-                  )}
-                </h3>
-
-                <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>
-                  {step.short}
-                </p>
-
-                {/* Expanded detail */}
-                {isActive && (
-                  <div className="mt-5 pt-5 border-t" style={{ borderColor: '#282624' }}>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#c8c3be' }}>
-                      {step.detail}
-                    </p>
+          {/* Steps */}
+          <div className="flex flex-col gap-16 md:gap-32">
+            {STEPS.map((step, i) => {
+              const Icon = step.icon;
+              const isEven = i % 2 === 0;
+              
+              return (
+                <div key={step.id} className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  
+                  {/* Content Half */}
+                  <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pr-20 text-left md:text-right' : 'md:pl-20 text-left'}`}>
+                    <span className="text-[#282624] font-black text-7xl md:text-8xl mb-2 block leading-none tracking-tighter">{step.id}</span>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{step.title}</h3>
+                    <p className="text-[#a39e98] leading-relaxed mb-6 text-sm md:text-base">{step.desc}</p>
+                    
                     {step.cta && (
                       <Link
                         href={step.cta}
-                        className="inline-flex items-center gap-1.5 text-sm font-bold"
-                        style={{ color: '#f3c892' }}
-                        onClick={(e) => e.stopPropagation()}
+                        className={`inline-flex items-center gap-2 text-sm font-bold text-[#f3c892] hover:text-white transition-colors ${isEven ? 'md:justify-end md:w-full' : ''}`}
                       >
-                        Tap to Start Booking
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        Start Your Consultation
+                        <ArrowRight className="w-4 h-4" />
                       </Link>
                     )}
                   </div>
-                )}
-              </button>
-              </StaggerItem>
-            );
-          })}
-        </StaggerContainer>
+
+                  {/* Center Node */}
+                  <div className="absolute left-[28px] md:left-1/2 top-6 md:top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#141312] border-2 border-[#282624] flex items-center justify-center -translate-x-1/2 z-10 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                    <Icon className="w-6 h-6 text-[#f3c892]" />
+                  </div>
+                  
+                  {/* Empty Space for Grid Alignment */}
+                  <div className="hidden md:block md:w-1/2" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
       </div>
     </section>
   );
