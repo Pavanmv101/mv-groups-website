@@ -7,26 +7,66 @@ import Reveal from '@/components/animations/Reveal';
 import TextReveal from '@/components/animations/TextReveal';
 import MagneticButton from '@/components/animations/MagneticButton';
 
-function ImageBackground() {
+// ── Video clip list — using direct royalty-free CDN URLs ──
+const VIDEO_CLIPS = [
+  'https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/2795750/2795750-uhd_2560_1440_25fps.mp4',
+];
+
+function VideoBackground() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [currentClip, setCurrentClip] = useState(0);
+  const [fade, setFade] = useState(true);
+  const [videoError, setVideoError] = useState(false);
+
+  // Crossfade between clips every 8 seconds
+  useEffect(() => {
+    if (videoError) return;
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrentClip((prev) => (prev + 1) % VIDEO_CLIPS.length);
+        setFade(true);
+      }, 600);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, [videoError]);
+
+  if (videoError) {
+    // Fallback: dark gradient with subtle noise texture
+    return (
+      <div
+        className="absolute inset-0 w-full h-full"
+        style={{
+          background:
+            'linear-gradient(135deg, #0c0b0a 0%, #141312 40%, #0d0d0d 70%, #0c0b0a 100%)',
+        }}
+      >
+        {/* Subtle radial glow */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(243,200,146,0.06) 0%, transparent 70%)',
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div
-      className="absolute inset-0 w-full h-full bg-[#0c0b0a]"
-      style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1540039155732-d68b54f5f8b4?auto=format&fit=crop&q=80&w=2560')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        // Very slow zoom effect
-        animation: 'zoomIn 30s linear infinite alternate',
-      }}
-    >
-      <style>{`
-        @keyframes zoomIn {
-          from { transform: scale(1); }
-          to { transform: scale(1.1); }
-        }
-      `}</style>
-    </div>
+    <video
+      ref={videoRef}
+      key={currentClip}
+      className="hero-video absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+      src={VIDEO_CLIPS[currentClip]}
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{ opacity: fade ? 1 : 0, transition: 'opacity 0.6s ease-in-out' }}
+      onError={() => setVideoError(true)}
+    />
   );
 }
 
@@ -45,8 +85,8 @@ export default function Hero() {
       className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ minHeight: '100svh' }}
     >
-      {/* ── Image background ── */}
-      <ImageBackground />
+      {/* ── Video background ── */}
+      <VideoBackground />
 
       {/* ── Dark overlay ── */}
       <div
