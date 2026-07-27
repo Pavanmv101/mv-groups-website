@@ -151,7 +151,7 @@ export default function Hero() {
         <Reveal delay={0}>
           <div className="flex flex-col sm:flex-row items-center gap-3 mb-10">
             <span
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-medium text-white/90"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[13px] font-semibold text-white/90"
               style={{
                 background: 'rgba(0,0,0,0.7)',
                 border: '1px solid rgba(243,200,146,0.35)',
@@ -162,7 +162,7 @@ export default function Hero() {
               Reliable Events. Reliable Staff.
             </span>
             <span
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-medium text-white/80"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[13px] font-semibold text-white/80"
               style={{
                 background: 'rgba(0,0,0,0.7)',
                 border: '1px solid rgba(255,255,255,0.1)',
@@ -181,7 +181,7 @@ export default function Hero() {
           <div
             className="font-black leading-none select-none"
             style={{
-              fontSize: 'clamp(96px, 16vw, 144px)',
+              fontSize: 'clamp(96px, 16vw, 150px)',
               color: '#f3c892',
               textShadow: '0 0 60px rgba(243,200,146,0.3)',
               letterSpacing: '-0.02em',
@@ -190,8 +190,8 @@ export default function Hero() {
             MV
           </div>
           <div
-            className="font-black text-white mt-0 uppercase"
-            style={{ fontSize: '32px', letterSpacing: '0.3em' }}
+            className="font-black text-white mt-0 tracking-[0.22em]"
+            style={{ fontSize: 'clamp(24px, 5vw, 32px)', letterSpacing: '0.22em' }}
           >
             GROUPS
           </div>

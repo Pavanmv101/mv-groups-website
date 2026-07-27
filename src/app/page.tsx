@@ -28,7 +28,6 @@ export default function HomePage() {
       <AnyRoleSection />
       <WhyChooseUs />
       <JoinCrewSection />
-      {/* TODO: add real testimonials */}
       {/* <Testimonials /> */}
       <FAQSection />
       <CTASection />
