@@ -49,65 +49,73 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col justify-center py-32 px-4 sm:px-6 lg:px-8" style={{ background: '#0c0b0a' }}>
       <div className="max-w-md w-full mx-auto">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600 text-white font-bold text-xl mb-6 shadow-lg shadow-blue-500/30">
+        <div className="text-center mb-10">
+          <Link href="/" className="inline-flex items-center justify-center w-14 h-14 rounded-2xl font-black text-2xl transition-transform hover:scale-105 shadow-xl" style={{ background: '#f3c892', color: '#0c0b0a' }}>
             MV
           </Link>
         </div>
         
-        <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl animate-fade-in-up">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-2">
-              Set New Password
-            </h2>
-            <p className="text-slate-600">
-              Please enter your new password below.
-            </p>
+        <div className="p-8 sm:p-12 rounded-3xl shadow-2xl relative overflow-hidden" style={{ background: '#1a1918', border: '1px solid #282624' }}>
+          <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }}></div>
+          <div className="relative z-10">
+            <div className="mb-10 text-center">
+              <h2 className="text-3xl font-bold mb-3" style={{ color: '#ffffff' }}>
+                Set New Password
+              </h2>
+              <p className="text-lg leading-relaxed" style={{ color: '#a39e98' }}>
+                Please enter your new password below.
+              </p>
+            </div>
+
+            {error && (
+              <div className="mb-8 p-5 rounded-xl border text-sm font-medium text-center" style={{ background: 'rgba(239,68,68,0.1)', borderColor: 'rgba(239,68,68,0.2)', color: '#f87171' }}>
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>New Password</label>
+                <input 
+                  name="password"
+                  type="password"
+                  required
+                  className="w-full px-5 py-4 rounded-xl transition-all outline-none"
+                  style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }}
+                  placeholder="••••••••"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Confirm New Password</label>
+                <input 
+                  name="confirm_password"
+                  type="password"
+                  required
+                  className="w-full px-5 py-4 rounded-xl transition-all outline-none"
+                  style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }}
+                  placeholder="••••••••"
+                />
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-4 rounded-full font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:-translate-y-0.5 shadow-lg"
+                  style={{ background: '#f3c892', color: '#0c0b0a' }}
+                >
+                  {loading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    'Update Password'
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
-
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100">
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">New Password</label>
-              <input 
-                name="password"
-                type="password"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-                placeholder="••••••••"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Confirm New Password</label>
-              <input 
-                name="confirm_password"
-                type="password"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-                placeholder="••••••••"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold flex items-center justify-center gap-2 hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 disabled:opacity-70 mt-2"
-            >
-              {loading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                'Update Password'
-              )}
-            </button>
-          </form>
         </div>
       </div>
     </div>

@@ -14,41 +14,48 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-slate-50 pt-28 pb-20">
+    <div className="min-h-screen pt-28 pb-20" style={{ background: '#0c0b0a' }}>
       
-      {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-          About <span className="gradient-text">{COMPANY.name}</span>
+      {/* ── Hero Section ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+        <h1 
+          className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight"
+          style={{ color: '#ffffff' }}
+        >
+          About <span style={{ color: '#f3c892' }}>{COMPANY.name}</span>
         </h1>
-        <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#a39e98' }}>
           Founded in 2024 in Bengaluru, {COMPANY.name} was born out of a simple vision: to revolutionize 
           how businesses and event organizers source reliable, professional manpower. We believe that 
           the success of any event hinges on the quality of its people.
         </p>
       </section>
 
-      {/* Meet the Founder */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col md:flex-row items-center gap-10">
+      {/* ── Meet the Founder ── */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
+        <div 
+          className="rounded-3xl p-8 md:p-14 flex flex-col md:flex-row items-center gap-10 md:gap-16"
+          style={{ background: '#141312', border: '1px solid #282624' }}
+        >
           <div className="flex-shrink-0 relative">
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white shadow-xl relative">
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden relative" style={{ border: '2px solid #282624' }}>
               <Image 
                 src="/images/founder.jpg" 
                 alt="Pavan M V - Founder & Director"
                 fill
-                className="object-cover object-top"
-                sizes="(max-width: 768px) 192px, 224px"
+                className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
+                sizes="(max-width: 768px) 192px, 256px"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-full blur-2xl -z-10"></div>
+            {/* Subtle glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full blur-3xl -z-10" style={{ background: 'rgba(243,200,146,0.1)' }}></div>
           </div>
           
           <div className="flex-1 text-center md:text-left">
-            <h2 className="text-3xl font-bold text-slate-900 mb-1">Pavan M V</h2>
-            <p className="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-4">Founder & Director</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ color: '#ffffff' }}>Pavan M V</h2>
+            <p className="font-semibold tracking-[0.15em] uppercase text-xs mb-6" style={{ color: '#f3c892' }}>Founder & Director</p>
             
-            <p className="text-slate-600 leading-relaxed mb-6">
+            <p className="leading-relaxed mb-8 text-base md:text-lg" style={{ color: '#a39e98' }}>
               With a strong background in Information Science & Engineering, Pavan brings a unique, tech-driven approach to the event staffing industry. Drawing from hands-on experience at premier industry events like Google I/O Connect and the JPMorganChase Technology Innovation Forum, his vision for MV Groups is to seamlessly bridge the gap between world-class event operations and reliable, professional manpower across Karnataka.
             </p>
             
@@ -56,110 +63,103 @@ export default function AboutPage() {
               href="https://www.linkedin.com/in/pavan-mv-815051286/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 text-slate-500 hover:bg-[#0A66C2] hover:text-white transition-colors duration-300"
-              aria-label="LinkedIn Profile"
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-semibold transition-all hover:-translate-y-0.5"
+              style={{ background: '#1a1918', color: '#ffffff', border: '1px solid #282624' }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                fill="currentColor"
                 className="w-5 h-5"
+                style={{ color: '#0A66C2' }}
               >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect width="4" height="12" x="2" y="9" />
-                <circle cx="4" cy="4" r="2" />
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
+              Connect on LinkedIn
             </a>
           </div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="bg-white p-10 rounded-3xl shadow-lg shadow-slate-200/50 border border-slate-100">
-            <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
-              <Target className="w-7 h-7" />
+      {/* ── Mission & Vision ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {/* Mission */}
+          <div className="p-10 lg:p-14 rounded-3xl" style={{ background: '#1a1918', border: '1px solid #282624' }}>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8" style={{ background: 'rgba(243,200,146,0.1)' }}>
+              <Target className="w-7 h-7" style={{ color: '#f3c892' }} />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Our Mission</h2>
-            <p className="text-slate-600 leading-relaxed">
+            <h2 className="text-3xl font-bold mb-5" style={{ color: '#ffffff' }}>Our Mission</h2>
+            <p className="leading-relaxed text-lg" style={{ color: '#a39e98' }}>
               To provide unparalleled staffing solutions that empower our clients to execute flawless events. 
               We strive to bridge the gap between talented individuals seeking opportunities and organizations 
               requiring dependable manpower, fostering growth and excellence in the Karnataka event industry.
             </p>
           </div>
           
-          <div className="bg-white p-10 rounded-3xl shadow-lg shadow-slate-200/50 border border-slate-100 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-50 pointer-events-none"></div>
-            <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 relative z-10">
-              <Zap className="w-7 h-7" />
+          {/* Vision */}
+          <div className="p-10 lg:p-14 rounded-3xl relative overflow-hidden" style={{ background: '#1a1918', border: '1px solid #282624' }}>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 relative z-10" style={{ background: 'rgba(243,200,146,0.1)' }}>
+              <Zap className="w-7 h-7" style={{ color: '#f3c892' }} />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 relative z-10">Our Vision</h2>
-            <p className="text-slate-600 leading-relaxed relative z-10">
+            <h2 className="text-3xl font-bold mb-5 relative z-10" style={{ color: '#ffffff' }}>Our Vision</h2>
+            <p className="leading-relaxed text-lg relative z-10" style={{ color: '#a39e98' }}>
               To be the most trusted and preferred staffing partner across South India by 2028. 
               We envision a future where finding the right event crew is seamless, and where every 
               brand ambassador or logistics coordinator we deploy elevates the client&apos;s brand experience.
             </p>
+            {/* Soft decorative blur */}
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }}></div>
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-slate-900">Our Core Values</h2>
-          <p className="text-slate-600 mt-3">The principles that guide everything we do.</p>
+      {/* ── Core Values ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#ffffff' }}>Our Core Values</h2>
+          <p className="text-lg" style={{ color: '#66625d' }}>The principles that guide everything we do.</p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all text-center">
-            <Shield className="w-10 h-10 text-blue-500 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Reliability</h3>
-            <p className="text-sm text-slate-600">We show up on time, every time, ready to work.</p>
-          </div>
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-indigo-300 hover:shadow-lg transition-all text-center">
-            <Users className="w-10 h-10 text-indigo-500 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Professionalism</h3>
-            <p className="text-sm text-slate-600">Our staff is trained to represent your brand with the utmost class.</p>
-          </div>
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-purple-300 hover:shadow-lg transition-all text-center">
-            <Award className="w-10 h-10 text-purple-500 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Excellence</h3>
-            <p className="text-sm text-slate-600">We don&apos;t just meet expectations; we strive to exceed them.</p>
-          </div>
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-lg transition-all text-center">
-            <Zap className="w-10 h-10 text-emerald-500 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Flexibility</h3>
-            <p className="text-sm text-slate-600">Adaptable solutions to meet the dynamic needs of any event.</p>
-          </div>
+          {[
+            { icon: Shield, title: 'Reliability', desc: 'We show up on time, every time, ready to work.' },
+            { icon: Users, title: 'Professionalism', desc: 'Our staff is trained to represent your brand with the utmost class.' },
+            { icon: Award, title: 'Excellence', desc: 'We don\'t just meet expectations; we strive to exceed them.' },
+            { icon: Zap, title: 'Flexibility', desc: 'Adaptable solutions to meet the dynamic needs of any event.' },
+          ].map((val) => (
+            <div key={val.title} className="p-8 rounded-2xl text-center group transition-all duration-300" style={{ background: '#141312', border: '1px solid #282624' }}>
+              <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-6 transition-transform group-hover:scale-110" style={{ background: 'rgba(243,200,146,0.05)' }}>
+                <val.icon className="w-8 h-8" style={{ color: '#f3c892' }} />
+              </div>
+              <h3 className="text-xl font-bold mb-3" style={{ color: '#ffffff' }}>{val.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>{val.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="gradient-navy rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full blur-[100px] opacity-20 -mr-20 -mt-20"></div>
+      {/* ── CTA Section ── */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-3xl p-10 md:p-16 text-center relative overflow-hidden" style={{ background: '#141312', border: '1px solid #282624' }}>
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-[120px] -mr-20 -mt-20 pointer-events-none" style={{ background: 'rgba(243,200,146,0.08)' }}></div>
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Work with Us?</h2>
-            <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ color: '#ffffff' }}>Ready to Work with Us?</h2>
+            <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto" style={{ color: '#a39e98' }}>
               Whether you are looking to hire a reliable crew for your next big event, or you are looking to join our growing roster of professionals.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
               <Link 
                 href="/booking" 
-                className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl transition-colors w-full sm:w-auto"
+                className="w-full sm:w-auto px-8 py-4 font-bold rounded-full transition-all hover:opacity-90 text-center"
+                style={{ background: '#f3c892', color: '#0c0b0a' }}
               >
                 Request a Quote
               </Link>
               <Link 
                 href="/careers" 
-                className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 w-full sm:w-auto"
+                className="w-full sm:w-auto px-8 py-4 font-bold rounded-full transition-all flex items-center justify-center gap-2 hover:bg-white/5"
+                style={{ background: 'transparent', color: '#ffffff', border: '1px solid #282624' }}
               >
                 Join Our Team
                 <ArrowRight className="w-5 h-5" />

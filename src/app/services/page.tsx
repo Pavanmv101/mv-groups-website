@@ -22,7 +22,6 @@ import {
   Trophy,
 } from 'lucide-react';
 import { SERVICES, STATS } from '@/lib/constants';
-import SectionHeading from '@/components/ui/SectionHeading';
 
 /* ------------------------------------------------------------------ */
 /*  Animated entrance hook                                             */
@@ -75,48 +74,45 @@ const SERVICE_ICON_MAP: Record<string, typeof Users> = {
   event_logistics: Truck,
 };
 
-/* ------------------------------------------------------------------ */
-/*  Accent color map per service for visual variety                     */
-/* ------------------------------------------------------------------ */
-const ACCENT = [
-  { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-200', gradient: 'from-blue-500 to-blue-600' },
-  { bg: 'bg-violet-50', text: 'text-violet-600', border: 'border-violet-200', gradient: 'from-violet-500 to-violet-600' },
-  { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200', gradient: 'from-emerald-500 to-emerald-600' },
-  { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200', gradient: 'from-amber-500 to-amber-600' },
-];
-
 /* ================================================================== */
 /*  Page                                                               */
 /* ================================================================== */
 export default function ServicesPage() {
   return (
-    <>
+    <div style={{ background: '#0c0b0a', minHeight: '100vh' }}>
       {/* ───── Hero Banner ───── */}
-      <section className="relative gradient-navy hero-pattern pt-32 pb-16 lg:pt-40 lg:pb-20 overflow-hidden">
-        {/* decorative blobs */}
-        <div className="absolute top-10 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-10 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl" />
+      <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden border-b" style={{ borderBottomColor: '#1a1918' }}>
+        {/* decorative subtle gold blurs */}
+        <div className="absolute top-10 right-0 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }} />
+        <div className="absolute bottom-0 left-10 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.03)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm font-medium mb-6 animate-fade-in">
+          <span 
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-[0.15em] uppercase mb-8 animate-fade-in"
+            style={{ background: 'rgba(243,200,146,0.1)', color: '#f3c892', border: '1px solid rgba(243,200,146,0.2)' }}
+          >
             Our Services
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up delay-100">
-            Comprehensive Staffing &{' '}
-            <span className="gradient-text">Event Solutions</span>
+          <h1 
+            className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight mb-8 animate-fade-in-up delay-100"
+            style={{ color: '#ffffff', letterSpacing: '-0.02em' }}
+          >
+            Comprehensive Staffing &<br />
+            <span style={{ color: '#f3c892' }}>Event Solutions</span>
           </h1>
-          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+          <p 
+            className="text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200"
+            style={{ color: '#a39e98' }}
+          >
             Whether you need a single specialist or a 500‑strong workforce, MV
             Groups delivers tailored manpower supply and end‑to‑end event
             management across Karnataka.
           </p>
         </div>
-
       </section>
 
       {/* ───── Service Detail Sections ───── */}
       {SERVICES.map((service, idx) => {
-        const accent = ACCENT[idx % ACCENT.length];
         const isReversed = idx % 2 === 1;
         const Icon = SERVICE_ICON_MAP[service.id] ?? Users;
 
@@ -124,7 +120,6 @@ export default function ServicesPage() {
           <ServiceDetailSection
             key={service.id}
             service={service}
-            accent={accent}
             Icon={Icon}
             reversed={isReversed}
             index={idx}
@@ -140,7 +135,7 @@ export default function ServicesPage() {
 
       {/* ───── CTA ───── */}
       <CTABanner />
-    </>
+    </div>
   );
 }
 
@@ -149,7 +144,6 @@ export default function ServicesPage() {
 /* ================================================================== */
 interface ServiceDetailProps {
   service: (typeof SERVICES)[number];
-  accent: (typeof ACCENT)[number];
   Icon: typeof Users;
   reversed: boolean;
   index: number;
@@ -157,7 +151,6 @@ interface ServiceDetailProps {
 
 function ServiceDetailSection({
   service,
-  accent,
   Icon,
   reversed,
   index,
@@ -168,50 +161,51 @@ function ServiceDetailSection({
     <section
       ref={ref}
       id={service.id}
-      className={`py-20 lg:py-28 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}
+      className={`py-20 lg:py-28`}
+      style={{ background: index % 2 === 0 ? '#141312' : '#0c0b0a' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
             reversed ? 'lg:flex-row-reverse' : ''
           }`}
-          style={{ direction: reversed ? 'rtl' : 'ltr' }}
         >
           {/* ── Visual card ── */}
           <div
-            className={`${
-              visible ? 'animate-fade-in-up' : 'opacity-0'
-            }`}
-            style={{ direction: 'ltr' }}
+            className={`${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
           >
             <div
-              className={`relative rounded-3xl ${accent.bg} border ${accent.border} p-10 lg:p-14 overflow-hidden`}
+              className={`relative rounded-3xl p-10 lg:p-14 overflow-hidden border`}
+              style={{ background: '#1a1918', borderColor: '#282624' }}
             >
-              {/* Gradient corner accent */}
+              {/* Subtle accent glow inside card */}
               <div
-                className={`absolute -top-10 -right-10 w-40 h-40 rounded-full bg-gradient-to-br ${accent.gradient} opacity-10 blur-2xl`}
+                className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-[80px] pointer-events-none"
+                style={{ background: 'rgba(243,200,146,0.1)' }}
               />
 
               <div
-                className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${accent.gradient} flex items-center justify-center mb-8 shadow-lg`}
+                className="w-20 h-20 rounded-2xl flex items-center justify-center mb-8 shadow-lg"
+                style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.2)' }}
               >
-                <Icon className="w-10 h-10 text-white" />
+                <Icon className="w-10 h-10" style={{ color: '#f3c892' }} />
               </div>
 
-              <h2 className="text-3xl lg:text-4xl font-bold text-navy-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: '#ffffff' }}>
                 {service.title}
               </h2>
 
-              <p className="text-slate-600 text-lg leading-relaxed">
+              <p className="text-lg leading-relaxed" style={{ color: '#a39e98' }}>
                 {service.description}
               </p>
 
               {/* Decorative dots */}
-              <div className="absolute bottom-6 right-6 grid grid-cols-3 gap-1.5 opacity-20">
+              <div className="absolute bottom-6 right-6 grid grid-cols-3 gap-1.5 opacity-30">
                 {Array.from({ length: 9 }).map((_, i) => (
                   <div
                     key={i}
-                    className={`w-2 h-2 rounded-full bg-gradient-to-br ${accent.gradient}`}
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: '#f3c892' }}
                   />
                 ))}
               </div>
@@ -220,43 +214,41 @@ function ServiceDetailSection({
 
           {/* ── Features list ── */}
           <div
-            className={`space-y-6 ${
-              visible ? 'animate-fade-in-up delay-200' : 'opacity-0'
-            }`}
-            style={{ direction: 'ltr' }}
+            className={`space-y-8 ${visible ? 'animate-fade-in-up delay-200' : 'opacity-0'}`}
           >
             <span
-              className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold ${accent.bg} ${accent.text}`}
+              className="inline-block px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
+              style={{ background: '#1a1918', color: '#66625d', border: '1px solid #282624' }}
             >
               Key Capabilities
             </span>
 
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               {service.features.map((feature, fIdx) => (
-                <li
-                  key={fIdx}
-                  className="flex items-start gap-3 group"
-                >
+                <li key={fIdx} className="flex items-start gap-4 group">
                   <CheckCircle2
-                    className={`w-6 h-6 ${accent.text} shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}
+                    className="w-6 h-6 shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
+                    style={{ color: '#f3c892' }}
                   />
-                  <span className="text-slate-700 text-lg leading-snug">
+                  <span className="text-lg leading-snug" style={{ color: '#ffffff' }}>
                     {feature}
                   </span>
                 </li>
               ))}
             </ul>
 
-            <div className="pt-4 flex flex-wrap gap-4">
+            <div className="pt-6 flex flex-wrap gap-4">
               <Link
                 href={`/services/${service.id}`}
-                className={`inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-white border-2 ${accent.border} ${accent.text} font-semibold text-base hover:bg-slate-50 transition-all`}
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm transition-colors hover:bg-white/5"
+                style={{ border: '1px solid #282624', color: '#ffffff', background: 'transparent' }}
               >
                 Learn More
               </Link>
               <Link
                 href={`/booking?service=${service.id}`}
-                className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r ${accent.gradient} text-white font-semibold text-base hover:opacity-90 transition-all shadow-lg hover:-translate-y-0.5`}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm transition-transform hover:-translate-y-0.5 shadow-lg"
+                style={{ background: '#f3c892', color: '#0c0b0a' }}
               >
                 Request a Quote
                 <ArrowRight className="w-5 h-5" />
@@ -276,31 +268,36 @@ function IndustriesSection() {
   const { ref, visible } = useInView();
 
   return (
-    <section ref={ref} className="py-24 lg:py-32 gradient-navy">
+    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#0c0b0a', borderTop: '1px solid #1a1918' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          label="Industries"
-          title="Serving Diverse Sectors"
-          description="Our staffing and event solutions span across major industry verticals. No matter your domain, we have the talent and expertise to deliver."
-          light
-        />
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold tracking-[0.15em] uppercase mb-4 block" style={{ color: '#f3c892' }}>Industries</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ color: '#ffffff' }}>Serving Diverse Sectors</h2>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#a39e98' }}>
+            Our staffing and event solutions span across major industry verticals. No matter your domain, we have the talent and expertise to deliver.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {INDUSTRIES.map((ind, i) => {
             const Icon = ind.icon;
             return (
               <div
                 key={ind.label}
-                className={`glass rounded-2xl p-6 text-center group hover:bg-white/15 transition-all duration-300 ${
-                  visible
-                    ? `animate-fade-in-up delay-${(i + 1) * 100}`
-                    : 'opacity-0'
+                className={`rounded-2xl p-6 text-center group transition-all duration-300 ${
+                  visible ? `animate-fade-in-up delay-${Math.min(500, (i + 1) * 50)}` : 'opacity-0'
                 }`}
+                style={{ background: '#141312', border: '1px solid #282624' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(243,200,146,0.3)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#282624'; }}
               >
-                <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500/30 transition-colors">
-                  <Icon className="w-7 h-7 text-blue-300 group-hover:text-blue-200 transition-colors" />
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors"
+                  style={{ background: 'rgba(243,200,146,0.05)' }}
+                >
+                  <Icon className="w-6 h-6 transition-colors" style={{ color: '#f3c892' }} />
                 </div>
-                <span className="text-white text-sm font-medium">{ind.label}</span>
+                <span className="text-sm font-medium" style={{ color: '#ffffff' }}>{ind.label}</span>
               </div>
             );
           })}
@@ -317,23 +314,19 @@ function StatsBand() {
   const { ref, visible } = useInView();
 
   return (
-    <section ref={ref} className="py-16 bg-white border-y border-slate-100">
+    <section ref={ref} className="py-20" style={{ background: '#141312', borderTop: '1px solid #1a1918', borderBottom: '1px solid #1a1918' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
           {STATS.map((stat, i) => (
             <div
               key={stat.label}
-              className={`text-center ${
-                visible
-                  ? `animate-fade-in-up delay-${(i + 1) * 100}`
-                  : 'opacity-0'
-              }`}
+              className={`text-center ${visible ? `animate-fade-in-up delay-${(i + 1) * 100}` : 'opacity-0'}`}
             >
-              <div className="text-4xl md:text-5xl font-bold text-navy-900 mb-1">
+              <div className="text-4xl md:text-6xl font-black mb-2" style={{ color: '#f3c892' }}>
                 {stat.value.toLocaleString('en-IN')}
                 {stat.suffix}
               </div>
-              <div className="text-slate-500 text-sm font-medium">{stat.label}</div>
+              <div className="text-xs font-bold tracking-[0.15em] uppercase" style={{ color: '#66625d' }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -347,26 +340,28 @@ function StatsBand() {
 /* ================================================================== */
 function CTABanner() {
   return (
-    <section className="py-24 lg:py-32 bg-slate-50">
+    <section className="py-24 lg:py-32" style={{ background: '#0c0b0a' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 mb-6 leading-tight">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight" style={{ color: '#ffffff' }}>
           Ready to Scale Your Team?
         </h2>
-        <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10">
+        <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12" style={{ color: '#a39e98' }}>
           Tell us what you need and we&apos;ll put together a custom proposal
           within 24 hours. No obligation, no hidden fees.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
           <Link
             href="/booking"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-blue-500 text-white font-semibold text-lg hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5"
+            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-10 py-4 rounded-full font-bold text-sm transition-transform hover:-translate-y-0.5 shadow-lg"
+            style={{ background: '#f3c892', color: '#0c0b0a' }}
           >
             Request a Quote
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border-2 border-navy-800 text-navy-800 font-semibold text-lg hover:bg-navy-800 hover:text-white transition-all hover:-translate-y-0.5"
+            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-10 py-4 rounded-full font-bold text-sm transition-colors hover:bg-white/5"
+            style={{ border: '1px solid #282624', color: '#ffffff', background: 'transparent' }}
           >
             Contact Us
           </Link>

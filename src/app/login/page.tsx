@@ -37,7 +37,7 @@ function OtpInput({ value, onChange }: { value: string; onChange: (val: string) 
   }
 
   return (
-    <div className="flex gap-3 justify-center">
+    <div className="flex gap-2 sm:gap-3 justify-center">
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <input
           key={i}
@@ -49,22 +49,28 @@ function OtpInput({ value, onChange }: { value: string; onChange: (val: string) 
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
           onPaste={i === 0 ? handlePaste : undefined}
-          className="w-12 h-14 text-center text-xl font-bold border-2 border-slate-200 rounded-xl bg-slate-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all outline-none"
+          className="w-10 h-12 sm:w-12 sm:h-14 text-center text-xl font-bold rounded-xl transition-all outline-none focus:border-transparent focus:ring-2"
+          style={{ 
+            background: '#0c0b0a', 
+            border: '1px solid #282624', 
+            color: '#ffffff',
+            boxShadow: '0 0 0 0px rgba(243,200,146,0.2)' 
+          }}
         />
       ))}
     </div>
   )
 }
 
-// Animated tick component
+// Animated tick component adapted for dark theme
 const AnimatedTick = ({ title, subtitle }: { title: string; subtitle: string }) => (
-  <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
-    <div className="mx-auto mb-6 w-24 h-24 relative">
-      <svg className="w-24 h-24" viewBox="0 0 100 100">
+  <div className="p-8 sm:p-12 rounded-3xl shadow-2xl text-center border" style={{ background: '#1a1918', borderColor: '#282624' }}>
+    <div className="mx-auto mb-8 w-24 h-24 relative flex items-center justify-center rounded-full" style={{ background: 'rgba(34,197,94,0.1)' }}>
+      <svg className="w-12 h-12" viewBox="0 0 100 100">
         <circle
           cx="50" cy="50" r="45"
           fill="none"
-          stroke="#10b981"
+          stroke="#22c55e"
           strokeWidth="3"
           strokeDasharray="283"
           strokeDashoffset="283"
@@ -73,8 +79,8 @@ const AnimatedTick = ({ title, subtitle }: { title: string; subtitle: string }) 
         <path
           d="M30 52 L44 66 L70 38"
           fill="none"
-          stroke="#10b981"
-          strokeWidth="4"
+          stroke="#22c55e"
+          strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeDasharray="60"
@@ -83,8 +89,8 @@ const AnimatedTick = ({ title, subtitle }: { title: string; subtitle: string }) 
         />
       </svg>
     </div>
-    <h3 className="text-xl font-bold text-slate-900 mb-2">{title}</h3>
-    <p className="text-slate-500">{subtitle}</p>
+    <h3 className="text-2xl font-bold mb-3" style={{ color: '#ffffff' }}>{title}</h3>
+    <p className="text-lg" style={{ color: '#a39e98' }}>{subtitle}</p>
   </div>
 )
 
@@ -97,7 +103,6 @@ function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
-  const [failedAttempts, setFailedAttempts] = useState(0)
   const [lockedUntil, setLockedUntil] = useState<number | null>(null)
   const [requireCaptcha, setRequireCaptcha] = useState(false)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
@@ -238,8 +243,6 @@ function LoginForm() {
     }
   }
 
-
-
   // Login success screen
   if (loginSuccess) {
     return <AnimatedTick title="Login Successful!" subtitle="Redirecting you to your dashboard..." />
@@ -253,213 +256,230 @@ function LoginForm() {
   // OTP verification step
   if (otpStep) {
     return (
-      <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl animate-fade-in-up">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Mail className="w-8 h-8 text-blue-600" />
+      <div className="p-8 sm:p-12 rounded-3xl shadow-2xl relative overflow-hidden" style={{ background: '#1a1918', border: '1px solid #282624' }}>
+        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }}></div>
+        <div className="relative z-10">
+          <div className="text-center mb-10">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(243,200,146,0.1)' }}>
+              <Mail className="w-8 h-8" style={{ color: '#f3c892' }} />
+            </div>
+            <h2 className="text-3xl font-bold mb-3" style={{ color: '#ffffff' }}>Verify Your Email</h2>
+            <p className="text-lg leading-relaxed" style={{ color: '#a39e98' }}>
+              We sent a 6-digit code to<br />
+              <span className="font-bold" style={{ color: '#ffffff' }}>{otpEmail}</span>
+            </p>
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Verify Your Email</h2>
-          <p className="text-slate-600">
-            We sent a 6-digit code to<br />
-            <span className="font-semibold text-slate-800">{otpEmail}</span>
-          </p>
-        </div>
 
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100">
-            {error}
-          </div>
-        )}
-
-        <div className="mb-6">
-          <OtpInput value={otpCode} onChange={setOtpCode} />
-        </div>
-
-        <button
-          onClick={handleVerifyOtp}
-          disabled={loading || otpCode.length !== 6}
-          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold flex items-center justify-center gap-2 hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 disabled:opacity-70"
-        >
-          {loading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            <>
-              Verify Email
-              <ArrowRight className="w-4 h-4" />
-            </>
+          {error && (
+            <div className="mb-8 p-5 rounded-xl border text-sm font-medium text-center" style={{ background: 'rgba(239,68,68,0.1)', borderColor: 'rgba(239,68,68,0.2)', color: '#f87171' }}>
+              {error}
+            </div>
           )}
-        </button>
 
-        <div className="mt-6 text-center">
+          <div className="mb-8">
+            <OtpInput value={otpCode} onChange={setOtpCode} />
+          </div>
+
           <button
-            onClick={handleResendOtp}
-            disabled={resending}
-            className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1.5 mx-auto transition-colors"
+            onClick={handleVerifyOtp}
+            disabled={loading || otpCode.length !== 6}
+            className="w-full py-4 rounded-full font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2 group hover:-translate-y-0.5 shadow-lg"
+            style={{ background: '#f3c892', color: '#0c0b0a' }}
           >
-            <RotateCcw className={`w-3.5 h-3.5 ${resending ? 'animate-spin' : ''}`} />
-            {resending ? 'Sending...' : "Didn't get the code? Resend"}
+            {loading ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <>
+                Verify Email
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
           </button>
-        </div>
 
-        <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-slate-400">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span>Check your spam folder if you don&apos;t see the email</span>
+          <div className="mt-8 text-center">
+            <button
+              onClick={handleResendOtp}
+              disabled={resending}
+              className="text-sm font-bold flex items-center justify-center gap-2 mx-auto transition-opacity hover:opacity-80"
+              style={{ color: '#f3c892' }}
+            >
+              <RotateCcw className={`w-4 h-4 ${resending ? 'animate-spin' : ''}`} />
+              {resending ? 'Sending...' : "Didn't get the code? Resend"}
+            </button>
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-2 text-xs" style={{ color: '#66625d' }}>
+            <ShieldCheck className="w-4 h-4" />
+            <span>Check your spam folder if you don&apos;t see the email</span>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="bg-white p-8 sm:p-12 rounded-2xl shadow-xl animate-fade-in-up">
-      <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">
-          {isLogin ? 'Welcome Back' : 'Create an Account'}
-        </h2>
-        <p className="text-slate-600">
-          {isLogin 
-            ? 'Sign in to access your dashboard and manage bookings.'
-            : 'Sign up to request quotes and track your bookings.'}
-        </p>
-      </div>
-
-      {message && (
-        <div className="mb-6 p-4 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-medium border border-emerald-100">
-          {message}
+    <div className="p-8 sm:p-12 rounded-3xl shadow-2xl relative overflow-hidden" style={{ background: '#1a1918', border: '1px solid #282624' }}>
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }}></div>
+      <div className="relative z-10">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-bold mb-3" style={{ color: '#ffffff' }}>
+            {isLogin ? 'Welcome Back' : 'Create an Account'}
+          </h2>
+          <p className="text-lg" style={{ color: '#a39e98' }}>
+            {isLogin 
+              ? 'Sign in to access your dashboard and manage bookings.'
+              : 'Sign up to request quotes and track your bookings.'}
+          </p>
         </div>
-      )}
 
-      {error && (
-        <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-5">
-        {!isLogin && (
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-            <input 
-              name="full_name"
-              type="text"
-              required
-              className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-              placeholder="John Doe"
-            />
+        {message && (
+          <div className="mb-8 p-5 rounded-xl border text-sm font-medium" style={{ background: 'rgba(34,197,94,0.1)', borderColor: 'rgba(34,197,94,0.2)', color: '#4ade80' }}>
+            {message}
           </div>
         )}
 
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-          <input 
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white"
-            placeholder="you@company.com"
-          />
-        </div>
+        {error && (
+          <div className="mb-8 p-5 rounded-xl border text-sm font-medium" style={{ background: 'rgba(239,68,68,0.1)', borderColor: 'rgba(239,68,68,0.2)', color: '#f87171' }}>
+            {error}
+          </div>
+        )}
 
-        <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="block text-sm font-medium text-slate-700">Password</label>
-            {isLogin && (
-              <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                Forgot password?
-              </Link>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {!isLogin && (
+            <div>
+              <label className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Full Name</label>
+              <input 
+                name="full_name"
+                type="text"
+                required
+                className="w-full px-5 py-4 rounded-xl transition-all outline-none"
+                style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }}
+                placeholder="John Doe"
+              />
+            </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Email Address</label>
+            <input 
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              className="w-full px-5 py-4 rounded-xl transition-all outline-none"
+              style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }}
+              placeholder="you@company.com"
+            />
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-semibold" style={{ color: '#a39e98' }}>Password</label>
+              {isLogin && (
+                <Link href="/forgot-password" className="text-sm font-bold hover:opacity-80 transition-opacity" style={{ color: '#f3c892' }}>
+                  Forgot password?
+                </Link>
+              )}
+            </div>
+            <div className="relative">
+              <input 
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                required
+                minLength={8}
+                autoComplete={isLogin ? 'current-password' : 'new-password'}
+                className="w-full px-5 py-4 rounded-xl transition-all outline-none pr-12"
+                style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }}
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity p-1"
+                style={{ color: '#66625d', opacity: 0.7 }}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
+            {!isLogin && (
+              <p className="text-xs mt-3" style={{ color: '#66625d' }}>Min 8 characters with uppercase, lowercase, and a number.</p>
             )}
           </div>
-          <div className="relative">
-            <input 
-              name="password"
-              type={showPassword ? 'text' : 'password'}
-              required
-              minLength={8}
-              autoComplete={isLogin ? 'current-password' : 'new-password'}
-              className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors bg-slate-50 focus:bg-white pr-12"
-              placeholder="••••••••"
-            />
+
+          {requireCaptcha && (
+            <div className="mt-6 flex justify-center">
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+                onSuccess={(token) => setTurnstileToken(token)}
+              />
+            </div>
+          )}
+
+          <div className="pt-2">
             <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1"
-              tabIndex={-1}
+              type="submit"
+              disabled={loading || lockedUntil !== null}
+              className="w-full py-4 rounded-full font-bold transition-all disabled:opacity-50 flex items-center justify-center gap-2 group hover:-translate-y-0.5 shadow-lg"
+              style={{ background: '#f3c892', color: '#0c0b0a' }}
             >
-              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              {loading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  {isLogin ? 'Sign In' : 'Create Account'}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </button>
           </div>
-          {!isLogin && (
-            <p className="text-xs text-slate-400 mt-1.5">Min 8 characters with uppercase, lowercase, and a number.</p>
-          )}
+        </form>
+
+        <div className="mt-8 flex items-center justify-between text-sm">
+          <div className="w-full h-px" style={{ background: '#282624' }}></div>
+          <span className="px-4 font-semibold" style={{ color: '#66625d', background: '#1a1918' }}>OR</span>
+          <div className="w-full h-px" style={{ background: '#282624' }}></div>
         </div>
 
-        {requireCaptcha && (
-          <div className="mt-4 flex justify-center">
-            <Turnstile
-              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
-              onSuccess={(token) => setTurnstileToken(token)}
-            />
-          </div>
-        )}
+        <div className="mt-8">
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            disabled={googleLoading || loading || lockedUntil !== null}
+            className="w-full py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all hover:opacity-90 disabled:opacity-50 border"
+            style={{ background: '#ffffff', color: '#000000', borderColor: '#ffffff' }}
+          >
+            {googleLoading ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <>
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                </svg>
+                Continue with Google
+              </>
+            )}
+          </button>
+        </div>
 
-        <button
-          type="submit"
-          disabled={loading || lockedUntil !== null}
-          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold flex items-center justify-center gap-2 hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 disabled:opacity-70 mt-2"
-        >
-          {loading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            <>
-              {isLogin ? 'Sign In' : 'Create Account'}
-              <ArrowRight className="w-4 h-4" />
-            </>
-          )}
-        </button>
-      </form>
+        <div className="mt-8 flex items-center justify-center gap-2 text-xs" style={{ color: '#66625d' }}>
+          <ShieldCheck className="w-4 h-4" />
+          <span>Secured with end-to-end encryption</span>
+        </div>
 
-      <div className="mt-6 flex items-center justify-between text-sm text-slate-500">
-        <div className="w-full h-px bg-slate-200"></div>
-        <span className="px-3 bg-white text-slate-400">or</span>
-        <div className="w-full h-px bg-slate-200"></div>
-      </div>
-
-      <div className="mt-6">
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          disabled={googleLoading || loading || lockedUntil !== null}
-          className="w-full py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold flex items-center justify-center gap-3 hover:bg-slate-50 transition-colors shadow-sm disabled:opacity-70"
-        >
-          {googleLoading ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            <>
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-              </svg>
-              Continue with Google
-            </>
-          )}
-        </button>
-      </div>
-
-      <div className="mt-6 flex items-center justify-center gap-1.5 text-xs text-slate-400">
-        <ShieldCheck className="w-3.5 h-3.5" />
-        <span>Secured with end-to-end encryption</span>
-      </div>
-
-      <div className="mt-6 text-center text-sm text-slate-600">
-        {isLogin ? "Don't have an account? " : "Already have an account? "}
-        <button 
-          onClick={() => { setIsLogin(!isLogin); setError(null); }}
-          className="text-blue-600 font-semibold hover:underline"
-        >
-          {isLogin ? 'Sign Up' : 'Sign In'}
-        </button>
+        <div className="mt-8 text-center text-sm font-medium" style={{ color: '#a39e98' }}>
+          {isLogin ? "Don't have an account? " : "Already have an account? "}
+          <button 
+            onClick={() => { setIsLogin(!isLogin); setError(null); }}
+            className="font-bold hover:underline"
+            style={{ color: '#f3c892' }}
+          >
+            {isLogin ? 'Sign Up' : 'Sign In'}
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -467,9 +487,9 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-20">
+    <div className="min-h-screen flex flex-col justify-center py-32" style={{ background: '#0c0b0a' }}>
       <div className="max-w-md w-full mx-auto px-4">
-        <Suspense fallback={<div className="text-center"><Loader2 className="w-8 h-8 animate-spin mx-auto text-blue-500" /></div>}>
+        <Suspense fallback={<div className="text-center"><Loader2 className="w-10 h-10 animate-spin mx-auto" style={{ color: '#f3c892' }} /></div>}>
           <LoginForm />
         </Suspense>
       </div>
