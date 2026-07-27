@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import PageTransition from '@/components/animations/PageTransition';
-import CustomCursor from '@/components/CustomCursor';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -92,7 +91,6 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <CustomCursor />
         <Navbar />
         <PageTransition>
           <main className="flex-grow">{children}</main>
