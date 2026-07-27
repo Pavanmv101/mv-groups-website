@@ -12,14 +12,14 @@ export default function JoinCrewSection() {
   return (
     <section
       className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ background: '#0a0a0a' }}
+      style={{ background: '#0c0b0a' }}
     >
       {/* Subtle background texture */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(243,200,146,0.04) 0%, transparent 70%)',
         }}
       />
 
@@ -30,7 +30,7 @@ export default function JoinCrewSection() {
           <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
             Join the MV Groups Crew
           </h2>
-          <p className="text-sm max-w-md mx-auto" style={{ color: '#999999' }}>
+          <p className="text-sm max-w-md mx-auto" style={{ color: '#a39e98' }}>
             Work the biggest events across Karnataka. Get trained, get paid, and build a real career
             in live events.
           </p>
@@ -43,18 +43,18 @@ export default function JoinCrewSection() {
               key={b.title}
               className="rounded-xl p-6 text-center transition-all duration-300"
               style={{
-                background: '#1a1a1a',
-                border: '1px solid #2a2a2a',
+                background: '#1a1918',
+                border: '1px solid #282624',
               }}
             >
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"
-                style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)' }}
+                style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.25)' }}
               >
                 {b.icon}
               </div>
               <h3 className="font-bold text-white text-sm mb-1">{b.title}</h3>
-              <p className="text-xs" style={{ color: '#555555' }}>{b.desc}</p>
+              <p className="text-xs" style={{ color: '#66625d' }}>{b.desc}</p>
             </div>
           ))}
         </div>
@@ -65,7 +65,7 @@ export default function JoinCrewSection() {
             Fill Out Application Form
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <p className="text-xs" style={{ color: '#555555' }}>
+          <p className="text-xs" style={{ color: '#66625d' }}>
             Takes under 3 minutes · No prior experience needed
           </p>
         </div>

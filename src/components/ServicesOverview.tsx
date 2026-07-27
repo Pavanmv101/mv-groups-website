@@ -14,7 +14,7 @@ const SERVICES = [
     icon: Heart,
     title: 'Weddings',
     desc: 'Venue setup, guest management, hospitality & coordination teams',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
   },
   {
     id: 'corporate',
@@ -22,7 +22,7 @@ const SERVICES = [
     icon: Briefcase,
     title: 'Corporate Events',
     desc: 'Conference support, registration, tech crew & brand ambassadors',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a1a2a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
   },
   {
     id: 'exhibition',
@@ -30,7 +30,7 @@ const SERVICES = [
     icon: Store,
     title: 'Exhibition Staffing',
     desc: 'Booth assistants, lead generation, product presenters',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a2a1a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
   },
   {
     id: 'brand',
@@ -38,7 +38,7 @@ const SERVICES = [
     icon: Megaphone,
     title: 'Promotional Staffing',
     desc: 'Brand promoters, road show activation, sampling staff',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a1a2a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a2a 100%)',
   },
   {
     id: 'logistics',
@@ -46,7 +46,7 @@ const SERVICES = [
     icon: Truck,
     title: 'Event Setup & Logistics',
     desc: 'Loading crew, stage setup, barricading, transport',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a1a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #2a2a1a 100%)',
   },
   {
     id: 'college',
@@ -54,7 +54,7 @@ const SERVICES = [
     icon: GraduationCap,
     title: 'College Fests',
     desc: 'Volunteer pools, registration desks, floor managers',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a2a2a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a2a 100%)',
   },
   {
     id: 'brand-launches',
@@ -62,7 +62,7 @@ const SERVICES = [
     icon: Zap,
     title: 'Brand Launches',
     desc: 'Activation crew, brand ambassadors, launch-day hosts',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
   },
   {
     id: 'hospitality',
@@ -70,7 +70,7 @@ const SERVICES = [
     icon: UtensilsCrossed,
     title: 'Hospitality',
     desc: 'Servers, hosts, bartenders, guest service',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a1a2a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
   },
   {
     id: 'production',
@@ -78,7 +78,7 @@ const SERVICES = [
     icon: Music,
     title: 'Production & Backstage',
     desc: 'Stage hands, runners, comms, quick-change choreography',
-    bg: 'linear-gradient(135deg, #1a1a1a 0%, #1a2a1a 100%)',
+    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
   },
 ];
 
@@ -96,7 +96,7 @@ export default function ServicesOverview() {
   }, []);
 
   return (
-    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#111111' }}>
+    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#141312' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className={`flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
@@ -104,12 +104,12 @@ export default function ServicesOverview() {
             <p className="section-label">● WHAT WE DO</p>
             <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
               Our{' '}
-              <em className="not-italic" style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+              <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
                 Services
               </em>
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed lg:text-right" style={{ color: '#999999' }}>
+          <p className="max-w-sm text-sm leading-relaxed lg:text-right" style={{ color: '#a39e98' }}>
             Professional staffing across all event categories — from intimate weddings to massive corporate events.
           </p>
         </div>
@@ -126,13 +126,13 @@ export default function ServicesOverview() {
                   animationDelay: `${i * 60}ms`,
                   height: '260px',
                   background: svc.bg,
-                  border: '1px solid #2a2a2a',
+                  border: '1px solid #282624',
                 }}
               >
                 {/* Hover overlay */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{ background: 'rgba(201,168,76,0.06)' }}
+                  style={{ background: 'rgba(243,200,146,0.06)' }}
                 />
 
                 {/* Bottom gradient */}
@@ -145,13 +145,13 @@ export default function ServicesOverview() {
                 <div className="absolute top-5 left-5 flex items-center gap-2">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    style={{ background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)' }}
+                    style={{ background: 'rgba(243,200,146,0.15)', border: '1px solid rgba(243,200,146,0.3)' }}
                   >
-                    <Icon className="w-4 h-4" style={{ color: '#c9a84c' }} />
+                    <Icon className="w-4 h-4" style={{ color: '#f3c892' }} />
                   </div>
                   <span
                     className="text-[10px] font-bold tracking-[0.12em]"
-                    style={{ color: '#c9a84c' }}
+                    style={{ color: '#f3c892' }}
                   >
                     {svc.label}
                   </span>
@@ -168,7 +168,7 @@ export default function ServicesOverview() {
                   <Link
                     href={`/booking?service=${svc.id}`}
                     className="inline-flex items-center gap-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ color: '#c9a84c' }}
+                    style={{ color: '#f3c892' }}
                   >
                     Request a Quote →
                   </Link>

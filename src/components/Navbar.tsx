@@ -77,7 +77,7 @@ export default function Navbar() {
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#1a1a1a] py-3'
+            ? 'bg-[#0c0b0a]/95 backdrop-blur-md border-b border-[#1a1918] py-3'
             : 'bg-transparent py-5'
         }`}
       >
@@ -88,7 +88,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-0.5 group flex-shrink-0">
               <span
                 className="text-2xl font-black tracking-tight leading-none"
-                style={{ color: '#c9a84c' }}
+                style={{ color: '#f3c892' }}
               >
                 MV
               </span>
@@ -108,12 +108,12 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${
-                      isActive ? 'text-[#c9a84c]' : 'text-white/75 hover:text-white'
+                      isActive ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'
                     }`}
                   >
                     {link.label}
                     <span
-                      className={`absolute bottom-0 left-4 right-4 h-px bg-[#c9a84c] transition-transform duration-200 origin-left ${
+                      className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${
                         isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`}
                     />
@@ -127,7 +127,7 @@ export default function Navbar() {
                   {role === 'admin' && (
                     <Link
                       href="/admin"
-                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[#c9a84c]/80 hover:text-[#c9a84c] transition-colors"
+                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[#f3c892]/80 hover:text-[#f3c892] transition-colors"
                     >
                       Admin
                     </Link>
@@ -165,8 +165,8 @@ export default function Navbar() {
                 href="/booking"
                 className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${
                   scrolled
-                    ? 'bg-[#c9a84c] text-[#0a0a0a] hover:bg-[#e8c97a] shadow-lg shadow-[rgba(201,168,76,0.25)] hover:shadow-[rgba(201,168,76,0.4)] hover:-translate-y-0.5'
-                    : 'border-2 border-white/60 text-white hover:border-[#c9a84c] hover:text-[#c9a84c]'
+                    ? 'bg-[#f3c892] text-[#0c0b0a] hover:bg-[#e5b980] shadow-lg shadow-[rgba(243,200,146,0.25)] hover:shadow-[rgba(243,200,146,0.4)] hover:-translate-y-0.5'
+                    : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'
                 }`}
               >
                 Book Staff
@@ -201,7 +201,7 @@ export default function Navbar() {
 
           {/* Logo in overlay */}
           <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-0.5 mb-10">
-            <span className="text-3xl font-black" style={{ color: '#c9a84c' }}>MV</span>
+            <span className="text-3xl font-black" style={{ color: '#f3c892' }}>MV</span>
             <span className="text-3xl font-black tracking-[0.18em] text-white">GROUPS</span>
           </Link>
 
@@ -212,7 +212,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 {link.label}
@@ -225,7 +225,7 @@ export default function Navbar() {
                   <Link
                     href="/admin"
                     onClick={() => setIsOpen(false)}
-                    className="py-3.5 px-2 text-2xl font-bold text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                    className="py-3.5 px-2 text-2xl font-bold text-[#f3c892] transition-colors border-b border-[#1a1918]"
                   >
                     Admin
                   </Link>
@@ -234,7 +234,7 @@ export default function Navbar() {
                   <Link
                     href="/dashboard"
                     onClick={() => setIsOpen(false)}
-                    className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                    className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]"
                   >
                     Dashboard
                   </Link>
@@ -242,7 +242,7 @@ export default function Navbar() {
                 <form action={logout}>
                   <button
                     type="submit"
-                    className="w-full text-left py-3.5 px-2 text-2xl font-bold text-white/40 hover:text-red-400 transition-colors border-b border-[#1a1a1a]"
+                    className="w-full text-left py-3.5 px-2 text-2xl font-bold text-white/40 hover:text-red-400 transition-colors border-b border-[#1a1918]"
                   >
                     Log Out
                   </button>
@@ -252,7 +252,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setIsOpen(false)}
-                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]"
               >
                 Login
               </Link>
@@ -269,7 +269,7 @@ export default function Navbar() {
               Book Event Staff
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <p className="text-center text-[#555555] text-xs mt-4">
+            <p className="text-center text-[#66625d] text-xs mt-4">
               Same-day quotes · 7 days a week
             </p>
           </div>

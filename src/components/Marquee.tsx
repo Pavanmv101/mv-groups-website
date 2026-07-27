@@ -12,13 +12,13 @@ const ROW2_ITEMS = [
 
 export default function Marquee() {
   return (
-    <div className="w-full overflow-hidden" style={{ background: '#0a0a0a' }}>
+    <div className="w-full overflow-hidden" style={{ background: '#0c0b0a' }}>
       {/* ── Row 1: dark bg, gold text, scrolling LEFT ── */}
       <div
         className="flex items-center gap-0 border-y"
         style={{
-          background: '#111111',
-          borderColor: '#1a1a1a',
+          background: '#141312',
+          borderColor: '#1a1918',
           height: '52px',
           overflow: 'hidden',
         }}
@@ -31,7 +31,7 @@ export default function Marquee() {
             <span
               key={i}
               className="inline-flex items-center flex-shrink-0 font-black text-[15px] uppercase tracking-[0.05em] px-6"
-              style={{ color: item === '★' ? 'rgba(201,168,76,0.5)' : '#c9a84c', whiteSpace: 'nowrap' }}
+              style={{ color: item === '★' ? 'rgba(243,200,146,0.5)' : '#f3c892', whiteSpace: 'nowrap' }}
             >
               {item}
             </span>
@@ -43,7 +43,7 @@ export default function Marquee() {
       <div
         className="flex items-center gap-0"
         style={{
-          background: '#c9a84c',
+          background: '#f3c892',
           height: '52px',
           overflow: 'hidden',
         }}
@@ -56,7 +56,7 @@ export default function Marquee() {
             <span
               key={i}
               className="inline-flex items-center flex-shrink-0 font-black text-[15px] uppercase tracking-[0.05em] px-6"
-              style={{ color: item === '★' ? 'rgba(10,10,10,0.35)' : '#0a0a0a', whiteSpace: 'nowrap' }}
+              style={{ color: item === '★' ? 'rgba(12,11,10,0.35)' : '#0c0b0a', whiteSpace: 'nowrap' }}
             >
               {item}
             </span>

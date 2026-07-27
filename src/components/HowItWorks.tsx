@@ -53,7 +53,7 @@ export default function HowItWorks() {
     <section
       ref={ref}
       className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ background: '#0a0a0a' }}
+      style={{ background: '#0c0b0a' }}
     >
       {/* Large faded background numbers */}
       <div
@@ -64,7 +64,7 @@ export default function HowItWorks() {
           <span
             key={n}
             className="font-black leading-none"
-            style={{ fontSize: 'clamp(120px, 18vw, 220px)', color: '#1a1a1a', letterSpacing: '-0.04em' }}
+            style={{ fontSize: 'clamp(120px, 18vw, 220px)', color: '#1a1918', letterSpacing: '-0.04em' }}
           >
             {n}
           </span>
@@ -78,15 +78,15 @@ export default function HowItWorks() {
           <div className="flex flex-col sm:flex-row sm:items-end gap-4">
             <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
               How It{' '}
-              <em className="not-italic" style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
+              <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
                 Works
               </em>
             </h2>
-            <p className="text-sm pb-1" style={{ color: '#999999' }}>
+            <p className="text-sm pb-1" style={{ color: '#a39e98' }}>
               Three simple steps from booking to event execution
             </p>
           </div>
-          <p className="text-xs tracking-[0.2em] uppercase mt-4" style={{ color: '#555555' }}>
+          <p className="text-xs tracking-[0.2em] uppercase mt-4" style={{ color: '#66625d' }}>
             Tap each step to walk through
           </p>
         </div>
@@ -103,21 +103,21 @@ export default function HowItWorks() {
                   visible ? `reveal visible reveal-delay-${i + 1}` : 'opacity-0'
                 }`}
                 style={{
-                  background: '#1a1a1a',
-                  border: isActive ? '1.5px solid #c9a84c' : '1.5px solid #2a2a2a',
-                  boxShadow: isActive ? '0 0 32px rgba(201,168,76,0.12)' : 'none',
+                  background: '#1a1918',
+                  border: isActive ? '1.5px solid #f3c892' : '1.5px solid #282624',
+                  boxShadow: isActive ? '0 0 32px rgba(243,200,146,0.12)' : 'none',
                 }}
               >
                 <div className="flex items-start justify-between mb-6">
                   <span
                     className="text-5xl font-black leading-none"
-                    style={{ color: isActive ? '#c9a84c' : '#2a2a2a' }}
+                    style={{ color: isActive ? '#f3c892' : '#282624' }}
                   >
                     {step.num}
                   </span>
                   <span
                     className="text-2xl transition-transform duration-300"
-                    style={{ transform: isActive ? 'rotate(45deg)' : 'none', color: '#555555' }}
+                    style={{ transform: isActive ? 'rotate(45deg)' : 'none', color: '#66625d' }}
                   >
                     +
                   </span>
@@ -126,25 +126,25 @@ export default function HowItWorks() {
                 <h3 className="text-xl font-bold text-white mb-3">
                   {step.title}
                   {i < STEPS.length - 1 && (
-                    <span className="ml-2 text-base" style={{ color: '#555555' }}>→</span>
+                    <span className="ml-2 text-base" style={{ color: '#66625d' }}>→</span>
                   )}
                 </h3>
 
-                <p className="text-sm leading-relaxed" style={{ color: '#999999' }}>
+                <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>
                   {step.short}
                 </p>
 
                 {/* Expanded detail */}
                 {isActive && (
-                  <div className="mt-5 pt-5 border-t" style={{ borderColor: '#2a2a2a' }}>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#cccccc' }}>
+                  <div className="mt-5 pt-5 border-t" style={{ borderColor: '#282624' }}>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#c8c3be' }}>
                       {step.detail}
                     </p>
                     {step.cta && (
                       <Link
                         href={step.cta}
                         className="inline-flex items-center gap-1.5 text-sm font-bold"
-                        style={{ color: '#c9a84c' }}
+                        style={{ color: '#f3c892' }}
                         onClick={(e) => e.stopPropagation()}
                       >
                         Tap to Start Booking

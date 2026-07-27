@@ -4,22 +4,37 @@
 /* ─── Google Fonts ─── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DESIGN TOKENS — Warm Dark Aesthetic
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BG Primary:     #0c0b0a  Deep Warm Matte Black
+   BG Secondary:   #141312  Soft Charcoal
+   Card BG:        #1a1918  Elevated Dark Card
+   Card Border:    #282624  Subtle Warm Border
+   Accent:         #f3c892  Warm Champagne Gold
+   Accent Hover:   #e5b980  Soft Amber Hover
+   Accent Secondary:#302a23 Dark Amber Glow
+   Text Primary:   #ffffff
+   Text Secondary: #a39e98  Warm Light Gray
+   Text Muted:     #66625d  Deep Muted Gray
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 @theme inline {
-  /* Gold */
-  --color-gold-400: #e8c97a;
-  --color-gold-500: #c9a84c;
-  --color-gold-600: #a8873c;
+  /* Accent / Gold */
+  --color-gold-400: #f3c892;
+  --color-gold-500: #e5b980;
+  --color-gold-600: #c9a06a;
   /* Dark BGs */
-  --color-dark-950: #050505;
-  --color-dark-900: #0a0a0a;
-  --color-dark-800: #111111;
-  --color-dark-700: #1a1a1a;
-  --color-dark-600: #2a2a2a;
-  --color-dark-500: #3a3a3a;
+  --color-dark-950: #0c0b0a;
+  --color-dark-900: #0c0b0a;
+  --color-dark-800: #141312;
+  --color-dark-700: #1a1918;
+  --color-dark-600: #282624;
+  --color-dark-500: #302a23;
   /* Text */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #999999;
-  --color-text-muted: #555555;
+  --color-text-secondary: #a39e98;
+  --color-text-muted: #66625d;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -30,7 +45,7 @@ html {
 }
 
 body {
-  background: #0a0a0a;
+  background: #0c0b0a;
   color: #ffffff;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -39,13 +54,13 @@ body {
 
 /* ─── Custom scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #c9a84c; }
+::-webkit-scrollbar-track { background: #0c0b0a; }
+::-webkit-scrollbar-thumb { background: #282624; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #f3c892; }
 
 /* ─── Gold gradient text ─── */
 .gold-text {
-  background: linear-gradient(135deg, #c9a84c 0%, #e8c97a 50%, #c9a84c 100%);
+  background: linear-gradient(135deg, #f3c892 0%, #e5b980 50%, #f3c892 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -89,8 +104,8 @@ body {
 }
 
 @keyframes goldPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
-  50%       { box-shadow: 0 0 24px 4px rgba(201,168,76,0.25); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(243,200,146,0); }
+  50%       { box-shadow: 0 0 24px 4px rgba(243,200,146,0.22); }
 }
 
 @keyframes ping {
@@ -136,21 +151,21 @@ body {
 
 /* ─── Glass dark ─── */
 .glass-dark {
-  background: rgba(26, 26, 26, 0.75);
+  background: rgba(26, 25, 24, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(42, 42, 42, 0.8);
+  border: 1px solid rgba(40, 38, 36, 0.8);
 }
 
 /* ─── Gold border card ─── */
 .gold-card {
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background: #1a1918;
+  border: 1px solid #282624;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .gold-card:hover {
-  border-color: #c9a84c;
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.12);
+  border-color: #f3c892;
+  box-shadow: 0 0 20px rgba(243, 200, 146, 0.12);
 }
 
 /* ─── Primary button ─── */
@@ -159,8 +174,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: #c9a84c;
-  color: #0a0a0a;
+  background: #f3c892;
+  color: #0c0b0a;
   font-weight: 700;
   font-size: 0.9rem;
   border-radius: 9999px;
@@ -170,9 +185,9 @@ body {
   letter-spacing: 0.01em;
 }
 .btn-gold:hover {
-  background: #e8c97a;
+  background: #e5b980;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
+  box-shadow: 0 8px 24px rgba(243, 200, 146, 0.32);
 }
 
 /* ─── Outline button ─── */
@@ -186,13 +201,13 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   border-radius: 9999px;
-  border: 1.5px solid rgba(255,255,255,0.35);
+  border: 1.5px solid #282624;
   cursor: pointer;
   transition: border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
 }
 .btn-outline:hover {
-  border-color: #c9a84c;
-  color: #c9a84c;
+  border-color: #f3c892;
+  color: #f3c892;
   transform: translateY(-2px);
 }
 
@@ -205,16 +220,8 @@ body {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #c9a84c;
+  color: #f3c892;
   margin-bottom: 1rem;
-}
-
-/* ─── Animated tick mark (preserved from old code) ─── */
-@keyframes drawCircle {
-  to { stroke-dashoffset: 0; }
-}
-@keyframes drawCheck {
-  to { stroke-dashoffset: 0; }
 }
 
 /* ─── Video hero crossfade ─── */
@@ -231,7 +238,7 @@ body {
 .mobile-nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 5, 0.97);
+  background: rgba(12, 11, 10, 0.98);
   z-index: 40;
   display: flex;
   flex-direction: column;

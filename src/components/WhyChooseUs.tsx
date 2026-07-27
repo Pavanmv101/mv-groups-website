@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#111111' }}>
+    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#141312' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`mb-14 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <p className="section-label">● WHY MV GROUPS</p>
@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
             Built on Trust,{' '}
             <em
               className="not-italic"
-              style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
+              style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
             >
               Driven by Excellence
             </em>
@@ -66,12 +66,12 @@ export default function WhyChooseUs() {
               >
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)' }}
+                  style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.25)' }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: '#c9a84c' }} />
+                  <Icon className="w-5 h-5" style={{ color: '#f3c892' }} />
                 </div>
                 <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: '#999999' }}>
+                <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>
                   {item.description}
                 </p>
               </div>

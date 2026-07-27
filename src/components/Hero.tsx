@@ -37,7 +37,7 @@ function VideoBackground() {
         className="absolute inset-0 w-full h-full"
         style={{
           background:
-            'linear-gradient(135deg, #0a0a0a 0%, #111111 40%, #0d0d0d 70%, #0a0a0a 100%)',
+            'linear-gradient(135deg, #0c0b0a 0%, #141312 40%, #0d0d0d 70%, #0c0b0a 100%)',
         }}
       >
         {/* Subtle radial glow */}
@@ -45,7 +45,7 @@ function VideoBackground() {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%)',
+              'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(243,200,146,0.06) 0%, transparent 70%)',
           }}
         />
       </div>
@@ -110,18 +110,18 @@ export default function Hero() {
           <span
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/90"
             style={{
-              background: 'rgba(20,20,20,0.85)',
-              border: '1px solid rgba(201,168,76,0.35)',
+              background: 'rgba(18,17,16,0.85)',
+              border: '1px solid rgba(243,200,146,0.35)',
               backdropFilter: 'blur(10px)',
             }}
           >
-            <span style={{ color: '#c9a84c' }}>✦</span>
+            <span style={{ color: '#f3c892' }}>✦</span>
             Reliable Events. Reliable Staff.
           </span>
           <span
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/80"
             style={{
-              background: 'rgba(20,20,20,0.85)',
+              background: 'rgba(18,17,16,0.85)',
               border: '1px solid rgba(255,255,255,0.1)',
               backdropFilter: 'blur(10px)',
             }}
@@ -137,8 +137,8 @@ export default function Hero() {
             className="font-black leading-none select-none"
             style={{
               fontSize: 'clamp(72px, 16vw, 128px)',
-              color: '#c9a84c',
-              textShadow: '0 0 60px rgba(201,168,76,0.3)',
+              color: '#f3c892',
+              textShadow: '0 0 60px rgba(243,200,146,0.3)',
               letterSpacing: '-0.02em',
             }}
           >
@@ -163,7 +163,7 @@ export default function Hero() {
         {/* ── Description ── */}
         <p
           className="leading-relaxed mb-10 max-w-xl animate-fade-in-up delay-300"
-          style={{ color: '#cccccc', fontSize: '15px' }}
+          style={{ color: '#c8c3be', fontSize: '15px' }}
         >
           MV Groups provides professional event staffing and manpower solutions for corporate events,
           weddings, exhibitions, college fests, and brand activations across Karnataka.
@@ -184,7 +184,7 @@ export default function Hero() {
         <div
           className="flex flex-col sm:flex-row items-center gap-0 animate-fade-in-up delay-500"
           style={{
-            background: 'rgba(10,10,10,0.7)',
+            background: 'rgba(12,11,10,0.7)',
             border: '1px solid rgba(42,42,42,0.8)',
             borderRadius: '9999px',
             backdropFilter: 'blur(12px)',
@@ -196,13 +196,13 @@ export default function Hero() {
               <div className="flex flex-col items-center px-6 py-1">
                 <span
                   className="font-black leading-none"
-                  style={{ color: '#c9a84c', fontSize: '1.5rem' }}
+                  style={{ color: '#f3c892', fontSize: '1.5rem' }}
                 >
                   {stat.value}
                 </span>
                 <span
                   className="text-xs font-semibold tracking-widest mt-0.5"
-                  style={{ color: '#999999', letterSpacing: '0.1em' }}
+                  style={{ color: '#a39e98', letterSpacing: '0.1em' }}
                 >
                   {stat.label}
                 </span>
@@ -210,7 +210,7 @@ export default function Hero() {
               {i < STATS.length - 1 && (
                 <div
                   className="w-px self-stretch"
-                  style={{ background: '#2a2a2a' }}
+                  style={{ background: '#282624' }}
                 />
               )}
             </div>
@@ -222,13 +222,13 @@ export default function Hero() {
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 animate-fade-in delay-700"
       >
-        <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: '#555555' }}>
+        <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: '#66625d' }}>
           Scroll
         </span>
         <div
           className="w-px h-8"
           style={{
-            background: 'linear-gradient(to bottom, #2a2a2a, transparent)',
+            background: 'linear-gradient(to bottom, #282624, transparent)',
           }}
         />
       </div>

@@ -44,7 +44,7 @@ export default function FAQSection() {
   }, []);
 
   return (
-    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#0a0a0a' }}>
+    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#0c0b0a' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className={`mb-14 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}>
@@ -53,12 +53,12 @@ export default function FAQSection() {
             Event Manpower —{' '}
             <em
               className="not-italic"
-              style={{ color: '#c9a84c', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
+              style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
             >
               Karnataka
             </em>
           </h2>
-          <p className="mt-4 text-sm" style={{ color: '#999999' }}>
+          <p className="mt-4 text-sm" style={{ color: '#a39e98' }}>
             Straight answers from an event staffing crew that runs across Karnataka.
           </p>
         </div>
@@ -73,22 +73,22 @@ export default function FAQSection() {
                 className={`rounded-xl overflow-hidden transition-all duration-300 ${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
                 style={{
                   animationDelay: `${i * 60}ms`,
-                  border: isOpen ? '1px solid rgba(201,168,76,0.4)' : '1px solid #2a2a2a',
-                  background: '#1a1a1a',
-                  boxShadow: isOpen ? '0 0 24px rgba(201,168,76,0.08)' : 'none',
+                  border: isOpen ? '1px solid rgba(243,200,146,0.4)' : '1px solid #282624',
+                  background: '#1a1918',
+                  boxShadow: isOpen ? '0 0 24px rgba(243,200,146,0.08)' : 'none',
                 }}
               >
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
                 >
-                  <span className="font-semibold text-sm pr-4" style={{ color: isOpen ? '#c9a84c' : '#ffffff' }}>
+                  <span className="font-semibold text-sm pr-4" style={{ color: isOpen ? '#f3c892' : '#ffffff' }}>
                     {faq.q}
                   </span>
                   <span
                     className="text-2xl leading-none flex-shrink-0 font-light transition-transform duration-300"
                     style={{
-                      color: '#c9a84c',
+                      color: '#f3c892',
                       transform: isOpen ? 'rotate(45deg)' : 'none',
                       display: 'inline-block',
                     }}
@@ -102,7 +102,7 @@ export default function FAQSection() {
                   className="overflow-hidden transition-all duration-300 ease-in-out"
                   style={{ maxHeight: isOpen ? '400px' : '0px' }}
                 >
-                  <p className="px-6 pb-6 text-sm leading-relaxed" style={{ color: '#999999' }}>
+                  <p className="px-6 pb-6 text-sm leading-relaxed" style={{ color: '#a39e98' }}>
                     {faq.a}
                   </p>
                 </div>

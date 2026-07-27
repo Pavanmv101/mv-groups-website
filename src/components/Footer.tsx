@@ -31,7 +31,7 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#050505', borderTop: '1px solid #1a1a1a' }}>
+    <footer style={{ background: '#0c0b0a', borderTop: '1px solid #1a1918' }}>
       {/* Main grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -39,10 +39,10 @@ export default function Footer() {
           {/* Col 1 — Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-0.5 mb-5">
-              <span className="text-2xl font-black" style={{ color: '#c9a84c' }}>MV</span>
+              <span className="text-2xl font-black" style={{ color: '#f3c892' }}>MV</span>
               <span className="text-2xl font-black tracking-[0.18em] text-white">GROUPS</span>
             </Link>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: '#555555' }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: '#66625d' }}>
               On-demand event staffing for Karnataka. Professional crew, vetted &amp; trained.
             </p>
             {/* Social icons */}
@@ -52,10 +52,10 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
-                style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#555555' }}
+                style={{ background: '#1a1918', border: '1px solid #282624', color: '#66625d' }}
                 aria-label="LinkedIn"
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#c9a84c'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#555555'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#2a2a2a'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#f3c892'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(243,200,146,0.4)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#282624'; }}
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
@@ -64,20 +64,20 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
-                style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#555555' }}
+                style={{ background: '#1a1918', border: '1px solid #282624', color: '#66625d' }}
                 aria-label="Instagram"
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#c9a84c'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#555555'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#2a2a2a'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#f3c892'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(243,200,146,0.4)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#282624'; }}
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${COMPANY.email}`}
                 className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200"
-                style={{ background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#555555' }}
+                style={{ background: '#1a1918', border: '1px solid #282624', color: '#66625d' }}
                 aria-label="Email"
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#c9a84c'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#555555'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#2a2a2a'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#f3c892'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(243,200,146,0.4)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'; (e.currentTarget as HTMLAnchorElement).style.borderColor = '#282624'; }}
               >
                 <Mail className="w-4 h-4" />
               </a>
@@ -86,7 +86,7 @@ export default function Footer() {
 
           {/* Col 2 — Quick Links */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#555555' }}>
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#66625d' }}>
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -95,12 +95,12 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     className="text-sm flex items-center gap-1 group transition-colors duration-200"
-                    style={{ color: '#999999' }}
+                    style={{ color: '#a39e98' }}
                     onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
+                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
                   >
                     {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#c9a84c' }} />
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} />
                   </Link>
                 </li>
               ))}
@@ -108,7 +108,7 @@ export default function Footer() {
                 <Link
                   href="/booking"
                   className="text-sm flex items-center gap-1 group transition-colors duration-200"
-                  style={{ color: '#c9a84c' }}
+                  style={{ color: '#f3c892' }}
                 >
                   Request a Quote
                   <ArrowUpRight className="w-3 h-3" />
@@ -119,7 +119,7 @@ export default function Footer() {
 
           {/* Col 3 — Popular Services */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#555555' }}>
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#66625d' }}>
               Popular Services
             </h3>
             <ul className="space-y-3">
@@ -128,9 +128,9 @@ export default function Footer() {
                   <Link
                     href="/services"
                     className="text-sm transition-colors duration-200"
-                    style={{ color: '#999999' }}
+                    style={{ color: '#a39e98' }}
                     onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
+                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
                   >
                     {s}
                   </Link>
@@ -141,34 +141,34 @@ export default function Footer() {
 
           {/* Col 4 — Contact */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#555555' }}>
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#66625d' }}>
               Contact
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#c9a84c' }} />
-                <span className="text-sm" style={{ color: '#999999' }}>{COMPANY.location}</span>
+                <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#f3c892' }} />
+                <span className="text-sm" style={{ color: '#a39e98' }}>{COMPANY.location}</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 shrink-0" style={{ color: '#c9a84c' }} />
+                <Phone className="w-4 h-4 shrink-0" style={{ color: '#f3c892' }} />
                 <a
                   href={`tel:${COMPANY.phone}`}
                   className="text-sm transition-colors duration-200"
-                  style={{ color: '#999999' }}
+                  style={{ color: '#a39e98' }}
                   onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
+                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
                 >
                   {COMPANY.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 shrink-0" style={{ color: '#c9a84c' }} />
+                <Mail className="w-4 h-4 shrink-0" style={{ color: '#f3c892' }} />
                 <a
                   href={`mailto:${COMPANY.email}`}
                   className="text-sm transition-colors duration-200"
-                  style={{ color: '#999999' }}
+                  style={{ color: '#a39e98' }}
                   onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'}
-                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
+                  onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
                 >
                   {COMPANY.email}
                 </a>
@@ -190,27 +190,27 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: '1px solid #1a1a1a' }}>
+      <div style={{ borderTop: '1px solid #1a1918' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs" style={{ color: '#555555' }}>
+          <p className="text-xs" style={{ color: '#66625d' }}>
             © {new Date().getFullYear()} MV Groups. All rights reserved.
           </p>
           <div className="flex gap-5">
             <Link
               href="/privacy"
               className="text-xs transition-colors duration-200"
-              style={{ color: '#555555' }}
-              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
-              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#555555'}
+              style={{ color: '#66625d' }}
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'}
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
               className="text-xs transition-colors duration-200"
-              style={{ color: '#555555' }}
-              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#999999'}
-              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#555555'}
+              style={{ color: '#66625d' }}
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#a39e98'}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#66625d'}
             >
               Terms of Service
             </Link>
