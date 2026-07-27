@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import Marquee from '@/components/Marquee';
 import ClientLogos from '@/components/ClientLogos';
 import ServicesOverview from '@/components/ServicesOverview';
 import WhyChooseUs from '@/components/WhyChooseUs';
@@ -17,6 +18,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Marquee />
       <ClientLogos />
       <ServicesOverview />
       <WhyChooseUs />

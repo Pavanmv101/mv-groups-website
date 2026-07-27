@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { type User } from '@supabase/supabase-js';
-import { Menu, X, ArrowRight, User as UserIcon } from 'lucide-react';
-import { NAV_LINKS, COMPANY } from '@/lib/constants';
+import { Menu, X, User as UserIcon, ArrowRight } from 'lucide-react';
+import { NAV_LINKS } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/client';
 import { logout } from '@/app/login/actions';
 
@@ -16,36 +15,51 @@ export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<'client' | 'admin' | null>(null);
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
 
-  const isDarkHeroPage = pathname === '/' || pathname === '/services' || pathname === '/updates';
+  // Pages where navbar starts transparent (hero pages)
+  const isDarkHeroPage =
+    pathname === '/' ||
+    pathname === '/services' ||
+    pathname === '/updates';
+
   const scrolled = isScrolled || !isDarkHeroPage;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   useEffect(() => {
     const supabase = createClient();
-    
+
     const fetchRole = async (userId: string) => {
-      const { data } = await supabase.from('users').select('role').eq('id', userId).single();
+      const { data } = await supabase
+        .from('users')
+        .select('role')
+        .eq('id', userId)
+        .single();
       if (data) setRole(data.role);
     };
 
-    // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchRole(session.user.id);
-      }
+      if (session?.user) fetchRole(session.user.id);
     });
 
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchRole(session.user.id);
@@ -58,175 +72,79 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-slate-200/50 py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/25 overflow-hidden">
-              <Image src="/logo.jpg" alt="MV Groups Logo" width={40} height={40} className="object-cover" />
-            </div>
-            <span
-              className={`text-xl font-bold transition-colors ${
-                scrolled ? 'text-navy-900' : 'text-white'
-              }`}
-            >
-              {COMPANY.name}
-            </span>
-          </Link>
+    <>
+      <nav
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#1a1a1a] py-3'
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  scrolled
-                    ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
-                }`}
+            {/* ── Logo ── */}
+            <Link href="/" className="flex items-center gap-0.5 group flex-shrink-0">
+              <span
+                className="text-2xl font-black tracking-tight leading-none"
+                style={{ color: '#c9a84c' }}
               >
-                {link.label}
-              </Link>
-            ))}
-            
-            {user ? (
-              <>
-                {role === 'admin' && (
-                  <Link
-                    href="/admin"
-                    className={`ml-2 px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200 flex items-center gap-2 ${
-                      scrolled
-                        ? 'text-indigo-600 hover:text-indigo-900 hover:bg-indigo-50'
-                        : 'text-indigo-300 hover:text-indigo-100 hover:bg-indigo-500/20'
-                    }`}
-                  >
-                    Admin Panel
-                  </Link>
-                )}
-                {role !== 'admin' && (
-                  <Link
-                    href="/dashboard"
-                    className={`ml-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                      scrolled
-                        ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <UserIcon className="w-4 h-4" />
-                    Dashboard
-                  </Link>
-                )}
-                <form action={logout}>
-                  <button
-                    type="submit"
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      scrolled
-                        ? 'text-red-600 hover:bg-red-50'
-                        : 'text-red-300 hover:text-red-200 hover:bg-red-500/10'
-                    }`}
-                  >
-                    Log Out
-                  </button>
-                </form>
-              </>
-            ) : (
-              <Link
-                href="/login"
-                className={`ml-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                  scrolled
-                    ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
-                }`}
+                MV
+              </span>
+              <span
+                className="text-2xl font-black tracking-[0.18em] leading-none text-white"
               >
-                <UserIcon className="w-4 h-4" />
-                Login
-              </Link>
-            )}
-
-            <Link
-              href="/booking"
-              className="ml-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-500 text-white text-sm font-semibold hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
-            >
-              Get Started
-              <ArrowRight className="w-4 h-4" />
+                GROUPS
+              </span>
             </Link>
-          </div>
 
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors cursor-pointer ${
-              scrolled ? 'text-navy-900 hover:bg-slate-100' : 'text-white hover:bg-white/10'
-            }`}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+            {/* ── Desktop nav links ── */}
+            <div className="hidden md:flex items-center gap-0.5">
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${
+                      isActive ? 'text-[#c9a84c]' : 'text-white/75 hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                    <span
+                      className={`absolute bottom-0 left-4 right-4 h-px bg-[#c9a84c] transition-transform duration-200 origin-left ${
+                        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
 
-        {/* Mobile menu */}
-        {isOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-slate-200/20 animate-fade-in">
-            <div className="flex flex-col gap-1 pt-4">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    scrolled
-                      ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              
+              {/* Auth links */}
               {user ? (
                 <>
                   {role === 'admin' && (
                     <Link
                       href="/admin"
-                      onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 rounded-lg text-sm font-bold transition-colors ${
-                        scrolled
-                          ? 'text-indigo-600 hover:text-indigo-900 hover:bg-indigo-50'
-                          : 'text-indigo-300 hover:text-indigo-100 hover:bg-white/10'
-                      }`}
+                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[#c9a84c]/80 hover:text-[#c9a84c] transition-colors"
                     >
-                      Admin Panel
+                      Admin
                     </Link>
                   )}
                   {role !== 'admin' && (
                     <Link
                       href="/dashboard"
-                      onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        scrolled
-                          ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                          : 'text-white/80 hover:text-white hover:bg-white/10'
-                      }`}
+                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/75 hover:text-white transition-colors flex items-center gap-1.5"
                     >
+                      <UserIcon className="w-3.5 h-3.5" />
                       Dashboard
                     </Link>
                   )}
                   <form action={logout}>
                     <button
                       type="submit"
-                      className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        scrolled
-                          ? 'text-red-600 hover:bg-red-50'
-                          : 'text-red-300 hover:bg-white/10'
-                      }`}
+                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/50 hover:text-red-400 transition-colors"
                     >
                       Log Out
                     </button>
@@ -235,29 +153,128 @@ export default function Navbar() {
               ) : (
                 <Link
                   href="/login"
-                  onClick={() => setIsOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    scrolled
-                      ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-100'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/75 hover:text-white transition-colors flex items-center gap-1.5"
                 >
+                  <UserIcon className="w-3.5 h-3.5" />
                   Login
                 </Link>
               )}
 
+              {/* Book Staff CTA */}
               <Link
                 href="/booking"
-                onClick={() => setIsOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-blue-500 text-white text-sm font-semibold hover:bg-blue-600 transition-all"
+                className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${
+                  scrolled
+                    ? 'bg-[#c9a84c] text-[#0a0a0a] hover:bg-[#e8c97a] shadow-lg shadow-[rgba(201,168,76,0.25)] hover:shadow-[rgba(201,168,76,0.4)] hover:-translate-y-0.5'
+                    : 'border-2 border-white/60 text-white hover:border-[#c9a84c] hover:text-[#c9a84c]'
+                }`}
               >
-                Get Started
-                <ArrowRight className="w-4 h-4" />
+                Book Staff
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+
+            {/* ── Mobile hamburger ── */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      </nav>
+
+      {/* ── Mobile full-screen overlay ── */}
+      {isOpen && (
+        <div className="mobile-nav-overlay md:hidden">
+          {/* Close button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-5 right-4 p-2 text-white/60 hover:text-white transition-colors cursor-pointer"
+            aria-label="Close menu"
+          >
+            <X className="w-7 h-7" />
+          </button>
+
+          {/* Logo in overlay */}
+          <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-0.5 mb-10">
+            <span className="text-3xl font-black" style={{ color: '#c9a84c' }}>MV</span>
+            <span className="text-3xl font-black tracking-[0.18em] text-white">GROUPS</span>
+          </Link>
+
+          {/* Nav links */}
+          <div className="flex flex-col gap-1">
+            {NAV_LINKS.map((link, i) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            {user ? (
+              <>
+                {role === 'admin' && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setIsOpen(false)}
+                    className="py-3.5 px-2 text-2xl font-bold text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                  >
+                    Admin
+                  </Link>
+                )}
+                {role !== 'admin' && (
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+                  >
+                    Dashboard
+                  </Link>
+                )}
+                <form action={logout}>
+                  <button
+                    type="submit"
+                    className="w-full text-left py-3.5 px-2 text-2xl font-bold text-white/40 hover:text-red-400 transition-colors border-b border-[#1a1a1a]"
+                  >
+                    Log Out
+                  </button>
+                </form>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setIsOpen(false)}
+                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#c9a84c] transition-colors border-b border-[#1a1a1a]"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-auto pt-8">
+            <Link
+              href="/booking"
+              onClick={() => setIsOpen(false)}
+              className="btn-gold w-full justify-center text-base py-4"
+            >
+              Book Event Staff
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <p className="text-center text-[#555555] text-xs mt-4">
+              Same-day quotes · 7 days a week
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
