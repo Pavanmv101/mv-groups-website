@@ -12,8 +12,13 @@ const LOGOS = [
 
 export default function ClientLogos() {
   return (
-    <section className="py-24 lg:py-32" style={{ background: '#0c0b0a', borderBottom: '1px solid #1a1918' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0c0b0a', borderBottom: '1px solid #1a1918' }}>
+      
+      {/* ── Animated Background Blobs ── */}
+      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#f3c892] rounded-full mix-blend-screen filter blur-[120px] opacity-10 animate-blob pointer-events-none transform -translate-y-1/2" />
+      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-[#e5b980] rounded-full mix-blend-screen filter blur-[120px] opacity-10 animate-blob animation-delay-4000 pointer-events-none transform -translate-y-1/2" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Reveal delay={0.2}>
           <p
             className="text-center text-[11px] font-bold tracking-[0.2em] uppercase mb-12"
