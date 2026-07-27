@@ -22,17 +22,25 @@ export default function ClientLogos() {
             Trusted by Teams Across India
           </p>
         </Reveal>
-        <StaggerContainer className="flex flex-row justify-center items-center gap-8 md:gap-16 w-full max-w-5xl mx-auto flex-wrap md:flex-nowrap">
+        <StaggerContainer className="flex flex-row justify-center items-start gap-10 md:gap-12 w-full max-w-6xl mx-auto flex-wrap md:flex-nowrap">
           {LOGOS.map((logo) => (
-            <StaggerItem key={logo.id} className="flex-1 flex justify-center min-w-[120px]">
-              <div className="relative h-10 w-32 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+            <StaggerItem key={logo.id} className="flex-1 flex flex-col items-center justify-start min-w-[160px] gap-5 group cursor-default">
+              <div className="relative h-24 w-44 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 hover:scale-105">
                 <Image
                   src={logo.src}
                   alt={logo.name}
                   fill
                   className="object-contain"
-                  sizes="128px"
+                  sizes="176px"
                 />
+              </div>
+              <div className="text-center opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <h4 className="text-xs md:text-[13px] font-bold text-white tracking-widest uppercase mb-1.5 leading-snug">
+                  {logo.name}
+                </h4>
+                <p className="text-[10px] md:text-[11px] font-medium text-[#c9a84c] tracking-[0.2em] uppercase">
+                  {logo.location}
+                </p>
               </div>
             </StaggerItem>
           ))}
