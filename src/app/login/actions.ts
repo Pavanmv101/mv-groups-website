@@ -10,7 +10,7 @@ import { headers } from 'next/headers'
 const loginSchema = z.object({
   email: z.string().trim().email(),
   password: z.string().min(1),
-  turnstileToken: z.string().optional(),
+  turnstileToken: z.string().nullable().optional(),
 })
 
 const signupSchema = z.object({
