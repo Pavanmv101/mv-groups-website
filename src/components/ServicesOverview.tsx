@@ -17,6 +17,7 @@ const SERVICES = [
     title: 'Weddings',
     desc: 'Venue setup, guest management, hospitality & coordination teams',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
+    bento: 'md:col-span-2 md:row-span-2'
   },
   {
     id: 'corporate',
@@ -25,6 +26,7 @@ const SERVICES = [
     title: 'Corporate Events',
     desc: 'Conference support, registration, tech crew & brand ambassadors',
     bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
+    bento: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 'exhibition',
@@ -33,6 +35,7 @@ const SERVICES = [
     title: 'Exhibition Staffing',
     desc: 'Booth assistants, lead generation, product presenters',
     bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
+    bento: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 'brand',
@@ -41,6 +44,7 @@ const SERVICES = [
     title: 'Promotional Staffing',
     desc: 'Brand promoters, road show activation, sampling staff',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a2a 100%)',
+    bento: 'md:col-span-2 md:row-span-1'
   },
   {
     id: 'logistics',
@@ -49,6 +53,7 @@ const SERVICES = [
     title: 'Event Setup & Logistics',
     desc: 'Loading crew, stage setup, barricading, transport',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a2a1a 100%)',
+    bento: 'md:col-span-1 md:row-span-2'
   },
   {
     id: 'college',
@@ -57,6 +62,7 @@ const SERVICES = [
     title: 'College Fests',
     desc: 'Volunteer pools, registration desks, floor managers',
     bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a2a 100%)',
+    bento: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 'brand-launches',
@@ -65,6 +71,7 @@ const SERVICES = [
     title: 'Brand Launches',
     desc: 'Activation crew, brand ambassadors, launch-day hosts',
     bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
+    bento: 'md:col-span-2 md:row-span-1'
   },
   {
     id: 'hospitality',
@@ -73,6 +80,7 @@ const SERVICES = [
     title: 'Hospitality',
     desc: 'Servers, hosts, bartenders, guest service',
     bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
+    bento: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 'production',
@@ -81,6 +89,7 @@ const SERVICES = [
     title: 'Production & Backstage',
     desc: 'Stage hands, runners, comms, quick-change choreography',
     bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
+    bento: 'md:col-span-4 md:row-span-1'
   },
 ];
 
@@ -106,62 +115,63 @@ export default function ServicesOverview() {
         </div>
         </Reveal>
 
-        {/* 3×3 Grid */}
-        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Bento Grid */}
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-4 auto-rows-[160px] gap-4">
           {SERVICES.map((svc) => {
             const Icon = svc.icon;
             return (
-              <StaggerItem key={svc.id}>
+              <StaggerItem key={svc.id} className={svc.bento}>
                 <div
-                  className="group relative rounded-2xl overflow-hidden cursor-pointer"
+                  className="group relative rounded-3xl overflow-hidden cursor-pointer h-full w-full flex flex-col justify-end p-6 md:p-8"
                   style={{
-                    height: '260px',
                     background: svc.bg,
-                    border: '1px solid #282624',
+                    border: '1px solid rgba(255,255,255,0.05)',
                   }}
                 >
-                {/* Hover overlay */}
+                {/* Hover glow overlay */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{ background: 'rgba(243,200,146,0.06)' }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: 'radial-gradient(circle at center, rgba(243,200,146,0.15) 0%, transparent 70%)' }}
                 />
 
                 {/* Bottom gradient */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 h-2/3 pointer-events-none"
-                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85), transparent)' }}
+                  className="absolute bottom-0 left-0 right-0 h-3/4 pointer-events-none"
+                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent)' }}
                 />
 
-                {/* Category label + icon — top left */}
-                <div className="absolute top-5 left-5 flex items-center gap-2">
+                {/* Top left Icon & Label */}
+                <div className="absolute top-6 left-6 flex items-center gap-3">
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    style={{ background: 'rgba(243,200,146,0.15)', border: '1px solid rgba(243,200,146,0.3)' }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md"
+                    style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.2)' }}
                   >
-                    <Icon className="w-4 h-4" style={{ color: '#f3c892' }} />
+                    <Icon className="w-5 h-5" style={{ color: '#f3c892' }} />
                   </div>
                   <span
-                    className="text-[10px] font-bold tracking-[0.12em]"
-                    style={{ color: '#f3c892' }}
+                    className="text-[11px] font-black tracking-[0.2em] uppercase"
+                    style={{ color: 'rgba(255,255,255,0.5)' }}
                   >
                     {svc.label}
                   </span>
                 </div>
 
-                {/* Content — bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="text-lg font-bold text-white mb-1 group-hover:translate-y-0 translate-y-0 transition-transform">
+                {/* Content Area */}
+                <div className="relative z-10 w-full transform group-hover:-translate-y-2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">
                     {svc.title}
                   </h3>
-                  <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                  <p className="text-sm md:text-base leading-relaxed max-w-[90%]" style={{ color: 'rgba(255,255,255,0.5)' }}>
                     {svc.desc}
                   </p>
+                  
+                  {/* Arrow CTA that fades in/slides up on hover */}
                   <Link
                     href={`/booking?service=${svc.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                    style={{ color: '#f3c892' }}
+                    className="absolute right-0 bottom-2 w-10 h-10 rounded-full bg-white text-black flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:scale-110"
+                    aria-label={`Book ${svc.title}`}
                   >
-                    Request a Quote →
+                    <span className="text-lg leading-none">↗</span>
                   </Link>
                 </div>
 

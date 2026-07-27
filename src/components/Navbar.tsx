@@ -75,10 +75,10 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-500 rounded-full ${
           scrolled
-            ? 'bg-[#0c0b0a]/95 backdrop-blur-md border-b border-[#1a1918] py-3'
-            : 'bg-transparent py-5'
+            ? 'top-4 bg-[#0c0b0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl py-3'
+            : 'top-6 bg-transparent border border-transparent py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
