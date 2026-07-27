@@ -4,7 +4,6 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import SmoothScroll from '@/components/animations/SmoothScroll';
 import PageTransition from '@/components/animations/PageTransition';
 
 const inter = Inter({
@@ -92,14 +91,12 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <SmoothScroll>
-          <Navbar />
-          <PageTransition>
-            <main className="flex-grow">{children}</main>
-          </PageTransition>
-          <Footer />
-          <WhatsAppButton />
-        </SmoothScroll>
+        <Navbar />
+        <PageTransition>
+          <main className="flex-grow">{children}</main>
+        </PageTransition>
+        <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );
