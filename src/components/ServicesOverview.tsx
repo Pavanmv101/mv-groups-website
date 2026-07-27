@@ -16,7 +16,7 @@ const SERVICES = [
     icon: UtensilsCrossed,
     title: 'VIP Hospitality & Guest Services',
     desc: 'Flawless service for your most important guests. From elite servers to protocol officers and mixologists.',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a1a 100%)',
+    bg: 'url(https://images.unsplash.com/photo-1559336197-ded8aaa244bc?auto=format&fit=crop&q=80&w=1200)',
     bento: 'md:col-span-2 md:row-span-2'
   },
   {
@@ -25,7 +25,7 @@ const SERVICES = [
     icon: Megaphone,
     title: 'Brand Ambassadors & Activations',
     desc: 'Charismatic product specialists and lead generators who seamlessly adopt and project your brand’s voice.',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
+    bg: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800)',
     bento: 'md:col-span-2 md:row-span-1'
   },
   {
@@ -34,7 +34,7 @@ const SERVICES = [
     icon: Briefcase,
     title: 'Corporate & Conference Teams',
     desc: 'Articulate registration teams, multilingual ushers, and dedicated tech-assistants for high-stakes summits.',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a2a1a 100%)',
+    bg: 'url(https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800)',
     bento: 'md:col-span-2 md:row-span-1'
   },
   {
@@ -43,7 +43,7 @@ const SERVICES = [
     icon: Heart,
     title: 'Private & Exclusive Gatherings',
     desc: 'Discreet, highly-vetted staff tailored for ultra-exclusive, high-net-worth social events and bespoke weddings.',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #2a1a2a 100%)',
+    bg: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=800)',
     bento: 'md:col-span-2 md:row-span-1'
   },
   {
@@ -52,7 +52,7 @@ const SERVICES = [
     icon: Truck,
     title: 'Logistics & Ground Control',
     desc: 'Precision crowd flow management, VIP access control, and rapid deployment setup crews.',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #2a2a1a 100%)',
+    bg: 'url(https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80&w=800)',
     bento: 'md:col-span-2 md:row-span-1'
   },
   {
@@ -61,7 +61,7 @@ const SERVICES = [
     icon: Music,
     title: 'Behind-the-Scenes Production',
     desc: 'The invisible engine of your event. Stage managers, green-room coordinators, and technical runners.',
-    bg: 'linear-gradient(135deg, #1a1918 0%, #1a1a2a 100%)',
+    bg: 'url(https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=1600)',
     bento: 'md:col-span-4 md:row-span-1'
   },
 ];
@@ -97,10 +97,17 @@ export default function ServicesOverview() {
                 <div
                   className="group relative rounded-3xl overflow-hidden cursor-pointer h-full w-full flex flex-col justify-end p-6 md:p-8"
                   style={{
-                    background: svc.bg,
+                    backgroundImage: svc.bg,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     border: '1px solid rgba(255,255,255,0.05)',
                   }}
                 >
+                {/* Always-on dark overlay for text readability */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'rgba(12,11,10,0.6)' }}
+                />
                 {/* Hover glow overlay */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
