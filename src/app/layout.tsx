@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import SmoothScroll from '@/components/animations/SmoothScroll';
-import CustomCursor from '@/components/animations/CustomCursor';
 import PageTransition from '@/components/animations/PageTransition';
 
 const inter = Inter({
@@ -94,7 +93,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <SmoothScroll>
-          <CustomCursor />
           <Navbar />
           <PageTransition>
             <main className="flex-grow">{children}</main>
