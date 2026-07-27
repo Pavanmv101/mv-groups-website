@@ -30,14 +30,14 @@ export default async function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-14">
-          <p className="section-label">● WHAT CLIENTS SAY</p>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight max-w-2xl">
-            Trusted by Event Organisers{' '}
+          <p className="text-[#f3c892] text-xs font-bold tracking-[0.2em] uppercase mb-4">Verified Partners</p>
+          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight max-w-2xl tracking-tighter">
+            The standard of choice for{' '}
             <em
               className="not-italic"
               style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}
             >
-              Across Karnataka
+              industry leaders.
             </em>
           </h2>
         </div>
