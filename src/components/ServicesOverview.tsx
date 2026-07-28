@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
-  Heart, Briefcase, Store, Megaphone, Truck,
-  GraduationCap, Zap, UtensilsCrossed, Music,
+  Heart, Briefcase, Megaphone, Truck,
+  UtensilsCrossed, Music,
 } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';

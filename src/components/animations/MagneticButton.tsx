@@ -1,11 +1,10 @@
 'use client';
 
-import { useRef, useState, ReactNode } from 'react';
+import { useRef, ReactNode } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function MagneticButton({ children, className = '' }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -30,13 +29,12 @@ export default function MagneticButton({ children, className = '' }: { children:
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
     x.set(0);
     y.set(0);
   };
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    // intentional empty — triggers motion only
   };
 
   return (
