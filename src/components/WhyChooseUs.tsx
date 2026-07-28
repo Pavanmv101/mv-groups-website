@@ -3,6 +3,8 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import Watermark from './animations/Watermark';
+import GSAPTextReveal from './animations/GSAPTextReveal';
+import Reveal from '@/components/animations/Reveal';
 
 const REASONS = [
   {
@@ -39,12 +41,13 @@ export default function WhyChooseUs() {
           <div className="lg:w-1/2 relative">
             <div className="lg:sticky lg:top-32">
               <p className="text-[11px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: '#c9a84c' }}>● THE MV STANDARD</p>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tighter">
-                Why the best brands <br className="hidden lg:block"/>
-                <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>
-                  trust us.
-                </em>
-              </h2>
+              <GSAPTextReveal
+                tag="h2"
+                splitBy="words"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tighter"
+              >
+                Why the best brands trust us.
+              </GSAPTextReveal>
               <p className="text-[#a39e98] leading-relaxed text-lg mb-8 max-w-md">
                 We bridge the gap between temporary manpower and permanent luxury hospitality. We are your partners in perfect execution.
               </p>
@@ -54,8 +57,8 @@ export default function WhyChooseUs() {
           {/* Right - 2x2 Grid of Cards */}
           <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
             {REASONS.map((reason, idx) => (
+              <Reveal key={idx} delay={idx * 0.1}>
               <div 
-                key={idx} 
                 className="flex flex-col p-8 rounded-2xl group transition-all duration-300 hover:-translate-y-2"
                 style={{ background: '#1a1a1a', border: '1px solid #2a2a2a' }}
               >
@@ -69,6 +72,7 @@ export default function WhyChooseUs() {
                   {reason.desc}
                 </p>
               </div>
+              </Reveal>
             ))}
           </div>
 

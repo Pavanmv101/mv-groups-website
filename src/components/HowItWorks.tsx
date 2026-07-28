@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { ArrowRight, ClipboardCheck, Users, CalendarCheck } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import Constellation from './animations/Constellation';
+import GSAPTextReveal from './animations/GSAPTextReveal';
+import GSAPMagnetic from './animations/GSAPMagnetic';
 
 const STEPS = [
   {
@@ -45,9 +47,13 @@ export default function HowItWorks() {
             <p className="text-[11px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: '#c9a84c' }}>
               ● The Process
             </p>
-            <h2 className="text-4xl md:text-5xl font-black text-white">
-              Our <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>Process</em>
-            </h2>
+            <GSAPTextReveal
+              tag="h2"
+              splitBy="words"
+              className="text-4xl md:text-5xl font-black text-white"
+            >
+              Our Process
+            </GSAPTextReveal>
           </div>
         </Reveal>
 

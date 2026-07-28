@@ -6,6 +6,9 @@ import { ArrowRight } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import TextReveal from '@/components/animations/TextReveal';
 import MagneticButton from '@/components/animations/MagneticButton';
+import GSAPCounter from '@/components/animations/GSAPCounter';
+import GSAPMagnetic from '@/components/animations/GSAPMagnetic';
+import GSAPTextReveal from '@/components/animations/GSAPTextReveal';
 
 // ── Video clip list — local downloaded MP4s ──
 const VIDEO_CLIPS = [
@@ -111,9 +114,9 @@ function QuadVideoBackground() {
 }
 
 const STATS = [
-  { value: '100+', label: 'EVENTS POWERED' },
-  { value: '250+', label: 'STAFF DEPLOYED' },
-  { value: '15+',  label: 'ACTIVE CLIENTS'  },
+  { num: 100, suffix: '+', label: 'EVENTS POWERED' },
+  { num: 250, suffix: '+', label: 'STAFF DEPLOYED' },
+  { num: 15,  suffix: '+', label: 'ACTIVE CLIENTS'  },
 ];
 
 export default function Hero() {
@@ -222,17 +225,17 @@ export default function Hero() {
         {/* ── CTA buttons ── */}
         <Reveal delay={0.6}>
           <div className="flex flex-col sm:flex-row gap-4 mb-14 justify-center w-full">
-            <MagneticButton>
+            <GSAPMagnetic strength={0.35}>
               <Link href="/booking" className="btn-gold text-sm px-7 py-3.5">
                 Book Your Team
                 <ArrowRight className="w-4 h-4" />
               </Link>
-            </MagneticButton>
-            <MagneticButton>
+            </GSAPMagnetic>
+            <GSAPMagnetic strength={0.35}>
               <Link href="/contact" className="btn-outline text-sm px-7 py-3.5">
                 Request a Consultation
               </Link>
-            </MagneticButton>
+            </GSAPMagnetic>
           </div>
         </Reveal>
 
@@ -251,12 +254,13 @@ export default function Hero() {
             {STATS.map((stat, i) => (
               <div key={stat.label} className="flex items-center">
                 <div className="flex flex-col items-center px-6 py-1">
-                  <span
+                  <GSAPCounter
+                    value={stat.num}
+                    suffix={stat.suffix}
+                    duration={2.2}
                     className="font-black leading-none"
-                    style={{ color: '#f3c892', fontSize: '48px' }}
-                  >
-                    {stat.value}
-                  </span>
+                    style={{ color: '#f3c892', fontSize: '48px' } as React.CSSProperties}
+                  />
                   <span
                     className="text-[13px] font-semibold tracking-widest mt-1"
                     style={{ color: '#a39e98', letterSpacing: '0.1em' }}
