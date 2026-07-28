@@ -41,7 +41,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-0.5 mb-5 group">
               <Image 
-                src="/images/mv-groups-logo.jpg" 
+                src="/images/mv-groups-logo.png" 
                 alt="MV Groups Logo" 
                 width={56} 
                 height={56} 

@@ -89,7 +89,7 @@ export default function Navbar() {
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
               <Image 
-                src="/images/mv-groups-logo.jpg" 
+                src="/images/mv-groups-logo.png" 
                 alt="MV Groups Logo" 
                 width={40} 
                 height={40} 
