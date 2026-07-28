@@ -2,9 +2,15 @@
 
 import { useEffect } from 'react';
 
+interface LenisInstance {
+  raf: (time: number) => void;
+  destroy: () => void;
+}
+
 export default function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    let lenis: any;
+    let lenis: LenisInstance | null = null;
+    let rafId: number;
 
     async function initLenis() {
       const Lenis = (await import('lenis')).default;
@@ -14,13 +20,13 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
         orientation: 'vertical',
         smoothWheel: true,
         wheelMultiplier: 0.8,
-      });
+      }) as LenisInstance;
 
       function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+        lenis?.raf(time);
+        rafId = requestAnimationFrame(raf);
       }
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
     initLenis().catch(() => {
@@ -28,6 +34,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     });
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       if (lenis) lenis.destroy();
     };
   }, []);

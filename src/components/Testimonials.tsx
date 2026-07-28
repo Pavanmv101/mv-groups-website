@@ -60,7 +60,7 @@ export default async function Testimonials() {
                 style={{ color: '#f3c892', opacity: 0.25, fontFamily: 'Georgia, serif', lineHeight: 1 }}
                 aria-hidden="true"
               >
-                "
+                &ldquo;
               </div>
 
               {/* Stars */}
