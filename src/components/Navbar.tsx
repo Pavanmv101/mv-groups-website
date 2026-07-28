@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { type User } from '@supabase/supabase-js';
 import { Menu, X, User as UserIcon, ArrowRight } from 'lucide-react';
 import { NAV_LINKS } from '@/lib/constants';
@@ -86,18 +87,15 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
 
             {/* ── Logo ── */}
-            <Link href="/" className="flex items-center gap-0.5 group flex-shrink-0">
-              <span
-                className="text-2xl font-black tracking-tight leading-none"
-                style={{ color: '#f3c892' }}
-              >
-                MV
-              </span>
-              <span
-                className="text-2xl font-black tracking-[0.18em] leading-none text-white"
-              >
-                GROUPS
-              </span>
+            <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
+              <Image 
+                src="/images/mv-groups-logo.jpg" 
+                alt="MV Groups Logo" 
+                width={40} 
+                height={40} 
+                className="rounded-full shadow-lg border-[1.5px] border-[#d4aa73]/30 transition-transform duration-300 group-hover:scale-105"
+                priority 
+              />
             </Link>
 
             {/* ── Desktop nav links ── */}

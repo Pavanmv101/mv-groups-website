@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { COMPANY, NAV_LINKS } from '@/lib/constants';
 
@@ -38,9 +39,14 @@ export default function Footer() {
 
           {/* Col 1 — Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-0.5 mb-5">
-              <span className="text-2xl font-black" style={{ color: '#f3c892' }}>MV</span>
-              <span className="text-2xl font-black tracking-[0.18em] text-white">GROUPS</span>
+            <Link href="/" className="flex items-center gap-0.5 mb-5 group">
+              <Image 
+                src="/images/mv-groups-logo.jpg" 
+                alt="MV Groups Logo" 
+                width={56} 
+                height={56} 
+                className="rounded-full shadow-lg border-[1.5px] border-[#d4aa73]/30 transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: '#66625d' }}>
               On-demand event staffing for Karnataka. Professional crew, vetted &amp; trained.
