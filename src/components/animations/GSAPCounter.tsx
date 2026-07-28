@@ -12,6 +12,7 @@ interface CounterProps {
   prefix?: string;
   duration?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export default function GSAPCounter({
@@ -20,6 +21,7 @@ export default function GSAPCounter({
   prefix = '',
   duration = 2,
   className = '',
+  style,
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -46,5 +48,5 @@ export default function GSAPCounter({
     return () => { tl.kill(); };
   }, [value, suffix, prefix, duration]);
 
-  return <span ref={ref} className={className}>{prefix}0{suffix}</span>;
+  return <span ref={ref} className={className} style={style}>{prefix}0{suffix}</span>;
 }
