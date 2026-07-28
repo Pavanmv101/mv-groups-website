@@ -23,7 +23,7 @@ export default function SideNav() {
         });
       },
       {
-        rootMargin: '-30% 0px -70% 0px', 
+        rootMargin: '-40% 0px -40% 0px', 
       }
     );
 
@@ -36,7 +36,7 @@ export default function SideNav() {
   }, []);
 
   return (
-    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-end gap-8 mix-blend-screen pointer-events-none">
+    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col items-end gap-8 pointer-events-none">
       <div className="absolute right-[3px] top-2 bottom-2 w-[1px] bg-white/10 z-0" />
       
       {SECTIONS.map(({ id, label }) => {
