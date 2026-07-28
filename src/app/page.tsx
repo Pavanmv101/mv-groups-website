@@ -6,7 +6,7 @@ import ServicesOverview from '@/components/ServicesOverview';
 import AnyRoleSection from '@/components/AnyRoleSection';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import JoinCrewSection from '@/components/JoinCrewSection';
-import Testimonials from '@/components/Testimonials';
+
 import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
 import SideNav from '@/components/SideNav';

@@ -1,14 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
-import TextReveal from '@/components/animations/TextReveal';
-import MagneticButton from '@/components/animations/MagneticButton';
 import GSAPCounter from '@/components/animations/GSAPCounter';
 import GSAPMagnetic from '@/components/animations/GSAPMagnetic';
-import GSAPTextReveal from '@/components/animations/GSAPTextReveal';
 
 // ── Video clip list — local downloaded MP4s ──
 const VIDEO_CLIPS = [

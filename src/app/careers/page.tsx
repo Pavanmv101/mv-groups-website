@@ -152,7 +152,7 @@ export default function CareersPage() {
                       name="resume" 
                       accept=".pdf,.doc,.docx"
                       className="block w-full text-sm file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:font-semibold transition-all rounded-xl"
-                      style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98', file: { background: '#282624', color: '#ffffff' } } as any}
+                      style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}
                     />
                   </div>
                   <p className="text-xs mt-3" style={{ color: '#66625d' }}>Max size: 5MB. Formats: PDF, DOCX</p>

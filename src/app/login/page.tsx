@@ -103,7 +103,7 @@ function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
-  const [lockedUntil, setLockedUntil] = useState<number | null>(null)
+  const [lockedUntil, _setLockedUntil] = useState<number | null>(null)
   const [requireCaptcha, setRequireCaptcha] = useState(false)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
@@ -184,9 +184,9 @@ function LoginForm() {
           setError(null)
         }
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err)
-      setError('System Error: ' + (err.message || 'An error occurred. Please try again.'))
+      setError('System Error: ' + (err instanceof Error ? err.message : 'An error occurred. Please try again.'))
     } finally {
       setLoading(false)
     }

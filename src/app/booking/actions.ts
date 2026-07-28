@@ -50,9 +50,9 @@ export async function submitBooking(formData: FormData) {
     if (sbError) throw sbError
     
     return { success: true }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Submit Booking Error:', err)
-    const errorMsg = err?.message || err?.details || JSON.stringify(err) || 'Something went wrong.'
+    const errorMsg = err instanceof Error ? err.message : (typeof err === 'object' && err !== null && 'details' in err ? String((err as Record<string, unknown>).details) : 'Something went wrong.')
     return { success: false, error: errorMsg }
   }
 }

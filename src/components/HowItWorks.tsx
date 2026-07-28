@@ -5,7 +5,7 @@ import { ArrowRight, ClipboardCheck, Users, CalendarCheck } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import Constellation from './animations/Constellation';
 import GSAPTextReveal from './animations/GSAPTextReveal';
-import GSAPMagnetic from './animations/GSAPMagnetic';
+
 
 const STEPS = [
   {

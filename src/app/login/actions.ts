@@ -133,9 +133,9 @@ export async function login(formData: FormData) {
 
     revalidatePath('/', 'layout')
     return { success: true, role: userData?.role || 'client' }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('Server Action Login Error:', err)
-    return { error: 'Server Error: ' + (err.message || err.toString()) }
+    return { error: 'Server Error: ' + (err instanceof Error ? err.message : String(err)) }
   }
 }
 

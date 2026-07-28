@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import { COMPANY } from '@/lib/constants';
+
 
 export default function Loading() {
   return (
