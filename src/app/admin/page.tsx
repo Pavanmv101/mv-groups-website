@@ -5,7 +5,7 @@ import AdminApplicantsTable from '@/components/admin/AdminApplicantsTable'
 import AdminInquiriesTable from '@/components/admin/AdminInquiriesTable'
 import AdminUpdatesTable from '@/components/admin/AdminUpdatesTable'
 import AdminTestimonialsTable from '@/components/admin/AdminTestimonialsTable'
-import { ShieldCheck, Users, Briefcase, Mail, Megaphone, Star, Image } from 'lucide-react'
+import { ShieldCheck, Users, Briefcase, Mail, Megaphone, Star, Image as ImageIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default async function AdminDashboardPage({
@@ -196,7 +196,7 @@ export default async function AdminDashboardPage({
             href="/admin/gallery"
             className="px-5 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap border-transparent text-[#66625d] hover:text-[#c8c3be] hover:border-[#403e3c]"
           >
-            <Image className="w-4 h-4" />
+            <ImageIcon className="w-4 h-4" />
             Gallery
           </Link>
         </div>

@@ -103,7 +103,8 @@ function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
-  const [lockedUntil, _setLockedUntil] = useState<number | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [lockedUntil, setLockedUntil] = useState<number | null>(null)
   const [requireCaptcha, setRequireCaptcha] = useState(false)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 

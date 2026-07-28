@@ -215,7 +215,7 @@ export default function Hero() {
             className="leading-relaxed mb-10 max-w-xl"
             style={{ color: '#c8c3be', fontSize: '15px' }}
           >
-            We don't just fill roles; we carefully select the professional faces that bring your vision to life. Elite hospitality, brand ambassadors, and seamless event talent across Karnataka.
+            We don&apos;t just fill roles; we carefully select the professional faces that bring your vision to life. Elite hospitality, brand ambassadors, and seamless event talent across Karnataka.
           </p>
         </Reveal>
 

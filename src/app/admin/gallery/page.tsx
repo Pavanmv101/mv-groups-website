@@ -97,8 +97,8 @@ export default function AdminGalleryPage() {
       
       // Refresh list
       await fetchImages();
-    } catch (err: any) {
-      setError(err.message || 'Failed to upload image');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to upload image');
     } finally {
       setUploading(false);
     }
@@ -117,8 +117,8 @@ export default function AdminGalleryPage() {
       
       // Refresh list
       await fetchImages();
-    } catch (err: any) {
-      alert(err.message || 'Failed to delete image');
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'Failed to delete image');
     } finally {
       setDeleting(null);
     }
