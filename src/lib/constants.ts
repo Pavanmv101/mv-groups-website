@@ -27,7 +27,7 @@ export const COMPANY = {
   phone: '+91 93805 58344',
   linkedin: 'https://linkedin.com/company/mvgroups',
   instagram: 'https://instagram.com/mvgroups.online',
-  website: 'https://mvgroups.in',
+  website: 'https://mvgroups.online',
 } as const;
 
 // ---- Navigation ----
