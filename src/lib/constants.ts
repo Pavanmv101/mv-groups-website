@@ -25,7 +25,7 @@ export const COMPANY = {
   location: 'Bengaluru, Karnataka',
   email: 'mvgroups2026@gmail.com',
   phone: '+91 93805 58344',
-  linkedin: 'https://linkedin.com/company/mvgroups',
+  linkedin: 'https://www.linkedin.com/company/mvgroups-karnataka',
   instagram: 'https://instagram.com/mvgroups.online',
   website: 'https://mvgroups.online',
 } as const;
