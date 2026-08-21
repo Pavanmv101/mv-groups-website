@@ -91,9 +91,9 @@ export default function Navbar() {
               <Image 
                 src="/images/mv-groups-logo.png" 
                 alt="MV Groups Logo" 
-                width={40} 
-                height={40} 
-                className="rounded-full shadow-lg border-[1.5px] border-[#d4aa73]/30 transition-transform duration-300 group-hover:scale-105"
+                width={120} 
+                height={48} 
+                className="transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
                 priority 
               />
             </Link>

@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: 'MV Groups',
     images: [
       {
-        url: 'https://mvgroups.online/logo.jpg',
+        url: 'https://mvgroups.online/logo.png',
         width: 800,
         height: 600,
         alt: 'MV Groups Logo',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MV Groups | Event Staffing & Manpower Solutions',
     description: 'Premier manpower supply and corporate event staffing agency in Karnataka.',
-    images: ['https://mvgroups.online/logo.jpg'],
+    images: ['https://mvgroups.online/logo.png'],
   },
 };
 
@@ -71,7 +71,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'MV Groups',
-    image: 'https://mvgroups.online/logo.jpg',
+    image: 'https://mvgroups.online/logo.png',
     url: 'https://mvgroups.online',
     description: 'Premier manpower supply and software/tech events company delivering reliable staffing solutions and world-class event management across Karnataka.',
     address: {

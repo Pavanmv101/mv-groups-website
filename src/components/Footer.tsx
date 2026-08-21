@@ -43,9 +43,9 @@ export default function Footer() {
               <Image 
                 src="/images/mv-groups-logo.png" 
                 alt="MV Groups Logo" 
-                width={56} 
+                width={140} 
                 height={56} 
-                className="rounded-full shadow-lg border-[1.5px] border-[#d4aa73]/30 transition-transform duration-300 group-hover:scale-105"
+                className="transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
               />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: '#66625d' }}>
