@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
@@ -17,6 +17,31 @@ const VIDEO_CLIPS = [
 
 function QuadVideoBackground() {
   const [videoError, setVideoError] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null, null]);
+
+  // Force-play all videos on mount and when tab becomes visible again
+  useEffect(() => {
+    const playAll = () => {
+      videoRefs.current.forEach((v) => {
+        if (v) {
+          v.play().catch(() => {
+            // Silently ignore — browser may still block
+          });
+        }
+      });
+    };
+
+    // Play on mount
+    playAll();
+
+    // Re-play when user returns to the tab
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') playAll();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
 
   if (videoError) {
     // Fallback: dark gradient with subtle noise texture
@@ -44,6 +69,7 @@ function QuadVideoBackground() {
       {/* Top Left - Concert */}
       <div className="relative w-full h-full">
         <video
+          ref={(el) => { videoRefs.current[0] = el; }}
           className="absolute inset-0 w-full h-full object-cover"
           src={VIDEO_CLIPS[0]}
           autoPlay
@@ -59,6 +85,7 @@ function QuadVideoBackground() {
       {/* Top Right - Wedding */}
       <div className="relative w-full h-full">
         <video
+          ref={(el) => { videoRefs.current[1] = el; }}
           className="absolute inset-0 w-full h-full object-cover"
           src={VIDEO_CLIPS[1]}
           autoPlay
@@ -74,6 +101,7 @@ function QuadVideoBackground() {
       {/* Bottom Left - Corporate */}
       <div className="relative w-full h-full">
         <video
+          ref={(el) => { videoRefs.current[2] = el; }}
           className="absolute inset-0 w-full h-full object-cover"
           src={VIDEO_CLIPS[2]}
           autoPlay
@@ -89,6 +117,7 @@ function QuadVideoBackground() {
       {/* Bottom Right - DJ Night */}
       <div className="relative w-full h-full">
         <video
+          ref={(el) => { videoRefs.current[3] = el; }}
           className="absolute inset-0 w-full h-full object-cover"
           src={VIDEO_CLIPS[3]}
           autoPlay
