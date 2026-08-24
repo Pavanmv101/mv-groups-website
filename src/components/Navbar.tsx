@@ -79,8 +79,8 @@ export default function Navbar() {
         ref={navRef}
         className={`fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-500 rounded-full ${
           scrolled
-            ? 'top-4 bg-[#0c0b0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl py-3'
-            : 'top-6 bg-transparent border border-transparent py-4'
+            ? 'top-4 bg-[#0c0b0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl py-2'
+            : 'top-6 bg-transparent border border-transparent py-2'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,9 +91,9 @@ export default function Navbar() {
               <Image 
                 src="/images/mv-groups-logo.png" 
                 alt="MV Groups Logo" 
-                width={120} 
-                height={48} 
-                className="transition-transform duration-300 group-hover:scale-105 drop-shadow-lg"
+                width={90} 
+                height={36} 
+                className="transition-transform duration-300 group-hover:scale-105 drop-shadow-lg h-9 w-auto object-contain"
                 priority 
               />
             </Link>
