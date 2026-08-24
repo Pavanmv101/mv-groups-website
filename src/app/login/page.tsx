@@ -102,7 +102,17 @@ function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
-  const [loginSuccess, setLoginSuccess] = useState(false)
+  const [loginSuccess, setLoginSuccess] = useState(searchParams.get('success') === 'true')
+  
+  useEffect(() => {
+    if (searchParams.get('success') === 'true') {
+      const nextUrl = searchParams.get('next') || '/dashboard'
+      setTimeout(() => {
+        router.push(nextUrl)
+        router.refresh()
+      }, 1500)
+    }
+  }, [searchParams, router])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [lockedUntil, setLockedUntil] = useState<number | null>(null)
   const [requireCaptcha, setRequireCaptcha] = useState(false)

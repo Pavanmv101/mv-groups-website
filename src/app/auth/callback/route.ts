@@ -17,7 +17,8 @@ export async function GET(request: Request) {
     const supabase = await createClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      // Redirect back to login page to show the success animation, passing the 'next' destination
+      return NextResponse.redirect(`${origin}/login?success=true&next=${encodeURIComponent(next)}`)
     } else {
       console.error('exchangeCodeForSession error:', error)
     }
