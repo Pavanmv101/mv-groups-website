@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react'
 import { submitApplication } from './actions'
-import { Briefcase, MapPin, Clock } from 'lucide-react'
+import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const initialState = {
