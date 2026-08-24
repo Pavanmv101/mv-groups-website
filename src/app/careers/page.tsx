@@ -265,7 +265,7 @@ export default function CareersPage() {
             )}
 
           </div>
-        </div>
+        </motion.div>
 
         {/* ── FAQ Section ── */}
         <div className="max-w-3xl mx-auto mt-32">
