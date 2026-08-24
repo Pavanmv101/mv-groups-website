@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import CookieConsent from '@/components/CookieConsent';
 import PageTransition from '@/components/animations/PageTransition';
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider';
 
@@ -99,6 +100,7 @@ export default function RootLayout({
           </PageTransition>
           <Footer />
           <WhatsAppButton />
+          <CookieConsent />
         </SmoothScrollProvider>
       </body>
     </html>

@@ -327,3 +327,18 @@ body {
   padding: 6rem 2rem 2rem;
   animation: fadeIn 0.2s ease forwards;
 }
+
+/* ── Cookie Consent Slide-Up ── */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
