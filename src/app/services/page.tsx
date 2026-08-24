@@ -3,21 +3,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
-  Building2,
-  Calendar,
   Megaphone,
   Store,
   Briefcase,
   HeartHandshake,
   Truck,
   Users,
-  GraduationCap,
-  ShoppingBag,
-  Hotel,
-  Rocket,
-  Landmark,
-  Heart,
-  Trophy,
   CheckCircle2,
   ArrowRight
 } from 'lucide-react';

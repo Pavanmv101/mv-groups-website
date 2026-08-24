@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'
+import nodemailer from 'nodemailer'
 
 export async function submitApplication(prevState: unknown, formData: FormData) {
   try {
@@ -109,7 +110,6 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
 
     // 4. Send Email Notification using Nodemailer
     try {
-      const nodemailer = require('nodemailer')
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
