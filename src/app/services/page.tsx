@@ -168,7 +168,7 @@ function ServiceDetailSection({
               {/* Background Image with Zoom on Hover */}
               {bgImage && (
                 <div 
-                  className="absolute inset-0 z-0 opacity-20 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110"
+                  className="absolute inset-0 z-0 opacity-40 transition-all duration-1000 group-hover:scale-110 group-hover:opacity-60"
                   style={{
                     backgroundImage: `url(${bgImage})`,
                     backgroundSize: 'cover',
@@ -177,8 +177,10 @@ function ServiceDetailSection({
                 />
               )}
               
-              {/* Gradient Overlay for Text Readability */}
-              <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#1a1918] via-transparent to-transparent opacity-80" />
+              {/* Gradient Overlays for Text Readability */}
+              <div className="absolute inset-0 z-0 bg-[#1a1918]/50" />
+              <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#1a1918] via-[#1a1918]/80 to-transparent" />
+              <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#1a1918] via-[#1a1918]/50 to-transparent" />
 
               <div className="relative z-10">
                 <div
