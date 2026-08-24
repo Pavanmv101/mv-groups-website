@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import CookieConsent from '@/components/CookieConsent';
+import { Analytics } from '@vercel/analytics/react';
 import PageTransition from '@/components/animations/PageTransition';
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider';
 
@@ -102,6 +103,7 @@ export default function RootLayout({
           <WhatsAppButton />
           <CookieConsent />
         </SmoothScrollProvider>
+        <Analytics />
       </body>
     </html>
   );
