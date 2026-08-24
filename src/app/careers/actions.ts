@@ -107,6 +107,45 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
       return { success: false, error: `Submission failed: ${insertError.message} (code: ${insertError.code})` }
     }
 
+    // 4. Send Email Notification using Nodemailer
+    try {
+      const nodemailer = require('nodemailer')
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_APP_PASSWORD,
+        },
+      })
+
+      const mailOptions = {
+        from: `"MV Groups Website" <${process.env.GMAIL_USER}>`,
+        to: process.env.GMAIL_USER,
+        subject: `New Career Application: ${name}`,
+        html: `
+          <h2>New Job Application Received</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>City:</strong> ${city}</p>
+          <p><strong>Interest:</strong> ${interest}</p>
+          <p><strong>Availability:</strong> ${availability}</p>
+          <hr />
+          <p><strong>Gender:</strong> ${gender}</p>
+          <p><strong>Experience:</strong> ${experience}</p>
+          <p><strong>Languages:</strong> ${languages}</p>
+          <p><strong>Instagram:</strong> ${instagram || 'None provided'}</p>
+          ${resume_url ? `<p><a href="${resume_url}">📄 View Resume</a></p>` : '<p>No resume uploaded.</p>'}
+          ${photo_url ? `<p><a href="${photo_url}">📸 View Photo</a></p>` : '<p>No photo uploaded.</p>'}
+        `,
+      }
+
+      await transporter.sendMail(mailOptions)
+    } catch (emailErr) {
+      console.error('Failed to send email notification:', emailErr)
+      // We don't fail the submission if email fails, just log it.
+    }
+
     revalidatePath('/admin') // refresh admin cache
     
     return { success: true, error: null }
