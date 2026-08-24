@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
-  ArrowRight,
-  CheckCircle2,
   Building2,
   Calendar,
   Megaphone,
@@ -20,8 +18,10 @@ import {
   Landmark,
   Heart,
   Trophy,
+  CheckCircle2,
+  ArrowRight
 } from 'lucide-react';
-import { SERVICES, STATS } from '@/lib/constants';
+import { SERVICES } from '@/lib/constants';
 
 /* ------------------------------------------------------------------ */
 /*  Animated entrance hook                                             */
@@ -45,26 +45,17 @@ function useInView(threshold = 0.15) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Industries We Serve — data                                         */
+/*  Service images & icons                                            */
 /* ------------------------------------------------------------------ */
-const INDUSTRIES = [
-  { icon: Building2, label: 'Corporate Companies' },
-  { icon: Calendar, label: 'Event Management' },
-  { icon: Megaphone, label: 'Marketing Agencies' },
-  { icon: Store, label: 'Exhibition Organizers' },
-  { icon: HeartHandshake, label: 'Wedding Planners' },
-  { icon: GraduationCap, label: 'Colleges & Universities' },
-  { icon: ShoppingBag, label: 'Shopping Malls' },
-  { icon: Hotel, label: 'Hotels & Convention Centers' },
-  { icon: Rocket, label: 'Startups' },
-  { icon: Landmark, label: 'Government Events' },
-  { icon: Heart, label: 'NGOs' },
-  { icon: Trophy, label: 'Sports Events' },
-];
+const SERVICE_IMAGES: Record<string, string> = {
+  event_manpower: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000&auto=format&fit=crop',
+  promotional_staffing: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1000&auto=format&fit=crop',
+  exhibition_staffing: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop',
+  corporate_staffing: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1000&auto=format&fit=crop',
+  wedding_social: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop',
+  event_logistics: 'https://images.unsplash.com/photo-1586528116311-ad8ed7e50def?q=80&w=1000&auto=format&fit=crop',
+};
 
-/* ------------------------------------------------------------------ */
-/*  Service icon map (for the icon prop which is a component)          */
-/* ------------------------------------------------------------------ */
 const SERVICE_ICON_MAP: Record<string, typeof Users> = {
   event_manpower: Users,
   promotional_staffing: Megaphone,
@@ -82,7 +73,6 @@ export default function ServicesPage() {
     <div style={{ background: '#0c0b0a', minHeight: '100vh' }}>
       {/* ───── Hero Banner ───── */}
       <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden border-b" style={{ borderBottomColor: '#1a1918' }}>
-        {/* decorative subtle gold blurs */}
         <div className="absolute top-10 right-0 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }} />
         <div className="absolute bottom-0 left-10 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.03)' }} />
 
@@ -111,30 +101,25 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ───── Service Detail Sections ───── */}
-      {SERVICES.map((service, idx) => {
-        const isReversed = idx % 2 === 1;
-        const Icon = SERVICE_ICON_MAP[service.id] ?? Users;
+      {/* ───── Service Detail Sections (Sticky Scrolling) ───── */}
+      <div className="relative">
+        {SERVICES.map((service, idx) => {
+          const isReversed = idx % 2 === 1;
+          const Icon = SERVICE_ICON_MAP[service.id] ?? Users;
+          const bgImage = SERVICE_IMAGES[service.id];
 
-        return (
-          <ServiceDetailSection
-            key={service.id}
-            service={service}
-            Icon={Icon}
-            reversed={isReversed}
-            index={idx}
-          />
-        );
-      })}
-
-      {/* ───── Industries We Serve ───── */}
-      <IndustriesSection />
-
-      {/* ───── Stats Band ───── */}
-      <StatsBand />
-
-      {/* ───── CTA ───── */}
-      <CTABanner />
+          return (
+            <ServiceDetailSection
+              key={service.id}
+              service={service}
+              Icon={Icon}
+              reversed={isReversed}
+              index={idx}
+              bgImage={bgImage}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -147,6 +132,7 @@ interface ServiceDetailProps {
   Icon: typeof Users;
   reversed: boolean;
   index: number;
+  bgImage?: string;
 }
 
 function ServiceDetailSection({
@@ -154,6 +140,7 @@ function ServiceDetailSection({
   Icon,
   reversed,
   index,
+  bgImage,
 }: ServiceDetailProps) {
   const { ref, visible } = useInView();
 
@@ -161,210 +148,106 @@ function ServiceDetailSection({
     <section
       ref={ref}
       id={service.id}
-      className={`py-20 lg:py-28`}
+      className={`relative py-20 lg:py-32`}
       style={{ background: index % 2 === 0 ? '#141312' : '#0c0b0a' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
+          className={`grid lg:grid-cols-12 gap-12 lg:gap-16 items-start ${
             reversed ? 'lg:flex-row-reverse' : ''
           }`}
         >
-          {/* ── Visual card ── */}
+          {/* ── Left Side: Sticky Visual Card ── */}
           <div
-            className={`${visible ? 'animate-fade-in-up' : 'opacity-0'}`}
+            className={`lg:col-span-6 lg:sticky lg:top-32 ${visible ? 'animate-fade-in-up' : 'opacity-0'} ${reversed ? 'lg:order-2' : 'lg:order-1'}`}
           >
             <div
-              className={`relative rounded-3xl p-10 lg:p-14 overflow-hidden border`}
+              className={`group relative rounded-[2rem] p-8 lg:p-14 overflow-hidden border transition-all duration-700 hover:border-[#f3c892]/30 hover:shadow-[0_0_40px_rgba(243,200,146,0.1)]`}
               style={{ background: '#1a1918', borderColor: '#282624' }}
             >
-              {/* Subtle accent glow inside card */}
-              <div
-                className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-[80px] pointer-events-none"
-                style={{ background: 'rgba(243,200,146,0.1)' }}
-              />
+              {/* Background Image with Zoom on Hover */}
+              {bgImage && (
+                <div 
+                  className="absolute inset-0 z-0 opacity-20 mix-blend-overlay transition-transform duration-1000 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url(${bgImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+              )}
+              
+              {/* Gradient Overlay for Text Readability */}
+              <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#1a1918] via-transparent to-transparent opacity-80" />
 
-              <div
-                className="w-20 h-20 rounded-2xl flex items-center justify-center mb-8 shadow-lg"
-                style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.2)' }}
-              >
-                <Icon className="w-10 h-10" style={{ color: '#f3c892' }} />
-              </div>
+              <div className="relative z-10">
+                <div
+                  className="w-20 h-20 rounded-2xl flex items-center justify-center mb-8 shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3"
+                  style={{ background: 'rgba(243,200,146,0.1)', border: '1px solid rgba(243,200,146,0.2)' }}
+                >
+                  <Icon className="w-10 h-10" style={{ color: '#f3c892' }} />
+                </div>
 
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: '#ffffff' }}>
-                {service.title}
-              </h2>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: '#ffffff' }}>
+                  {service.title}
+                </h2>
 
-              <p className="text-lg leading-relaxed" style={{ color: '#a39e98' }}>
-                {service.description}
-              </p>
-
-              {/* Decorative dots */}
-              <div className="absolute bottom-6 right-6 grid grid-cols-3 gap-1.5 opacity-30">
-                {Array.from({ length: 9 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: '#f3c892' }}
-                  />
-                ))}
+                <p className="text-lg leading-relaxed" style={{ color: '#a39e98' }}>
+                  {service.description}
+                </p>
               </div>
             </div>
           </div>
 
-          {/* ── Features list ── */}
+          {/* ── Right Side: Features List ── */}
           <div
-            className={`space-y-8 ${visible ? 'animate-fade-in-up delay-200' : 'opacity-0'}`}
+            className={`lg:col-span-6 lg:pt-10 space-y-10 ${visible ? 'animate-fade-in-up delay-200' : 'opacity-0'} ${reversed ? 'lg:order-1' : 'lg:order-2'}`}
           >
-            <span
-              className="inline-block px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
-              style={{ background: '#1a1918', color: '#66625d', border: '1px solid #282624' }}
-            >
-              Key Capabilities
-            </span>
+            <div>
+              <span
+                className="inline-block px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8"
+                style={{ background: '#1a1918', color: '#66625d', border: '1px solid #282624' }}
+              >
+                Key Capabilities
+              </span>
 
-            <ul className="space-y-5">
-              {service.features.map((feature, fIdx) => (
-                <li key={fIdx} className="flex items-start gap-4 group">
-                  <CheckCircle2
-                    className="w-6 h-6 shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
-                    style={{ color: '#f3c892' }}
-                  />
-                  <span className="text-lg leading-snug" style={{ color: '#ffffff' }}>
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
+              <ul className="space-y-6">
+                {service.features.map((feature, fIdx) => (
+                  <li 
+                    key={fIdx} 
+                    className="flex items-start gap-4 group p-4 rounded-2xl transition-all duration-300 hover:bg-[#1a1918]"
+                    style={{ border: '1px solid transparent' }}
+                  >
+                    <CheckCircle2
+                      className="w-6 h-6 shrink-0 mt-0.5 transition-all duration-500 group-hover:scale-110 group-hover:text-white"
+                      style={{ color: '#f3c892' }}
+                    />
+                    <span className="text-lg leading-snug transition-colors duration-300 group-hover:text-[#f3c892]" style={{ color: '#ffffff' }}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <div className="pt-6 flex flex-wrap gap-4">
+            <div className="pt-8 flex flex-col sm:flex-row gap-4 border-t" style={{ borderColor: '#282624' }}>
               <Link
                 href={`/services/${service.id}`}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm transition-colors hover:bg-[#141312]/5"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm transition-all hover:bg-white hover:text-black group"
                 style={{ border: '1px solid #282624', color: '#ffffff', background: 'transparent' }}
               >
                 Learn More
+                <ArrowRight className="w-4 h-4 ml-2 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
               </Link>
               <Link
                 href={`/booking?service=${service.id}`}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm transition-transform hover:-translate-y-0.5 shadow-lg"
-                style={{ background: '#f3c892', color: '#0c0b0a' }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-sm transition-transform hover:-translate-y-1 shadow-lg"
+                style={{ background: 'linear-gradient(135deg, #f3c892, #d4aa73)', color: '#0c0b0a' }}
               >
-                Request a Quote
-                <ArrowRight className="w-5 h-5" />
+                Book Your Team
               </Link>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================== */
-/*  Industries Section                                                 */
-/* ================================================================== */
-function IndustriesSection() {
-  const { ref, visible } = useInView();
-
-  return (
-    <section ref={ref} className="py-24 lg:py-32" style={{ background: '#0c0b0a', borderTop: '1px solid #1a1918' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-xs font-bold tracking-[0.15em] uppercase mb-4 block" style={{ color: '#f3c892' }}>Industries</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ color: '#ffffff' }}>Serving Diverse Sectors</h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#a39e98' }}>
-            Our staffing and event solutions span across major industry verticals. No matter your domain, we have the talent and expertise to deliver.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {INDUSTRIES.map((ind, i) => {
-            const Icon = ind.icon;
-            return (
-              <div
-                key={ind.label}
-                className={`rounded-2xl p-6 text-center group transition-all duration-300 ${
-                  visible ? `animate-fade-in-up delay-${Math.min(500, (i + 1) * 50)}` : 'opacity-0'
-                }`}
-                style={{ background: '#141312', border: '1px solid #282624' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(243,200,146,0.3)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#282624'; }}
-              >
-                <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors"
-                  style={{ background: 'rgba(243,200,146,0.05)' }}
-                >
-                  <Icon className="w-6 h-6 transition-colors" style={{ color: '#f3c892' }} />
-                </div>
-                <span className="text-sm font-medium" style={{ color: '#ffffff' }}>{ind.label}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================== */
-/*  Stats Band                                                         */
-/* ================================================================== */
-function StatsBand() {
-  const { ref, visible } = useInView();
-
-  return (
-    <section ref={ref} className="py-20" style={{ background: '#141312', borderTop: '1px solid #1a1918', borderBottom: '1px solid #1a1918' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
-          {STATS.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`text-center ${visible ? `animate-fade-in-up delay-${(i + 1) * 100}` : 'opacity-0'}`}
-            >
-              <div className="text-4xl md:text-6xl font-black mb-2" style={{ color: '#f3c892' }}>
-                {stat.value.toLocaleString('en-IN')}
-                {stat.suffix}
-              </div>
-              <div className="text-xs font-bold tracking-[0.15em] uppercase" style={{ color: '#66625d' }}>{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================== */
-/*  CTA Banner                                                         */
-/* ================================================================== */
-function CTABanner() {
-  return (
-    <section className="py-24 lg:py-32" style={{ background: '#0c0b0a' }}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight" style={{ color: '#ffffff' }}>
-          Ready to Scale Your Team?
-        </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12" style={{ color: '#a39e98' }}>
-          Tell us what you need and we&apos;ll put together a custom proposal
-          within 24 hours. No obligation, no hidden fees.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-          <Link
-            href="/booking"
-            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-10 py-4 rounded-full font-bold text-sm transition-transform hover:-translate-y-0.5 shadow-lg"
-            style={{ background: '#f3c892', color: '#0c0b0a' }}
-          >
-            Request a Quote
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-          <Link
-            href="/contact"
-            className="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-10 py-4 rounded-full font-bold text-sm transition-colors hover:bg-[#141312]/5"
-            style={{ border: '1px solid #282624', color: '#ffffff', background: 'transparent' }}
-          >
-            Contact Us
-          </Link>
         </div>
       </div>
     </section>
