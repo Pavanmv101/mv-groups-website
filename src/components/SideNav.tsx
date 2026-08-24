@@ -35,29 +35,43 @@ export default function SideNav() {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col items-end gap-8 pointer-events-none">
-      <div className="absolute right-[3px] top-2 bottom-2 w-[1px] bg-white/10 z-0" />
+    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col items-end gap-8 group">
+      <div className="absolute right-[3px] top-2 bottom-2 w-[1px] bg-white/10 z-0 pointer-events-none" />
       
       {SECTIONS.map(({ id, label }) => {
         const isActive = activeSection === id;
         return (
-          <div key={id} className="relative flex items-center gap-4 z-10">
+          <button 
+            key={id}
+            onClick={() => scrollToSection(id)}
+            className="relative flex items-center gap-4 z-10 cursor-pointer"
+            aria-label={`Scroll to ${label}`}
+          >
             <span 
-              className={`text-[9px] font-bold tracking-[0.25em] transition-all duration-700 ease-out ${
-                isActive ? 'text-[#f3c892] opacity-100 translate-x-0' : 'text-white/0 opacity-0 translate-x-4'
+              className={`text-[9px] font-bold tracking-[0.25em] transition-all duration-300 ease-out ${
+                isActive 
+                  ? 'text-[#f3c892] opacity-100 translate-x-0' 
+                  : 'text-white/50 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-white'
               }`}
             >
               {label}
             </span>
             <div 
-              className={`w-[7px] h-[7px] rounded-full transition-all duration-500 ${
+              className={`w-[7px] h-[7px] rounded-full transition-all duration-300 ${
                 isActive 
                   ? 'bg-[#f3c892] shadow-[0_0_12px_rgba(243,200,146,0.6)] scale-100' 
-                  : 'bg-white/20 scale-50'
+                  : 'bg-white/20 scale-50 group-hover:scale-75 group-hover:bg-white/50'
               }`}
             />
-          </div>
+          </button>
         );
       })}
     </div>
