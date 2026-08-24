@@ -50,7 +50,7 @@ function useInView(threshold = 0.15) {
 const SERVICE_IMAGES: Record<string, string> = {
   event_manpower: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000&auto=format&fit=crop',
   promotional_staffing: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=1000&auto=format&fit=crop',
-  exhibition_staffing: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop',
+  exhibition_staffing: 'https://images.unsplash.com/photo-1558403194-611308249627?q=80&w=1000&auto=format&fit=crop',
   corporate_staffing: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1000&auto=format&fit=crop',
   wedding_social: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop',
   event_logistics: 'https://images.unsplash.com/photo-1586528116311-ad8ed7e50def?q=80&w=1000&auto=format&fit=crop',
