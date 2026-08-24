@@ -2,6 +2,15 @@ import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight, Megaphone } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'News & Updates | Latest from MV Groups',
+  description: 'Stay updated with the latest announcements, event highlights, and industry insights from MV Groups — Karnataka\'s premier event staffing agency.',
+  alternates: {
+    canonical: 'https://mvgroups.online/updates',
+  },
+}
 
 export default async function UpdatesPage() {
   const supabase = await createClient()
