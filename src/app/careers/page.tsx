@@ -180,20 +180,69 @@ export default function CareersPage() {
                   </select>
                 </div>
 
-                <div>
-                  <label htmlFor="resume" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Resume / CV (Optional)</label>
-                  <div className="relative">
-                    <input 
-                      type="file" 
-                      id="resume" 
-                      name="resume" 
-                      accept=".pdf,.doc,.docx"
-                      className="block w-full text-sm file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:font-semibold transition-all rounded-xl"
-                      style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}
-                    />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="gender" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Gender *</label>
+                    <select required id="gender" name="gender" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                      <option value="">Select gender...</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                      <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
                   </div>
-                  <p className="text-xs mt-3" style={{ color: '#66625d' }}>Max size: 5MB. Formats: PDF, DOCX</p>
+                  <div>
+                    <label htmlFor="experience" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Prior Experience *</label>
+                    <select required id="experience" name="experience" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                      <option value="">Do you have experience?</option>
+                      <option value="None">No prior experience (Fresher)</option>
+                      <option value="Less than 1 year">Less than 1 year</option>
+                      <option value="1-3 years">1-3 years</option>
+                      <option value="3+ years">3+ years</option>
+                    </select>
+                  </div>
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="languages" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Languages Spoken *</label>
+                    <input required type="text" id="languages" name="languages" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="English, Kannada, Hindi..." />
+                  </div>
+                  <div>
+                    <label htmlFor="instagram" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Instagram Handle (Optional)</label>
+                    <input type="text" id="instagram" name="instagram" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="@yourhandle" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="photo" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Headshot / Full Body Photo (Optional)</label>
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        id="photo" 
+                        name="photo" 
+                        accept="image/jpeg,image/png,image/webp"
+                        className="w-full px-5 py-4 rounded-xl transition-all outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#f3c892] file:text-[#0c0b0a] hover:file:bg-[#e2b985]" 
+                        style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }} 
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="resume" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Resume / CV (Optional)</label>
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        id="resume" 
+                        name="resume" 
+                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        className="w-full px-5 py-4 rounded-xl transition-all outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#f3c892] file:text-[#0c0b0a] hover:file:bg-[#e2b985]" 
+                        style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }} 
+                      />
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs" style={{ color: '#66625d' }}>Max size: 5MB. Formats: PDF, DOCX, JPG, PNG</p>
 
                 <div className="pt-4">
                   <button

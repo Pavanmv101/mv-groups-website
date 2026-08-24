@@ -23,9 +23,17 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
     const city = formData.get('city') as string
     const interest = formData.get('interest') as string
     const availability = formData.get('availability') as string
+    
+    // New fields
+    const gender = formData.get('gender') as string
+    const experience = formData.get('experience') as string
+    const languages = formData.get('languages') as string
+    const instagram = formData.get('instagram') as string
+    
     const resumeFile = formData.get('resume') as File | null
+    const photoFile = formData.get('photo') as File | null
 
-    if (!name || !email || !phone || !city || !interest || !availability) {
+    if (!name || !email || !phone || !city || !interest || !availability || !gender || !experience || !languages) {
       return { success: false, error: 'Please fill out all required fields.' }
     }
 
@@ -36,40 +44,44 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
     }
 
     let resume_url = null
+    let photo_url = null
 
-    // 2. Upload resume if provided
-    if (resumeFile && resumeFile.size > 0) {
-      if (resumeFile.size > 5 * 1024 * 1024) {
-        return { success: false, error: 'Resume must be less than 5MB.' }
+    // Helper function to upload files
+    const uploadFile = async (file: File, allowedTypes: Record<string, string>, maxMb: number) => {
+      if (file.size > maxMb * 1024 * 1024) {
+        throw new Error(`File must be less than ${maxMb}MB.`)
       }
-      const allowedMimeTypes: Record<string, string> = {
-        'application/pdf': 'pdf',
-        'application/msword': 'doc',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx'
+      if (!allowedTypes[file.type]) {
+        throw new Error('Invalid file format.')
       }
-      if (!allowedMimeTypes[resumeFile.type]) {
-        return { success: false, error: 'Resume must be a PDF or Word document.' }
-      }
-
-      const fileExt = allowedMimeTypes[resumeFile.type]
+      const fileExt = allowedTypes[file.type]
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
       
-      const { error: uploadError } = await supabase
-        .storage
-        .from('resumes')
-        .upload(fileName, resumeFile, {
-          cacheControl: '3600',
-          upsert: false
-        })
-
-      if (uploadError) {
-        console.error('Resume upload error:', uploadError)
-        return { success: false, error: 'Failed to upload resume. Please try again without a resume or try later.' }
-      }
-
-      // Get public URL
+      const { error } = await supabase.storage.from('resumes').upload(fileName, file, { cacheControl: '3600', upsert: false })
+      if (error) throw new Error('Failed to upload file.')
+      
       const { data: { publicUrl } } = supabase.storage.from('resumes').getPublicUrl(fileName)
-      resume_url = publicUrl
+      return publicUrl
+    }
+
+    // 2. Upload resume if provided
+    try {
+      if (resumeFile && resumeFile.size > 0) {
+        resume_url = await uploadFile(resumeFile, {
+          'application/pdf': 'pdf',
+          'application/msword': 'doc',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx'
+        }, 5)
+      }
+      if (photoFile && photoFile.size > 0) {
+        photo_url = await uploadFile(photoFile, {
+          'image/jpeg': 'jpg',
+          'image/png': 'png',
+          'image/webp': 'webp'
+        }, 5)
+      }
+    } catch (err) {
+      return { success: false, error: err instanceof Error ? err.message : 'File upload failed.' }
     }
 
     // 3. Insert into applicants table
@@ -81,7 +93,12 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
         city,
         area_of_interest: interest,
         availability,
-        resume_url
+        resume_url,
+        gender,
+        experience,
+        languages,
+        instagram,
+        photo_url
       }
     ])
 
