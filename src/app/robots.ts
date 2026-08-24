@@ -1,18 +1,12 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: [
-        '/admin/', 
-        '/admin/*',
-        '/dashboard/',
-        '/dashboard/*',
-        '/api/'
-      ],
+      disallow: ['/admin/', '/dashboard/'],
     },
-    sitemap: 'https://mvgroups.online/sitemap.xml',
-  };
+    sitemap: 'https://www.mvgroups.online/sitemap.xml',
+  }
 }

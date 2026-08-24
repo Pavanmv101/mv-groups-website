@@ -82,7 +82,8 @@ export default function RootLayout({
       addressRegion: 'Karnataka',
       addressCountry: 'IN'
     },
-    telephone: '+91 98765 43210',
+    telephone: '+919380558344',
+    email: 'mvgroups2026@gmail.com',
   };
 
   return (
