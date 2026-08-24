@@ -2,7 +2,8 @@
 
 import { useActionState, useEffect, useRef } from 'react'
 import { submitApplication } from './actions'
-import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react'
+import { Briefcase, MapPin, Clock } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const initialState = {
   success: false,
@@ -25,46 +26,82 @@ export default function CareersPage() {
         
         {/* ── Header Section ── */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span 
-            className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[0.15em] uppercase mb-6"
-            style={{ background: 'rgba(243,200,146,0.1)', color: '#f3c892', border: '1px solid rgba(243,200,146,0.2)' }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            Careers
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight" style={{ color: '#ffffff' }}>
+            <span 
+              className="inline-block px-5 py-2 rounded-full text-xs font-bold tracking-[0.15em] uppercase mb-6"
+              style={{ background: 'rgba(243,200,146,0.1)', color: '#f3c892', border: '1px solid rgba(243,200,146,0.2)' }}
+            >
+              Careers
+            </span>
+          </motion.div>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight" 
+            style={{ color: '#ffffff' }}
+          >
             Join the <span style={{ color: '#f3c892' }}>MV Groups</span> Team
-          </h1>
-          <p className="text-lg md:text-xl leading-relaxed" style={{ color: '#a39e98' }}>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg md:text-xl leading-relaxed" 
+            style={{ color: '#a39e98' }}
+          >
             We are always looking for passionate, energetic, and reliable individuals to join our growing team. Whether you&apos;re looking for flexible event work or a career in manpower staffing, we have opportunities for you.
-          </p>
+          </motion.p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-16">
-            <div className="p-8 rounded-3xl transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="p-8 rounded-3xl transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ background: 'rgba(243,200,146,0.05)' }}>
                 <Briefcase className="w-6 h-6" style={{ color: '#f3c892' }} />
               </div>
               <h3 className="text-lg font-bold mb-3" style={{ color: '#ffffff' }}>Diverse Opportunities</h3>
               <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>From brand promoters to event logistics, find a role that fits your skills.</p>
-            </div>
-            <div className="p-8 rounded-3xl transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="p-8 rounded-3xl transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ background: 'rgba(243,200,146,0.05)' }}>
                 <Clock className="w-6 h-6" style={{ color: '#f3c892' }} />
               </div>
               <h3 className="text-lg font-bold mb-3" style={{ color: '#ffffff' }}>Flexible Schedules</h3>
               <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>Work when you want. Choose events that fit around your lifestyle.</p>
-            </div>
-            <div className="p-8 rounded-3xl transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="p-8 rounded-3xl transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ background: 'rgba(243,200,146,0.05)' }}>
                 <MapPin className="w-6 h-6" style={{ color: '#f3c892' }} />
               </div>
               <h3 className="text-lg font-bold mb-3" style={{ color: '#ffffff' }}>Top Venues</h3>
               <p className="text-sm leading-relaxed" style={{ color: '#a39e98' }}>Experience working at the best corporate and social events in Bengaluru.</p>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* ── Application Form ── */}
-        <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden relative" style={{ background: '#1a1918', border: '1px solid #282624' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="max-w-3xl mx-auto rounded-3xl overflow-hidden relative" 
+          style={{ background: '#1a1918', border: '1px solid #282624' }}
+        >
           <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ background: 'rgba(243,200,146,0.05)' }}></div>
           <div className="p-8 md:p-12 relative z-10">
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center" style={{ color: '#ffffff' }}>Submit Your Application</h2>
