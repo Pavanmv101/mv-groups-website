@@ -156,28 +156,28 @@ export default function CareersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Full Name *</label>
-                    <input required type="text" id="name" name="name" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="John Doe" />
+                    <input required type="text" id="name" name="name" className="w-full px-5 py-4 rounded-xl transition-all outline-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="John Doe" />
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Phone Number *</label>
-                    <input required type="tel" id="phone" name="phone" pattern="[+0-9\s\-]+" minLength={10} maxLength={20} title="Phone number should contain at least 10 digits" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="+91 98765 43210" />
+                    <input required type="tel" id="phone" name="phone" pattern="[+0-9\s\-]+" minLength={10} maxLength={20} title="Phone number should contain at least 10 digits" className="w-full px-5 py-4 rounded-xl transition-all outline-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="+91 98765 43210" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Email Address *</label>
-                    <input required type="email" id="email" name="email" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="john@example.com" />
+                    <input required type="email" id="email" name="email" className="w-full px-5 py-4 rounded-xl transition-all outline-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="john@example.com" />
                   </div>
                   <div>
                     <label htmlFor="city" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>City of Residence *</label>
-                    <input required type="text" id="city" name="city" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="Bengaluru" />
+                    <input required type="text" id="city" name="city" className="w-full px-5 py-4 rounded-xl transition-all outline-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="Bengaluru" />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="interest" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>What are you interested in doing? *</label>
-                  <select required id="interest" name="interest" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                  <select required id="interest" name="interest" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
                     <option value="">Select what you are interested in doing...</option>
                     <option value="Usher / Registration Staff">Usher / Registration Staff</option>
                     <option value="Brand Promoter">Brand Promoter</option>
@@ -190,7 +190,7 @@ export default function CareersPage() {
 
                 <div>
                   <label htmlFor="availability" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Availability *</label>
-                  <select required id="availability" name="availability" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                  <select required id="availability" name="availability" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
                     <option value="">Select your availability...</option>
                     <option value="Full-time">Full-time (Any days)</option>
                     <option value="Part-time (Weekends)">Part-time (Weekends Only)</option>
@@ -202,7 +202,7 @@ export default function CareersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="gender" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Gender *</label>
-                    <select required id="gender" name="gender" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                    <select required id="gender" name="gender" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
                       <option value="">Select gender...</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -212,7 +212,7 @@ export default function CareersPage() {
                   </div>
                   <div>
                     <label htmlFor="experience" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Prior Experience *</label>
-                    <select required id="experience" name="experience" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                    <select required id="experience" name="experience" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
                       <option value="">Do you have experience?</option>
                       <option value="None">No prior experience (Fresher)</option>
                       <option value="Less than 1 year">Less than 1 year</option>
@@ -225,11 +225,11 @@ export default function CareersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="languages" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Languages Spoken *</label>
-                    <input required type="text" id="languages" name="languages" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="English, Kannada, Hindi..." />
+                    <input required type="text" id="languages" name="languages" className="w-full px-5 py-4 rounded-xl transition-all outline-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="English, Kannada, Hindi..." />
                   </div>
                   <div>
                     <label htmlFor="instagram" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Instagram Handle <span style={{ color: '#f3c892' }}>(Optional)</span></label>
-                    <input type="text" id="instagram" name="instagram" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="@yourhandle" />
+                    <input type="text" id="instagram" name="instagram" className="w-full px-5 py-4 rounded-xl transition-all outline-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="@yourhandle" />
                   </div>
                 </div>
 
