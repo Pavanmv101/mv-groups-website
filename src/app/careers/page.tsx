@@ -209,14 +209,14 @@ export default function CareersPage() {
                     <input required type="text" id="languages" name="languages" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="English, Kannada, Hindi..." />
                   </div>
                   <div>
-                    <label htmlFor="instagram" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Instagram Handle (Optional)</label>
+                    <label htmlFor="instagram" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Instagram Handle <span style={{ color: '#f3c892' }}>(Optional)</span></label>
                     <input type="text" id="instagram" name="instagram" className="w-full px-5 py-4 rounded-xl transition-all outline-none" style={{ background: '#141312', border: '1px solid #282624', color: '#ffffff' }} placeholder="@yourhandle" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="photo" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Headshot / Full Body Photo (Optional)</label>
+                    <label htmlFor="photo" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Headshot / Full Body Photo <span style={{ color: '#f3c892' }}>(Optional)</span></label>
                     <div className="relative">
                       <input 
                         type="file" 
@@ -229,7 +229,7 @@ export default function CareersPage() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="resume" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Resume / CV (Optional)</label>
+                    <label htmlFor="resume" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Resume / CV <span style={{ color: '#f3c892' }}>(Optional)</span></label>
                     <div className="relative">
                       <input 
                         type="file" 
