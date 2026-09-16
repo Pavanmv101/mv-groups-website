@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next';
 import BrochureDownload from '@/components/BrochureDownload';
+import VettingProcess from '@/components/VettingProcess';
 
 export const metadata: Metadata = {
   title: 'About MV Groups | Bangalore Event Staffing Agency',
@@ -140,6 +141,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <VettingProcess />
+      
       {/* ── CTA Section ── */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl p-10 md:p-16 text-center relative overflow-hidden" style={{ background: '#141312', border: '1px solid #282624' }}>

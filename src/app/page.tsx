@@ -5,6 +5,7 @@ import HowItWorks from '@/components/HowItWorks';
 import ServicesOverview from '@/components/ServicesOverview';
 import AnyRoleSection from '@/components/AnyRoleSection';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import VettingProcess from '@/components/VettingProcess';
 import JoinCrewSection from '@/components/JoinCrewSection';
 import BrochureDownload from '@/components/BrochureDownload';
 import FAQSection from '@/components/FAQSection';
@@ -29,6 +30,7 @@ export default function HomePage() {
       <ServicesOverview />
       <AnyRoleSection />
       <WhyChooseUs />
+      <VettingProcess />
       <JoinCrewSection />
       <BrochureDownload />
       <FAQSection />
