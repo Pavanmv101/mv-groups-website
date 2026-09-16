@@ -105,7 +105,7 @@ export default function Navbar() {
               {/* Dynamic Links based on portal */}
               {!pathname.startsWith('/management') && (
                 <>
-                  <Link href="/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/staffing/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/staffing/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/staffing/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/gallery" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/gallery' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Gallery<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/gallery' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/careers" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/careers' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Careers<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/careers' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/contact" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/contact' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Contact<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/contact' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
@@ -113,7 +113,7 @@ export default function Navbar() {
               )}
               {pathname.startsWith('/management') && (
                 <>
-                  <Link href="/management" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Process<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/management/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/gallery" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/gallery' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Portfolio<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/gallery' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/contact" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/contact' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Contact<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/contact' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                 </>
@@ -181,7 +181,7 @@ export default function Navbar() {
           <div className="flex flex-col gap-1">
             {!pathname.startsWith('/management') && (
               <>
-                <Link href="/services" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Services</Link>
+                <Link href="/staffing/services" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Services</Link>
                 <Link href="/gallery" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Gallery</Link>
                 <Link href="/careers" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Careers</Link>
                 <Link href="/contact" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Contact</Link>
@@ -189,7 +189,7 @@ export default function Navbar() {
             )}
             {pathname.startsWith('/management') && (
               <>
-                <Link href="/management" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Process</Link>
+                <Link href="/management/services" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Services</Link>
                 <Link href="/gallery" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Portfolio</Link>
                 <Link href="/contact" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Contact</Link>
               </>
