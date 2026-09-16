@@ -11,7 +11,7 @@ export default function ProfilePage() {
   const router = useRouter()
   const supabase = createClient()
   const [initialLoading, setInitialLoading] = useState(true)
-  const [userMetadata, setUserMetadata] = useState<Record<string, unknown> | null>(null)
+  const [userEmail, setUserEmail] = useState<string>('')
 
   // Profile State
   const [profileLoading, setProfileLoading] = useState(false)
@@ -28,8 +28,8 @@ export default function ProfilePage() {
     const fetchUser = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
-        setUserMetadata(user.user_metadata)
         setFullName(user.user_metadata?.full_name || '')
+        setUserEmail(user.email || '')
       } else {
         router.push('/login')
       }
@@ -145,7 +145,7 @@ export default function ProfilePage() {
                   <input 
                     type="email"
                     disabled
-                    value={(userMetadata?.email as string) || 'Your Email'}
+                    value={userEmail || 'Your Email'}
                     className="w-full px-4 py-3 rounded-lg border border-[#282624] bg-[#141312] text-[#66625d] cursor-not-allowed"
                   />
                   <p className="text-xs text-[#403e3c] mt-1.5">Email cannot be changed currently.</p>

@@ -43,5 +43,10 @@ export async function checkRateLimit(identifier: string) {
     return { success: true }
   }
 
-  return await rateLimit.limit(identifier)
+  try {
+    return await rateLimit.limit(identifier)
+  } catch (error) {
+    console.error('Rate limit error, failing open:', error)
+    return { success: true }
+  }
 }

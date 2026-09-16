@@ -58,7 +58,7 @@ export async function login(formData: FormData) {
     })
 
   if (!parsed.success) {
-    return { error: 'Incorrect email or password. [Invalid Format]' }
+    return { error: 'Incorrect email or password.' }
   }
 
   const { email, password, turnstileToken } = parsed.data
@@ -116,8 +116,7 @@ export async function login(formData: FormData) {
     }
     
     // Always return generic error message
-    const debugFlag = redis ? ` [Att:${currentAttempts}]` : ' [No DB]'
-    return { error: 'Incorrect email or password.' + debugFlag }
+    return { error: 'Incorrect email or password.' }
   }
 
   // 8. Handle Success
@@ -167,8 +166,8 @@ export async function signup(formData: FormData) {
   })
 
   if (error) {
-    // Return generic error for email already in use, etc. to avoid enumeration, or pass generic failure
-    return { error: 'Signup failed. Please try again.' }
+    console.error('Supabase signup error:', error)
+    return { error: `Signup failed: ${error.message}` }
   }
 
   return { success: true, email }

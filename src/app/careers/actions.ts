@@ -92,7 +92,7 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
         email,
         phone,
         city,
-        area_of_interest: interest,
+        interest,
         availability,
         resume_url,
         gender,

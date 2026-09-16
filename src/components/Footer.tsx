@@ -169,9 +169,9 @@ export default function Footer() {
 
       {/* Massive Edge-to-Edge Typography */}
       <div className="w-full overflow-hidden flex justify-center items-center py-6 md:py-12 select-none pointer-events-none border-t border-[#1a1918]">
-        <h1 className="text-[16vw] font-black leading-none tracking-tighter text-center" style={{ color: '#141312' }}>
+        <div aria-hidden="true" className="text-[16vw] font-black leading-none tracking-tighter text-center" style={{ color: '#141312' }}>
           MV<span style={{ color: 'rgba(243,200,146,0.05)' }}>GROUPS</span>
-        </h1>
+        </div>
       </div>
 
       {/* Bottom bar */}

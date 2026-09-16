@@ -8,16 +8,16 @@ export default async function ClientBookingPage({ params }: { params: Promise<{ 
   const { id } = await params
   const supabase = await createClient()
 
-  const { data: { session } } = await supabase.auth.getSession()
-  if (!session) {
-    redirect('/auth/login')
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    redirect('/login')
   }
 
   const { data: booking, error } = await supabase
     .from('bookings')
     .select('*')
     .eq('id', id)
-    .eq('client_id', session.user.id)
+    .eq('client_id', user.id)
     .single()
 
   if (error || !booking) {
@@ -94,7 +94,7 @@ export default async function ClientBookingPage({ params }: { params: Promise<{ 
 
           {/* Messaging Thread */}
           <div className="lg:col-span-2">
-            <BookingMessaging bookingId={booking.id} currentRole="client" currentUserId={session.user.id} />
+            <BookingMessaging bookingId={booking.id} currentRole="client" currentUserId={user.id} />
           </div>
 
         </div>

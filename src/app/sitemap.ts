@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.mvgroups.online'
+  const baseUrl = 'https://mvgroups.online'
 
   const routes = [
     '',
@@ -12,13 +12,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/gallery',
     '/updates',
     '/booking',
-    '/login',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: new Date('2026-09-16'),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1 : 0.8,
   }))
 
-  return [...routes]
+  const extraRoutes = [
+    '/privacy',
+    '/terms',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date('2026-09-16'),
+    changeFrequency: 'weekly' as const,
+    priority: 0.3,
+  }))
+
+  return [...routes, ...extraRoutes]
 }

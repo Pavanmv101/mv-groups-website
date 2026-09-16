@@ -177,7 +177,7 @@ export default function CareersPage() {
 
                 <div>
                   <label htmlFor="interest" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>What are you interested in doing? *</label>
-                  <select required id="interest" name="interest" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                  <select required id="interest" name="interest" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ backgroundColor: '#141312', backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f3c892' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.25rem center', backgroundSize: '1em', border: '1px solid #282624', color: '#a39e98' }}>
                     <option value="">Select what you are interested in doing...</option>
                     <option value="Usher / Registration Staff">Usher / Registration Staff</option>
                     <option value="Brand Promoter">Brand Promoter</option>
@@ -190,7 +190,7 @@ export default function CareersPage() {
 
                 <div>
                   <label htmlFor="availability" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Availability *</label>
-                  <select required id="availability" name="availability" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                  <select required id="availability" name="availability" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ backgroundColor: '#141312', backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f3c892' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.25rem center', backgroundSize: '1em', border: '1px solid #282624', color: '#a39e98' }}>
                     <option value="">Select your availability...</option>
                     <option value="Full-time">Full-time (Any days)</option>
                     <option value="Part-time (Weekends)">Part-time (Weekends Only)</option>
@@ -202,7 +202,7 @@ export default function CareersPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="gender" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Gender *</label>
-                    <select required id="gender" name="gender" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                    <select required id="gender" name="gender" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ backgroundColor: '#141312', backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f3c892' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.25rem center', backgroundSize: '1em', border: '1px solid #282624', color: '#a39e98' }}>
                       <option value="">Select gender...</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -212,7 +212,7 @@ export default function CareersPage() {
                   </div>
                   <div>
                     <label htmlFor="experience" className="block text-sm font-semibold mb-2" style={{ color: '#a39e98' }}>Prior Experience *</label>
-                    <select required id="experience" name="experience" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ background: '#141312', border: '1px solid #282624', color: '#a39e98' }}>
+                    <select required id="experience" name="experience" className="w-full px-5 py-4 rounded-xl transition-all outline-none appearance-none font-semibold" style={{ backgroundColor: '#141312', backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f3c892' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.25rem center', backgroundSize: '1em', border: '1px solid #282624', color: '#a39e98' }}>
                       <option value="">Do you have experience?</option>
                       <option value="None">No prior experience (Fresher)</option>
                       <option value="Less than 1 year">Less than 1 year</option>

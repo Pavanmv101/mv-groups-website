@@ -30,7 +30,6 @@ export default function HomePage() {
       <AnyRoleSection />
       <WhyChooseUs />
       <JoinCrewSection />
-      {/* <Testimonials /> */}
       <FAQSection />
       <CTASection />
     </>

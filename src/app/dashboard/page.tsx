@@ -60,7 +60,7 @@ export default async function DashboardPage() {
             </Link>
             <Link 
               href="/services" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f3c892] text-white rounded-lg font-medium hover:bg-[#e5b980] transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#f3c892] text-[#0c0b0a] rounded-lg font-medium hover:bg-[#e5b980] transition-colors shadow-sm"
             >
               New Booking Request
             </Link>

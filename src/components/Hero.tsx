@@ -76,10 +76,11 @@ function QuadVideoBackground() {
           muted
           loop
           playsInline
+          preload="metadata"
           onError={() => setVideoError(true)}
         />
         <div className="absolute top-8 left-8 md:top-12 md:left-12 z-10 pointer-events-none">
-          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Corporate Meeting</span>
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Concert</span>
         </div>
       </div>
       {/* Top Right - Wedding */}
@@ -92,6 +93,7 @@ function QuadVideoBackground() {
           muted
           loop
           playsInline
+          preload="metadata"
           onError={() => setVideoError(true)}
         />
         <div className="absolute top-8 right-8 md:top-12 md:right-12 z-10 pointer-events-none text-right">
@@ -108,6 +110,7 @@ function QuadVideoBackground() {
           muted
           loop
           playsInline
+          preload="metadata"
           onError={() => setVideoError(true)}
         />
         <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-10 pointer-events-none">
@@ -124,6 +127,7 @@ function QuadVideoBackground() {
           muted
           loop
           playsInline
+          preload="metadata"
           onError={() => setVideoError(true)}
         />
         <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 z-10 pointer-events-none text-right">

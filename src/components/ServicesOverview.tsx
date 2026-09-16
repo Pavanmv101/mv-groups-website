@@ -10,7 +10,7 @@ import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
 const SERVICES = [
   {
-    id: 'vip-hospitality',
+    id: 'event_manpower',
     label: 'HOSPITALITY',
     icon: UtensilsCrossed,
     title: 'VIP Hospitality & Guest Services',
@@ -18,7 +18,7 @@ const SERVICES = [
     bg: 'url(https://images.unsplash.com/photo-1559336197-ded8aaa244bc?auto=format&fit=crop&q=80&w=1200)',
   },
   {
-    id: 'brand-ambassadors',
+    id: 'promotional_staffing',
     label: 'BRAND',
     icon: Megaphone,
     title: 'Brand Ambassadors & Activations',
@@ -26,7 +26,7 @@ const SERVICES = [
     bg: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800)',
   },
   {
-    id: 'corporate-teams',
+    id: 'corporate_staffing',
     label: 'CORPORATE',
     icon: Briefcase,
     title: 'Corporate & Conference Teams',
@@ -34,7 +34,7 @@ const SERVICES = [
     bg: 'url(https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800)',
   },
   {
-    id: 'private-events',
+    id: 'wedding_social',
     label: 'PRIVATE',
     icon: Heart,
     title: 'Private & Exclusive Gatherings',
@@ -42,7 +42,7 @@ const SERVICES = [
     bg: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=800)',
   },
   {
-    id: 'logistics',
+    id: 'event_logistics',
     label: 'LOGISTICS',
     icon: Truck,
     title: 'Logistics & Ground Control',
@@ -50,7 +50,7 @@ const SERVICES = [
     bg: 'url(https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80&w=800)',
   },
   {
-    id: 'production',
+    id: 'exhibition_staffing',
     label: 'PRODUCTION',
     icon: Music,
     title: 'Behind-the-Scenes Production',

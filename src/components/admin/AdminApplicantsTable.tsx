@@ -13,6 +13,11 @@ type Applicant = {
   city: string
   interest: string
   availability: string
+  gender?: string
+  experience?: string
+  languages?: string
+  instagram?: string
+  photo_url?: string | null
   resume_url: string | null
   status: string
   created_at: string
@@ -95,7 +100,12 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
           <thead>
             <tr className="bg-[#0a0908] border-b border-[#282624] text-[#66625d] text-sm">
               <th className="px-6 py-4 font-semibold">Applicant</th>
+              <th className="px-6 py-4 font-semibold">Gender</th>
+              <th className="px-6 py-4 font-semibold">Experience</th>
+              <th className="px-6 py-4 font-semibold">Languages</th>
               <th className="px-6 py-4 font-semibold">Interest & Availability</th>
+              <th className="px-6 py-4 font-semibold">Instagram</th>
+              <th className="px-6 py-4 font-semibold">Photo</th>
               <th className="px-6 py-4 font-semibold">Resume</th>
               <th className="px-6 py-4 font-semibold">Status & Date</th>
               <th className="px-6 py-4 font-semibold text-right">Actions</th>
@@ -104,7 +114,7 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
           <tbody className="divide-y divide-slate-100">
             {applicants.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-[#66625d]">
+                <td colSpan={10} className="px-6 py-12 text-center text-[#66625d]">
                   No applicants found for the selected filter.
                 </td>
               </tr>
@@ -117,11 +127,49 @@ export default function AdminApplicantsTable({ applicants }: { applicants: Appli
                     <p className="text-sm text-[#66625d] flex items-center gap-1 mt-0.5"><Phone className="w-3 h-3"/> {app.phone}</p>
                     <p className="text-sm text-[#66625d] flex items-center gap-1 mt-0.5"><MapPin className="w-3 h-3"/> {app.city}</p>
                   </td>
+                  <td className="px-6 py-4 align-top text-sm text-white">
+                    {app.gender || '-'}
+                  </td>
+                  <td className="px-6 py-4 align-top text-sm text-white">
+                    {app.experience || '-'}
+                  </td>
+                  <td className="px-6 py-4 align-top text-sm text-white">
+                    {app.languages || '-'}
+                  </td>
                   <td className="px-6 py-4 align-top">
                     <p className="font-medium text-white">{app.interest}</p>
                     <span className="inline-block mt-2 px-2 py-1 bg-[#141312] text-[#a39e98] text-xs rounded-md">
                       {app.availability}
                     </span>
+                  </td>
+                  <td className="px-6 py-4 align-top">
+                    {app.instagram ? (
+                      <a
+                        href={app.instagram.startsWith('http') ? app.instagram : `https://instagram.com/${app.instagram.replace('@', '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline text-sm font-medium"
+                      >
+                        {app.instagram}
+                      </a>
+                    ) : (
+                      <span className="text-sm text-[#403e3c] italic">-</span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 align-top">
+                    {app.photo_url ? (
+                      <a 
+                        href={app.photo_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors"
+                      >
+                        <FileText className="w-4 h-4" />
+                        View Photo
+                      </a>
+                    ) : (
+                      <span className="text-sm text-[#403e3c] italic">No photo</span>
+                    )}
                   </td>
                   <td className="px-6 py-4 align-top">
                     {app.resume_url ? (

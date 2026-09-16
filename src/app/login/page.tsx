@@ -107,8 +107,9 @@ function LoginForm() {
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
       const nextUrl = searchParams.get('next') || '/dashboard'
+      const safeNext = (nextUrl.startsWith('/') && !nextUrl.startsWith('//')) ? nextUrl : '/dashboard'
       setTimeout(() => {
-        router.push(nextUrl)
+        router.push(safeNext)
         router.refresh()
       }, 1500)
     }
