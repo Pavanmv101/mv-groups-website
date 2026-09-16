@@ -63,15 +63,17 @@ export default function Navbar() {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchRole(session.user.id);
-      } else {
-        setRole(null);
-      }
+      if (session?.user) fetchRole(session.user.id);
+      else setRole(null);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Hide Navbar entirely on the Root Gateway
+  if (pathname === '/') {
+    return null;
+  }
 
   return (
     <>
@@ -100,67 +102,46 @@ export default function Navbar() {
 
             {/* ── Desktop nav links ── */}
             <div className="hidden md:flex items-center gap-0.5">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${
-                      isActive ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'
-                    }`}
-                  >
-                    {link.label}
-                    <span
-                      className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${
-                        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                      }`}
-                    />
-                  </Link>
-                );
-              })}
-
-              {/* Auth links (Hidden for public guests, visible for admins) */}
-              {user && (
+              {/* Dynamic Links based on portal */}
+              {!pathname.startsWith('/management') && (
                 <>
-                  {role === 'admin' && (
-                    <Link
-                      href="/admin"
-                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[#f3c892]/80 hover:text-[#f3c892] transition-colors"
-                    >
-                      Admin
-                    </Link>
-                  )}
-                  {role !== 'admin' && (
-                    <Link
-                      href="/dashboard"
-                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/75 hover:text-white transition-colors flex items-center gap-1.5"
-                    >
-                      <UserIcon className="w-3.5 h-3.5" />
-                      Dashboard
-                    </Link>
-                  )}
-                  <form action={logout}>
-                    <button
-                      type="submit"
-                      className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/50 hover:text-red-400 transition-colors"
-                    >
-                      Log Out
-                    </button>
-                  </form>
+                  <Link href="/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/gallery" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/gallery' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Gallery<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/gallery' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/careers" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/careers' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Careers<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/careers' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/contact" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/contact' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Contact<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/contact' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                </>
+              )}
+              {pathname.startsWith('/management') && (
+                <>
+                  <Link href="/management" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Process<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/gallery" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/gallery' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Portfolio<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/gallery' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/contact" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/contact' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Contact<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/contact' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                 </>
               )}
 
-              {/* Book Staff CTA */}
+              {/* Auth links */}
+              {user && (
+                <>
+                  {role === 'admin' && (
+                    <Link href="/admin" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-[#f3c892]/80 hover:text-[#f3c892] transition-colors">Admin</Link>
+                  )}
+                  {role !== 'admin' && (
+                    <Link href="/dashboard" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/75 hover:text-white transition-colors flex items-center gap-1.5"><UserIcon className="w-3.5 h-3.5" />Dashboard</Link>
+                  )}
+                  <form action={logout}><button type="submit" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/50 hover:text-red-400 transition-colors">Log Out</button></form>
+                </>
+              )}
+
+              {/* Dynamic CTA */}
               <Link
-                href="/booking"
+                href={pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
                 className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap ${
                   scrolled
                     ? 'bg-[#f3c892] text-[#0c0b0a] hover:bg-[#e5b980] shadow-lg shadow-[rgba(243,200,146,0.25)] hover:shadow-[rgba(243,200,146,0.4)] hover:-translate-y-0.5'
                     : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'
                 }`}
               >
-                Book Your Team
+                {pathname.startsWith('/management') ? "Plan Your Event" : "Book Your Team"}
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -198,45 +179,32 @@ export default function Navbar() {
 
           {/* Nav links */}
           <div className="flex flex-col gap-1">
-            {NAV_LINKS.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]"
-                style={{ animationDelay: `${i * 60}ms` }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {!pathname.startsWith('/management') && (
+              <>
+                <Link href="/services" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Services</Link>
+                <Link href="/gallery" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Gallery</Link>
+                <Link href="/careers" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Careers</Link>
+                <Link href="/contact" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Contact</Link>
+              </>
+            )}
+            {pathname.startsWith('/management') && (
+              <>
+                <Link href="/management" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Process</Link>
+                <Link href="/gallery" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Portfolio</Link>
+                <Link href="/contact" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Contact</Link>
+              </>
+            )}
 
             {user && (
               <>
                 {role === 'admin' && (
-                  <Link
-                    href="/admin"
-                    onClick={() => setIsOpen(false)}
-                    className="py-3.5 px-2 text-2xl font-bold text-[#f3c892] transition-colors border-b border-[#1a1918]"
-                  >
-                    Admin
-                  </Link>
+                  <Link href="/admin" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-[#f3c892] transition-colors border-b border-[#1a1918]">Admin</Link>
                 )}
                 {role !== 'admin' && (
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setIsOpen(false)}
-                    className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]"
-                  >
-                    Dashboard
-                  </Link>
+                  <Link href="/dashboard" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Dashboard</Link>
                 )}
                 <form action={logout}>
-                  <button
-                    type="submit"
-                    className="w-full text-left py-3.5 px-2 text-2xl font-bold text-white/40 hover:text-red-400 transition-colors border-b border-[#1a1918]"
-                  >
-                    Log Out
-                  </button>
+                  <button type="submit" className="w-full text-left py-3.5 px-2 text-2xl font-bold text-white/40 hover:text-red-400 transition-colors border-b border-[#1a1918]">Log Out</button>
                 </form>
               </>
             )}
@@ -245,15 +213,15 @@ export default function Navbar() {
           {/* Bottom CTA */}
           <div className="mt-auto pt-8">
             <Link
-              href="/booking"
+              href={pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
               onClick={() => setIsOpen(false)}
               className="btn-gold w-full justify-center text-base py-4"
             >
-              Book Your Team
+              {pathname.startsWith('/management') ? "Plan Your Event" : "Book Your Team"}
               <ArrowRight className="w-4 h-4" />
             </Link>
             <p className="text-center text-[#66625d] text-xs mt-4">
-              Same-day quotes · 7 days a week
+              {pathname.startsWith('/management') ? "Full-service production" : "Same-day quotes · 7 days a week"}
             </p>
           </div>
         </div>
