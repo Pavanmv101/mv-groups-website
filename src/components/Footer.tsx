@@ -4,15 +4,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
-import { COMPANY, NAV_LINKS } from '@/lib/constants';
+import { COMPANY } from '@/lib/constants';
 
-const POPULAR_SERVICES = [
-  'End-to-End Event Planning',
+const STAFFING_POPULAR_SERVICES = [
   'Event Manpower',
   'Promotional Staffing',
   'Corporate Event Staffing',
   'Wedding & Social Staffing',
   'Event Setup & Logistics',
+  'Bouncers & Security',
+];
+
+const MANAGEMENT_POPULAR_SERVICES = [
+  'End-to-End Event Planning',
+  'Stage & AV Production',
+  'Decor & Stage Design',
+  'Content & Media Coverage',
+  'Catering & Hospitality',
+  'Entertainment & Talent',
 ];
 
 function LinkedinIcon({ className }: { className?: string }) {
@@ -97,26 +106,28 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="footer-link text-sm flex items-center gap-1 group"
-                  >
-                    {link.label}
-                    <ArrowUpRight
-                      className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{ color: '#f3c892' }}
-                    />
-                  </Link>
-                </li>
-              ))}
+              {pathname.startsWith('/management') ? (
+                <>
+                  <li><Link href="/management" className="footer-link text-sm flex items-center gap-1 group">Home<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/management/services" className="footer-link text-sm flex items-center gap-1 group">Services<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/gallery" className="footer-link text-sm flex items-center gap-1 group">Portfolio<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/contact" className="footer-link text-sm flex items-center gap-1 group">Contact<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                </>
+              ) : (
+                <>
+                  <li><Link href="/staffing" className="footer-link text-sm flex items-center gap-1 group">Home<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/staffing/services" className="footer-link text-sm flex items-center gap-1 group">Services<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/gallery" className="footer-link text-sm flex items-center gap-1 group">Gallery<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/careers" className="footer-link text-sm flex items-center gap-1 group">Careers<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/contact" className="footer-link text-sm flex items-center gap-1 group">Contact<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                </>
+              )}
               <li>
                 <Link
-                  href="/booking"
+                  href={pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
                   className="footer-link-gold text-sm flex items-center gap-1"
                 >
-                  Request a Quote
+                  {pathname.startsWith('/management') ? "Plan Your Event" : "Request a Quote"}
                   <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>
@@ -126,12 +137,12 @@ export default function Footer() {
           {/* Col 3 — Popular Services */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#66625d' }}>
-              Popular Services
+              {pathname.startsWith('/management') ? 'Our Services' : 'Popular Services'}
             </h3>
             <ul className="space-y-3">
-              {POPULAR_SERVICES.map((s) => (
+              {(pathname.startsWith('/management') ? MANAGEMENT_POPULAR_SERVICES : STAFFING_POPULAR_SERVICES).map((s) => (
                 <li key={s}>
-                  <Link href="/services" className="footer-link text-sm">
+                  <Link href={pathname.startsWith('/management') ? "/management/services" : "/staffing/services"} className="footer-link text-sm">
                     {s}
                   </Link>
                 </li>
