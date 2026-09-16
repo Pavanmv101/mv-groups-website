@@ -68,6 +68,8 @@ export default function Hero() {
                   </p>
                   <Link 
                     href="/staffing" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl"
                     style={{ background: '#f3c892', color: '#0c0b0a' }}
                   >
@@ -136,6 +138,8 @@ export default function Hero() {
                   </p>
                   <Link 
                     href="/management" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl"
                     style={{ background: '#f3c892', color: '#0c0b0a' }}
                   >
