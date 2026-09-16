@@ -13,33 +13,120 @@ const STATS = [
   { num: 100, suffix: '%', label: 'RELIABILITY' },
 ];
 
-export default function StaffingHero() {
-  const [videoError, setVideoError] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+// ── Video clip list — local downloaded MP4s ──
+const VIDEO_CLIPS = [
+  '/videos/concert.mp4',
+  '/videos/wedding.mp4',
+  '/videos/corporate.mp4',
+  '/videos/dj.mp4',
+];
 
+function QuadVideoBackground() {
+  const [videoError, setVideoError] = useState(false);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null, null]);
+
+  // Force-play all videos on mount and when tab becomes visible again
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
+    const playAll = () => {
+      videoRefs.current.forEach((v) => {
+        if (v) {
+          v.play().catch(() => {
+            // Silently ignore
+          });
+        }
+      });
+    };
+
+    playAll();
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') playAll();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
   }, []);
 
+  if (videoError) {
+    return (
+      <div
+        className="absolute inset-0 w-full h-full"
+        style={{
+          background: 'linear-gradient(135deg, #0c0b0a 0%, #141312 40%, #0d0d0d 70%, #0c0b0a 100%)',
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(243,200,146,0.06) 0%, transparent 70%)',
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden gap-0 bg-[#0c0b0a]">
+      <div className="relative w-full h-full">
+        <video
+          ref={(el) => { videoRefs.current[0] = el; }}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[0]}
+          autoPlay muted loop playsInline preload="metadata"
+          onError={() => setVideoError(true)}
+        />
+        <div className="absolute top-8 left-8 md:top-12 md:left-12 z-10 pointer-events-none">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Concert</span>
+        </div>
+      </div>
+      <div className="relative w-full h-full">
+        <video
+          ref={(el) => { videoRefs.current[1] = el; }}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[1]}
+          autoPlay muted loop playsInline preload="metadata"
+          onError={() => setVideoError(true)}
+        />
+        <div className="absolute top-8 right-8 md:top-12 md:right-12 z-10 pointer-events-none text-right">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Luxury Wedding</span>
+        </div>
+      </div>
+      <div className="relative w-full h-full">
+        <video
+          ref={(el) => { videoRefs.current[2] = el; }}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[2]}
+          autoPlay muted loop playsInline preload="metadata"
+          onError={() => setVideoError(true)}
+        />
+        <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-10 pointer-events-none">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Corporate Summit</span>
+        </div>
+      </div>
+      <div className="relative w-full h-full">
+        <video
+          ref={(el) => { videoRefs.current[3] = el; }}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_CLIPS[3]}
+          autoPlay muted loop playsInline preload="metadata"
+          onError={() => setVideoError(true)}
+        />
+        <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 z-10 pointer-events-none text-right">
+          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Exclusive Nightlife</span>
+        </div>
+      </div>
+      <div className="absolute inset-0 bg-[#0c0b0a]/30 pointer-events-none" />
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-white/5 pointer-events-none" />
+      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 pointer-events-none" />
+    </div>
+  );
+}
+
+export default function StaffingHero() {
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ minHeight: '100svh' }}>
       {/* Background Video */}
-      {!videoError ? (
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/videos/concert.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          onError={() => setVideoError(true)}
-        />
-      ) : (
-        <div className="absolute inset-0 w-full h-full bg-[#0c0b0a]" />
-      )}
+      <QuadVideoBackground />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none bg-premium-grid" style={{ backgroundColor: 'rgba(0,0,0,0.65)' }} />
