@@ -23,10 +23,11 @@ export default function Hero() {
         onMouseEnter={() => setHoveredSide('left')}
         onMouseLeave={() => setHoveredSide(null)}
       >
-        {/* Background Image/Video */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1600)' }}
+        {/* Background Video */}
+        <video 
+          src="/videos/concert.mp4"
+          autoPlay muted loop playsInline preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
         
         {/* Dynamic Dark Overlay based on hover state */}
@@ -93,10 +94,11 @@ export default function Hero() {
         onMouseEnter={() => setHoveredSide('right')}
         onMouseLeave={() => setHoveredSide(null)}
       >
-        {/* Background Image/Video */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1505236858219-8373dd707522?auto=format&fit=crop&q=80&w=1600)' }}
+        {/* Background Video */}
+        <video 
+          src="/videos/wedding.mp4"
+          autoPlay muted loop playsInline preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
         
         {/* Dynamic Dark Overlay based on hover state */}
@@ -152,14 +154,29 @@ export default function Hero() {
         </div>
       </motion.div>
       
-      {/* Central MV Groups Branding (Hidden on mobile) */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50 hidden md:block pointer-events-none">
-         <div
-            className="font-black text-white tracking-[0.22em] text-center"
-            style={{ fontSize: '16px', letterSpacing: '0.22em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
-          >
-            MV GROUPS
-          </div>
+      {/* Central MV Groups Branding - Floating Logo Badge */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 z-50 pointer-events-none hidden md:flex items-center justify-center shadow-2xl"
+        initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
+        animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <div className="w-32 h-32 rounded-full flex items-center justify-center overflow-hidden border border-[#f3c892]/30 bg-[#0c0b0a]/60 backdrop-blur-md">
+          <img 
+            src="/images/mv-groups-logo.png" 
+            alt="MV Groups Logo"
+            className="w-24 h-auto object-contain drop-shadow-xl"
+          />
+        </div>
+      </motion.div>
+
+      {/* Top Mobile Logo */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-50 md:hidden pointer-events-none">
+        <img 
+          src="/images/mv-groups-logo.png" 
+          alt="MV Groups Logo"
+          className="w-24 h-auto object-contain drop-shadow-lg"
+        />
       </div>
     </section>
   );
