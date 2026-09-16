@@ -8,8 +8,8 @@ import GSAPCounter from '@/components/animations/GSAPCounter';
 import GSAPMagnetic from '@/components/animations/GSAPMagnetic';
 
 const STATS = [
-  { num: 1500, suffix: '+', label: 'EVENTS STAFFED' },
-  { num: 50, suffix: '+', label: 'TRUSTED CLIENTS' },
+  { num: 150, suffix: '+', label: 'EVENTS STAFFED' },
+  { num: 15, suffix: '+', label: 'TRUSTED CLIENTS' },
   { num: 100, suffix: '%', label: 'RELIABILITY' },
 ];
 

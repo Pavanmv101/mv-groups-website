@@ -51,10 +51,10 @@ const CAPABILITIES = [
 ];
 
 const STATS = [
-  { value: '50+', label: 'Events Managed' },
-  { value: '200+', label: 'Vendor Network' },
-  { value: '100%', label: 'Client Satisfaction' },
-  { value: '24/7', label: 'Event Support' },
+  { value: '100%', label: 'Bespoke Planning' },
+  { value: 'Premium', label: 'Vendor Access' },
+  { value: 'Seamless', label: 'Execution' },
+  { value: '24/7', label: 'Dedicated Support' },
 ];
 
 export default function ManagementPage() {
