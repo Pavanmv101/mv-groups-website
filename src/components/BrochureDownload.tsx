@@ -25,7 +25,7 @@ export default function BrochureDownload() {
         setStatus('error');
         setErrorMessage(res.error || 'Something went wrong');
       }
-    } catch (error) {
+    } catch {
       setStatus('error');
       setErrorMessage('Failed to send request');
     }
@@ -57,7 +57,7 @@ export default function BrochureDownload() {
             <div className="flex flex-col items-center justify-center py-6 px-4 rounded-2xl" style={{ background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.2)' }}>
               <CheckCircle2 className="w-10 h-10 text-green-500 mb-3" />
               <h3 className="text-xl font-bold text-white mb-1">Check Your Inbox!</h3>
-              <p className="text-green-400">We've emailed the profile PDF to your address.</p>
+              <p className="text-green-400">We&apos;ve emailed the profile PDF to your address.</p>
               <button 
                 onClick={() => setStatus('idle')}
                 className="mt-6 text-sm underline opacity-70 hover:opacity-100 transition-opacity text-white"

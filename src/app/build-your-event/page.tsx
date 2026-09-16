@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { SERVICES } from '@/lib/constants';
-import { ArrowRight, CheckCircle2, Package, MapPin, Calendar as CalendarIcon, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Package, MapPin, Calendar as CalendarIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function BuildYourEventPage() {
@@ -67,7 +67,7 @@ ${formData.details}
       } else {
         setStatus('error');
       }
-    } catch (err) {
+    } catch {
       setStatus('error');
     }
   };
@@ -105,7 +105,7 @@ ${formData.details}
             Build Your <span style={{ color: '#f3c892' }}>Event Package</span>
           </h1>
           <p className="text-lg md:text-xl text-[#a39e98]">
-            Select everything you need for your event in one place. We'll handle the rest.
+            Select everything you need for your event in one place. We&apos;ll handle the rest.
           </p>
         </div>
 
@@ -197,7 +197,7 @@ ${formData.details}
           {step === 2 && (
             <div className="animate-fade-in-up">
               <h2 className="text-2xl font-bold text-white mb-2">Select Services Needed</h2>
-              <p className="text-[#a39e98] mb-8">Choose all that apply. We'll bundle them into one comprehensive package.</p>
+              <p className="text-[#a39e98] mb-8">Choose all that apply. We&apos;ll bundle them into one comprehensive package.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
                 {SERVICES.map(service => {

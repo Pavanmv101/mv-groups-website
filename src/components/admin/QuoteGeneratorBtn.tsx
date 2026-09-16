@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { generateQuotePDF } from '@/lib/generateQuote';
+import { generateQuotePDF, type Booking } from '@/lib/generateQuote';
 import { Download, Calculator } from 'lucide-react';
 
-export default function QuoteGeneratorBtn({ booking }: { booking: any }) {
+export default function QuoteGeneratorBtn({ booking }: { booking: Booking }) {
   const [customPrice, setCustomPrice] = useState(booking.amount || 0);
   const [isEditing, setIsEditing] = useState(false);
 

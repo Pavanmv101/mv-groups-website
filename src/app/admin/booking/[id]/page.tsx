@@ -112,6 +112,7 @@ export default async function AdminBookingPage({ params }: { params: Promise<{ i
                   </div>
                 </div>
               </div>
+              <QuoteGeneratorBtn booking={booking} />
 
               {booking.description && (
                 <div className="mt-6 pt-6 border-t border-[#1a1918]">

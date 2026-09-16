@@ -2,7 +2,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { SERVICES } from '@/lib/constants';
 
-type Booking = {
+export type Booking = {
   id: string;
   contact_name: string;
   contact_email: string;
@@ -106,7 +106,7 @@ export const generateQuotePDF = (booking: Booking, customPrice: number) => {
     }
   });
 
-  const finalY = (doc as any).lastAutoTable.finalY + 15;
+  const finalY = (doc as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 15;
 
   // --- Total Section ---
   doc.setFontSize(12);
