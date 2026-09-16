@@ -8,7 +8,7 @@ const VETTING_STEPS = [
     icon: ShieldCheck,
     title: '1. Strict Background Checks',
     description: 'Every candidate undergoes a comprehensive identity and background verification before joining our roster.',
-    points: ['Aadhaar & ID Verification', 'Past Employment Checks', 'Police Verification (for Security roles)']
+    points: ['Aadhaar & ID Verification', 'Past Employment Checks', 'Professional Reference Checks']
   },
   {
     icon: UserCheck,
