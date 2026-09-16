@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import {
   Heart, Briefcase, Megaphone, Truck,
-  UtensilsCrossed, Music,
+  UtensilsCrossed, Music, ShieldCheck,
+  Mic2, Camera, Speaker, Car, Palette,
 } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
@@ -56,6 +57,62 @@ const SERVICES = [
     title: 'Behind-the-Scenes Production',
     desc: 'The invisible engine of your event. Stage managers, green-room coordinators, and technical runners.',
     bg: 'url(https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=1600)',
+  },
+  {
+    id: 'dj_services',
+    label: 'ENTERTAINMENT',
+    icon: Music,
+    title: 'Professional DJ Services',
+    desc: 'Expert DJs for corporate galas, high-energy concerts, and memorable weddings.',
+    bg: 'url(https://images.unsplash.com/photo-1516280440502-d2fdaa07a518?auto=format&fit=crop&q=80&w=800)',
+  },
+  {
+    id: 'bouncers_security',
+    label: 'SECURITY',
+    icon: ShieldCheck,
+    title: 'Bouncers & Event Security',
+    desc: 'Crowd control, VIP protection, and comprehensive venue security.',
+    bg: 'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&q=80&w=800)',
+  },
+  {
+    id: 'anchoring_emcee',
+    label: 'HOSTING',
+    icon: Mic2,
+    title: 'Anchoring & Emcee',
+    desc: 'Charismatic anchors and emcees for corporate awards, product launches, and weddings.',
+    bg: 'url(https://images.unsplash.com/photo-1475721028314-398f6dc78bf8?auto=format&fit=crop&q=80&w=800)',
+  },
+  {
+    id: 'photography_videography',
+    label: 'MEDIA',
+    icon: Camera,
+    title: 'Photography & Videography',
+    desc: 'Event coverage, cinematic highlights, and social media-ready reels.',
+    bg: 'url(https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800)',
+  },
+  {
+    id: 'sound_lighting',
+    label: 'AV TECH',
+    icon: Speaker,
+    title: 'Sound & Lighting',
+    desc: 'State-of-the-art PA systems, dynamic stage lighting, and LED wall setups.',
+    bg: 'url(https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800)',
+  },
+  {
+    id: 'valet_parking',
+    label: 'HOSPITALITY',
+    icon: Car,
+    title: 'Valet Parking',
+    desc: 'Professional valet staff for premium events and seamless arrival experiences.',
+    bg: 'url(https://images.unsplash.com/photo-1555589635-f094522a4505?auto=format&fit=crop&q=80&w=800)',
+  },
+  {
+    id: 'decor_stage',
+    label: 'DESIGN',
+    icon: Palette,
+    title: 'Decor & Stage Setup',
+    desc: 'Custom stage design, floral decor, and themed event setups.',
+    bg: 'url(https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=800)',
   },
 ];
 

@@ -10,7 +10,14 @@ import {
   Truck,
   Users,
   CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  Music,
+  ShieldCheck,
+  Mic2,
+  Camera,
+  Speaker,
+  Car,
+  Palette
 } from 'lucide-react';
 import { SERVICES } from '@/lib/constants';
 
@@ -45,6 +52,13 @@ const SERVICE_IMAGES: Record<string, string> = {
   corporate_staffing: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1000&auto=format&fit=crop',
   wedding_social: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1000&auto=format&fit=crop',
   event_logistics: 'https://images.unsplash.com/photo-1586528116311-ad8ed7e50def?q=80&w=1000&auto=format&fit=crop',
+  dj_services: 'https://images.unsplash.com/photo-1516280440502-d2fdaa07a518?q=80&w=1000&auto=format&fit=crop',
+  bouncers_security: 'https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=1000&auto=format&fit=crop',
+  anchoring_emcee: 'https://images.unsplash.com/photo-1475721028314-398f6dc78bf8?q=80&w=1000&auto=format&fit=crop',
+  photography_videography: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop',
+  sound_lighting: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop',
+  valet_parking: 'https://images.unsplash.com/photo-1555589635-f094522a4505?q=80&w=1000&auto=format&fit=crop',
+  decor_stage: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1000&auto=format&fit=crop',
 };
 
 const SERVICE_ICON_MAP: Record<string, typeof Users> = {
@@ -54,6 +68,13 @@ const SERVICE_ICON_MAP: Record<string, typeof Users> = {
   corporate_staffing: Briefcase,
   wedding_social: HeartHandshake,
   event_logistics: Truck,
+  dj_services: Music,
+  bouncers_security: ShieldCheck,
+  anchoring_emcee: Mic2,
+  photography_videography: Camera,
+  sound_lighting: Speaker,
+  valet_parking: Car,
+  decor_stage: Palette,
 };
 
 /* ================================================================== */
