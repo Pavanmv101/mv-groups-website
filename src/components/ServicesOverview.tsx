@@ -4,20 +4,12 @@ import Link from 'next/link';
 import {
   Heart, Briefcase, Megaphone, Truck,
   UtensilsCrossed, Music, ShieldCheck,
-  Mic2, Camera, Speaker, Car, Palette, Award,
+  Mic2, Camera, Speaker, Car, Palette,
 } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
 const SERVICES = [
-  {
-    id: 'event_management',
-    label: 'MANAGEMENT',
-    icon: Award,
-    title: 'End-to-End Event Planning',
-    desc: 'From venue sourcing to full stage production, we conceptualize and execute flawless events start to finish.',
-    bg: 'url(https://images.unsplash.com/photo-1505236858219-8373dd707522?auto=format&fit=crop&q=80&w=1200)',
-  },
   {
     id: 'event_manpower',
     label: 'HOSPITALITY',
