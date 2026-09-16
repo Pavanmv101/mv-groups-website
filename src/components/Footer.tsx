@@ -109,6 +109,7 @@ export default function Footer() {
               {pathname.startsWith('/management') ? (
                 <>
                   <li><Link href="/management" className="footer-link text-sm flex items-center gap-1 group">Home<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/about" className="footer-link text-sm flex items-center gap-1 group">About Us<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/management/services" className="footer-link text-sm flex items-center gap-1 group">Services<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/management/portfolio" className="footer-link text-sm flex items-center gap-1 group">Portfolio<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/contact" className="footer-link text-sm flex items-center gap-1 group">Contact<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
@@ -116,6 +117,7 @@ export default function Footer() {
               ) : (
                 <>
                   <li><Link href="/staffing" className="footer-link text-sm flex items-center gap-1 group">Home<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/about" className="footer-link text-sm flex items-center gap-1 group">About Us<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/staffing/services" className="footer-link text-sm flex items-center gap-1 group">Services<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/gallery" className="footer-link text-sm flex items-center gap-1 group">Gallery<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/careers" className="footer-link text-sm flex items-center gap-1 group">Careers<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
