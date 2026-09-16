@@ -94,11 +94,10 @@ export default function Hero() {
         onMouseEnter={() => setHoveredSide('right')}
         onMouseLeave={() => setHoveredSide(null)}
       >
-        {/* Background Video */}
-        <video 
-          src="/videos/corporate.mp4"
-          autoPlay muted loop playsInline preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+        {/* Background Image (Stock Photo to avoid client conflict) */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1600)' }}
         />
         
         {/* Dynamic Dark Overlay based on hover state */}
