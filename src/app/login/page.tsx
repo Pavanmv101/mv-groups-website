@@ -338,12 +338,12 @@ function LoginForm() {
       <div className="relative z-10">
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-bold mb-3" style={{ color: '#ffffff' }}>
-            {isLogin ? 'Welcome Back' : 'Create an Account'}
+            {isLogin ? 'Welcome Back' : 'Join MV Groups Crew'}
           </h2>
           <p className="text-lg" style={{ color: '#a39e98' }}>
             {isLogin 
-              ? 'Sign in to access your dashboard and manage bookings.'
-              : 'Sign up to request quotes and track your bookings.'}
+              ? 'Sign in to access the Admin or Applicant portal.'
+              : 'Sign up to check your application status.'}
           </p>
         </div>
 

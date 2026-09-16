@@ -51,11 +51,24 @@ export default function CareersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl leading-relaxed" 
+            className="text-lg md:text-xl leading-relaxed mb-8" 
             style={{ color: '#a39e98' }}
           >
             We are always looking for passionate, energetic, and reliable individuals to join our growing team. Whether you&apos;re looking for flexible event work or a career in manpower staffing, we have opportunities for you.
           </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+          >
+            <a 
+              href="/login"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all hover:-translate-y-0.5 shadow-lg bg-[#f3c892] text-[#0c0b0a]"
+            >
+              Check Application Status <ArrowRight className="w-5 h-5" />
+            </a>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-16">
             <motion.div 
