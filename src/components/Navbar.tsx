@@ -120,8 +120,8 @@ export default function Navbar() {
                 );
               })}
 
-              {/* Auth links */}
-              {user ? (
+              {/* Auth links (Hidden for public guests, visible for admins) */}
+              {user && (
                 <>
                   {role === 'admin' && (
                     <Link
@@ -149,14 +149,6 @@ export default function Navbar() {
                     </button>
                   </form>
                 </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/75 hover:text-white transition-colors flex items-center gap-1.5"
-                >
-                  <UserIcon className="w-3.5 h-3.5" />
-                  Login
-                </Link>
               )}
 
               {/* Book Staff CTA */}
@@ -218,7 +210,7 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {user ? (
+            {user && (
               <>
                 {role === 'admin' && (
                   <Link
@@ -247,14 +239,6 @@ export default function Navbar() {
                   </button>
                 </form>
               </>
-            ) : (
-              <Link
-                href="/login"
-                onClick={() => setIsOpen(false)}
-                className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]"
-              >
-                Login
-              </Link>
             )}
           </div>
 

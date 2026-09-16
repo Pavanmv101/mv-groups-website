@@ -262,8 +262,8 @@ export default function Hero() {
               </Link>
             </GSAPMagnetic>
             <GSAPMagnetic strength={0.35}>
-              <Link href="/contact" className="btn-outline text-sm px-7 py-3.5">
-                Request a Consultation
+              <Link href="/build-your-event" className="btn-outline text-sm px-7 py-3.5">
+                Build Your Event Package
               </Link>
             </GSAPMagnetic>
           </div>
