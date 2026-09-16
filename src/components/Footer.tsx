@@ -1,12 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { COMPANY, NAV_LINKS } from '@/lib/constants';
 
 const POPULAR_SERVICES = [
+  'End-to-End Event Planning',
   'Event Manpower',
   'Promotional Staffing',
-  'Exhibition Staffing',
   'Corporate Event Staffing',
   'Wedding & Social Staffing',
   'Event Setup & Logistics',
@@ -31,6 +34,13 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Hide Footer entirely on the Root Gateway
+  if (pathname === '/') {
+    return null;
+  }
+
   return (
     <footer style={{ background: '#0c0b0a', borderTop: '1px solid #1a1918' }}>
       {/* Main grid */}
@@ -49,7 +59,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: '#66625d' }}>
-              On-demand event staffing for Karnataka. Professional crew, vetted &amp; trained.
+              {COMPANY.description}
             </p>
             {/* Social icons — pure CSS hover via .social-icon-btn */}
             <div className="flex gap-3">
