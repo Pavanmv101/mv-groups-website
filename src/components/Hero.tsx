@@ -67,11 +67,11 @@ export default function Hero() {
                     The reliable backbone of Karnataka&apos;s biggest events. We supply vetted VIP hospitality, security, promoters, and logistics crew.
                   </p>
                   <Link 
-                    href="/services" 
+                    href="/staffing" 
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl"
                     style={{ background: '#f3c892', color: '#0c0b0a' }}
                   >
-                    Hire Event Staff <ArrowRight className="w-4 h-4" />
+                    Enter Staffing Portal <ArrowRight className="w-4 h-4" />
                   </Link>
                 </motion.div>
               )}
@@ -135,11 +135,11 @@ export default function Hero() {
                     From concept to flawless execution. We design, produce, and manage premium corporate and social events.
                   </p>
                   <Link 
-                    href="/build-your-event" 
+                    href="/management" 
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl"
                     style={{ background: '#f3c892', color: '#0c0b0a' }}
                   >
-                    Plan Your Event <ArrowRight className="w-4 h-4" />
+                    Enter Management Portal <ArrowRight className="w-4 h-4" />
                   </Link>
                 </motion.div>
               )}

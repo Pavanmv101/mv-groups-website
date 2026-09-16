@@ -39,9 +39,10 @@ export const COMPANY = {
 
 // ---- Navigation ----
 export const NAV_LINKS = [
-  { label: 'Home', href: '/' },
+  { label: 'Gateway', href: '/' },
+  { label: 'Event Staffing', href: '/staffing' },
+  { label: 'Event Management', href: '/management' },
   { label: 'Services', href: '/services' },
-  { label: 'About', href: '/about' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Careers', href: '/careers' },
   { label: 'Updates', href: '/updates' },

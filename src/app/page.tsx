@@ -1,19 +1,9 @@
 import Hero from '@/components/Hero';
-import Marquee from '@/components/Marquee';
-import ClientLogos from '@/components/ClientLogos';
-import HowItWorks from '@/components/HowItWorks';
-import ServicesOverview from '@/components/ServicesOverview';
-import AnyRoleSection from '@/components/AnyRoleSection';
-import WhyChooseUs from '@/components/WhyChooseUs';
-import VettingProcess from '@/components/VettingProcess';
-import JoinCrewSection from '@/components/JoinCrewSection';
-import BrochureDownload from '@/components/BrochureDownload';
-import FAQSection from '@/components/FAQSection';
-import CTASection from '@/components/CTASection';
-import SideNav from '@/components/SideNav';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  title: 'MV Groups | End-to-End Event Management & Staffing',
+  description: 'MV Groups provides premium event staffing, manpower, and end-to-end event execution across Karnataka.',
   alternates: {
     canonical: 'https://mvgroups.online',
   },
@@ -22,19 +12,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <SideNav />
       <Hero />
-      <Marquee />
-      <ClientLogos />
-      <HowItWorks />
-      <ServicesOverview />
-      <AnyRoleSection />
-      <WhyChooseUs />
-      <VettingProcess />
-      <JoinCrewSection />
-      <BrochureDownload />
-      <FAQSection />
-      <CTASection />
     </>
   );
 }
