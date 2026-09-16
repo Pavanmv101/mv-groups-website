@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Users, Briefcase, Mail, Phone, User } from 'lucide-react'
 import BookingMessaging from '@/components/BookingMessaging'
+import QuoteGeneratorBtn from '@/components/admin/QuoteGeneratorBtn'
 
 export default async function AdminBookingPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
