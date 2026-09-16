@@ -25,9 +25,9 @@ import {
 // ---- Company Info ----
 export const COMPANY = {
   name: 'MV Groups',
-  tagline: 'Powering Your Workforce & Events',
+  tagline: 'End-to-End Event Management & Staffing',
   description:
-    'A premier manpower supply and software/tech events company delivering reliable staffing solutions and world-class event management across Karnataka.',
+    'A premier event management and manpower supply agency. We deliver end-to-end event execution—from concept to logistics—alongside reliable staffing solutions across Karnataka.',
   founded: '2024',
   location: 'Bengaluru, Karnataka',
   email: 'mvgroups2026@gmail.com',
@@ -50,6 +50,14 @@ export const NAV_LINKS = [
 
 // ---- Services ----
 export const SERVICES = [
+  {
+    id: 'event_management',
+    title: 'End-to-End Event Planning',
+    shortDescription: 'Full-service event execution, from venue sourcing to production and management.',
+    description: 'We take the stress off your shoulders. Our expert planners handle end-to-end event execution, including conceptualization, vendor management, stage production, and on-ground coordination for corporate and social events.',
+    icon: Award,
+    features: ['Venue Sourcing & Booking', 'Vendor & Artist Management', 'Stage & Technical Production', 'On-Ground Event Coordination', 'Concept & Theme Design'],
+  },
   {
     id: 'event_manpower',
     title: 'Event Manpower Services',

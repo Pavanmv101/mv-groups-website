@@ -4,12 +4,20 @@ import Link from 'next/link';
 import {
   Heart, Briefcase, Megaphone, Truck,
   UtensilsCrossed, Music, ShieldCheck,
-  Mic2, Camera, Speaker, Car, Palette,
+  Mic2, Camera, Speaker, Car, Palette, Award,
 } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
 const SERVICES = [
+  {
+    id: 'event_management',
+    label: 'MANAGEMENT',
+    icon: Award,
+    title: 'End-to-End Event Planning',
+    desc: 'From venue sourcing to full stage production, we conceptualize and execute flawless events start to finish.',
+    bg: 'url(https://images.unsplash.com/photo-1505236858219-8373dd707522?auto=format&fit=crop&q=80&w=1200)',
+  },
   {
     id: 'event_manpower',
     label: 'HOSPITALITY',
@@ -142,7 +150,7 @@ export default function ServicesOverview() {
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed lg:text-right" style={{ color: '#a39e98' }}>
-            Professional staffing across all event categories — from intimate weddings to massive corporate events.
+            From full-scale event execution and stage design to elite hospitality staffing across Karnataka.
           </p>
         </div>
         </Reveal>
