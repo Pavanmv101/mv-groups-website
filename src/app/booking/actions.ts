@@ -33,22 +33,27 @@ export async function submitBooking(formData: FormData) {
         ? `[Budget: ${budgetRange}]\n\n${rawDescription || ''}`.trim()
         : rawDescription
 
-    const { error: sbError } = await supabase.from('bookings').insert([
-      {
-        client_id: userId,
-        contact_name: formData.get('contact_name') as string,
-        contact_email: formData.get('contact_email') as string,
-        contact_phone: formData.get('contact_phone') as string,
-        service_type: formData.get('service_type') as string,
-        start_date: formData.get('start_date') as string,
-        end_date: formData.get('end_date') as string,
-        people_needed: parseInt(formData.get('people_needed') as string, 10),
-        description,
-      },
-    ])
+    const bookingData = {
+      client_id: userId,
+      contact_name: formData.get('contact_name') as string,
+      contact_email: formData.get('contact_email') as string,
+      contact_phone: formData.get('contact_phone') as string,
+      service_type: formData.get('service_type') as string,
+      start_date: formData.get('start_date') as string,
+      end_date: formData.get('end_date') as string,
+      people_needed: parseInt(formData.get('people_needed') as string, 10),
+      description,
+    };
+
+    const { error: sbError } = await supabase.from('bookings').insert([bookingData])
 
     if (sbError) throw sbError
     
+    // Send email notification to Admin
+    import('@/app/actions/email').then(module => {
+      module.sendNewBookingNotification(bookingData).catch(console.error);
+    });
+
     return { success: true }
   } catch (err: unknown) {
     console.error('Submit Booking Error:', err)

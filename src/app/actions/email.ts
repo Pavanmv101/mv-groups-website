@@ -89,7 +89,65 @@ export async function sendBookingApprovedEmail(name: string, email: string, serv
     })
     return { success: true }
   } catch (error) {
-    console.error('Error sending approval email:', error)
-    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    console.error('Failed to send booking approval email:', error)
+    return { success: false, error: 'Failed to send email' }
+  }
+}
+
+type BookingDataPayload = {
+  client_id?: string | null;
+  contact_name: string;
+  contact_email: string;
+  contact_phone: string;
+  service_type: string;
+  start_date: string;
+  end_date: string;
+  people_needed: number;
+  description: string;
+};
+
+export async function sendNewBookingNotification(bookingData: BookingDataPayload) {
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    return { success: false, error: 'Email credentials not configured' }
+  }
+
+  try {
+    const subject = `🚀 New Quote Request from ${bookingData.contact_name}`
+    const htmlContent = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #141312; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden;">
+        <div style="background-color: #0c0b0a; padding: 20px; text-align: center;">
+          <h2 style="color: #f3c892; margin: 0;">New Quote Request</h2>
+        </div>
+        <div style="padding: 30px;">
+          <p><strong>Name:</strong> ${bookingData.contact_name}</p>
+          <p><strong>Email:</strong> ${bookingData.contact_email}</p>
+          <p><strong>Phone:</strong> ${bookingData.contact_phone}</p>
+          <p><strong>Service:</strong> ${bookingData.service_type}</p>
+          <p><strong>Staff Needed:</strong> ${bookingData.people_needed}</p>
+          <p><strong>Dates:</strong> ${bookingData.start_date} to ${bookingData.end_date || 'N/A'}</p>
+          <div style="margin-top: 20px; padding: 15px; background-color: #f8f8f8; border-radius: 8px;">
+            <p style="margin:0; font-weight:bold;">Message / Details:</p>
+            <p style="white-space: pre-wrap; margin-top: 8px; color: #555;">${bookingData.description || 'No additional details provided.'}</p>
+          </div>
+          <div style="margin-top: 30px; text-align: center;">
+            <a href="https://mvgroups.online/login" style="background-color: #f3c892; color: #0c0b0a; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; display: inline-block;">
+              View in Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    `
+
+    await transporter.sendMail({
+      from: `"MV Groups Website" <${process.env.GMAIL_USER}>`,
+      to: process.env.GMAIL_USER, // Send to Admin
+      subject,
+      html: htmlContent,
+    })
+
+    return { success: true }
+  } catch (error) {
+    console.error('Failed to send booking notification email:', error)
+    return { success: false, error: 'Failed to send email' }
   }
 }
