@@ -94,7 +94,7 @@ export default function ManagementPage() {
             <h2 className="text-3xl md:text-5xl font-black text-[#0a0908] mb-6">Ready to elevate your next event?</h2>
             <p className="text-[#403e3c] text-lg mb-8 max-w-xl mx-auto font-medium">Stop managing 10 different vendors. Let MV Groups handle the stress while you take the credit.</p>
             <Link 
-              href="/booking" 
+              href="/build-your-event" 
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold transition-all shadow-xl bg-[#0a0908] text-white hover:bg-[#1a1918]"
             >
               Start Planning Now <ArrowRight className="w-5 h-5" />
