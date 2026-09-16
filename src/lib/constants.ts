@@ -39,13 +39,11 @@ export const COMPANY = {
 
 // ---- Navigation ----
 export const NAV_LINKS = [
-  { label: 'Gateway', href: '/' },
-  { label: 'Event Staffing', href: '/staffing' },
-  { label: 'Event Management', href: '/management' },
+  { label: 'Staffing', href: '/staffing' },
+  { label: 'Management', href: '/management' },
   { label: 'Services', href: '/services' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Careers', href: '/careers' },
-  { label: 'Updates', href: '/updates' },
   { label: 'Contact', href: '/contact' },
 ] as const;
 
