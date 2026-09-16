@@ -25,14 +25,14 @@ export default function Hero() {
       >
         {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 filter grayscale-[20%]"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1600)' }}
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=1600)' }}
         />
         
         {/* Dynamic Dark Overlay based on hover state */}
         <motion.div 
           className="absolute inset-0 bg-[#0a0908]"
-          animate={{ opacity: hoveredSide === 'right' ? 0.8 : 0.4 }}
+          animate={{ opacity: hoveredSide === 'right' ? 0.8 : 0.25 }}
           transition={{ duration: 0.4 }}
         />
 
@@ -96,13 +96,13 @@ export default function Hero() {
         {/* Background Image (Stock Photo to avoid client conflict) */}
         <div 
           className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1600)' }}
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1600)' }}
         />
         
         {/* Dynamic Dark Overlay based on hover state */}
         <motion.div 
           className="absolute inset-0 bg-[#0a0908]"
-          animate={{ opacity: hoveredSide === 'left' ? 0.8 : 0.4 }}
+          animate={{ opacity: hoveredSide === 'left' ? 0.8 : 0.25 }}
           transition={{ duration: 0.4 }}
         />
 
