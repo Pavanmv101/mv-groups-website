@@ -1,329 +1,162 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import Reveal from '@/components/animations/Reveal';
-import GSAPCounter from '@/components/animations/GSAPCounter';
-import GSAPMagnetic from '@/components/animations/GSAPMagnetic';
-
-// ── Video clip list — local downloaded MP4s ──
-const VIDEO_CLIPS = [
-  '/videos/concert.mp4',
-  '/videos/wedding.mp4',
-  '/videos/corporate.mp4',
-  '/videos/dj.mp4',
-];
-
-function QuadVideoBackground() {
-  const [videoError, setVideoError] = useState(false);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null, null, null]);
-
-  // Force-play all videos on mount and when tab becomes visible again
-  useEffect(() => {
-    const playAll = () => {
-      videoRefs.current.forEach((v) => {
-        if (v) {
-          v.play().catch(() => {
-            // Silently ignore — browser may still block
-          });
-        }
-      });
-    };
-
-    // Play on mount
-    playAll();
-
-    // Re-play when user returns to the tab
-    const handleVisibility = () => {
-      if (document.visibilityState === 'visible') playAll();
-    };
-    document.addEventListener('visibilitychange', handleVisibility);
-
-    return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, []);
-
-  if (videoError) {
-    // Fallback: dark gradient with subtle noise texture
-    return (
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={{
-          background:
-            'linear-gradient(135deg, #0c0b0a 0%, #141312 40%, #0d0d0d 70%, #0c0b0a 100%)',
-        }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(243,200,146,0.06) 0%, transparent 70%)',
-          }}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="absolute inset-0 w-full h-full grid grid-cols-2 grid-rows-2 overflow-hidden gap-0 bg-[#0c0b0a]">
-      {/* Top Left - Concert */}
-      <div className="relative w-full h-full">
-        <video
-          ref={(el) => { videoRefs.current[0] = el; }}
-          className="absolute inset-0 w-full h-full object-cover"
-          src={VIDEO_CLIPS[0]}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onError={() => setVideoError(true)}
-        />
-        <div className="absolute top-8 left-8 md:top-12 md:left-12 z-10 pointer-events-none">
-          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Concert</span>
-        </div>
-      </div>
-      {/* Top Right - Wedding */}
-      <div className="relative w-full h-full">
-        <video
-          ref={(el) => { videoRefs.current[1] = el; }}
-          className="absolute inset-0 w-full h-full object-cover"
-          src={VIDEO_CLIPS[1]}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onError={() => setVideoError(true)}
-        />
-        <div className="absolute top-8 right-8 md:top-12 md:right-12 z-10 pointer-events-none text-right">
-          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Luxury Wedding</span>
-        </div>
-      </div>
-      {/* Bottom Left - Corporate */}
-      <div className="relative w-full h-full">
-        <video
-          ref={(el) => { videoRefs.current[2] = el; }}
-          className="absolute inset-0 w-full h-full object-cover"
-          src={VIDEO_CLIPS[2]}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onError={() => setVideoError(true)}
-        />
-        <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 z-10 pointer-events-none">
-          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Corporate Summit</span>
-        </div>
-      </div>
-      {/* Bottom Right - DJ Night */}
-      <div className="relative w-full h-full">
-        <video
-          ref={(el) => { videoRefs.current[3] = el; }}
-          className="absolute inset-0 w-full h-full object-cover"
-          src={VIDEO_CLIPS[3]}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onError={() => setVideoError(true)}
-        />
-        <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 z-10 pointer-events-none text-right">
-          <span className="text-[9px] md:text-[11px] tracking-[0.3em] font-bold text-white/30 uppercase">Exclusive Nightlife</span>
-        </div>
-      </div>
-      
-      {/* Overlay to blend the grid seams slightly */}
-      <div className="absolute inset-0 bg-[#0c0b0a]/30 pointer-events-none" />
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-white/5 pointer-events-none" />
-      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/5 pointer-events-none" />
-    </div>
-  );
-}
-
-const STATS = [
-  { num: 100, suffix: '+', label: 'EVENTS POWERED' },
-  { num: 250, suffix: '+', label: 'STAFF DEPLOYED' },
-  { num: 15,  suffix: '+', label: 'ACTIVE CLIENTS'  },
-];
+import { ArrowRight, Users, Award } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
+  const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | null>(null);
 
   return (
-    <section
-      id="hero"
-      ref={heroRef}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ minHeight: '100svh' }}
+    <section 
+      className="relative w-full h-[100svh] flex flex-col md:flex-row overflow-hidden bg-[#0a0908]"
     >
-      {/* ── 4-Grid Video background ── */}
-      <QuadVideoBackground />
-
-      {/* ── Dark overlay ── */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none bg-premium-grid"
-        style={{ backgroundColor: 'rgba(0,0,0,0.58)' }}
-      />
-
-      {/* ── Fine grain noise texture overlay ── */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none opacity-30"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E\")",
-          backgroundSize: '128px 128px',
+      {/* ── Left Pillar: Event Manpower ── */}
+      <motion.div
+        className="relative h-1/2 md:h-full flex-shrink-0 flex items-center justify-center cursor-pointer border-b md:border-b-0 md:border-r border-[#282624] overflow-hidden group"
+        initial={{ flexBasis: '50%' }}
+        animate={{
+          flexBasis: hoveredSide === 'left' ? '70%' : hoveredSide === 'right' ? '30%' : '50%',
         }}
-      />
+        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+        onMouseEnter={() => setHoveredSide('left')}
+        onMouseLeave={() => setHoveredSide(null)}
+      >
+        {/* Background Image/Video */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1600)' }}
+        />
+        
+        {/* Dynamic Dark Overlay based on hover state */}
+        <motion.div 
+          className="absolute inset-0 bg-[#0a0908]"
+          animate={{ opacity: hoveredSide === 'right' ? 0.8 : 0.4 }}
+          transition={{ duration: 0.4 }}
+        />
 
-      {/* ── Hero content ── */}
-      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center pt-24 pb-12">
-
-        {/* Badge pills */}
-        <Reveal delay={0}>
-          <div className="flex flex-col sm:flex-row items-center gap-3 mb-10">
-            <span
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[13px] font-semibold text-white/90"
-              style={{
-                background: 'rgba(0,0,0,0.7)',
-                border: '1px solid rgba(243,200,146,0.35)',
-                backdropFilter: 'blur(10px)',
-              }}
-            >
-              <span style={{ color: '#f3c892' }}>✦</span>
-              Reliable Events. Reliable Staff.
-            </span>
-            <span
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[13px] font-semibold text-white/80"
-              style={{
-                background: 'rgba(0,0,0,0.7)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(10px)',
-              }}
-            >
-              <span className="w-2 h-2 rounded-full bg-green-400 inline-block shrink-0" />
-              Est. 2024 · Growing Fast
-            </span>
-          </div>
-        </Reveal>
-
-        {/* ── Logo treatment ── */}
-        <Reveal delay={0.15}>
-          <div className="mb-4">
-          <div
-            className="font-black leading-none select-none"
-            style={{
-              fontSize: 'clamp(96px, 16vw, 150px)',
-              color: '#f3c892',
-              textShadow: '0 0 60px rgba(243,200,146,0.3)',
-              letterSpacing: '-0.02em',
+        {/* Content */}
+        <div className="relative z-10 p-8 md:p-16 w-full max-w-2xl mx-auto flex flex-col items-center md:items-start text-center md:text-left">
+          <motion.div
+            animate={{ 
+              opacity: hoveredSide === 'right' ? 0.3 : 1,
+              y: hoveredSide === 'left' ? -10 : 0 
             }}
+            transition={{ duration: 0.4 }}
+            className="w-full"
           >
-            MV
-          </div>
-          <div
-            className="font-black text-white mt-0 tracking-[0.22em]"
-            style={{ fontSize: 'clamp(24px, 5vw, 32px)', letterSpacing: '0.22em' }}
-          >
-            GROUPS
-          </div>
-          </div>
-        </Reveal>
-
-        {/* ── Tagline ── */}
-        <Reveal delay={0.3}>
-          <p
-            className="font-bold text-white mb-4"
-            style={{ fontSize: 'clamp(15px, 2.5vw, 22px)' }}
-          >
-            The Human Element of Extraordinary Events.
-          </p>
-        </Reveal>
-
-        {/* ── Description ── */}
-        <Reveal delay={0.45}>
-          <p
-            className="leading-relaxed mb-10 max-w-xl"
-            style={{ color: '#c8c3be', fontSize: '15px' }}
-          >
-            We don&apos;t just fill roles; we deliver complete event experiences. From end-to-end event planning to supplying elite hospitality staff, brand ambassadors, and logistics crew across Karnataka.
-          </p>
-        </Reveal>
-
-        {/* ── CTA buttons ── */}
-        <Reveal delay={0.6}>
-          <div className="flex flex-col sm:flex-row gap-4 mb-14 justify-center w-full">
-            <GSAPMagnetic strength={0.35}>
-              <Link href="/booking" className="btn-gold text-sm px-7 py-3.5">
-                Plan Your Event
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </GSAPMagnetic>
-            <GSAPMagnetic strength={0.35}>
-              <Link href="/build-your-event" className="btn-outline text-sm px-7 py-3.5">
-                Build Your Event Package
-              </Link>
-            </GSAPMagnetic>
-          </div>
-        </Reveal>
-
-        {/* ── Stats row ── */}
-        <Reveal delay={0.75}>
-          <div
-            className="flex flex-col sm:flex-row items-center gap-0"
-            style={{
-              background: 'rgba(12,11,10,0.7)',
-              border: '1px solid rgba(42,42,42,0.8)',
-              borderRadius: '9999px',
-              backdropFilter: 'blur(12px)',
-              padding: '0.75rem 2rem',
-            }}
-          >
-            {STATS.map((stat, i) => (
-              <div key={stat.label} className="flex items-center">
-                <div className="flex flex-col items-center px-6 py-1">
-                  <GSAPCounter
-                    value={stat.num}
-                    suffix={stat.suffix}
-                    duration={2.2}
-                    className="font-black leading-none"
-                    style={{ color: '#f3c892', fontSize: '48px' } as React.CSSProperties}
-                  />
-                  <span
-                    className="text-[13px] font-semibold tracking-widest mt-1"
-                    style={{ color: '#a39e98', letterSpacing: '0.1em' }}
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 mx-auto md:mx-0 shadow-lg" style={{ background: 'rgba(20, 19, 18, 0.8)', border: '1px solid rgba(243,200,146,0.3)', backdropFilter: 'blur(10px)' }}>
+              <Users className="w-6 h-6" style={{ color: '#f3c892' }} />
+            </div>
+            
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 tracking-tight leading-tight">
+              Event Staffing <br className="hidden md:block" />
+              <span style={{ color: '#f3c892' }}>& Manpower</span>
+            </h1>
+            
+            <AnimatePresence mode="wait">
+              {(!hoveredSide || hoveredSide === 'left') && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className="text-sm md:text-base text-[#c8c3be] mb-8 max-w-md mx-auto md:mx-0">
+                    The reliable backbone of Karnataka&apos;s biggest events. We supply vetted VIP hospitality, security, promoters, and logistics crew.
+                  </p>
+                  <Link 
+                    href="/services" 
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl"
+                    style={{ background: '#f3c892', color: '#0c0b0a' }}
                   >
-                    {stat.label}
-                  </span>
-                </div>
-                {i < STATS.length - 1 && (
-                  <div
-                    className="w-px self-stretch"
-                    style={{ background: '#282624' }}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-
-      {/* ── Scroll indicator ── */}
-      <Reveal delay={1}>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5">
-          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: '#66625d' }}>
-            Scroll
-          </span>
-          <div
-            className="w-px h-8"
-            style={{
-              background: 'linear-gradient(to bottom, #282624, transparent)',
-            }}
-          />
+                    Hire Event Staff <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
-      </Reveal>
+      </motion.div>
+
+      {/* ── Right Pillar: Event Management ── */}
+      <motion.div
+        className="relative h-1/2 md:h-full flex-shrink-0 flex items-center justify-center cursor-pointer overflow-hidden group"
+        initial={{ flexBasis: '50%' }}
+        animate={{
+          flexBasis: hoveredSide === 'right' ? '70%' : hoveredSide === 'left' ? '30%' : '50%',
+        }}
+        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+        onMouseEnter={() => setHoveredSide('right')}
+        onMouseLeave={() => setHoveredSide(null)}
+      >
+        {/* Background Image/Video */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1505236858219-8373dd707522?auto=format&fit=crop&q=80&w=1600)' }}
+        />
+        
+        {/* Dynamic Dark Overlay based on hover state */}
+        <motion.div 
+          className="absolute inset-0 bg-[#0a0908]"
+          animate={{ opacity: hoveredSide === 'left' ? 0.8 : 0.4 }}
+          transition={{ duration: 0.4 }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 p-8 md:p-16 w-full max-w-2xl mx-auto flex flex-col items-center md:items-start text-center md:text-left">
+          <motion.div
+            animate={{ 
+              opacity: hoveredSide === 'left' ? 0.3 : 1,
+              y: hoveredSide === 'right' ? -10 : 0
+            }}
+            transition={{ duration: 0.4 }}
+            className="w-full"
+          >
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 mx-auto md:mx-0 shadow-lg" style={{ background: 'rgba(20, 19, 18, 0.8)', border: '1px solid rgba(243,200,146,0.3)', backdropFilter: 'blur(10px)' }}>
+              <Award className="w-6 h-6" style={{ color: '#f3c892' }} />
+            </div>
+
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4 tracking-tight leading-tight">
+              End-to-End <br className="hidden md:block" />
+              <span style={{ color: '#f3c892' }}>Event Planning</span>
+            </h1>
+
+            <AnimatePresence mode="wait">
+              {(!hoveredSide || hoveredSide === 'right') && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className="text-sm md:text-base text-[#c8c3be] mb-8 max-w-md mx-auto md:mx-0">
+                    From concept to flawless execution. We design, produce, and manage premium corporate and social events.
+                  </p>
+                  <Link 
+                    href="/build-your-event" 
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl"
+                    style={{ background: '#f3c892', color: '#0c0b0a' }}
+                  >
+                    Plan Your Event <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </motion.div>
+      
+      {/* Central MV Groups Branding (Hidden on mobile) */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50 hidden md:block pointer-events-none">
+         <div
+            className="font-black text-white tracking-[0.22em] text-center"
+            style={{ fontSize: '16px', letterSpacing: '0.22em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
+          >
+            MV GROUPS
+          </div>
+      </div>
     </section>
   );
 }
