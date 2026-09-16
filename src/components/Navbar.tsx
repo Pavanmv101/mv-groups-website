@@ -114,7 +114,7 @@ export default function Navbar() {
               {pathname.startsWith('/management') && (
                 <>
                   <Link href="/management/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
-                  <Link href="/gallery" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/gallery' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Portfolio<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/gallery' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
+                  <Link href="/management/portfolio" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management/portfolio' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Portfolio<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management/portfolio' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/contact" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/contact' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Contact<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/contact' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                 </>
               )}
@@ -190,7 +190,7 @@ export default function Navbar() {
             {pathname.startsWith('/management') && (
               <>
                 <Link href="/management/services" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Services</Link>
-                <Link href="/gallery" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Portfolio</Link>
+                <Link href="/management/portfolio" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Portfolio</Link>
                 <Link href="/contact" onClick={() => setIsOpen(false)} className="py-3.5 px-2 text-2xl font-bold text-white/80 hover:text-[#f3c892] transition-colors border-b border-[#1a1918]">Contact</Link>
               </>
             )}
