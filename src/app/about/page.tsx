@@ -3,6 +3,7 @@ import { Shield, Target, Users, Zap, Award, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next';
+import BrochureDownload from '@/components/BrochureDownload';
 
 export const metadata: Metadata = {
   title: 'About MV Groups | Bangalore Event Staffing Agency',
@@ -169,6 +170,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <BrochureDownload />
     </div>
   )
 }

@@ -22,6 +22,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${service.title} | MV Groups Services`,
     description: service.shortDescription,
+    openGraph: {
+      title: `${service.title} | MV Groups Services`,
+      description: service.shortDescription,
+      url: `https://mvgroups.online/services/${service.id}`,
+      siteName: 'MV Groups',
+      images: [
+        {
+          url: 'https://mvgroups.online/og-image.jpg', // Fallback, would be nice to have actual service images here later
+          width: 1200,
+          height: 630,
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${service.title} | MV Groups`,
+      description: service.shortDescription,
+    },
   };
 }
 
@@ -35,8 +54,28 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   const Icon = service.icon;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.shortDescription,
+    provider: {
+      '@type': 'Organization',
+      name: 'MV Groups',
+      url: 'https://mvgroups.online',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Bengaluru',
+    },
+  };
+
   return (
     <div className="min-h-screen bg-[#141312]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-[#0a0908] border-b border-[#1a1918]">
