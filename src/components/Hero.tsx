@@ -96,7 +96,7 @@ export default function Hero() {
       >
         {/* Background Video */}
         <video 
-          src="/videos/wedding.mp4"
+          src="/videos/corporate.mp4"
           autoPlay muted loop playsInline preload="metadata"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
@@ -153,31 +153,19 @@ export default function Hero() {
           </motion.div>
         </div>
       </motion.div>
-      
-      {/* Central MV Groups Branding - Floating Logo Badge */}
+      {/* Top MV Groups Logo (Desktop & Mobile) */}
       <motion.div 
-        className="absolute top-1/2 left-1/2 z-50 pointer-events-none hidden md:flex items-center justify-center shadow-2xl"
-        initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
-        animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+        className="absolute top-8 left-1/2 z-50 pointer-events-none flex items-center justify-center"
+        initial={{ opacity: 0, y: -20, x: '-50%' }}
+        animate={{ opacity: 1, y: 0, x: '-50%' }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <div className="w-32 h-32 rounded-full flex items-center justify-center overflow-hidden border border-[#f3c892]/30 bg-[#0c0b0a]/60 backdrop-blur-md">
-          <img 
-            src="/images/mv-groups-logo.png" 
-            alt="MV Groups Logo"
-            className="w-24 h-auto object-contain drop-shadow-xl"
-          />
-        </div>
-      </motion.div>
-
-      {/* Top Mobile Logo */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-50 md:hidden pointer-events-none">
         <img 
           src="/images/mv-groups-logo.png" 
           alt="MV Groups Logo"
-          className="w-24 h-auto object-contain drop-shadow-lg"
+          className="w-32 md:w-40 h-auto object-contain drop-shadow-2xl filter brightness-110"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }
