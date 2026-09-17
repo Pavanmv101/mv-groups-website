@@ -348,3 +348,109 @@ body {
 .animate-slide-up {
   animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* ─── Typewriter cursor blink ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: #f3c892;
+  margin-left: 4px;
+  animation: blink 0.8s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* ─── Horizontal scroll showcase ─── */
+.horizontal-scroll-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 2rem 0;
+}
+.horizontal-scroll-container::-webkit-scrollbar { display: none; }
+.horizontal-scroll-card {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ─── Timeline draw line ─── */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #282624;
+  transform: translateX(-50%);
+}
+.timeline-line-fill {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #f3c892, #e5b980);
+  transform: translateX(-50%);
+  transition: height 0.1s linear;
+}
+
+/* ─── Masonry grid ─── */
+.masonry-grid {
+  columns: 2;
+  column-gap: 1rem;
+}
+@media (min-width: 768px) {
+  .masonry-grid { columns: 3; }
+}
+@media (min-width: 1024px) {
+  .masonry-grid { columns: 4; }
+}
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+/* ─── Lightbox overlay ─── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 0.75rem;
+}
+
+/* ─── Gradient blob morph ─── */
+@keyframes morphBlob {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 60% 40% 60% 30%; }
+  75%  { border-radius: 60% 30% 50% 40% / 30% 60% 40% 70%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+.morph-blob {
+  animation: morphBlob 12s ease-in-out infinite;
+}
+
+/* ─── Bounce chevron ─── */
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.animate-bounce-down {
+  animation: bounceDown 2s ease-in-out infinite;
+}
