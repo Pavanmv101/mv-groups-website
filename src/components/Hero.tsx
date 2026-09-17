@@ -61,13 +61,6 @@ function RevealSection({ children, className = '' }: { children: React.ReactNode
 const STAFFING_SERVICES = ['Event Manpower', 'Promotional Staffing', 'Corporate Staffing', 'Wedding & Social Staffing', 'Bouncers & Security', 'Anchoring & Emcee'];
 const MANAGEMENT_SERVICES = ['End-to-End Event Planning', 'Stage & AV Production', 'Decor & Stage Design', 'Content & Media Coverage', 'Catering & Hospitality', 'Entertainment & Talent'];
 
-const STATS = [
-  { value: '150+', label: 'Events Staffed' },
-  { value: '15+',  label: 'Trusted Clients' },
-  { value: '13',   label: 'Service Types'  },
-  { value: '100%', label: 'Reliability'    },
-  { value: '24/7', label: 'Dedicated Support' },
-];
 
 const WHY_US = [
   {
@@ -412,7 +405,7 @@ export default function Hero() {
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
               Tell us what you need.<br />
-              <span style={{ color: '#f3c892' }}>We'll handle the rest.</span>
+              <span style={{ color: '#f3c892' }}>We&apos;ll handle the rest.</span>
             </h2>
             <p className="text-[#a39e98] text-lg max-w-xl mx-auto">3 quick questions. Your details go straight to our WhatsApp. No forms, no delays.</p>
           </RevealSection>
@@ -509,7 +502,7 @@ export default function Hero() {
           </RevealSection>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {WHY_US.map((item, i) => {
+            {WHY_US.map((item) => {
               const Icon = item.icon;
               return (
                 <RevealSection key={item.title}>

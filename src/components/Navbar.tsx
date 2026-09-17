@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { type User } from '@supabase/supabase-js';
 import { Menu, X, User as UserIcon, ArrowRight } from 'lucide-react';
-import { NAV_LINKS } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/client';
 import { logout } from '@/app/login/actions';
 

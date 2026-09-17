@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Sparkles, LayoutTemplate, Palette, Camera, Speaker, UtensilsCrossed, Users, Mic2, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Sparkles, LayoutTemplate, Palette, Camera, Speaker, UtensilsCrossed, Mic2, CheckCircle2 } from 'lucide-react';
 import Reveal from '@/components/animations/Reveal';
 import { StaggerContainer, StaggerItem } from '@/components/animations/Stagger';
 
