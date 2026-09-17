@@ -156,7 +156,7 @@ export default function CareersPage() {
                     <h4 className="text-white font-bold mb-2">Next Step: Join Our Crew Group</h4>
                     <p className="text-sm text-[#a39e98] mb-6">Get instant updates on new event opportunities and shifts directly on WhatsApp.</p>
                     <a 
-                      href="https://chat.whatsapp.com/YOUR_INVITE_LINK_HERE" 
+                      href="https://chat.whatsapp.com/HGqIP0aSogOHfXFytuqPVX?mode=gi_t" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-3 w-full px-6 py-4 rounded-xl font-bold transition-all hover:-translate-y-1 shadow-lg hover:shadow-[0_10px_20px_rgba(37,211,102,0.2)]"
