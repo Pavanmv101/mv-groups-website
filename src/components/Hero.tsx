@@ -56,12 +56,57 @@ function GoldParticles() {
   );
 }
 
+function MaintenanceSign() {
+  return (
+    <div className="absolute top-[90px] md:top-[120px] left-1/2 z-[60] pointer-events-none">
+      <motion.div
+        className="flex flex-col items-center"
+        style={{ x: '-50%', transformOrigin: 'top center' }}
+        animate={{ rotate: [-3, 3] }}
+        transition={{ repeat: Infinity, repeatType: 'mirror', duration: 2.5, ease: 'easeInOut' }}
+      >
+        {/* Chains */}
+        <div className="flex justify-between w-40 md:w-56 px-5 -mb-1">
+          {/* Left Chain */}
+          <svg width="8" height="40" viewBox="0 0 8 40" fill="none" className="drop-shadow-xl opacity-80">
+            <pattern id="chain-pattern" x="0" y="0" width="8" height="12" patternUnits="userSpaceOnUse">
+              <rect x="1" y="0.5" width="6" height="10" rx="3" stroke="#a1a1aa" strokeWidth="1.5" fill="none"/>
+            </pattern>
+            <rect width="8" height="40" fill="url(#chain-pattern)"/>
+          </svg>
+          {/* Right Chain */}
+          <svg width="8" height="40" viewBox="0 0 8 40" fill="none" className="drop-shadow-xl opacity-80">
+            <rect width="8" height="40" fill="url(#chain-pattern)"/>
+          </svg>
+        </div>
+
+        {/* Sign Board */}
+        <div className="relative bg-[#cc0000] px-6 py-4 md:px-10 md:py-6 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-[3px] border-[#8a0000] flex flex-col items-center justify-center">
+          {/* Inner White Border */}
+          <div className="absolute inset-1.5 border-2 border-white/60 rounded-lg pointer-events-none" />
+          
+          {/* Screw holes left & right */}
+          <div className="absolute top-2 left-3.5 w-2.5 h-2.5 rounded-full bg-zinc-900 border border-zinc-500 shadow-inner" />
+          <div className="absolute top-2 right-3.5 w-2.5 h-2.5 rounded-full bg-zinc-900 border border-zinc-500 shadow-inner" />
+          
+          <div className="text-center mt-2 relative z-10">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-widest uppercase leading-none" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>Closed</h2>
+            <p className="text-[10px] md:text-sm font-bold text-white/90 tracking-widest uppercase mt-2">Under Construction</p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Hero() {
   const [hoveredSide, setHoveredSide] = useState<'left' | 'right' | null>(null);
 
   return (
     <section className="relative w-full h-[100svh] flex flex-col md:flex-row overflow-hidden bg-[#0a0908]">
       
+      <MaintenanceSign />
+
       {/* ── Animated gold divider line (Desktop) ── */}
       <motion.div
         className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px z-30 hidden md:block"
