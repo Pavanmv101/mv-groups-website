@@ -70,10 +70,8 @@ export default function Navbar() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Hide Navbar entirely on the Root Gateway
-  if (pathname === '/') {
-    return null;
-  }
+  // On root homepage, show a unified navbar (not portal-specific)
+  const isHomepage = pathname === '/';
 
   return (
     <>
@@ -103,7 +101,15 @@ export default function Navbar() {
             {/* ── Desktop nav links ── */}
             <div className="hidden md:flex items-center gap-0.5">
               {/* Dynamic Links based on portal */}
-              {!pathname.startsWith('/management') && (
+              {isHomepage && (
+                <>
+                  <Link href="/staffing" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group text-white/75 hover:text-white">Staffing<span className="absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100" /></Link>
+                  <Link href="/management" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group text-white/75 hover:text-white">Management<span className="absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100" /></Link>
+                  <Link href="/about" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group text-white/75 hover:text-white">About<span className="absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100" /></Link>
+                  <Link href="/contact" className="px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group text-white/75 hover:text-white">Contact<span className="absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left scale-x-0 group-hover:scale-x-100" /></Link>
+                </>
+              )}
+              {!isHomepage && !pathname.startsWith('/management') && (
                 <>
                   <Link href="/staffing/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/staffing/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/staffing/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/gallery" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/gallery' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Gallery<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/gallery' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
@@ -112,7 +118,7 @@ export default function Navbar() {
                   <Link href="/contact" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/contact' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Contact<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/contact' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                 </>
               )}
-              {pathname.startsWith('/management') && (
+              {!isHomepage && pathname.startsWith('/management') && (
                 <>
                   <Link href="/management/services" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management/services' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Services<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management/services' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
                   <Link href="/management/portfolio" className={`px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 relative group ${pathname === '/management/portfolio' ? 'text-[#f3c892]' : 'text-white/75 hover:text-white'}`}>Portfolio<span className={`absolute bottom-0 left-4 right-4 h-px bg-[#f3c892] transition-transform duration-200 origin-left ${pathname === '/management/portfolio' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} /></Link>
@@ -135,17 +141,28 @@ export default function Navbar() {
               )}
 
               {/* Dynamic CTA */}
-              <Link
-                href={pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
-                className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap ${
-                  scrolled
-                    ? 'bg-[#f3c892] text-[#0c0b0a] hover:bg-[#e5b980] shadow-lg shadow-[rgba(243,200,146,0.25)] hover:shadow-[rgba(243,200,146,0.4)] hover:-translate-y-0.5'
-                    : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'
-                }`}
-              >
-                {pathname.startsWith('/management') ? "Plan Your Event" : "Book Your Team"}
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              {isHomepage ? (
+                <div className="ml-3 flex items-center gap-2">
+                  <Link href="/staffing" className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-300 whitespace-nowrap border border-white/20 text-white hover:border-[#f3c892] hover:text-[#f3c892]`}>
+                    Staffing
+                  </Link>
+                  <Link href="/management" className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap ${scrolled ? 'bg-[#f3c892] text-[#0c0b0a] hover:bg-[#e5b980] shadow-lg' : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'}`}>
+                    Management <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  href={pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
+                  className={`ml-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap ${
+                    scrolled
+                      ? 'bg-[#f3c892] text-[#0c0b0a] hover:bg-[#e5b980] shadow-lg shadow-[rgba(243,200,146,0.25)] hover:shadow-[rgba(243,200,146,0.4)] hover:-translate-y-0.5'
+                      : 'border-2 border-white/60 text-white hover:border-[#f3c892] hover:text-[#f3c892]'
+                  }`}
+                >
+                  {pathname.startsWith('/management') ? "Plan Your Event" : "Book Your Team"}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              )}
             </div>
 
             {/* ── Mobile hamburger ── */}

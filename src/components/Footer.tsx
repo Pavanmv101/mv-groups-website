@@ -45,11 +45,6 @@ function InstagramIcon({ className }: { className?: string }) {
 export default function Footer() {
   const pathname = usePathname();
 
-  // Hide Footer entirely on the Root Gateway
-  if (pathname === '/') {
-    return null;
-  }
-
   return (
     <footer style={{ background: '#0c0b0a', borderTop: '1px solid #1a1918' }}>
       {/* Main grid */}
