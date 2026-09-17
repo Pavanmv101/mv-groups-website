@@ -49,6 +49,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ─── Custom gold cursor — hide native cursor on pointer devices ─── */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 /* ─── Custom scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0c0b0a; }

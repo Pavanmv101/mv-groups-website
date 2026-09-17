@@ -1,10 +1,12 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Users, Crown, Sparkles, CheckCircle2, ChevronDown, Star, Zap, Shield } from 'lucide-react';
+import { ArrowRight, Users, Crown, Sparkles, CheckCircle2, ChevronDown, Star, Zap, Shield, MessageSquare } from 'lucide-react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import QuickQuoteWidget from '@/components/QuickQuoteWidget';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 /* ── Pre-computed gold particle positions ── */
 const PARTICLES = [
@@ -363,19 +365,63 @@ export default function Hero() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 4: Stats Bar
+          SECTION 4: Animated Stats Bar
       ═══════════════════════════════════════════ */}
-      <section className="py-6 border-y overflow-hidden" style={{ borderColor: '#1a1918', background: '#0c0b0a' }}>
-        <RevealSection>
-          <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl md:text-4xl font-black mb-1" style={{ color: '#f3c892' }}>{s.value}</div>
-                <div className="text-xs font-bold uppercase tracking-widest" style={{ color: '#66625d' }}>{s.label}</div>
-              </div>
-            ))}
+      <section className="py-16 border-y overflow-hidden" style={{ borderColor: '#1a1918', background: '#0c0b0a' }}>
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-5 gap-10 text-center">
+          <div>
+            <div className="text-3xl md:text-5xl font-black mb-1" style={{ color: '#f3c892' }}>
+              <AnimatedCounter target={150} suffix="+" />
+            </div>
+            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: '#66625d' }}>Events Staffed</div>
           </div>
-        </RevealSection>
+          <div>
+            <div className="text-3xl md:text-5xl font-black mb-1" style={{ color: '#f3c892' }}>
+              <AnimatedCounter target={15} suffix="+" />
+            </div>
+            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: '#66625d' }}>Trusted Clients</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-5xl font-black mb-1" style={{ color: '#f3c892' }}>
+              <AnimatedCounter target={13} />
+            </div>
+            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: '#66625d' }}>Service Types</div>
+          </div>
+          <div>
+            <div className="text-3xl md:text-5xl font-black mb-1" style={{ color: '#f3c892' }}>
+              <AnimatedCounter target={100} suffix="%" />
+            </div>
+            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: '#66625d' }}>Reliability</div>
+          </div>
+          <div className="col-span-2 md:col-span-1">
+            <div className="text-3xl md:text-5xl font-black mb-1" style={{ color: '#f3c892' }}>24/7</div>
+            <div className="text-xs font-bold uppercase tracking-widest" style={{ color: '#66625d' }}>Dedicated Support</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          SECTION 4.5: Quick Quote Widget
+      ═══════════════════════════════════════════ */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 border-b" style={{ borderColor: '#1a1918', background: '#0c0b0a' }}>
+        <div className="max-w-4xl mx-auto">
+          <RevealSection className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-[0.15em] uppercase mb-6" style={{ background: 'rgba(243,200,146,0.08)', color: '#f3c892', border: '1px solid rgba(243,200,146,0.15)' }}>
+              <MessageSquare className="w-3.5 h-3.5" />
+              Get a Quote in 60 Seconds
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
+              Tell us what you need.<br />
+              <span style={{ color: '#f3c892' }}>We'll handle the rest.</span>
+            </h2>
+            <p className="text-[#a39e98] text-lg max-w-xl mx-auto">3 quick questions. Your details go straight to our WhatsApp. No forms, no delays.</p>
+          </RevealSection>
+          <RevealSection>
+            <div className="rounded-3xl p-8 lg:p-12" style={{ background: '#141312', border: '1px solid #282624' }}>
+              <QuickQuoteWidget />
+            </div>
+          </RevealSection>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════

@@ -1,4 +1,8 @@
 import Hero from '@/components/Hero';
+import Testimonials from '@/components/Testimonials';
+import InstagramSection from '@/components/InstagramSection';
+import LiveInquiryCounter from '@/components/LiveInquiryCounter';
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,6 +17,11 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Suspense fallback={null}>
+        <LiveInquiryCounter />
+      </Suspense>
+      <Testimonials />
+      <InstagramSection />
     </>
   );
 }
