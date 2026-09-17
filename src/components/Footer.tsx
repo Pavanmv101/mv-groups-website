@@ -101,7 +101,15 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {pathname.startsWith('/management') ? (
+              {pathname === '/' ? (
+                <>
+                  <li><Link href="/staffing" className="footer-link text-sm flex items-center gap-1 group">Staffing Portal<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/management" className="footer-link text-sm flex items-center gap-1 group">Management Portal<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/about" className="footer-link text-sm flex items-center gap-1 group">About Us<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/careers" className="footer-link text-sm flex items-center gap-1 group">Careers<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                  <li><Link href="/contact" className="footer-link text-sm flex items-center gap-1 group">Contact<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
+                </>
+              ) : pathname.startsWith('/management') ? (
                 <>
                   <li><Link href="/management" className="footer-link text-sm flex items-center gap-1 group">Home<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
                   <li><Link href="/about" className="footer-link text-sm flex items-center gap-1 group">About Us<ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#f3c892' }} /></Link></li>
@@ -121,10 +129,10 @@ export default function Footer() {
               )}
               <li>
                 <Link
-                  href={pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
+                  href={pathname === '/' ? "/contact" : pathname.startsWith('/management') ? "/build-your-event" : "/booking"}
                   className="footer-link-gold text-sm flex items-center gap-1"
                 >
-                  {pathname.startsWith('/management') ? "Plan Your Event" : "Request a Quote"}
+                  {pathname === '/' ? "Get in Touch" : pathname.startsWith('/management') ? "Plan Your Event" : "Request a Quote"}
                   <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>
@@ -134,16 +142,25 @@ export default function Footer() {
           {/* Col 3 — Popular Services */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-[0.15em] mb-5" style={{ color: '#66625d' }}>
-              {pathname.startsWith('/management') ? 'Our Services' : 'Popular Services'}
+              {pathname === '/' ? 'Our Services' : pathname.startsWith('/management') ? 'Our Services' : 'Popular Services'}
             </h3>
             <ul className="space-y-3">
-              {(pathname.startsWith('/management') ? MANAGEMENT_POPULAR_SERVICES : STAFFING_POPULAR_SERVICES).map((s) => (
-                <li key={s}>
-                  <Link href={pathname.startsWith('/management') ? "/management/services" : "/staffing/services"} className="footer-link text-sm">
-                    {s}
-                  </Link>
-                </li>
-              ))}
+              {pathname === '/' ? (
+                // On homepage, show a mix of both portals
+                <>
+                  {['Event Manpower', 'Corporate Staffing', 'Bouncers & Security', 'End-to-End Event Planning', 'Stage & AV Production', 'Decor & Stage Design'].map((s) => (
+                    <li key={s}><Link href={['End-to-End Event Planning', 'Stage & AV Production', 'Decor & Stage Design'].includes(s) ? '/management/services' : '/staffing/services'} className="footer-link text-sm">{s}</Link></li>
+                  ))}
+                </>
+              ) : (
+                (pathname.startsWith('/management') ? MANAGEMENT_POPULAR_SERVICES : STAFFING_POPULAR_SERVICES).map((s) => (
+                  <li key={s}>
+                    <Link href={pathname.startsWith('/management') ? "/management/services" : "/staffing/services"} className="footer-link text-sm">
+                      {s}
+                    </Link>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
 
