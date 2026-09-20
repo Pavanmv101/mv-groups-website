@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef } from 'react'
 import { submitApplication } from './actions'
 import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 const initialState = {
   success: false,
@@ -62,12 +63,12 @@ export default function CareersPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.25 }}
           >
-            <a 
+            <Link 
               href="/login"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all hover:-translate-y-0.5 shadow-lg bg-[#f3c892] text-[#0c0b0a]"
             >
               Check Application Status <ArrowRight className="w-5 h-5" />
-            </a>
+            </Link>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-16">
@@ -179,7 +180,7 @@ export default function CareersPage() {
                 </div>
               </div>
             ) : (
-              <form ref={formRef} action={formAction} className="space-y-6">
+              <form ref={formRef} action={formAction} encType="multipart/form-data" className="space-y-6">
                 
                 {state.error && (
                   <div className="p-5 rounded-xl border text-sm font-medium" style={{ background: 'rgba(239,68,68,0.1)', borderColor: 'rgba(239,68,68,0.2)', color: '#f87171' }}>
