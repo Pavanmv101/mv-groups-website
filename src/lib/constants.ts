@@ -55,7 +55,15 @@ export const SERVICES = [
     shortDescription: 'Full-service event execution, from venue sourcing to production and management.',
     description: 'We take the stress off your shoulders. Our expert planners handle end-to-end event execution, including conceptualization, vendor management, stage production, and on-ground coordination for corporate and social events.',
     icon: Award,
-    features: ['Venue Sourcing & Booking', 'Vendor & Artist Management', 'Stage & Technical Production', 'On-Ground Event Coordination', 'Concept & Theme Design'],
+    features: [
+      'Venue & Planning (Sourcing, Coordination)', 
+      'Design & Production (Stage, AV, Layouts)', 
+      'Decor & Theming (Floral, Custom Setups)', 
+      'Event Support & Branding (Signage, Badges)', 
+      'Vendor Management (Catering, Photography)', 
+      'Staffing & Workforce (Hosts, Crew)', 
+      'On-Ground Execution (VIP Handling, Operations)'
+    ],
   },
   {
     id: 'event_manpower',

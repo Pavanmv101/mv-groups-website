@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, LayoutTemplate, Palette, CheckCircle2, Calendar, Users, Mic2, Camera, Speaker, UtensilsCrossed, MapPin, Star, ChevronDown, X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ArrowRight, Sparkles, LayoutTemplate, Palette, CheckCircle2, Calendar, Users, Mic2, Camera, Speaker, UtensilsCrossed, MapPin, Star, ChevronDown, X, ChevronLeft, ChevronRight, Play, Printer, Briefcase, Activity } from 'lucide-react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import MagneticWrapper from '@/components/animations/GSAPMagnetic';
 
@@ -33,12 +33,13 @@ const PROCESS_STEPS = [
 ];
 
 const CAPABILITIES = [
-  { icon: LayoutTemplate, title: 'Venue Sourcing', desc: 'Access to 200+ premium venues across Karnataka', angle: 0 },
-  { icon: Palette, title: 'Theme & Decor', desc: 'Custom stage design, floral, and immersive setups', angle: 60 },
-  { icon: Speaker, title: 'AV & Production', desc: 'Sound, lighting, LED walls, and live streaming', angle: 120 },
-  { icon: Camera, title: 'Content & Media', desc: 'Photography, videography, and social media coverage', angle: 180 },
-  { icon: UtensilsCrossed, title: 'F&B Management', desc: 'Catering coordination and bar service setup', angle: 240 },
-  { icon: Users, title: 'On-Ground Crew', desc: 'Our staffing backbone ensures flawless execution', angle: 300 },
+  { icon: MapPin, title: 'Venue & Planning', desc: 'Venue sourcing • Event planning • Coordination', angle: -90 },
+  { icon: LayoutTemplate, title: 'Design & Production', desc: 'Stage • 3D layouts • AV • LED • Lighting', angle: -38.6 },
+  { icon: Palette, title: 'Decor & Theming', desc: 'Floral • Thematic setups • Branding structures', angle: 12.8 },
+  { icon: Printer, title: 'Support & Branding', desc: 'Printing • Badges • Signage • Backdrops • Standees • Collaterals', angle: 64.3 },
+  { icon: Briefcase, title: 'Vendor Management', desc: 'Catering • Photography • Security • Entertainment', angle: 115.7 },
+  { icon: Users, title: 'Staffing & Workforce', desc: 'Hosts • Ushers • Promoters • Coordinators • Event crew', angle: 167.1 },
+  { icon: Activity, title: 'On-Ground Execution', desc: 'Guest management • VIP handling • Event-day operations', angle: 218.6 },
 ];
 
 const GALLERY_IMAGES = [
@@ -390,7 +391,10 @@ export default function ManagementPage() {
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
               Our <em className="not-italic" style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>Capabilities</em>
             </h2>
-            <p className="text-[#a39e98] text-lg max-w-2xl mx-auto">Stop managing 10 different vendors. We coordinate every moving part — one point of contact, zero stress.</p>
+            <p className="text-[#a39e98] text-lg max-w-2xl mx-auto mb-6">Stop managing 10 different vendors. We coordinate every moving part — one point of contact, zero stress.</p>
+            <p className="text-sm font-medium italic max-w-3xl mx-auto px-6 py-4 rounded-2xl" style={{ background: 'rgba(243,200,146,0.05)', color: '#d4aa73', border: '1px solid rgba(243,200,146,0.1)' }}>
+              "From event badges and signage to complete on-ground branding, MV Groups provides the essential support materials that bring your event identity to life — customized to your requirements."
+            </p>
           </RevealOnScroll>
 
           {/* Desktop: Orbit Layout */}
