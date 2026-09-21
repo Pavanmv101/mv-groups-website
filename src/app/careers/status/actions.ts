@@ -1,12 +1,12 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/server'
+import { createClient, createAdminClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'
 
 export async function checkApplicationStatus(prevState: unknown, formData: FormData) {
   try {
-    const supabase = await createClient()
+    const supabase = await createAdminClient()
 
     const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
     const rateLimitResult = await checkRateLimit(`status_check_${ip}`)

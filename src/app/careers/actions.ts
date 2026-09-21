@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/server'
+import { createClient, createAdminClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'
@@ -8,7 +8,7 @@ import nodemailer from 'nodemailer'
 
 export async function submitApplication(prevState: unknown, formData: FormData) {
   try {
-    const supabase = await createClient()
+    const supabase = await createAdminClient()
 
     const ip = (await headers()).get('x-forwarded-for') ?? '127.0.0.1'
     const rateLimitResult = await checkRateLimit(`careers_${ip}`)
