@@ -8,7 +8,8 @@ import Link from 'next/link'
 
 const initialState = {
   success: false,
-  error: null,
+  error: null as string | null,
+  applicationId: null as string | null,
 }
 
 export default function CareersPage() {
@@ -64,7 +65,7 @@ export default function CareersPage() {
             transition={{ duration: 0.5, delay: 0.25 }}
           >
             <Link 
-              href="/login"
+              href="/careers/status"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all hover:-translate-y-0.5 shadow-lg bg-[#f3c892] text-[#0c0b0a]"
             >
               Check Application Status <ArrowRight className="w-5 h-5" />
@@ -147,9 +148,34 @@ export default function CareersPage() {
                   </motion.svg>
                 </motion.div>
                 <h3 className="text-2xl font-bold mb-4" style={{ color: '#ffffff' }}>Application Submitted!</h3>
-                <p className="max-w-md mx-auto mb-10 text-lg" style={{ color: '#a39e98' }}>
+                <p className="max-w-md mx-auto mb-6 text-lg" style={{ color: '#a39e98' }}>
                   Thank you for your interest in joining MV Groups. Our recruitment team will review your application and get back to you shortly.
                 </p>
+
+                {/* Application ID Card */}
+                {state.applicationId && (
+                  <div className="bg-[#141312] border border-[#282624] p-6 rounded-2xl max-w-sm mx-auto mb-8 shadow-lg text-left">
+                    <p className="text-xs font-bold text-[#a39e98] uppercase tracking-wider mb-2">Your Application ID</p>
+                    <div className="flex items-center justify-between bg-[#0c0b0a] border border-[#282624] p-3 rounded-xl">
+                      <code className="text-[#f3c892] font-mono text-sm break-all select-all">
+                        {state.applicationId}
+                      </code>
+                      <button 
+                        onClick={() => {
+                          if (state.applicationId) {
+                            navigator.clipboard.writeText(state.applicationId);
+                            alert('Application ID copied to clipboard!');
+                          }
+                        }}
+                        className="ml-3 p-2 bg-[#282624] hover:bg-[#403e3c] rounded-lg transition-colors text-white"
+                        title="Copy to clipboard"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      </button>
+                    </div>
+                    <p className="text-xs text-[#66625d] mt-3">Save this ID to check your application status later.</p>
+                  </div>
+                )}
 
                 <div className="flex flex-col items-center gap-6">
                   {/* WhatsApp Group Join Card */}

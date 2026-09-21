@@ -14,7 +14,7 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
     const rateLimitResult = await checkRateLimit(`careers_${ip}`)
 
     if (!rateLimitResult.success) {
-      return { success: false, error: 'Too many requests. Please try again later.' }
+      return { success: false, error: 'Too many requests. Please try again later.', applicationId: null }
     }
 
     // 1. Extract basic form fields
@@ -35,13 +35,13 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
     const photoFile = formData.get('photo') as File | null
 
     if (!name || !email || !phone || !city || !interest || !availability || !gender || !experience || !languages) {
-      return { success: false, error: 'Please fill out all required fields.' }
+      return { success: false, error: 'Please fill out all required fields.', applicationId: null }
     }
 
     // Basic phone validation
     const phoneDigits = phone.replace(/\D/g, '')
     if (phoneDigits.length < 10 || phoneDigits.length > 15) {
-      return { success: false, error: 'Please enter a valid phone number (10-15 digits).' }
+      return { success: false, error: 'Please enter a valid phone number (10-15 digits).', applicationId: null }
     }
 
     let resume_url = null
@@ -82,11 +82,11 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
         }, 5)
       }
     } catch (err) {
-      return { success: false, error: err instanceof Error ? err.message : 'File upload failed.' }
+      return { success: false, error: err instanceof Error ? err.message : 'File upload failed.', applicationId: null }
     }
 
     // 3. Insert into applicants table
-    const { error: insertError } = await supabase.from('applicants').insert([
+    const { data: insertedData, error: insertError } = await supabase.from('applicants').insert([
       {
         name,
         email,
@@ -101,11 +101,11 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
         instagram,
         photo_url
       }
-    ])
+    ]).select('id').single()
 
     if (insertError) {
       console.error('Application insert error:', insertError)
-      return { success: false, error: `Submission failed: ${insertError.message} (code: ${insertError.code})` }
+      return { success: false, error: `Submission failed: ${insertError.message} (code: ${insertError.code})`, applicationId: null }
     }
 
     // 4. Send Email Notification using Nodemailer
@@ -124,6 +124,7 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
         subject: `New Career Application: ${name}`,
         html: `
           <h2>New Job Application Received</h2>
+          <p><strong>Application ID:</strong> ${insertedData.id}</p>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${phone}</p>
@@ -148,10 +149,10 @@ export async function submitApplication(prevState: unknown, formData: FormData) 
 
     revalidatePath('/admin') // refresh admin cache
     
-    return { success: true, error: null }
+    return { success: true, error: null, applicationId: insertedData.id as string }
 
   } catch (error) {
     console.error('Error submitting application:', error)
-    return { success: false, error: error instanceof Error ? error.message : 'An unexpected error occurred.' }
+    return { success: false, error: error instanceof Error ? error.message : 'An unexpected error occurred.', applicationId: null }
   }
 }
