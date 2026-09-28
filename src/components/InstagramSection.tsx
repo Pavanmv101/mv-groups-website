@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Heart, MessageCircle, Play } from 'lucide-react';
 
 function InstagramIcon({ className = '', style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -13,18 +14,70 @@ function InstagramIcon({ className = '', style }: { className?: string; style?: 
   );
 }
 
-// Static placeholder grid — replace src values with actual Instagram post image URLs
-// once you connect Instagram Basic Display API or use a service like Behold.so
-const POSTS = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=400&h=400', caption: 'Event staffing excellence' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=400&h=400', caption: 'Premium event production' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=400&h=400', caption: 'Corporate event crew' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400&h=400', caption: 'Award ceremony setup' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=400&h=400', caption: 'Stage production' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?auto=format&fit=crop&q=80&w=400&h=400', caption: 'Luxury gala evening' },
-];
+const BEHOLD_FEED_ID = 'blS1SssVZM6tz09gAdSv';
+
+interface BeholdPost {
+  id: string;
+  permalink: string;
+  prunedCaption: string;
+  mediaType: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
+  likeCount: number;
+  commentsCount: number;
+  sizes: {
+    medium: { mediaUrl: string };
+  };
+}
+
+interface BeholdFeed {
+  username: string;
+  posts: BeholdPost[];
+}
 
 export default function InstagramSection() {
+  const [posts, setPosts] = useState<BeholdPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchFeed() {
+      try {
+        const res = await fetch(`https://feeds.behold.so/${BEHOLD_FEED_ID}`);
+        if (!res.ok) throw new Error('Feed fetch failed');
+        const data: BeholdFeed = await res.json();
+        setPosts(data.posts?.slice(0, 6) || []);
+      } catch {
+        // Silently fail — section just won't show
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchFeed();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-24 border-t" style={{ borderColor: '#1a1918', background: '#0c0b0a' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <InstagramIcon className="w-5 h-5" style={{ color: '#f3c892' }} />
+                <span className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: '#f3c892' }}>Follow Us</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-black text-white">@mvgroups.online</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="aspect-square rounded-xl animate-pulse" style={{ background: '#141312' }} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (posts.length === 0) return null;
+
   return (
     <section className="py-24 border-t" style={{ borderColor: '#1a1918', background: '#0c0b0a' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,12 +101,12 @@ export default function InstagramSection() {
           </Link>
         </div>
 
-        {/* Grid */}
+        {/* Grid — LIVE from Instagram */}
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
-          {POSTS.map((post) => (
+          {posts.map((post) => (
             <Link
               key={post.id}
-              href="https://www.instagram.com/mvgroups.online"
+              href={post.permalink}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative aspect-square rounded-xl overflow-hidden block"
@@ -61,14 +114,29 @@ export default function InstagramSection() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={post.src}
-                alt={post.caption}
+                src={post.sizes.medium.mediaUrl}
+                alt={post.prunedCaption?.slice(0, 80) || 'MV Groups Instagram post'}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
               />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300" style={{ background: 'rgba(243,200,146,0.15)', backdropFilter: 'blur(4px)' }}>
-                <InstagramIcon className="w-6 h-6 text-white" />
+
+              {/* Video indicator */}
+              {post.mediaType === 'VIDEO' && (
+                <div className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.5)' }}>
+                  <Play className="w-3.5 h-3.5 text-white fill-white" />
+                </div>
+              )}
+
+              {/* Hover overlay with engagement stats */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300" style={{ background: 'rgba(12,11,10,0.7)', backdropFilter: 'blur(4px)' }}>
+                <div className="flex items-center gap-4">
+                  <span className="flex items-center gap-1 text-white text-sm font-bold">
+                    <Heart className="w-4 h-4 fill-white" /> {post.likeCount}
+                  </span>
+                  <span className="flex items-center gap-1 text-white text-sm font-bold">
+                    <MessageCircle className="w-4 h-4 fill-white" /> {post.commentsCount}
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
