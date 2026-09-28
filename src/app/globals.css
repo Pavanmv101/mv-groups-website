@@ -454,3 +454,12 @@ body {
 .animate-bounce-down {
   animation: bounceDown 2s ease-in-out infinite;
 }
+
+/* Events Showcase - Auto-scroll ticker */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll-left {
+  animation: scrollLeft 40s linear infinite;
+}

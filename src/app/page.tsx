@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import Testimonials from '@/components/Testimonials';
 import InstagramSection from '@/components/InstagramSection';
 import LiveInquiryCounter from '@/components/LiveInquiryCounter';
+import EventsShowcase from '@/components/EventsShowcase';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 
@@ -20,6 +21,7 @@ export default function HomePage() {
       <Suspense fallback={null}>
         <LiveInquiryCounter />
       </Suspense>
+      <EventsShowcase />
       <Testimonials />
       <InstagramSection />
     </>
