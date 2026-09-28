@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient, createAdminClient } from '@/utils/supabase/server'
+import { createAdminClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'

@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, LayoutTemplate, Palette, CheckCircle2, Calendar, Users, Mic2, Camera, Speaker, UtensilsCrossed, MapPin, Star, ChevronDown, X, ChevronLeft, ChevronRight, Play, Printer, Briefcase, Activity } from 'lucide-react';
+import { ArrowRight, Sparkles, LayoutTemplate, Palette, CheckCircle2, Calendar, Users, Mic2, UtensilsCrossed, MapPin, Star, ChevronDown, X, ChevronLeft, ChevronRight, Play, Printer, Briefcase, Activity } from 'lucide-react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import MagneticWrapper from '@/components/animations/GSAPMagnetic';
 
@@ -393,7 +393,7 @@ export default function ManagementPage() {
             </h2>
             <p className="text-[#a39e98] text-lg max-w-2xl mx-auto mb-6">Stop managing 10 different vendors. We coordinate every moving part — one point of contact, zero stress.</p>
             <p className="text-sm font-medium italic max-w-3xl mx-auto px-6 py-4 rounded-2xl" style={{ background: 'rgba(243,200,146,0.05)', color: '#d4aa73', border: '1px solid rgba(243,200,146,0.1)' }}>
-              "From event badges and signage to complete on-ground branding, MV Groups provides the essential support materials that bring your event identity to life — customized to your requirements."
+              &quot;From event badges and signage to complete on-ground branding, MV Groups provides the essential support materials that bring your event identity to life — customized to your requirements.&quot;
             </p>
           </RevealOnScroll>
 

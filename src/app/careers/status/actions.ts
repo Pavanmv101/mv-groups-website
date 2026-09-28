@@ -1,10 +1,16 @@
 'use server'
 
-import { createClient, createAdminClient } from '@/utils/supabase/server'
+import { createAdminClient } from '@/utils/supabase/server'
 import { headers } from 'next/headers'
 import { checkRateLimit } from '@/lib/rate-limit'
 
-export async function checkApplicationStatus(prevState: unknown, formData: FormData) {
+export type StatusState = {
+  success: boolean
+  error: string | null
+  data: { name: string; role: string; status: string; date: string } | null
+}
+
+export async function checkApplicationStatus(prevState: StatusState, formData: FormData): Promise<StatusState> {
   try {
     const supabase = await createAdminClient()
 
@@ -43,8 +49,8 @@ export async function checkApplicationStatus(prevState: unknown, formData: FormD
       }
     }
 
-  } catch (error) {
-    console.error('Error checking status:', error)
+  } catch (err) {
+    console.error('Error checking status:', err)
     return { success: false, error: 'An unexpected error occurred.', data: null }
   }
 }

@@ -2,14 +2,15 @@
 
 import { useActionState, useState } from 'react'
 import { checkApplicationStatus } from './actions'
+import type { StatusState } from './actions'
 import { ArrowLeft, Search, Clock, CheckCircle, XCircle, FileText } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-const initialState = {
+const initialState: StatusState = {
   success: false,
   error: null,
-  data: null as any
+  data: null
 }
 
 export default function StatusCheckPage() {
