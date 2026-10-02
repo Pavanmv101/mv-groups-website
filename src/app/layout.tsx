@@ -19,31 +19,28 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://mvgroups.online'),
   title: {
-    default: 'MV Groups | Premier Event Staffing & Manpower Solutions in Bangalore',
+    default: 'MV Groups | End-to-End Event Management & Premium Staffing',
     template: '%s | MV Groups',
   },
   description:
-    'MV Groups is a leading manpower supply and corporate event staffing agency in Karnataka. We provide reliable staffing solutions, brand promoters, and world-class event management.',
+    'MV Groups provides complete end-to-end event management, premium staffing, and production services across Karnataka. From corporate conferences to luxury weddings, we bring your vision to life.',
   keywords: [
+    'event management bangalore',
+    'end to end event management',
+    'corporate event planners karnataka',
+    'wedding planners',
     'event staffing agency bangalore',
+    'event production',
     'manpower staffing',
-    'corporate manpower supply',
-    'tech events',
-    'event management',
     'brand promoters karnataka',
-    'staffing solutions',
-    'Tumakuru',
     'Karnataka',
     'India',
-    'software events',
-    'hackathon management',
-    'workforce solutions',
   ],
   authors: [{ name: 'Pavan MV' }],
   openGraph: {
-    title: 'MV Groups | Premier Event Staffing & Manpower Solutions',
+    title: 'MV Groups | End-to-End Event Management & Premium Staffing',
     description:
-      'MV Groups is a leading manpower supply and corporate event staffing agency in Karnataka, providing reliable staffing solutions and event management.',
+      'MV Groups provides complete end-to-end event management, premium staffing, and production services across Karnataka. We bring your vision to life.',
     url: 'https://mvgroups.online',
     type: 'website',
     locale: 'en_IN',
@@ -59,8 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MV Groups | Event Staffing & Manpower Solutions',
-    description: 'Premier manpower supply and corporate event staffing agency in Karnataka.',
+    title: 'MV Groups | Event Management & Staffing',
+    description: 'Complete end-to-end event management and premium staffing across Karnataka.',
     images: ['https://mvgroups.online/logo.png'],
   },
   robots: {
