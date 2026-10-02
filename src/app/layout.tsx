@@ -63,6 +63,17 @@ export const metadata: Metadata = {
     description: 'Premier manpower supply and corporate event staffing agency in Karnataka.',
     images: ['https://mvgroups.online/logo.png'],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large' as const,
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
