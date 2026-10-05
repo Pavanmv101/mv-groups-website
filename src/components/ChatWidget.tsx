@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { X, Send, MessageCircle, Loader2 } from 'lucide-react';
+import { X, Send, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -24,22 +25,49 @@ const SUGGESTED = [
   'What events have you worked on?',
 ];
 
+// Rotating pop-up teaser messages
+const TEASERS = [
+  '✨ Planning an event? Let Mira help!',
+  '🎤 Need staff for your next event?',
+  '🏆 We worked Google I/O & JPMorgan!',
+  '⚡ Get a quote in under 4 hours!',
+  '🎊 Weddings, Expos, Corporates — we do it all!',
+];
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hi! I'm Mira from MV Groups 👋 I can help you plan your event or find the right staff. What can I help you with today?",
+      content: "Hi! I'm Mira from MV Groups ✨ I can help you plan your event or find the right staff. What can I help you with today?",
     },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [hasUnread, setHasUnread] = useState(true);
+  const [teaserIndex, setTeaserIndex] = useState(0);
+  const [showTeaser, setShowTeaser] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Show teaser bubble after 3s, then rotate every 5s
+  useEffect(() => {
+    if (open) return;
+    const initialTimer = setTimeout(() => setShowTeaser(true), 3000);
+    return () => clearTimeout(initialTimer);
+  }, [open]);
+
+  useEffect(() => {
+    if (!showTeaser || open) return;
+    const interval = setInterval(() => {
+      setTeaserIndex((i) => (i + 1) % TEASERS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [showTeaser, open]);
+
   useEffect(() => {
     if (open) {
+      setShowTeaser(false);
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [open]);
@@ -77,20 +105,47 @@ export default function ChatWidget() {
 
   return (
     <>
+      {/* Teaser bubble */}
+      {showTeaser && !open && (
+        <div
+          className="fixed bottom-24 right-6 z-50 max-w-[220px] px-4 py-3 rounded-2xl rounded-br-sm text-sm font-medium shadow-2xl cursor-pointer animate-bounce-subtle"
+          style={{
+            background: 'linear-gradient(135deg, #1a1918 0%, #242220 100%)',
+            border: '1px solid #f3c892',
+            color: '#f3c892',
+            animation: 'fadeSlideUp 0.4s ease forwards',
+          }}
+          onClick={() => { setOpen(true); setHasUnread(false); }}
+        >
+          {TEASERS[teaserIndex]}
+          {/* tail */}
+          <div
+            className="absolute -bottom-2 right-4 w-0 h-0"
+            style={{
+              borderLeft: '8px solid transparent',
+              borderRight: '8px solid transparent',
+              borderTop: '8px solid #f3c892',
+            }}
+          />
+        </div>
+      )}
+
       {/* Floating button */}
       <button
-        onClick={() => { setOpen((o) => !o); setHasUnread(false); }}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
-        style={{ background: '#f3c892' }}
-        aria-label="Open chat"
+        onClick={() => { setOpen((o) => !o); setHasUnread(false); setShowTeaser(false); }}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-110 ring-2 ring-offset-2"
+        style={{ boxShadow: '0 0 25px rgba(243,200,146,0.4), 0 0 0 2px #f3c892' }}
+        aria-label="Open chat with Mira"
       >
         {open ? (
-          <X className="w-6 h-6" style={{ color: '#0c0b0a' }} />
+          <div className="w-full h-full flex items-center justify-center" style={{ background: '#f3c892' }}>
+            <X className="w-6 h-6" style={{ color: '#0c0b0a' }} />
+          </div>
         ) : (
-          <MessageCircle className="w-6 h-6" style={{ color: '#0c0b0a' }} />
+          <Image src="/mira-avatar.jpg" alt="Chat with Mira" width={64} height={64} className="object-cover" />
         )}
         {!open && hasUnread && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold">
+          <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold border-2 border-[#0c0b0a]">
             1
           </span>
         )}
@@ -99,41 +154,51 @@ export default function ChatWidget() {
       {/* Chat window */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
-          style={{ background: '#0c0b0a', border: '1px solid #282624', height: '520px' }}
+          className="fixed bottom-28 right-6 z-50 w-[370px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+          style={{ background: '#0c0b0a', border: '1px solid #282624', height: '530px' }}
         >
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ borderColor: '#1a1918', background: '#141312' }}>
-            <div
-              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
-              style={{ background: '#f3c892', color: '#0c0b0a' }}
-            >
-              M
+          <div
+            className="flex items-center gap-3 px-4 py-3 border-b"
+            style={{
+              borderColor: '#1a1918',
+              background: 'linear-gradient(135deg, #141312 0%, #1a1918 100%)',
+            }}
+          >
+            <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0" style={{ boxShadow: '0 0 0 2px #f3c892' }}>
+              <Image src="/mira-avatar.jpg" alt="Mira" width={40} height={40} className="object-cover" />
+              {/* Online dot */}
+              <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-[#141312]" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white font-semibold text-sm">Mira · MV Groups</p>
-              <p className="text-xs" style={{ color: '#a39e98' }}>AI Assistant · usually replies instantly</p>
+              <p className="text-white font-bold text-sm tracking-wide">Mira <span className="text-[10px] font-normal px-1.5 py-0.5 rounded-full ml-1" style={{ background: '#f3c892', color: '#0c0b0a' }}>AI</span></p>
+              <p className="text-xs" style={{ color: '#a39e98' }}>MV Groups · Usually replies instantly</p>
             </div>
             <a
               href="https://wa.me/919380558344"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all hover:opacity-80"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all hover:opacity-80 flex-shrink-0"
               style={{ background: '#25D366', color: '#fff' }}
             >
-              <WhatsAppIcon /> WhatsApp
+              <WhatsAppIcon /> Chat
             </a>
           </div>
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
             {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={i} className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                {msg.role === 'assistant' && (
+                  <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 mt-1">
+                    <Image src="/mira-avatar.jpg" alt="Mira" width={28} height={28} className="object-cover" />
+                  </div>
+                )}
                 <div
-                  className="max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed"
+                  className="max-w-[78%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed"
                   style={
                     msg.role === 'user'
-                      ? { background: '#f3c892', color: '#0c0b0a', borderBottomRightRadius: 4 }
+                      ? { background: '#f3c892', color: '#0c0b0a', borderBottomRightRadius: 4, fontWeight: 500 }
                       : { background: '#1a1918', color: '#e8e4df', border: '1px solid #282624', borderBottomLeftRadius: 4 }
                   }
                 >
@@ -144,14 +209,17 @@ export default function ChatWidget() {
 
             {/* Typing indicator */}
             {loading && (
-              <div className="flex justify-start">
+              <div className="flex gap-2 justify-start">
+                <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
+                  <Image src="/mira-avatar.jpg" alt="Mira" width={28} height={28} className="object-cover" />
+                </div>
                 <div className="rounded-2xl px-4 py-3" style={{ background: '#1a1918', border: '1px solid #282624', borderBottomLeftRadius: 4 }}>
                   <Loader2 className="w-4 h-4 animate-spin" style={{ color: '#f3c892' }} />
                 </div>
               </div>
             )}
 
-            {/* Suggested chips — show only after first message */}
+            {/* Suggested chips */}
             {messages.length === 1 && !loading && (
               <div className="flex flex-wrap gap-2 pt-1">
                 {SUGGESTED.map((s) => (
@@ -159,7 +227,7 @@ export default function ChatWidget() {
                     key={s}
                     onClick={() => sendMessage(s)}
                     className="text-xs px-3 py-1.5 rounded-full transition-all hover:opacity-80"
-                    style={{ background: '#1a1918', color: '#f3c892', border: '1px solid #282624' }}
+                    style={{ background: '#1a1918', color: '#f3c892', border: '1px solid #f3c892' }}
                   >
                     {s}
                   </button>
@@ -174,7 +242,8 @@ export default function ChatWidget() {
           <div className="px-3 py-3 border-t" style={{ borderColor: '#1a1918', background: '#141312' }}>
             <form
               onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full"
+              style={{ background: '#1a1918', border: '1px solid #282624' }}
             >
               <input
                 ref={inputRef}
@@ -188,15 +257,23 @@ export default function ChatWidget() {
               <button
                 type="submit"
                 disabled={!input.trim() || loading}
-                className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-40"
+                className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-40 hover:scale-110"
                 style={{ background: '#f3c892' }}
               >
                 <Send className="w-3.5 h-3.5" style={{ color: '#0c0b0a' }} />
               </button>
             </form>
+            <p className="text-center text-[10px] mt-1.5" style={{ color: '#3d3a37' }}>Powered by MV Groups AI</p>
           </div>
         </div>
       )}
+
+      <style>{`
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </>
   );
 }
