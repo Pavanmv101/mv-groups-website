@@ -40,7 +40,6 @@ export default function ChatWidget() {
 
   useEffect(() => {
     if (open) {
-      setHasUnread(false);
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [open]);
@@ -80,7 +79,7 @@ export default function ChatWidget() {
     <>
       {/* Floating button */}
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => { setOpen((o) => !o); setHasUnread(false); }}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
         style={{ background: '#f3c892' }}
         aria-label="Open chat"
