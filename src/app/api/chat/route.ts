@@ -78,23 +78,32 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'AI not configured' }, { status: 500 });
     }
 
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-flash-latest',
-      systemInstruction: SYSTEM_PROMPT,
-    });
+    const MODELS = ['gemini-3.5-flash-lite', 'gemini-flash-lite-latest'];
 
-    // Convert message history for Gemini format
-    const history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }],
-    }));
+    let text = '';
+    let lastErr: unknown;
+    for (const modelName of MODELS) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: SYSTEM_PROMPT,
+        });
+        const history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }],
+        }));
+        const chat = model.startChat({ history });
+        const lastMessage = messages[messages.length - 1];
+        const result = await chat.sendMessage(lastMessage.content);
+        text = result.response.text();
+        break; // success — stop trying
+      } catch (e) {
+        lastErr = e;
+        continue; // try next model
+      }
+    }
 
-    const chat = model.startChat({ history });
-
-    const lastMessage = messages[messages.length - 1];
-    const result = await chat.sendMessage(lastMessage.content);
-    const text = result.response.text();
-
+    if (!text) throw lastErr;
     return NextResponse.json({ reply: text });
   } catch (err) {
     console.error('Chat API error:', err);
