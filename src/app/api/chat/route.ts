@@ -88,10 +88,14 @@ export async function POST(req: NextRequest) {
           model: modelName,
           systemInstruction: SYSTEM_PROMPT,
         });
-        const history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
+        // Gemini requires history to start with a user turn — strip leading model messages
+        let history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
           role: m.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: m.content }],
         }));
+        while (history.length > 0 && history[0].role === 'model') {
+          history = history.slice(1);
+        }
         const chat = model.startChat({ history });
         const lastMessage = messages[messages.length - 1];
         const result = await chat.sendMessage(lastMessage.content);
