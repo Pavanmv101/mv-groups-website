@@ -1,7 +1,13 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 const SYSTEM_PROMPT = `You are Mira, the friendly AI assistant for MV Groups — a premium end-to-end event management and staffing company based in Bengaluru, Karnataka, India.
 
@@ -68,7 +74,12 @@ YOUR ROLE:
 - If you cannot answer something specific (like exact prices, availability), direct them to WhatsApp: +91 93805 58344
 - Never make up specific prices — say "we provide custom quotes based on requirements"
 - Always be helpful and end with a gentle CTA if relevant
-- Speak in a friendly, modern tone — not overly corporate`;
+- Speak in a friendly, modern tone — not overly corporate
+
+LEAD CAPTURE RULE (IMPORTANT):
+When you have collected the visitor's name AND phone number (even if event type or date is missing), append this EXACT tag at the very end of your reply — on a new line, with no spaces around it:
+<!--LEAD:{"name":"<name>","phone":"<phone>","event":"<event type or unknown>","date":"<date or unknown>"}-->
+Only append it ONCE, the first time you have both name and phone. Never show this tag to the user — it is invisible to them.`;
 
 export async function POST(req: NextRequest) {
   try {
@@ -108,7 +119,28 @@ export async function POST(req: NextRequest) {
     }
 
     if (!text) throw lastErr;
-    return NextResponse.json({ reply: text });
+
+    // Extract hidden lead tag if present, strip it from visible reply
+    const leadMatch = text.match(/<!--LEAD:([\s\S]*?)-->/);
+    const cleanReply = text.replace(/<!--LEAD:[\s\S]*?-->/, '').trim();
+
+    if (leadMatch) {
+      try {
+        const lead = JSON.parse(leadMatch[1]);
+        await supabaseAdmin.from('inquiries').insert({
+          name: lead.name || 'Chat Lead',
+          email: '',
+          phone: lead.phone || '',
+          subject: `Chat Lead — ${lead.event || 'Event Inquiry'}`,
+          message: `Via AI Chat. Event: ${lead.event || 'N/A'}. Date: ${lead.date || 'N/A'}. Phone: ${lead.phone || 'N/A'}.`,
+        });
+      } catch (e) {
+        console.error('Lead save error:', e);
+        // Non-critical — don't fail the response
+      }
+    }
+
+    return NextResponse.json({ reply: cleanReply });
   } catch (err) {
     console.error('Chat API error:', err);
     return NextResponse.json(
