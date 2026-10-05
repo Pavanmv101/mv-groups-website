@@ -132,8 +132,8 @@ export default function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => { setOpen((o) => !o); setHasUnread(false); setShowTeaser(false); }}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-110 ring-2 ring-offset-2"
-        style={{ boxShadow: '0 0 25px rgba(243,200,146,0.4), 0 0 0 2px #f3c892' }}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-110"
+        style={{ boxShadow: '0 0 30px rgba(243,200,146,0.5)' }}
         aria-label="Open chat with Mira"
       >
         {open ? (
@@ -141,12 +141,10 @@ export default function ChatWidget() {
             <X className="w-6 h-6" style={{ color: '#0c0b0a' }} />
           </div>
         ) : (
-          <Image src="/mira-avatar.jpg" alt="Chat with Mira" width={64} height={64} className="object-cover" />
+          <Image src="/mira-avatar.jpg" alt="Chat with Mira" width={64} height={64} className="object-cover w-full h-full" />
         )}
         {!open && hasUnread && (
-          <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold border-2 border-[#0c0b0a]">
-            1
-          </span>
+          <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-[#0c0b0a] animate-pulse" />
         )}
       </button>
 
