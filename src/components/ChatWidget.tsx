@@ -67,7 +67,6 @@ export default function ChatWidget() {
 
   useEffect(() => {
     if (open) {
-      setShowTeaser(false);
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [open]);
