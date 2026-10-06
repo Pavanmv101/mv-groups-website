@@ -107,7 +107,7 @@ export default function ChatWidget() {
       {/* Teaser bubble */}
       {showTeaser && !open && (
         <div
-          className="fixed bottom-24 right-6 z-50 max-w-[220px] px-4 py-3 rounded-2xl rounded-br-sm text-sm font-medium shadow-2xl cursor-pointer animate-bounce-subtle"
+          className="fixed bottom-44 right-6 z-50 max-w-[220px] px-4 py-3 rounded-2xl rounded-br-sm text-sm font-medium shadow-2xl cursor-pointer"
           style={{
             background: 'linear-gradient(135deg, #1a1918 0%, #242220 100%)',
             border: '1px solid #f3c892',
@@ -132,7 +132,7 @@ export default function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => { setOpen((o) => !o); setHasUnread(false); setShowTeaser(false); }}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-110"
+        className="fixed bottom-24 right-6 z-50 w-16 h-16 rounded-full overflow-hidden shadow-2xl transition-all duration-300 hover:scale-110"
         style={{ boxShadow: '0 0 30px rgba(243,200,146,0.5)' }}
         aria-label="Open chat with Mira"
       >
@@ -151,7 +151,7 @@ export default function ChatWidget() {
       {/* Chat window */}
       {open && (
         <div
-          className="fixed bottom-28 right-6 z-50 w-[370px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+          className="fixed bottom-44 right-6 z-50 w-[370px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
           style={{ background: '#0c0b0a', border: '1px solid #282624', height: '530px' }}
         >
           {/* Header */}
