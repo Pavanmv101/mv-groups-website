@@ -1,12 +1,54 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Users, Crown, Sparkles, CheckCircle2, ChevronDown, Star, Zap, Shield, MessageSquare } from 'lucide-react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import QuickQuoteWidget from '@/components/QuickQuoteWidget';
 import AnimatedCounter from '@/components/AnimatedCounter';
+
+const ROTATING_TEXTS = [
+  'End-to-End Event Management',
+  'Premium Event Staffing',
+  'Stage Design & AV Production',
+  'Corporate Conference Staffing',
+  'Wedding & Social Management',
+  'Concert & Live Show Production',
+  'Exhibition & Expo Manpower',
+  'Award Ceremonies & Galas',
+];
+
+function RotatingText() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIndex((prev) => (prev + 1) % ROTATING_TEXTS.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex justify-center items-center h-10 overflow-hidden mb-2">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -30, opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="text-base sm:text-lg md:text-xl font-semibold"
+          style={{ color: '#f3c892' }}
+        >
+          {ROTATING_TEXTS[index]}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 
 /* ── Pre-computed gold particle positions ── */
 const PARTICLES = [
@@ -175,7 +217,7 @@ export default function Hero() {
 
           {/* Headline */}
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-6"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-4"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -183,6 +225,15 @@ export default function Hero() {
             One Company.<br />
             <span style={{ color: '#f3c892', fontStyle: 'italic', fontFamily: 'Georgia, serif' }}>Two Powers.</span>
           </motion.h1>
+
+          {/* Rotating text */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <RotatingText />
+          </motion.div>
 
           {/* Sub */}
           <motion.p
