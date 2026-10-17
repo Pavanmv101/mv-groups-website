@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useRef } from 'react'
 import { submitInquiry } from './actions'
 import { COMPANY } from '@/lib/constants'
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare } from 'lucide-react'
 
 const initialState = {
   success: false,
@@ -55,6 +55,17 @@ export default function ContactPage() {
                 <a href={`tel:${COMPANY.phone}`} className="font-bold text-lg hover:opacity-80 transition-opacity" style={{ color: '#f3c892' }}>
                   {COMPANY.phone}
                 </a>
+              </div>
+            </div>
+
+            <div className="p-8 rounded-3xl flex items-start gap-5 transition-all hover:-translate-y-1" style={{ background: '#141312', border: '1px solid #282624' }}>
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(243,200,146,0.05)' }}>
+                <MessageSquare className="w-7 h-7" style={{ color: '#f3c892' }} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-1" style={{ color: '#ffffff' }}>WhatsApp — Sales</h3>
+                <p className="mb-2 text-sm" style={{ color: '#66625d' }}>Talk to Shrujan for bookings &amp; quotes.</p>
+                <a href="https://wa.me/919972983823" target="_blank" rel="noopener noreferrer" className="font-bold text-lg hover:opacity-80 transition-opacity" style={{ color: '#f3c892' }}>+91 99729 83823</a>
               </div>
             </div>
 

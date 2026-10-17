@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/build-your-event', priority: 0.8 },
     { path: '/staffing/services', priority: 0.7 },
     { path: '/management/services', priority: 0.7 },
+    { path: '/team', priority: 0.7 },
   ].map(({ path, priority }) => ({
     url: `${baseUrl}${path}`,
     lastModified,

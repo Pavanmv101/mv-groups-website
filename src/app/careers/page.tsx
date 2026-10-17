@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react'
 import { submitApplication } from './actions'
-import { Briefcase, MapPin, Clock, ArrowRight } from 'lucide-react'
+import { Briefcase, MapPin, Clock, ArrowRight, Phone } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
@@ -194,6 +194,17 @@ export default function CareersPage() {
                       </svg>
                       Join WhatsApp Group
                     </a>
+                  </div>
+
+                  <div className="mt-4 p-5 rounded-2xl flex items-center gap-4" style={{ background: '#141312', border: '1px solid #282624' }}>
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(243,200,146,0.05)' }}>
+                      <Phone className="w-6 h-6" style={{ color: '#f3c892' }} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white mb-0.5">Direct Contact — HR &amp; Operations</p>
+                      <p className="text-xs mb-1" style={{ color: '#66625d' }}>Reach Pavan MV directly</p>
+                      <a href="https://wa.me/919380558344" target="_blank" rel="noopener noreferrer" className="text-sm font-bold hover:opacity-80" style={{ color: '#f3c892' }}>+91 93805 58344</a>
+                    </div>
                   </div>
 
                   <button 
