@@ -74,6 +74,22 @@ const DEPARTMENTS: { id: string; label: string; desc: string; members: Member[] 
       },
     ],
   },
+  {
+    id: 'editing',
+    label: 'Editing Team',
+    desc: 'Crafting high-impact video edits, cinematic event highlights, and visual storytelling for MV Groups.',
+    members: [
+      {
+        name: 'Muruli',
+        role: 'Video Editor',
+        bio: 'Crafts dynamic video edits, event highlight reels, and creative visual content for all MV Groups productions.',
+        phone: '+91 72599 43393',
+        whatsapp: 'https://wa.me/917259943393',
+        email: 'muruli.mvgroups@gmail.com',
+        initials: 'MU',
+      },
+    ],
+  },
 ];
 
 // ── Member Card ───────────────────────────────────────────────────────────────
@@ -186,7 +202,7 @@ export default function TeamPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Three dedicated teams working behind the scenes to deliver events that leave a lasting impression.
+          Dedicated teams working behind the scenes to deliver events that leave a lasting impression.
         </motion.p>
       </section>
 
