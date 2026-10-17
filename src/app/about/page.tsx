@@ -83,6 +83,33 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Meet the Full Team Preview ── */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
+        <div 
+          className="rounded-3xl p-8 md:p-12 text-center"
+          style={{ background: '#141312', border: '1px solid #282624' }}
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4" style={{ background: 'rgba(243,200,146,0.1)', color: '#f3c892', border: '1px solid rgba(243,200,146,0.2)' }}>
+            Our People
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black mb-4 text-white">
+            Meet the <span style={{ color: '#f3c892' }}>MV Groups Team</span>
+          </h2>
+          <p className="text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed" style={{ color: '#a39e98' }}>
+            From Marketing and Sales to Operations and Video Editing, meet the passionate professionals driving excellence in Karnataka&apos;s event industry.
+          </p>
+          <Link
+            href="/team"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-bold transition-all hover:scale-105 shadow-xl hover:shadow-[0_8px_30px_rgba(243,200,146,0.3)]"
+            style={{ background: '#f3c892', color: '#0c0b0a' }}
+          >
+            <Users className="w-4 h-4" />
+            Explore Our Full Team
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* ── Mission & Vision ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
