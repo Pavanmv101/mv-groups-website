@@ -24,8 +24,8 @@ const DEPARTMENTS: { id: string; label: string; desc: string; members: Member[] 
     members: [
       {
         name: 'Harsha TD',
-        role: 'Marketing Executive',
-        bio: 'Manages brand campaigns, digital outreach, and client acquisition for MV Groups across Karnataka.',
+        role: 'Marketing Head',
+        bio: 'Leads marketing strategy, brand campaigns, digital outreach, and client acquisition for MV Groups across Karnataka.',
         phone: '+91 84313 81947',
         whatsapp: 'https://wa.me/918431381947',
         email: 'harshatd.mvgroups@gmail.com',
@@ -49,8 +49,8 @@ const DEPARTMENTS: { id: string; label: string; desc: string; members: Member[] 
     members: [
       {
         name: 'Shrujan',
-        role: 'Sales Executive',
-        bio: 'Manages client enquiries, quotations, and bookings for staffing and event management services.',
+        role: 'Sales Head',
+        bio: 'Leads client acquisition, partnerships, quotations, and bookings for staffing and event management services.',
         phone: '+91 99729 83823',
         whatsapp: 'https://wa.me/919972983823',
         email: 'shrujan.mvgroups@gmail.com',

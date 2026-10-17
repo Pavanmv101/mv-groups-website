@@ -64,7 +64,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-1" style={{ color: '#ffffff' }}>WhatsApp — Sales</h3>
-                <p className="mb-2 text-sm" style={{ color: '#66625d' }}>Talk to Shrujan for bookings &amp; quotes.</p>
+                <p className="mb-2 text-sm" style={{ color: '#66625d' }}>Talk to Shrujan (Sales Head) for bookings &amp; quotes.</p>
                 <a href="https://wa.me/919972983823" target="_blank" rel="noopener noreferrer" className="font-bold text-lg hover:opacity-80 transition-opacity" style={{ color: '#f3c892' }}>+91 99729 83823</a>
               </div>
             </div>
