@@ -4,7 +4,7 @@ import InstagramSection from '@/components/InstagramSection';
 import LiveInquiryCounter from '@/components/LiveInquiryCounter';
 import EventsShowcase from '@/components/EventsShowcase';
 import StatsSection from '@/components/StatsSection';
-import BentoServices from '@/components/BentoServices';
+import StickyServices from '@/components/StickyServices';
 import EventsTimeline from '@/components/EventsTimeline';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
@@ -22,7 +22,7 @@ export default function HomePage() {
     <>
       <Hero />
       <StatsSection />
-      <BentoServices />
+      <StickyServices />
       <Suspense fallback={null}>
         <LiveInquiryCounter />
       </Suspense>
