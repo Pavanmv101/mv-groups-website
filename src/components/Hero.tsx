@@ -96,6 +96,15 @@ export default function Hero() {
       ═══════════════════════════════════════════ */}
       <section ref={heroRef} className="relative w-full h-[100svh] overflow-hidden flex items-center justify-center">
 
+        {/* Stage spotlight beams */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+          <div style={{position:'absolute',top:0,left:'15%',width:'clamp(160px,18vw,280px)',height:'65%',background:'linear-gradient(180deg, rgba(243,200,146,0.06) 0%, transparent 100%)',clipPath:'polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%)',animation:'beam-pulse 5s ease-in-out infinite'}}/>
+          <div style={{position:'absolute',top:0,left:'45%',width:'clamp(120px,14vw,200px)',height:'50%',background:'linear-gradient(180deg, rgba(243,200,146,0.04) 0%, transparent 100%)',clipPath:'polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%)',animation:'beam-pulse 7s ease-in-out infinite',animationDelay:'2s'}}/>
+          <div style={{position:'absolute',top:0,left:'72%',width:'clamp(100px,12vw,180px)',height:'40%',background:'linear-gradient(180deg, rgba(243,200,146,0.035) 0%, transparent 100%)',clipPath:'polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)',animation:'beam-pulse 6s ease-in-out infinite',animationDelay:'1s'}}/>
+          {/* Corner gold glow */}
+          <div style={{position:'absolute',bottom:0,left:0,width:'clamp(200px,35vw,480px)',height:'clamp(200px,35vw,480px)',background:'radial-gradient(circle at 0% 100%, rgba(243,200,146,0.08) 0%, transparent 65%)',animation:'glow-breathe 6s ease-in-out infinite'}} />
+        </div>
+
         {/* Parallax background wrapper */}
         <motion.div className="absolute inset-0" style={{ scale: heroScale, y: heroY }}>
           {/* Left Half — Staffing */}

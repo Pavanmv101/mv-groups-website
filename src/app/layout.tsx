@@ -10,6 +10,7 @@ import GoldCursor from '@/components/GoldCursor';
 import { Analytics } from '@vercel/analytics/react';
 import PageTransition from '@/components/animations/PageTransition';
 import SmoothScrollProvider from '@/components/animations/SmoothScrollProvider';
+import SplashScreen from '@/components/SplashScreen';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -203,6 +204,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
+        <SplashScreen />
         <SmoothScrollProvider>
           <GoldCursor />
           <Navbar />

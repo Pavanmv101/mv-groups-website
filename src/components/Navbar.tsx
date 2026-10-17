@@ -76,6 +76,11 @@ export default function Navbar() {
     <>
       <nav
         ref={navRef}
+        style={{
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(243,200,146,0.04) inset'
+        }}
         className={`fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-500 rounded-full ${
           scrolled
             ? 'top-4 bg-[#0c0b0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl py-2'
