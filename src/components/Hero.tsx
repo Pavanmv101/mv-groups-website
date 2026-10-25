@@ -19,6 +19,21 @@ const ROTATING_TEXTS = [
   'Award Ceremonies & Galas',
 ];
 
+const ENTERPRISE_CLIENTS = [
+  { name: 'Google I/O Connect', role: 'Staffing & Coordination' },
+  { name: 'JPMorgan Chase', role: 'Innovation Tech Forum' },
+  { name: 'ServiceNow', role: 'Corporate Summits' },
+  { name: 'Nutanix', role: 'Executive Experience' },
+  { name: 'AgriTech India', role: 'KTPO Whitefield Expo' },
+  { name: 'BOSS Summit', role: 'Leadership Conference' },
+  { name: 'SecurEyes', role: '20th Anniversary Gala' },
+  { name: 'Proficorn 2026', role: 'Business Summit' },
+  { name: 'Quantum Leap', role: 'PACE & BBR Events' },
+  { name: 'BPN Colloquium', role: 'National Conference' },
+  { name: 'Varaha & Chamara', role: 'Luxury Weddings' },
+  { name: 'Europraktik', role: 'International Delegation' },
+];
+
 function RotatingText() {
   const [index, setIndex] = useState(0);
 
@@ -322,25 +337,48 @@ export default function Hero() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          SECTION 2: Marquee Trust Bar
+          SECTION 2: Enterprise Client & Event Trust Bar
       ═══════════════════════════════════════════ */}
-      <section className="py-6 border-y overflow-hidden" style={{ borderColor: '#1a1918', background: '#0c0b0a' }}>
-        <div className="flex animate-marquee gap-16 whitespace-nowrap" style={{ width: 'max-content' }}>
-          {[
-            'Google I/O Connect', 'JPMorganChase Forum', 'Corporate Summits',
-            'Luxury Weddings', 'Award Ceremonies', 'Brand Activations',
-            'Exhibition Setups', 'Gala Dinners', 'Concert Productions',
-            'Google I/O Connect', 'JPMorganChase Forum', 'Corporate Summits',
-            'Luxury Weddings', 'Award Ceremonies', 'Brand Activations',
-          ].map((name, i) => (
-            <span
+      <section className="py-8 border-y overflow-hidden relative" style={{ borderColor: '#1f1d1b', background: '#0c0b0a' }}>
+        {/* Subtle heading */}
+        <div className="max-w-7xl mx-auto px-6 mb-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#f3c892] animate-pulse" />
+            <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-[#8a847e]">
+              Trusted for Flagship Summits, Global Forums &amp; Mega Productions
+            </p>
+          </div>
+          <span className="text-[10px] font-mono tracking-widest text-[#5a544e] hidden md:block uppercase">
+            Pan-Karnataka Operations
+          </span>
+        </div>
+
+        {/* Continuous enterprise marquee */}
+        <div className="flex animate-marquee gap-4 whitespace-nowrap" style={{ width: 'max-content' }}>
+          {[...ENTERPRISE_CLIENTS, ...ENTERPRISE_CLIENTS].map((client, i) => (
+            <div
               key={i}
-              className="inline-flex items-center gap-3 text-sm font-semibold tracking-widest uppercase"
-              style={{ color: '#66625d' }}
+              className="group inline-flex items-center gap-3.5 px-5 py-3 rounded-full border transition-all duration-300 hover:scale-105"
+              style={{
+                background: '#141312',
+                borderColor: '#242220',
+              }}
             >
-              <span style={{ color: '#f3c892', fontSize: 8 }}>◆</span>
-              {name}
-            </span>
+              <div className="w-2 h-2 rounded-full bg-[#f3c892]/60 group-hover:bg-[#f3c892] transition-colors" />
+              <span className="text-xs font-bold tracking-wider uppercase text-white/80 group-hover:text-white transition-colors">
+                {client.name}
+              </span>
+              <span
+                className="text-[10px] font-mono px-2.5 py-0.5 rounded-full border transition-colors"
+                style={{
+                  background: 'rgba(243,200,146,0.06)',
+                  borderColor: 'rgba(243,200,146,0.2)',
+                  color: '#f3c892',
+                }}
+              >
+                {client.role}
+              </span>
+            </div>
           ))}
         </div>
       </section>
