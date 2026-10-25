@@ -353,12 +353,19 @@ export default function Hero() {
           </span>
         </div>
 
+        {/* Ambient edge fades for smooth ticker entrance/exit */}
+        <div className="absolute left-0 top-16 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#0c0b0a] via-[#0c0b0a]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-16 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#0c0b0a] via-[#0c0b0a]/80 to-transparent z-10 pointer-events-none" />
+
         {/* Continuous enterprise marquee */}
-        <div className="flex animate-marquee gap-4 whitespace-nowrap" style={{ width: 'max-content' }}>
+        <div
+          className="flex animate-marquee-left gap-4 whitespace-nowrap"
+          style={{ width: 'max-content', willChange: 'transform' }}
+        >
           {[...ENTERPRISE_CLIENTS, ...ENTERPRISE_CLIENTS].map((client, i) => (
             <div
               key={i}
-              className="group inline-flex items-center gap-3.5 px-5 py-3 rounded-full border transition-all duration-300 hover:scale-105"
+              className="group inline-flex items-center gap-3.5 px-5 py-3 rounded-full border transition-all duration-300 hover:scale-105 select-none"
               style={{
                 background: '#141312',
                 borderColor: '#242220',
