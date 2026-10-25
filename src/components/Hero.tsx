@@ -125,10 +125,27 @@ const WHY_US = [
 export default function Hero() {
   const [activeTab, setActiveTab] = useState<'staffing' | 'management'>('staffing');
   const heroRef = useRef<HTMLDivElement>(null);
+  const leftVideoRef = useRef<HTMLVideoElement>(null);
+  const rightVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const playVideos = () => {
+      [leftVideoRef.current, rightVideoRef.current].forEach((video) => {
+        if (video) {
+          video.play().catch(() => {});
+        }
+      });
+    };
+    playVideos();
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') playVideos();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
+
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale  = useTransform(scrollYProgress, [0, 0.5], [1, 1.05]);
-  const heroY      = useTransform(scrollYProgress, [0, 0.5], ['0%', '10%']);
 
   return (
     <div style={{ background: '#0a0908' }}>
@@ -138,6 +155,45 @@ export default function Hero() {
       ═══════════════════════════════════════════ */}
       <section ref={heroRef} className="relative w-full h-[100svh] overflow-hidden flex items-center justify-center">
 
+        {/* High-performance Solid Video Background (No stock photos, no parallax transform lag) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          {/* Left Half — Corporate & Staffing Video */}
+          <div className="absolute inset-y-0 left-0 w-1/2 overflow-hidden bg-[#0c0b0a]">
+            <video
+              ref={leftVideoRef}
+              src="/videos/corporate.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Dark contrast overlays for clean text readability */}
+            <div className="absolute inset-0 bg-[#0a0908]/55" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0908]/85 via-transparent to-[#0a0908]/70" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/70" />
+          </div>
+
+          {/* Right Half — Concert & Stage Production Video */}
+          <div className="absolute inset-y-0 right-0 w-1/2 overflow-hidden bg-[#0c0b0a]">
+            <video
+              ref={rightVideoRef}
+              src="/videos/concert.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Dark contrast overlays for clean text readability */}
+            <div className="absolute inset-0 bg-[#0a0908]/55" />
+            <div className="absolute inset-0 bg-gradient-to-l from-[#0a0908]/85 via-transparent to-[#0a0908]/70" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/70" />
+          </div>
+        </div>
+
         {/* Stage spotlight beams */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
           <div style={{position:'absolute',top:0,left:'15%',width:'clamp(160px,18vw,280px)',height:'65%',background:'linear-gradient(180deg, rgba(243,200,146,0.06) 0%, transparent 100%)',clipPath:'polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%)',animation:'beam-pulse 5s ease-in-out infinite'}}/>
@@ -146,29 +202,6 @@ export default function Hero() {
           {/* Corner gold glow */}
           <div style={{position:'absolute',bottom:0,left:0,width:'clamp(200px,35vw,480px)',height:'clamp(200px,35vw,480px)',background:'radial-gradient(circle at 0% 100%, rgba(243,200,146,0.08) 0%, transparent 65%)',animation:'glow-breathe 6s ease-in-out infinite'}} />
         </div>
-
-        {/* Parallax background wrapper */}
-        <motion.div className="absolute inset-0" style={{ scale: heroScale, y: heroY }}>
-          {/* Left Half — Staffing */}
-          <div className="absolute inset-y-0 left-0 w-1/2">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200)' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0908]/80 via-[#0a0908]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/40" />
-          </div>
-
-          {/* Right Half — Management */}
-          <div className="absolute inset-y-0 right-0 w-1/2">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200)' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-l from-[#0a0908]/80 via-[#0a0908]/40 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/40" />
-          </div>
-        </motion.div>
 
         {/* Gold diagonal divider */}
         <motion.div
