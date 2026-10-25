@@ -18,11 +18,11 @@ const TYPEWRITER_LINES = [
 
 const EVENT_TYPES = [
   { title: 'Corporate Summits', desc: 'Conferences, product launches, annual meets, and leadership retreats executed with military precision.', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800&h=1200', icon: Calendar },
-  { title: 'Award Ceremonies', desc: 'Red carpet arrivals, stage production, scripting, live coordination, and cinematic stage design.', image: 'https://images.unsplash.com/photo-1607962837359-5e7e89f86776?auto=format&fit=crop&q=80&w=800&h=1200', icon: Star },
+  { title: 'Award Ceremonies', desc: 'Red carpet arrivals, stage production, scripting, live coordination, and cinematic stage design.', image: '/images/services/award-ceremony.jpg', icon: Star },
   { title: 'Private Celebrations', desc: 'Luxury weddings, milestone birthdays, and receptions designed with breathtaking attention to detail.', image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=800&h=1200', icon: Sparkles },
-  { title: 'Brand Activations', desc: 'Experiential marketing, pop-up experiences, and immersive brand environments that captivate audiences.', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800&h=1200', icon: Mic2 },
-  { title: 'Exhibition Setups', desc: 'Booth design, logistics coordination, and professional on-ground exhibition staffing.', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800&h=1200', icon: MapPin },
-  { title: 'Social Gatherings', desc: 'Cocktail parties, galas, networking events, and exclusive social experiences.', image: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=800&h=1200', icon: UtensilsCrossed },
+  { title: 'Brand Activations', desc: 'Experiential marketing, pop-up experiences, and immersive brand environments that captivate audiences.', image: 'https://kkanfilvlittraukxrhb.supabase.co/storage/v1/object/public/gallery/uploads/1792939528328_mynt1p.jpg', icon: Mic2 },
+  { title: 'Exhibition Setups', desc: 'Booth design, logistics coordination, and professional on-ground exhibition staffing.', image: 'https://kkanfilvlittraukxrhb.supabase.co/storage/v1/object/public/gallery/uploads/1784405585190_t6lwn5.JPG', icon: MapPin },
+  { title: 'Social Gatherings', desc: 'Cocktail parties, galas, networking events, and exclusive social experiences.', image: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=800&h=1200', icon: UtensilsCrossed },
 ];
 
 const PROCESS_STEPS = [

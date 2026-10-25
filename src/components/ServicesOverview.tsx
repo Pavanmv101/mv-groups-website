@@ -16,7 +16,7 @@ const SERVICES = [
     icon: UtensilsCrossed,
     title: 'VIP Hospitality & Guest Services',
     desc: 'Perfect service for your most important guests. From elite servers to protocol officers and mixologists.',
-    bg: 'url(https://images.unsplash.com/photo-1559336197-ded8aaa244bc?auto=format&fit=crop&q=80&w=1200)',
+    bg: 'url(https://kkanfilvlittraukxrhb.supabase.co/storage/v1/object/public/gallery/uploads/1784405506289_q994nh.JPG)',
   },
   {
     id: 'promotional_staffing',
@@ -24,7 +24,7 @@ const SERVICES = [
     icon: Megaphone,
     title: 'Brand Ambassadors & Activations',
     desc: 'Engaging product specialists and promoters who perfectly represent your brand.',
-    bg: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800)',
+    bg: 'url(https://kkanfilvlittraukxrhb.supabase.co/storage/v1/object/public/gallery/uploads/1792939528328_mynt1p.jpg)',
   },
   {
     id: 'corporate_staffing',
@@ -32,7 +32,7 @@ const SERVICES = [
     icon: Briefcase,
     title: 'Corporate & Conference Teams',
     desc: 'Professional registration teams, ushers, and tech assistants for important corporate events.',
-    bg: 'url(https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800)',
+    bg: 'url(https://kkanfilvlittraukxrhb.supabase.co/storage/v1/object/public/gallery/uploads/1784405585190_t6lwn5.JPG)',
   },
   {
     id: 'wedding_social',
@@ -48,7 +48,7 @@ const SERVICES = [
     icon: Truck,
     title: 'Logistics & Ground Control',
     desc: 'Expert crowd management, VIP access control, and fast setup crews.',
-    bg: 'url(https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80&w=800)',
+    bg: 'url(https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800)',
   },
   {
     id: 'exhibition_staffing',
