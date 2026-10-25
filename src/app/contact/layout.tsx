@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Contact Us | Get in Touch with MV Groups',
   description: 'Reach out to MV Groups for event staffing inquiries, partnerships, or questions. Based in Bengaluru, Karnataka — we respond within 24 hours.',
   alternates: {
-    canonical: 'https://mvgroups.online/contact',
+    canonical: 'https://mvgroups.co.in/contact',
   },
 };
 

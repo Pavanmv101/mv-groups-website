@@ -25,11 +25,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${service.title} | MV Groups Services`,
       description: service.shortDescription,
-      url: `https://mvgroups.online/services/${service.id}`,
+      url: `https://mvgroups.co.in/services/${service.id}`,
       siteName: 'MV Groups',
       images: [
         {
-          url: 'https://mvgroups.online/og-image.jpg', // Fallback, would be nice to have actual service images here later
+          url: 'https://mvgroups.co.in/og-image.jpg', // Fallback, would be nice to have actual service images here later
           width: 1200,
           height: 630,
         },
@@ -62,7 +62,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     provider: {
       '@type': 'Organization',
       name: 'MV Groups',
-      url: 'https://mvgroups.online',
+      url: 'https://mvgroups.co.in',
     },
     areaServed: {
       '@type': 'City',

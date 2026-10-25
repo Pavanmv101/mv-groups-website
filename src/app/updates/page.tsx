@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'News & Updates | Latest from MV Groups',
   description: 'Stay updated with the latest announcements, event highlights, and industry insights from MV Groups — Karnataka\'s premier event staffing agency.',
   alternates: {
-    canonical: 'https://mvgroups.online/updates',
+    canonical: 'https://mvgroups.co.in/updates',
   },
 }
 

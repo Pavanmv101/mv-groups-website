@@ -19,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mvgroups.online'),
+  metadataBase: new URL('https://mvgroups.co.in'),
   title: {
     default: 'MV Groups | End-to-End Event Management & Premium Staffing',
     template: '%s | MV Groups',
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
     title: 'MV Groups | End-to-End Event Management & Premium Staffing',
     description:
       'MV Groups provides complete end-to-end event management, premium staffing, and production services across Karnataka. We bring your vision to life.',
-    url: 'https://mvgroups.online',
+    url: 'https://mvgroups.co.in',
     type: 'website',
     locale: 'en_IN',
     siteName: 'MV Groups',
     images: [
       {
-        url: 'https://mvgroups.online/logo.png',
+        url: 'https://mvgroups.co.in/logo.png',
         width: 800,
         height: 600,
         alt: 'MV Groups Logo',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MV Groups | Event Management & Staffing',
     description: 'Complete end-to-end event management and premium staffing across Karnataka.',
-    images: ['https://mvgroups.online/logo.png'],
+    images: ['https://mvgroups.co.in/logo.png'],
   },
   robots: {
     index: true,
@@ -85,10 +85,10 @@ export default function RootLayout({
     '@graph': [
       {
         '@type': ['Organization', 'LocalBusiness'],
-        '@id': 'https://mvgroups.online/#organization',
+        '@id': 'https://mvgroups.co.in/#organization',
         name: 'MV Groups',
-        url: 'https://mvgroups.online',
-        logo: 'https://mvgroups.online/logo.png',
+        url: 'https://mvgroups.co.in',
+        logo: 'https://mvgroups.co.in/logo.png',
         description:
           'MV Groups is a premium end-to-end event management and staffing agency based in Bengaluru, Karnataka. We deliver complete event solutions — from venue planning and stage production to on-ground staffing and execution — for corporate conferences, exhibitions, weddings, and more.',
         foundingDate: '2024',
@@ -117,14 +117,14 @@ export default function RootLayout({
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://mvgroups.online/#website',
-        url: 'https://mvgroups.online',
+        '@id': 'https://mvgroups.co.in/#website',
+        url: 'https://mvgroups.co.in',
         name: 'MV Groups',
-        publisher: { '@id': 'https://mvgroups.online/#organization' },
+        publisher: { '@id': 'https://mvgroups.co.in/#organization' },
       },
       {
         '@type': 'FAQPage',
-        '@id': 'https://mvgroups.online/#faq',
+        '@id': 'https://mvgroups.co.in/#faq',
         mainEntity: [
           {
             '@type': 'Question',

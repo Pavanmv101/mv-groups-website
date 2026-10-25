@@ -34,7 +34,7 @@ export const COMPANY = {
   phone: '+91 93805 58344',
   linkedin: 'https://www.linkedin.com/company/mvgroups-karnataka',
   instagram: 'https://instagram.com/mvgroups.online',
-  website: 'https://mvgroups.online',
+  website: 'https://mvgroups.co.in',
 } as const;
 
 // ---- Navigation ----

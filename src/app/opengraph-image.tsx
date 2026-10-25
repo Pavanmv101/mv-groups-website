@@ -59,7 +59,7 @@ export default async function Image() {
 
         {/* Domain */}
         <div style={{ position: 'absolute', bottom: 28, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 18, color: '#66625d', letterSpacing: '0.1em' }}>mvgroups.online</span>
+          <span style={{ fontSize: 18, color: '#66625d', letterSpacing: '0.1em' }}>mvgroups.co.in</span>
         </div>
 
         {/* Gold bottom bar */}

@@ -31,7 +31,7 @@ export async function requestBrochure(email: string) {
               We're thrilled you want to learn more about how MV Groups can power your next event. You can download our comprehensive Company Profile by clicking the button below.
             </p>
             <div style="text-align: center; margin: 40px 0;">
-              <a href="https://mvgroups.online/MV_Groups_Profile.pdf" style="background-color: #f3c892; color: #0c0b0a; text-decoration: none; padding: 14px 32px; border-radius: 50px; font-weight: bold; font-size: 16px; display: inline-block;">
+              <a href="https://mvgroups.co.in/MV_Groups_Profile.pdf" style="background-color: #f3c892; color: #0c0b0a; text-decoration: none; padding: 14px 32px; border-radius: 50px; font-weight: bold; font-size: 16px; display: inline-block;">
                 Download Profile PDF
               </a>
             </div>

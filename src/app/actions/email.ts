@@ -130,7 +130,7 @@ export async function sendNewBookingNotification(bookingData: BookingDataPayload
             <p style="white-space: pre-wrap; margin-top: 8px; color: #555;">${bookingData.description || 'No additional details provided.'}</p>
           </div>
           <div style="margin-top: 30px; text-align: center;">
-            <a href="https://mvgroups.online/login" style="background-color: #f3c892; color: #0c0b0a; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; display: inline-block;">
+            <a href="https://mvgroups.co.in/login" style="background-color: #f3c892; color: #0c0b0a; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; display: inline-block;">
               View in Dashboard
             </a>
           </div>

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: 'Event Staffing & Manpower | MV Groups',
   description: 'Karnataka\'s most reliable event crew. We supply vetted VIP hospitality, security, brand promoters, and logistics staff for extraordinary events.',
   alternates: {
-    canonical: 'https://mvgroups.online/staffing',
+    canonical: 'https://mvgroups.co.in/staffing',
   },
 };
 

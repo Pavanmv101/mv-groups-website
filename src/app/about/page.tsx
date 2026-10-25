@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'About MV Groups | Bangalore Event Staffing Agency',
   description: 'Learn about MV Groups, a premier event staffing and manpower supply agency founded by Pavan MV. We deliver exceptional event experiences across Karnataka.',
   alternates: {
-    canonical: 'https://mvgroups.online/about',
+    canonical: 'https://mvgroups.co.in/about',
   }
 };
 

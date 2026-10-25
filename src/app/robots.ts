@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/dashboard/'],
     },
-    sitemap: 'https://mvgroups.online/sitemap.xml',
+    sitemap: 'https://mvgroups.co.in/sitemap.xml',
   }
 }

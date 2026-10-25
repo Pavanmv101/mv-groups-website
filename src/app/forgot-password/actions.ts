@@ -32,7 +32,7 @@ export async function resetPassword(formData: FormData) {
   // since Vercel dynamic host headers can sometimes cause redirect mismatch errors.
   const origin = process.env.NODE_ENV === 'development' 
     ? 'http://localhost:3000' 
-    : 'https://www.mvgroups.online'
+    : 'https://www.mvgroups.co.in'
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${origin}/auth/callback?next=/reset-password`,

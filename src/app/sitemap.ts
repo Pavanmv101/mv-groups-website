@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { SERVICES } from '@/lib/constants'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://mvgroups.online'
+  const baseUrl = 'https://mvgroups.co.in'
   const lastModified = new Date('2026-10-02')
 
   // ── Core pages ──

@@ -129,7 +129,7 @@ export const generateQuotePDF = (booking: Booking, customPrice: number) => {
   doc.text('Thank you for choosing MV Groups. We look forward to making your event a success!', 14, 280, { align: 'left' });
   
   doc.setFontSize(8);
-  doc.text('mvgroups.online | mvgroups2026@gmail.com | +91 93805 58344', 105, 290, { align: 'center' });
+  doc.text('mvgroups.co.in | mvgroups2026@gmail.com | +91 93805 58344', 105, 290, { align: 'center' });
 
   // Save the PDF
   doc.save(`MV_Groups_Quote_${booking.contact_name.replace(/\s+/g, '_')}.pdf`);

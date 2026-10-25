@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     'Explore MV Groups\' comprehensive staffing solutions, including exhibition staffing, brand promoters, corporate manpower, and VIP hosting across Bangalore and Karnataka.',
   alternates: {
-    canonical: 'https://mvgroups.online/services',
+    canonical: 'https://mvgroups.co.in/services',
   }
 };
 
