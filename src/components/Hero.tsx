@@ -125,25 +125,6 @@ const WHY_US = [
 export default function Hero() {
   const [activeTab, setActiveTab] = useState<'staffing' | 'management'>('staffing');
   const heroRef = useRef<HTMLDivElement>(null);
-  const leftVideoRef = useRef<HTMLVideoElement>(null);
-  const rightVideoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const playVideos = () => {
-      [leftVideoRef.current, rightVideoRef.current].forEach((video) => {
-        if (video) {
-          video.play().catch(() => {});
-        }
-      });
-    };
-    playVideos();
-    const handleVisibility = () => {
-      if (document.visibilityState === 'visible') playVideos();
-    };
-    document.addEventListener('visibilitychange', handleVisibility);
-    return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, []);
-
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroScale  = useTransform(scrollYProgress, [0, 0.5], [1, 1.05]);
@@ -169,55 +150,23 @@ export default function Hero() {
         {/* Parallax background wrapper */}
         <motion.div className="absolute inset-0" style={{ scale: heroScale, y: heroY }}>
           {/* Left Half — Staffing */}
-          <div className="absolute inset-y-0 left-0 w-1/2 overflow-hidden">
-            <video
-              ref={leftVideoRef}
-              src="/videos/corporate.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="absolute inset-0 w-full h-full object-cover opacity-35"
-            />
+          <div className="absolute inset-y-0 left-0 w-1/2">
             <div
-              className="absolute inset-0 bg-cover bg-center -z-10"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200)' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0908]/90 via-[#0a0908]/50 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/50" />
-            {/* Subtle Pill label */}
-            <div className="absolute top-8 left-8 hidden md:block z-20 pointer-events-none">
-              <span className="text-[10px] tracking-[0.25em] font-bold text-white/30 uppercase bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/5">
-                Corporate &amp; Staffing
-              </span>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0908]/80 via-[#0a0908]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/40" />
           </div>
 
           {/* Right Half — Management */}
-          <div className="absolute inset-y-0 right-0 w-1/2 overflow-hidden">
-            <video
-              ref={rightVideoRef}
-              src="/videos/concert.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="absolute inset-0 w-full h-full object-cover opacity-35"
-            />
+          <div className="absolute inset-y-0 right-0 w-1/2">
             <div
-              className="absolute inset-0 bg-cover bg-center -z-10"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=1200)' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-l from-[#0a0908]/90 via-[#0a0908]/50 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/50" />
-            {/* Subtle Pill label */}
-            <div className="absolute top-8 right-8 hidden md:block z-20 pointer-events-none text-right">
-              <span className="text-[10px] tracking-[0.25em] font-bold text-white/30 uppercase bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/5">
-                Stage &amp; Production
-              </span>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-l from-[#0a0908]/80 via-[#0a0908]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-[#0a0908]/40" />
           </div>
         </motion.div>
 
