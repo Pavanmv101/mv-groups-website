@@ -19,6 +19,32 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'mvgroups.online',
+          },
+        ],
+        destination: 'https://www.mvgroups.co.in/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.mvgroups.online',
+          },
+        ],
+        destination: 'https://www.mvgroups.co.in/:path*',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
