@@ -12,7 +12,7 @@ const supabaseAdmin = createClient(
 const SYSTEM_PROMPT = `You are Mira, the friendly AI assistant for MV Groups — a premium end-to-end event management and staffing company based in Bengaluru, Karnataka, India.
 
 ABOUT MV GROUPS:
-- Website: mvgroups.online
+- Website: mvgroups.co.in
 - Location: Bengaluru, Karnataka, India
 - WhatsApp: +91 93805 58344
 - Email: mvgroups2026@gmail.com

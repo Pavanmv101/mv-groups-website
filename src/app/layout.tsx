@@ -179,7 +179,7 @@ export default function RootLayout({
             name: 'How do I get a quote from MV Groups?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'You can get a quote by filling the booking form at mvgroups.online/booking, chatting with our AI assistant Mira on the website, or WhatsApp us directly at +91 93805 58344. We typically respond with a custom quote within 4 hours.',
+              text: 'You can get a quote by filling the booking form at mvgroups.co.in/booking, chatting with our AI assistant Mira on the website, or WhatsApp us directly at +91 93805 58344. We typically respond with a custom quote within 4 hours.',
             },
           },
           {
