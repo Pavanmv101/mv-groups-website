@@ -214,13 +214,47 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid #1a1918' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs" style={{ color: '#66625d' }}>
-            © {new Date().getFullYear()} MV Groups. All rights reserved.
-          </p>
-          <div className="flex gap-5">
-            <Link href="/privacy" className="footer-link-muted text-xs">Privacy Policy</Link>
-            <Link href="/terms" className="footer-link-muted text-xs">Terms of Service</Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* GST Registration Details */}
+          <div className="pb-4 mb-4 border-b border-[#1a1918] flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#f3c892' }} />
+              <span className="font-semibold uppercase tracking-wider text-[11px]" style={{ color: '#f3c892' }}>
+                GST Registration Details
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs" style={{ color: '#a39e98' }}>
+              <div>
+                <span style={{ color: '#66625d' }}>Legal Name: </span>
+                <span className="font-medium text-[#e8e4df]">PAVAN M V</span>
+              </div>
+              <div>
+                <span style={{ color: '#66625d' }}>Trade Name: </span>
+                <span className="font-medium text-[#e8e4df]">MV Groups</span>
+              </div>
+              <div>
+                <span style={{ color: '#66625d' }}>GSTIN: </span>
+                <span className="font-mono font-medium text-[#f3c892] tracking-wide">29ISQPP3980N1ZD</span>
+              </div>
+              <div>
+                <span style={{ color: '#66625d' }}>Business Constitution: </span>
+                <span className="font-medium text-[#e8e4df]">Proprietorship</span>
+              </div>
+              <div>
+                <span style={{ color: '#66625d' }}>State: </span>
+                <span className="font-medium text-[#e8e4df]">Karnataka, India</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs" style={{ color: '#66625d' }}>
+              © {new Date().getFullYear()} MV Groups. All rights reserved.
+            </p>
+            <div className="flex gap-5">
+              <Link href="/privacy" className="footer-link-muted text-xs">Privacy Policy</Link>
+              <Link href="/terms" className="footer-link-muted text-xs">Terms of Service</Link>
+            </div>
           </div>
         </div>
       </div>
